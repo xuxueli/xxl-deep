@@ -29,8 +29,8 @@ public class CodeGeneratorToolTest {
 
         String tableSql = stringBuffer.toString();
 
-        // 生成代码
-        ClassInfo codeJavaInfo = CodeGeneratorTool.processTableIntoClassInfo(tableSql);
+        // code generate
+        ClassInfo classInfo = CodeGeneratorTool.processTableIntoClassInfo(tableSql);
 
     }
 

@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * @author xuxueli 2018-05-02 21:10:45
+ */
 public class TableParseUtil {
 
     /**
@@ -36,7 +39,7 @@ public class TableParseUtil {
         }
 
         // class Name
-        String className = StringUtils.upperCase(tableName);
+        String className = StringUtils.upperCaseFirst(StringUtils.underlineToCamelCase(tableName));
         if (className.contains("_")) {
             className = className.replaceAll("_", "");
         }
@@ -68,7 +71,7 @@ public class TableParseUtil {
                     String columnName = columnLine.substring(0, columnLine.indexOf("`"));	// userid
 
                     // field Name
-                    String fieldName = StringUtils.lowerCase(columnName);
+                    String fieldName = StringUtils.lowerCaseFirst(StringUtils.underlineToCamelCase(columnName));
                     if (fieldName.contains("_")) {
                         fieldName = fieldName.replaceAll("_", "");
                     }
