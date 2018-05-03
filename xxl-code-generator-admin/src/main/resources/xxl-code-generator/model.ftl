@@ -5,7 +5,6 @@
         </#if>
     </#list>
 </#if>
-
 import java.io.Serializable;
 <#if importDdate>
 import java.util.Date;

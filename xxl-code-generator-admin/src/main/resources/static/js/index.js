@@ -21,12 +21,17 @@ $(function () {
     /**
      * 初始化 code area
      */
-    var model_ide;
+
+    var controller_ide;
+    var service_ide;
+    var service_impl_ide;
     var dao_ide;
     var mybatis_ide;
+    var model_ide;
     function initCodeArea(){
-        // model_ide
-        model_ide = CodeMirror.fromTextArea(document.getElementById("model_ide"), {
+
+        // controller_ide
+        controller_ide = CodeMirror.fromTextArea(document.getElementById("controller_ide"), {
             lineNumbers: true,
             matchBrackets: true,
             mode: "text/x-java",
@@ -35,7 +40,31 @@ $(function () {
             foldGutter: true,
             gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
-        model_ide.setSize('auto','auto');
+        controller_ide.setSize('auto','auto');
+
+        // service_ide
+        service_ide = CodeMirror.fromTextArea(document.getElementById("service_ide"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-java",
+            lineWrapping:true,
+            readOnly:true,
+            foldGutter: true,
+            gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        });
+        service_ide.setSize('auto','auto');
+
+        // service_impl_ide
+        service_impl_ide = CodeMirror.fromTextArea(document.getElementById("service_impl_ide"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-java",
+            lineWrapping:true,
+            readOnly:true,
+            foldGutter: true,
+            gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        });
+        service_impl_ide.setSize('auto','auto');
 
         // dao_ide
         dao_ide = CodeMirror.fromTextArea(document.getElementById("dao_ide"), {
@@ -58,6 +87,18 @@ $(function () {
             readOnly:true
         });
         mybatis_ide.setSize('auto','auto');
+
+        // model_ide
+        model_ide = CodeMirror.fromTextArea(document.getElementById("model_ide"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-java",
+            lineWrapping:true,
+            readOnly:true,
+            foldGutter: true,
+            gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        });
+        model_ide.setSize('auto','auto');
     }
 
     initCodeArea();
@@ -82,14 +123,25 @@ $(function () {
                         icon: '1',
                         content: "代码生成成功" ,
                         end: function(layero, index){
-                            model_ide.setValue(data.data.model_code);
-                            model_ide.setSize('auto','auto');
+
+                            controller_ide.setValue(data.data.controller_code);
+                            controller_ide.setSize('auto','auto');
+
+                            service_ide.setValue(data.data.service_code);
+                            service_ide.setSize('auto','auto');
+
+                            service_impl_ide.setValue(data.data.service_impl_code);
+                            service_impl_ide.setSize('auto','auto');
 
                             dao_ide.setValue(data.data.dao_code);
                             dao_ide.setSize('auto','auto');
 
                             mybatis_ide.setValue(data.data.mybatis_code);
                             mybatis_ide.setSize('auto','auto');
+
+                            model_ide.setValue(data.data.model_code);
+                            model_ide.setSize('auto','auto');
+
                         }
                     });
                 } else {

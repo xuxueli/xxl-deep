@@ -64,7 +64,62 @@ Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平�
 
 
 ## 三、总体设计
+
+### 设计思想
 略
+
+### ReturnT
+统一接口返回数据类型，有利于接口对接与效率提升；因此生成的多层代码交互时，采用统一ReturnT，源码如下；
+```
+import java.io.Serializable;
+
+/**
+ * common return
+ * @author xuxueli 2015-12-4 16:32:31
+ */
+public class ReturnT<T> implements Serializable {
+	public static final long serialVersionUID = 42L;
+
+	public static final int SUCCESS_CODE = 200;
+	public static final int FAIL_CODE = 500;
+	public static final ReturnT<String> SUCCESS = new ReturnT<String>(null);
+	public static final ReturnT<String> FAIL = new ReturnT<String>(FAIL_CODE, null);
+	
+	private int code;
+	private String msg;
+	private T data;
+	
+	public ReturnT(int code, String msg) {
+		this.code = code;
+		this.msg = msg;
+	}
+	public ReturnT(T data) {
+		this.code = SUCCESS_CODE;
+		this.data = data;
+	}
+	
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public T getData() {
+		return data;
+	}
+	public void setData(T data) {
+		this.data = data;
+	}
+
+}
+
+```
 
 
 ## 四、版本更新日志

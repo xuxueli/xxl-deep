@@ -47,15 +47,16 @@ public class IndexController {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("classInfo", classInfo);
 
-            String modelCode = FreemarkerUtil.processString("model.ftl", params);
-            String daoCode = FreemarkerUtil.processString("dao.ftl", params);
-            String xmlCode = FreemarkerUtil.processString("mybatis.ftl", params);
-
             // result
             Map<String, String> result = new HashMap<String, String>();
-            result.put("model_code", modelCode);
-            result.put("dao_code", daoCode);
-            result.put("mybatis_code", xmlCode);
+
+            result.put("controller_code", FreemarkerUtil.processString("controller.ftl", params));
+            result.put("service_code", FreemarkerUtil.processString("service.ftl", params));
+            result.put("service_impl_code", FreemarkerUtil.processString("service_impl.ftl", params));
+
+            result.put("dao_code", FreemarkerUtil.processString("dao.ftl", params));
+            result.put("mybatis_code", FreemarkerUtil.processString("mybatis.ftl", params));
+            result.put("model_code", FreemarkerUtil.processString("model.ftl", params));
 
             return new ReturnT<Map<String, String>>(result);
         } catch (IOException | TemplateException e) {
