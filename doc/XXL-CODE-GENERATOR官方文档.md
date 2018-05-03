@@ -135,12 +135,15 @@ public class ReturnT<T> implements Serializable {
 ## 四、版本更新日志
 ### 版本 v0.0.1，新特性[2018-08-05]
 - 1、简洁：界面操作，简洁直观，可快速上手；
-- 2、轻量级：仅需提供建表SQL，简洁高效；
-- 3、多层代码生成：将会自动生成  "controller + service + dao" 多层代码； 
+- 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
+- 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
+- 4、生产力：从SQL到API接口，全部代码均支持自动生成，极大提高生产力； 
+- 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
 
 
 ### TODO LIST
-
+- 1、多模板支持：当前模板为 "SpringMVC + Mybatis + Mysql" 技术栈；计划新增不同代码生成模板；
+- 2、扩展多层：目前支持生成 "controller/service/dao/mybatis/model" 层代码；计划新增前端代码，如 "jquery、vuejs、react" 等；
 
 ## 五、其他
 
