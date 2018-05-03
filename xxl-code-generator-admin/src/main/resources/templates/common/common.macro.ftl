@@ -62,19 +62,19 @@
                 </button>
             </div>
             <!-- Navbar Right Menu -->
-            <#--<div class="navbar-custom-menu">
+            <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a target="_blank" href="http://www.xuxueli.com/xxl-code-generator/">官方文档</a>
+                        <#--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="hidden-xs">表结构</span>
                         </a>
-
-                            <ul class="dropdown-menu">
-                                <li><a href="${request.contextPath}/">XXX</a></li>
-                            </ul>
+                        <ul class="dropdown-menu">
+                            <li><a href="${request.contextPath}/">XXX</a></li>
+                        </ul>-->
                     </li>
                 </ul>
-            </div>-->
+            </div>
             <!-- /.navbar-custom-menu -->
         </div>
         <!-- /.container-fluid -->
