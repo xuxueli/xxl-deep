@@ -55,7 +55,7 @@ Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平�
 
 
 ### 第二步：生成代码
-进入代码生成平台，填写好 "表结构信息"之后，点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
+点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
 将会自动生成 "controller/service/dao" 多层代码；部分截图如下：
 
 ![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_02.png "在这里输入图片标题")
