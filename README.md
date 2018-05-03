@@ -42,7 +42,6 @@ Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代
 - 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
 
 
-
 ## Communication
 
 - [社区交流](http://www.xuxueli.com/page/community.html)
