@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>代码生成平台</title>
+    <title>XXL代码生成平台</title>
 
     <#import "common/common.macro.ftl" as netCommon>
     <@netCommon.commonStyle />
