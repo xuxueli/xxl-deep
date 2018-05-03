@@ -7,12 +7,14 @@
 ## 一、简介
 
 ### 1.1 概述
-Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ### 1.2 特性
 - 1、简洁：界面操作，简洁直观，可快速上手；
-- 2、轻量级：仅需提供建表SQL，简洁高效；
-- 3、多层代码生成：将会自动生成  "controller + service + dao" 多层代码； 
+- 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
+- 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
+- 4、生产力：从SQL到API接口，全部代码均支持自动生成，极大提高生产力； 
+- 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
 
 
 ### 1.3 下载
@@ -56,11 +58,19 @@ Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平�
 
 ### 第二步：生成代码
 点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
-将会自动生成 "controller/service/dao" 多层代码；部分截图如下：
 
 ![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_02.png "在这里输入图片标题")
+
+
+### 第三步：Finish
+代码生成后，可在界面查看和使用 "controller/service/dao/mybatis/model" 多层源代码。部分截图如下：
+
 ![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_03.png "在这里输入图片标题")
 ![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_04.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_05.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_06.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_07.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_08.png "在这里输入图片标题")
 
 
 ## 三、总体设计

@@ -2,7 +2,7 @@
     <img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/xxl-logo.jpg" width="150">
     <h3 align="center">Xxl-Code-Generator</h3>
     <p align="center">
-        Xxl Code Generator, a code generator framework for controller/service/dao layer.
+        Xxl Code Generator, a code generator framework for "controller/service/dao/mybatis/model" layer.
         <br>
         <a href="http://www.xuxueli.com/xxl-code-generator/"><strong>-- Home Page --</strong></a>
         <br>
@@ -25,10 +25,10 @@
 
 ## Introduction
 
-Xxl-Code-Generator is a code generator framework for controller/service/dao layer.
+Xxl-Code-Generator is a code generator framework for "controller/service/dao/mybatis/model" layer.
 You only need to provide SQL to generate code automatically.
 
-Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ## Documentation
 - [中文文档](http://www.xuxueli.com/xxl-code-generator/)
@@ -36,8 +36,12 @@ Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平�
 
 ## Features
 - 1、简洁：界面操作，简洁直观，可快速上手；
-- 2、轻量级：仅需提供建表SQL，简洁高效；
-- 3、多层代码生成：将会自动生成  "controller + service + dao" 多层代码； 
+- 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
+- 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
+- 4、生产力：从SQL到API接口，全部代码均支持自动生成，极大提高生产力； 
+- 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
+
+
 
 ## Communication
 
