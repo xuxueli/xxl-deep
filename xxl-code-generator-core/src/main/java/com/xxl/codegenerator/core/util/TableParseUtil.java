@@ -21,8 +21,9 @@ public class TableParseUtil {
      */
     public static ClassInfo processTableIntoClassInfo(String tableSql) throws IOException {
         if (tableSql==null || tableSql.trim().length()==0) {
-            return null;
+            throw new CodeGenerateException("Table structure can not be empty.");
         }
+        tableSql = tableSql.trim();
 
         // table Name
         String tableName = null;

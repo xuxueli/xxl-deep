@@ -1,0 +1,96 @@
+## 《代码生成平台Xxl-Code-Generator》
+
+[![GitHub release](https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg)](https://github.com/xuxueli/xxl-code-generator/releases)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![donate](https://img.shields.io/badge/%24-donate-ff69b4.svg?style=flat-square)](http://www.xuxueli.com/page/donate.html)
+
+## 一、简介
+
+### 1.1 概述
+Xxl-Code-Generator 是一个 "controller/service/dao" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+
+### 1.2 特性
+- 1、简洁：界面操作，简洁直观，可快速上手；
+- 2、轻量级：仅需提供建表SQL，简洁高效；
+- 3、多层代码生成：将会自动生成  "controller + service + dao" 多层代码； 
+
+
+### 1.3 下载
+
+#### 文档地址
+
+- [中文文档](http://www.xuxueli.com/xxl-code-generator/)
+
+#### 源码仓库地址
+
+源码仓库地址 | Release Download
+--- | ---
+[https://github.com/xuxueli/xxl-code-generator](https://github.com/xuxueli/xxl-code-generator) | [Download](https://github.com/xuxueli/xxl-code-generator/releases)
+[https://gitee.com/xuxueli0323/xxl-code-generator](https://gitee.com/xuxueli0323/xxl-code-generator) | [Download](https://gitee.com/xuxueli0323/xxl-code-generator/releases)  
+
+
+#### 技术交流
+- [社区交流](http://www.xuxueli.com/page/community.html)
+
+### 1.4 环境
+- JDK：1.7+
+
+
+## 二、快速入门
+
+### 第一步：编译项目
+项目目录结构如下：
+```
+- xxl-code-generator
+    - xxl-code-generator-core   ：代码生成的Core依赖，进行SQL解析等操作；
+    - xxl-code-generator-admin  ：代码生成平台，使用时，只需要部署该项目即可；
+```
+
+### 第二步：准备SQL
+代码生成，是以数据库表为维度进行生成。所以，需要准备好待生成代码的表SQL脚本。
+然后进入代码生成平台，将建表SQL脚本填写到 "表结构信息" 输入框即可。
+（默认已经提供了一个供参考Demo表SQL脚本，可操作体验下）
+
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_01.png "在这里输入图片标题")
+
+
+### 第二步：生成代码
+进入代码生成平台，填写好 "表结构信息"之后，点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
+将会自动生成 "controller/service/dao" 多层代码；部分截图如下：
+
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_02.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_03.png "在这里输入图片标题")
+![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_04.png "在这里输入图片标题")
+
+
+## 三、总体设计
+略
+
+
+## 四、版本更新日志
+### 版本 v0.0.1，新特性[2018-08-05]
+- 1、简洁：界面操作，简洁直观，可快速上手；
+- 2、轻量级：仅需提供建表SQL，简洁高效；
+- 3、多层代码生成：将会自动生成  "controller + service + dao" 多层代码； 
+
+
+### TODO LIST
+
+
+## 五、其他
+
+### 5.1 项目贡献
+欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-code-generator/issues/) 讨论新特性或者变更。
+
+### 5.2 用户接入登记
+更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-code-generator/issues/1 ) 登记，登记仅仅为了产品推广。
+
+### 5.3 开源协议和版权
+产品开源免费，并且将持续提供免费的社区技术支持。个人或企业内部可自由的接入和使用。
+
+- Licensed under the GNU General Public License (GPL) v3.
+- Copyright (c) 2015-present, xuxueli.
+
+---
+### 捐赠
+无论金额多少都足够表达您这份心意，非常感谢 ：）      [前往捐赠](http://www.xuxueli.com/page/donate.html )
