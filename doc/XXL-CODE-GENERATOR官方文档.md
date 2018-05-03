@@ -79,7 +79,7 @@ Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代
 略
 
 ### ReturnT
-统一接口返回数据类型，有利于接口对接与效率提升；因此生成的多层代码交互时，采用统一ReturnT，源码如下；
+统一接口返回数据类型，有利于接口对接与效率提升；因此生成的多层代码交互时，采用统一ReturnT，源码如下:
 ```
 import java.io.Serializable;
 
