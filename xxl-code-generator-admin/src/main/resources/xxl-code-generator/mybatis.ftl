@@ -19,7 +19,7 @@
     </#if>
     </sql>
 
-    <insert id="insert" parameterType="Model路径.${classInfo.className}" >
+    <insert id="insert" parameterType="java.util.Map" >
         INSERT INTO ${classInfo.tableName} (
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
         <#list classInfo.fieldList as fieldItem >
@@ -49,7 +49,7 @@
         WHERE `id` = ${r"#{id}"}
     </delete>
 
-    <update id="update" parameterType="Model路径.${classInfo.className}" >
+    <update id="update" parameterType="java.util.Map" >
         UPDATE ${classInfo.tableName}
         SET
         <#list classInfo.fieldList as fieldItem >
@@ -62,7 +62,7 @@
     </update>
 
 
-    <select id="load" parameterType="java.lang.String" resultMap="${classInfo.className}">
+    <select id="load" parameterType="java.util.Map" resultMap="${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.tableName}
         WHERE `id` = ${r"#{id}"}
