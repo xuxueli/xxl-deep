@@ -55,7 +55,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 	*/
 	@Override
 	public ${classInfo.className} load(int id) {
-            return ${classInfo.className?uncap_first}Dao.load(id);
+		return ${classInfo.className?uncap_first}Dao.load(id);
 	}
 
 	/**

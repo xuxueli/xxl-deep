@@ -1,4 +1,3 @@
-import com.xxl.conf.admin.core.model.XxlConfNode;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
