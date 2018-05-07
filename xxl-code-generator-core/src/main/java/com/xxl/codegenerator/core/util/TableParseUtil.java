@@ -7,6 +7,8 @@ import com.xxl.codegenerator.core.model.FieldInfo;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author xuxueli 2018-05-02 21:10:45
@@ -61,6 +63,21 @@ public class TableParseUtil {
         List<FieldInfo> fieldList = new ArrayList<FieldInfo>();
 
         String fieldListTmp = tableSql.substring(tableSql.indexOf("(")+1, tableSql.lastIndexOf(")"));
+
+        // replave "," by "，" in comment
+        Matcher matcher = Pattern.compile("\\ COMMENT '(.*?)\\'").matcher(fieldListTmp);     // "\\{(.*?)\\}"
+        while(matcher.find()){
+
+            String commentTmp = matcher.group();
+            commentTmp = commentTmp.replaceAll("\\ COMMENT '|\\'", "");      // "\\{|\\}"
+
+            if (commentTmp.contains(",")) {
+                String commentTmpFinal = commentTmp.replaceAll(",", "，");
+                fieldListTmp = fieldListTmp.replace(matcher.group(), commentTmpFinal);
+            }
+        }
+
+
         String[] fieldLineList = fieldListTmp.split(",");
         if (fieldLineList.length > 0) {
             for (String columnLine :fieldLineList) {

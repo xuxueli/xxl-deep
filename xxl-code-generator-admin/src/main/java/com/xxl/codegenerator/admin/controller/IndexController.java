@@ -58,6 +58,15 @@ public class IndexController {
             result.put("mybatis_code", FreemarkerUtil.processString("mybatis.ftl", params));
             result.put("model_code", FreemarkerUtil.processString("model.ftl", params));
 
+            // 计算,生成代码行数
+            int lineNum = 0;
+            for (Map.Entry<String, String> item: result.entrySet()) {
+                if (item.getValue() != null) {
+                    lineNum += StringUtils.countMatches(item.getValue(), "\n");
+                }
+            }
+            logger.info("生成代码行数：{}", lineNum);
+
             return new ReturnT<Map<String, String>>(result);
         } catch (IOException | TemplateException e) {
             logger.error(e.getMessage(), e);
