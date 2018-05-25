@@ -1,7 +1,8 @@
-package com.xxl.codegenerator.core;
+package com.xxl.codegenerator.admin.core;
 
-import com.xxl.codegenerator.core.model.ClassInfo;
-import com.xxl.codegenerator.core.util.TableParseUtil;
+
+import com.xxl.codegenerator.admin.core.model.ClassInfo;
+import com.xxl.codegenerator.admin.core.util.TableParseUtil;
 
 import java.io.IOException;
 

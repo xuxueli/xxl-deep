@@ -1,4 +1,4 @@
-package com.xxl.codegenerator.core.util;
+package com.xxl.codegenerator.admin.core.util;
 
 /**
  * string tool

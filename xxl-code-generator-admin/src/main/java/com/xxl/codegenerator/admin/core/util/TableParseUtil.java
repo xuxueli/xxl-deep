@@ -1,12 +1,15 @@
-package com.xxl.codegenerator.core.util;
+package com.xxl.codegenerator.admin.core.util;
 
-import com.xxl.codegenerator.core.exception.CodeGenerateException;
-import com.xxl.codegenerator.core.model.ClassInfo;
-import com.xxl.codegenerator.core.model.FieldInfo;
+
+import com.xxl.codegenerator.admin.core.exception.CodeGenerateException;
+import com.xxl.codegenerator.admin.core.model.ClassInfo;
+import com.xxl.codegenerator.admin.core.model.FieldInfo;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

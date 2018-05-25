@@ -1,4 +1,4 @@
-package com.xxl.codegenerator.core.exception;
+package com.xxl.codegenerator.admin.core.exception;
 
 /**
  * @author xuxueli 2018-05-02 21:10:28

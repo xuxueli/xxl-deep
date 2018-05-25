@@ -1,6 +1,6 @@
 package com.xxl.codegenerator.admin.util;
 
-import com.xxl.codegenerator.core.CodeGeneratorTool;
+import com.xxl.codegenerator.admin.core.CodeGeneratorTool;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

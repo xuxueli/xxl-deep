@@ -1,4 +1,4 @@
-package com.xxl.codegenerator.core.model;
+package com.xxl.codegenerator.admin.core.model;
 
 import java.util.List;
 

@@ -1,7 +1,8 @@
 package com.xxl.codegenerator.core.test;
 
-import com.xxl.codegenerator.core.CodeGeneratorTool;
-import com.xxl.codegenerator.core.model.ClassInfo;
+
+import com.xxl.codegenerator.admin.core.CodeGeneratorTool;
+import com.xxl.codegenerator.admin.core.model.ClassInfo;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
