@@ -34,7 +34,7 @@ public class FreemarkerUtil {
         }
 
         try {
-            freemarkerConfig.setDirectoryForTemplateLoading(new File(templatePath, "xxl-code-generator"));
+            freemarkerConfig.setDirectoryForTemplateLoading(new File(templatePath, "templates/xxl-code-generator"));
             freemarkerConfig.setNumberFormat("#");
             freemarkerConfig.setClassicCompatible(true);
             freemarkerConfig.setDefaultEncoding("UTF-8");
