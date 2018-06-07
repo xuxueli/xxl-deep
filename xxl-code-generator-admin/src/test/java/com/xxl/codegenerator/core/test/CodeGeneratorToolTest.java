@@ -3,6 +3,7 @@ package com.xxl.codegenerator.core.test;
 
 import com.xxl.codegenerator.admin.core.CodeGeneratorTool;
 import com.xxl.codegenerator.admin.core.model.ClassInfo;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -14,8 +15,8 @@ import java.io.InputStreamReader;
  */
 public class CodeGeneratorToolTest {
 
-
-    public static void main(String[] args) throws IOException {
+    @Test
+    public void codeGeneratorToolTest() throws IOException  {
 
         // table sql
         FileInputStream fileInputStream = new FileInputStream(Thread.currentThread().getContextClassLoader().getResource("table.sql").getPath());
