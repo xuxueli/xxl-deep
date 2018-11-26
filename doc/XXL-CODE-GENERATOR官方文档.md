@@ -142,6 +142,7 @@ public class ReturnT<T> implements Serializable {
 
 ### 版本 v0.0.2[迭代中]
 - 1、表字段comment不支持逗号问题修复；
+- 2、Docker基础镜像切换，精简镜像；
 
 ### TODO LIST
 - 1、多模板支持：当前模板为 "SpringMVC + Mybatis + Mysql" 技术栈；计划新增不同代码生成模板；
