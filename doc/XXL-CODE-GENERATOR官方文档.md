@@ -1,4 +1,4 @@
-## 《代码生成平台Xxl-Code-Generator》
+## 《代码生成平台XXL-CODE-GENERATOR》
 
 [![GitHub release](https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg)](https://github.com/xuxueli/xxl-code-generator/releases)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
@@ -7,7 +7,7 @@
 ## 一、简介
 
 ### 1.1 概述
-Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ### 1.2 特性
 - 1、简洁：界面操作，简洁直观，可快速上手；
