@@ -51,7 +51,7 @@ public class TableParseUtil {
         }
 
         // class Comment
-        String classComment = "";
+        String classComment = null;
         if (tableSql.contains("COMMENT=")) {
             String classCommentTmp = tableSql.substring(tableSql.lastIndexOf("COMMENT=")+8).trim();
             if (classCommentTmp.contains("'") || classCommentTmp.indexOf("'")!=classCommentTmp.lastIndexOf("'")) {
