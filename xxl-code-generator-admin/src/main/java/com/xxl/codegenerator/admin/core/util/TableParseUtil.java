@@ -51,7 +51,7 @@ public class TableParseUtil {
         }
 
         // class Comment
-        String classComment = null;
+        String classComment = "";
         if (tableSql.contains("COMMENT=")) {
             String classCommentTmp = tableSql.substring(tableSql.lastIndexOf("COMMENT=")+8).trim();
             if (classCommentTmp.contains("'") || classCommentTmp.indexOf("'")!=classCommentTmp.lastIndexOf("'")) {
@@ -117,7 +117,7 @@ public class TableParseUtil {
                     }
 
                     // field comment
-                    String fieldComment = null;
+                    String fieldComment = "";
                     if (columnLine.contains("COMMENT")) {
                         String commentTmp = fieldComment = columnLine.substring(columnLine.indexOf("COMMENT")+7).trim();	// '用户ID',
                         if (commentTmp.contains("'") || commentTmp.indexOf("'")!=commentTmp.lastIndexOf("'")) {

@@ -6,7 +6,7 @@
     </#list>
 </#if>
 import java.io.Serializable;
-<#if importDdate>
+<#if importDdate?? && importDdate>
 import java.util.Date;
 </#if>
 
