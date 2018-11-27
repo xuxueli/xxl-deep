@@ -1,4 +1,4 @@
-## 《代码生成平台Xxl-Code-Generator》
+## 《代码生成平台XXL-CODE-GENERATOR》
 
 [![GitHub release](https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg)](https://github.com/xuxueli/xxl-code-generator/releases)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
@@ -7,7 +7,7 @@
 ## 一、简介
 
 ### 1.1 概述
-Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ### 1.2 特性
 - 1、简洁：界面操作，简洁直观，可快速上手；
@@ -142,6 +142,8 @@ public class ReturnT<T> implements Serializable {
 
 ### 版本 v0.0.2[迭代中]
 - 1、表字段comment不支持逗号问题修复；
+- 2、Docker基础镜像切换，精简镜像；
+- 3、修复注释为空页面渲染报错问题；
 
 ### TODO LIST
 - 1、多模板支持：当前模板为 "SpringMVC + Mybatis + Mysql" 技术栈；计划新增不同代码生成模板；

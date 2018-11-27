@@ -1,6 +1,6 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/xxl-logo.jpg" width="150">
-    <h3 align="center">Xxl-Code-Generator</h3>
+    <h3 align="center">XXL-CODE-GENERATOR</h3>
     <p align="center">
         Xxl Code Generator, a code generator framework for "controller/service/dao/mybatis/model" layer.
         <br>
@@ -22,10 +22,10 @@
 
 ## Introduction
 
-Xxl-Code-Generator is a code generator framework for "controller/service/dao/mybatis/model" layer.
+XXL-CODE-GENERATOR is a code generator framework for "controller/service/dao/mybatis/model" layer.
 You only need to provide SQL to generate code automatically.
 
-Xxl-Code-Generator 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ## Documentation
 - [中文文档](http://www.xuxueli.com/xxl-code-generator/)
