@@ -80,6 +80,24 @@ public class TableParseUtil {
             }
         }
 
+        // remove PRIMARY KEY
+        Matcher primaryKeyMatcher = Pattern.compile("[\\s]*PRIMARY KEY .*(\\),|\\))").matcher(fieldListTmp);
+        while(primaryKeyMatcher.find()){
+            fieldListTmp = fieldListTmp.replace(primaryKeyMatcher.group(),"");
+        }
+
+        // remove UNIQUE KEY
+        Matcher uniqueKeyMathcer = Pattern.compile("[\\s]*UNIQUE KEY .*(\\),|\\))").matcher(fieldListTmp);
+        while(uniqueKeyMathcer.find()){
+            fieldListTmp = fieldListTmp.replace(uniqueKeyMathcer.group(), "");
+        }
+
+        // remove KEY
+        Matcher keyMathcer = Pattern.compile("[\\s]*KEY .*(\\),|\\))").matcher(fieldListTmp);
+        while(keyMathcer.find()){
+            fieldListTmp = fieldListTmp.replace(keyMathcer.group(), "");
+        }
+
 
         String[] fieldLineList = fieldListTmp.split(",");
         if (fieldLineList.length > 0) {
@@ -110,7 +128,7 @@ public class TableParseUtil {
                         fieldClass = Double.TYPE.getSimpleName();
                     } else if (columnLine.startsWith("datetime") || columnLine.startsWith("timestamp")) {
                         fieldClass = Date.class.getSimpleName();
-                    } else if (columnLine.startsWith("varchar") || columnLine.startsWith("text")) {
+                    } else if (columnLine.startsWith("varchar") || columnLine.startsWith("text") || columnLine.startsWith("char")) {
                         fieldClass = String.class.getSimpleName();
                     } else if (columnLine.startsWith("decimal")) {
                         fieldClass = BigDecimal.class.getSimpleName();
