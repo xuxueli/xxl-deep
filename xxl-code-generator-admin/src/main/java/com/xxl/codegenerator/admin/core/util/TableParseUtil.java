@@ -8,6 +8,7 @@ import com.xxl.codegenerator.admin.core.model.FieldInfo;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -80,24 +81,17 @@ public class TableParseUtil {
             }
         }
 
-        // remove PRIMARY KEY
-        Matcher primaryKeyMatcher = Pattern.compile("[\\s]*PRIMARY KEY .*(\\),|\\))").matcher(fieldListTmp);
-        while(primaryKeyMatcher.find()){
-            fieldListTmp = fieldListTmp.replace(primaryKeyMatcher.group(),"");
+        // remove invalid data
+        for (Pattern pattern: Arrays.asList(
+                Pattern.compile("[\\s]*PRIMARY KEY .*(\\),|\\))"),      // remove PRIMARY KEY
+                Pattern.compile("[\\s]*UNIQUE KEY .*(\\),|\\))"),       // remove UNIQUE KEY
+                Pattern.compile("[\\s]*KEY .*(\\),|\\))")               // remove KEY
+        )) {
+            Matcher patternMatcher = pattern.matcher(fieldListTmp);
+            while(patternMatcher.find()){
+                fieldListTmp = fieldListTmp.replace(patternMatcher.group(),"");
+            }
         }
-
-        // remove UNIQUE KEY
-        Matcher uniqueKeyMathcer = Pattern.compile("[\\s]*UNIQUE KEY .*(\\),|\\))").matcher(fieldListTmp);
-        while(uniqueKeyMathcer.find()){
-            fieldListTmp = fieldListTmp.replace(uniqueKeyMathcer.group(), "");
-        }
-
-        // remove KEY
-        Matcher keyMathcer = Pattern.compile("[\\s]*KEY .*(\\),|\\))").matcher(fieldListTmp);
-        while(keyMathcer.find()){
-            fieldListTmp = fieldListTmp.replace(keyMathcer.group(), "");
-        }
-
 
         String[] fieldLineList = fieldListTmp.split(",");
         if (fieldLineList.length > 0) {
