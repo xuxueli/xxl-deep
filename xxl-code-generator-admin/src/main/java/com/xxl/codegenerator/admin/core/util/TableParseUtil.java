@@ -76,7 +76,7 @@ public class TableParseUtil {
 
             if (commentTmp.contains(",")) {
                 String commentTmpFinal = commentTmp.replaceAll(",", "，");
-                fieldListTmp = fieldListTmp.replace(matcher.group(), commentTmpFinal);
+                fieldListTmp = fieldListTmp.replace(commentTmp, commentTmpFinal);
             }
         }
 
