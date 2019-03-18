@@ -1,3 +1,6 @@
+package ${packageName}.dao;
+
+import ${packageName}.model.${classInfo.className};
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

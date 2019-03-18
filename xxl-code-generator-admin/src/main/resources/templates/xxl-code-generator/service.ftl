@@ -1,4 +1,8 @@
+package ${packageName}.service;
+
+import ${packageName}.model.${classInfo.className};
 import java.util.Map;
+
 
 /**
 * ${classInfo.classComment}

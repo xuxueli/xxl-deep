@@ -1,3 +1,5 @@
+package ${packageName}.model;
+
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
         <#if fieldItem.fieldClass == "Date">

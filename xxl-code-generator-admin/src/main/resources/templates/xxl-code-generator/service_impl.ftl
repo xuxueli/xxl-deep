@@ -1,10 +1,16 @@
-import org.springframework.stereotype.Service;
+package ${packageName}.service.impl;
 
+import org.springframework.stereotype.Service;
+import ${packageName}.model.${classInfo.className};
+import ${packageName}.dao.${classInfo.className}Dao;
+import ${packageName}.service.${classInfo.className}Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
 * ${classInfo.classComment}
@@ -13,6 +19,8 @@ import java.util.Map;
 */
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
+
+	private static final Logger logger = LoggerFactory.getLogger(${classInfo.className}ServiceImpl.class);
 
 	@Resource
 	private ${classInfo.className}Dao ${classInfo.className?uncap_first}Dao;

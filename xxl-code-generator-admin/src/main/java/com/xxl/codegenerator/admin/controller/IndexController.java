@@ -36,13 +36,18 @@ public class IndexController {
 
     @RequestMapping("/codeGenerate")
     @ResponseBody
-    public ReturnT<Map<String, String>> codeGenerate(String tableSql) {
+    public ReturnT<Map<String, String>> codeGenerate(String tableSql, String packageName) {
 
         try {
+
+            if (StringUtils.isBlank(packageName)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "包名不能为空");
+            }
 
             if (StringUtils.isBlank(tableSql)) {
                 return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构信息不可为空");
             }
+
 
             // parse table
             ClassInfo classInfo = CodeGeneratorTool.processTableIntoClassInfo(tableSql);
@@ -50,6 +55,9 @@ public class IndexController {
             // code genarete
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("classInfo", classInfo);
+
+            params.put("packageName", packageName);
+
 
             // result
             Map<String, String> result = new HashMap<String, String>();
@@ -64,7 +72,7 @@ public class IndexController {
 
             // 计算,生成代码行数
             int lineNum = 0;
-            for (Map.Entry<String, String> item: result.entrySet()) {
+            for (Map.Entry<String, String> item : result.entrySet()) {
                 if (item.getValue() != null) {
                     lineNum += StringUtils.countMatches(item.getValue(), "\n");
                 }

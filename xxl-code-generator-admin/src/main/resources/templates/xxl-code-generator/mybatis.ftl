@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Dao路径.${classInfo.className}Dao">
+<mapper namespace="${packageName}.dao.${classInfo.className}Dao">
 
-    <resultMap id="${classInfo.className}" type="Model路径.${classInfo.className}" >
+    <resultMap id="${classInfo.className}" type="${packageName}.model.${classInfo.className}" >
     <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
         <result column="${fieldItem.columnName}" property="${fieldItem.fieldName}" />
@@ -62,13 +62,13 @@
     </update>
 
 
-    <select id="load" parameterType="java.util.Map" resultMap="${classInfo.className}">
+    <select id="load" parameterType="java.util.Map" resultMap="${packageName}.model.${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.tableName}
         WHERE `id` = ${r"#{id}"}
     </select>
 
-    <select id="pageList" parameterType="java.util.Map" resultMap="${classInfo.className}">
+    <select id="pageList" parameterType="java.util.Map" resultMap="${packageName}.model.${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.tableName}
         LIMIT ${r"#{offset}"}, ${r"#{pagesize}"}
