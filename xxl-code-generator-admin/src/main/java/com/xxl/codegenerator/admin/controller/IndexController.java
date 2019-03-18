@@ -34,6 +34,63 @@ public class IndexController {
         return "index";
     }
 
+
+    @RequestMapping("/getVerification")
+    @ResponseBody
+    public ReturnT<Map<String, String>> getVerification(String field) {
+
+        try {
+            if (StringUtils.isBlank(field)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "字段不能为空");
+            }
+
+
+            // code genarete
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("field", field);
+            // result
+            Map<String, String> result = new HashMap<String, String>();
+
+            result.put("verification", freemarkerTool.processString("xxl-code-generator/verification.ftl", params));
+
+            return new ReturnT<Map<String, String>>(result);
+        } catch (IOException | TemplateException e) {
+            logger.error(e.getMessage(), e);
+            return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构解析失败");
+        }
+
+    }
+
+    @RequestMapping("/getParseTableSql")
+    @ResponseBody
+    public ReturnT<Map<String, String>> getParseTableSql(String tableSql, String packageName) {
+
+        try {
+            if (StringUtils.isBlank(packageName)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "包名不能为空");
+            }
+            if (StringUtils.isBlank(tableSql)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构信息不可为空");
+            }
+            // parse table
+            ClassInfo classInfo = CodeGeneratorTool.processTableIntoClassInfo(tableSql);
+            // code genarete
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("classInfo", classInfo);
+            // result
+            Map<String, String> result = new HashMap<String, String>();
+
+            result.put("optionSelect", freemarkerTool.processString("xxl-code-generator/form.ftl", params));
+
+            return new ReturnT<Map<String, String>>(result);
+        } catch (IOException | TemplateException e) {
+            logger.error(e.getMessage(), e);
+            return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构解析失败");
+        }
+
+    }
+
+
     @RequestMapping("/codeGenerate")
     @ResponseBody
     public ReturnT<Map<String, String>> codeGenerate(String tableSql, String packageName) {

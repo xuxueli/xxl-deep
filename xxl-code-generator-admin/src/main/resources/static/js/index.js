@@ -52,7 +52,6 @@ $(function () {
     function initCodeArea() {
 
 
-
         // controller_ide
         controller_ide = CodeMirror.fromTextArea(document.getElementById("controller_ide"), javaCodeOptions);
         controller_ide.setSize('auto', 'auto');
@@ -79,6 +78,42 @@ $(function () {
     }
 
     initCodeArea();
+
+
+    $("#getParseTableSql").click(function () {
+        var tableSql = tableSqlIDE.getValue();
+        var packageName = document.getElementById("packageName").value;
+
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getParseTableSql",
+            data: {
+                "tableSql": tableSql,
+                "packageName": packageName,
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 200) {
+                    console.log(data);
+                    layer.open({
+                        type: 1,
+                        title: "填写字段验证方式",
+                        area: '1000px',
+                        content: data.data.optionSelect,
+                        end: function (layero, index) {
+
+                        }
+                    });
+                } else {
+                    layer.open({
+                        icon: '2',
+                        content: (data.msg || '代码生成失败')
+                    });
+                }
+            }
+        });
+    });
 
     /**
      * 生成代码
@@ -135,5 +170,8 @@ $(function () {
         });
 
     });
+
+
+
 
 });

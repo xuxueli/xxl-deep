@@ -32,6 +32,9 @@
 
                             <button type="button" class="btn btn-default " id="codeGenerate">生成代码
                             </button>
+
+                            <button type="button" class="btn btn-default " id="getParseTableSql">生成增删改查模板文件
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -169,5 +172,37 @@ CREATE TABLE `userinfo` (
 
 <script src="${request.contextPath}/static/js/index.js"></script>
 
+<script type="application/javascript">
+    function openVerificationPage(target) {
+        $.ajax({
+            id : target + "verification",
+            type: 'POST',
+            url: base_url + "/getVerification",
+            data: {
+                "field": target,
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 200) {
+                    console.log(data);
+                    layer.open({
+                        type: 1,
+                        title: "填写字段验证方式",
+                        area: '1200px',
+                        content: data.data.verification,
+                        end: function (layero, index) {
+
+                        }
+                    });
+                } else {
+                    layer.open({
+                        icon: '2',
+                        content: (data.msg || '打开字段失败')
+                    });
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
