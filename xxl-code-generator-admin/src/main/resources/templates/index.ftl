@@ -173,25 +173,41 @@ CREATE TABLE `userinfo` (
 <script src="${request.contextPath}/static/js/index.js"></script>
 
 <script type="application/javascript">
-    function openVerificationPage(target) {
+    function openVerificationPage(columnName, fieldName, fieldClass, fieldComment) {
         $.ajax({
-            id : target + "verification",
             type: 'POST',
             url: base_url + "/getVerification",
             data: {
-                "field": target,
+                "columnName": columnName,
+                "fieldName": fieldName,
+                "fieldClass": fieldClass,
+                "fieldComment": fieldComment,
             },
             dataType: "json",
             success: function (data) {
+                var title = "";
+                title += "选择字段验证方式:";
+                title += "columnName : " + columnName + "&nbsp;&nbsp;";
+                title += "fieldName : " + fieldName + "&nbsp;&nbsp;";
+                title += "fieldClass : " + fieldClass + "&nbsp;&nbsp;";
+                title += "fieldComment : " + fieldComment + "&nbsp;&nbsp;";
+
                 if (data.code == 200) {
                     console.log(data);
                     layer.open({
+                        id: columnName + "dialog",
                         type: 1,
-                        title: "填写字段验证方式",
-                        area: '1200px',
+                        maxmin: true,//允许全屏最小化
+                        title: title,
+                        area: '1000px',
+                        btn: ["提交", '关闭'],
                         content: data.data.verification,
-                        end: function (layero, index) {
-
+                        success: function (content) {
+                            var btn = content.find('.layui-layer-btn');
+                            btn.find('.layui-layer-btn0').attr({
+                                href: 'http://www.layui.com/'
+                                , target: '_blank'
+                            });
                         }
                     });
                 } else {

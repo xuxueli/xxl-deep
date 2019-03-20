@@ -1,111 +1,83 @@
-<div style="width: 1000px; padding: 20px">
-    <form role="form" class="form-horizontal">
-        <div class="form-group">
-
-            <div class="col-md-6">
-                <div class="row">
-                    <label class="control-label col-md-3">
-                        <input name="${field}_checkbox" type="checkbox"/><span><strong>不为空</strong></span>
+<div style="width: 1000px;padding-left: 20px; padding-right: 20px ">
+    <div class="row">
+        <button type="button" id="${fieldName}_clean_all" class="btn btn-primary">取消全选</button>
+    </div>
+    <div class="row" style="margin-top: 20px;margin-bottom: 20px">
+        <#if rule?exists && rule?size gt 0>
+            <#list rule as ruleItem >
+                <div class="checkbox-inline">
+                    <label>
+                        <input onclick="ruleCheckBoxClick(this , '${fieldName}_${ruleItem.rule}_tr_id')"
+                               name="${fieldName}_checkbox" id="${fieldName}_checkbox"
+                               type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;<span><strong>${ruleItem.name}验证</strong></span>
                     </label>
-                    <div class="col-md-9 ">
-                        <div class="row">
-                            <label class="control-label col-md-4">错误文本</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="${field}_empty_message"
-                                       name="${field}_empty_message"
-                                       value="${field}必须填写"/>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </#list>
+        </#if>
+    </div>
+    <div class="layui-form">
+        <table class="layui-table">
+            <colgroup>
+                <col width="200px">
+                <col width="200px">
+                <col width="540px">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="padding: 10px">验证方式</th>
+                <th style="padding: 10px">值</th>
+                <th style="padding: 10px">错误提示</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#if rule?exists && rule?size gt 0>
+                <#list rule as ruleItem >
+                    <tr id="${fieldName}_${ruleItem.rule}_tr_id" style="display: none">
+                        <td style="padding: 10px">
+                            ${fieldName}
+                        </td>
+                        <#if ruleItem.rule == "min">
+                            <td style="padding: 10px"><input
+                                        class="form-control"
+                                        id="${fieldName}_${ruleItem.rule}_text_id"
+                                        type="number"
+                                        name="${fieldName}_${ruleItem.rule}_text_name"
+                                        placeholder="请输入最小值"
+                                /></td>
+                        <#elseif ruleItem.rule == "max">
+                            <td style="padding: 10px"><input
+                                        class="form-control"
+                                        id="${fieldName}_${ruleItem.rule}_id"
+                                        name="${fieldName}_${ruleItem.rule}_name"
+                                        type="number"
+                                        placeholder="请输入最大值"
 
-
-
-
-        </div>
-    </form>
+                                /></td>
+                        <#else>
+                            <td style="padding: 10px"></td>
+                        </#if>
+                        <td style="padding: 10px"><input type="text" class="form-control"
+                                                         id="${fieldName}_${ruleItem.rule}_message"
+                                                         name="${fieldName}_${ruleItem.rule}_message"
+                                                         value="<#if ruleItem.type=='normal'>${fieldComment}</#if>${ruleItem.errorInfo}"
+                            /></td>
+                    </tr>
+                </#list>
+            </#if>
+            </tbody>
+        </table>
+    </div>
 </div>
+<script>
+    $("#${fieldName}_clean_all").click(function () {
+        $("[name='${fieldName}_checkbox']").removeAttr("checked");
+    });
 
-
-<#--<form class="form" role="form">-->
-<#--<div class="form-group">-->
-<#--<div class="col-sm-12">${field}</div>-->
-
-
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_empty" name="${field}_empty"-->
-<#--type="checkbox">不为空-->
-<#--</label>-->
-<#--</div>-->
-<#--<input type="number" name="${field}_empty_text" class="form-control"-->
-<#--id="${field}_empty_text" value="${field}必须填写">-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_mobile" name="${field}_mobile"-->
-<#--type="checkbox">电话-->
-<#--</label>-->
-<#--</div>-->
-<#--<input type="number" name="${field}_mobile_text" class="form-control"-->
-<#--id="${field}_mobile_text" value="电话号码格式不正确">-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_email" name="${field}_email"-->
-<#--type="checkbox">邮箱-->
-<#--</label>-->
-<#--</div>-->
-<#--<input type="number" name="${field}_email_text" class="form-control"-->
-<#--id="${field}_email_text" value="邮箱地址格式不正确">-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_chinese" name="${field}_chinese"-->
-<#--type="checkbox">汉字-->
-<#--</label>-->
-<#--</div>-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_idcard" name="${field}_idcard"-->
-<#--type="checkbox">身份证-->
-<#--</label>-->
-<#--</div>-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_url" name="${field}_url" type="checkbox">URL-->
-<#--</label>-->
-<#--</div>-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<div class="checkbox">-->
-<#--<label>-->
-<#--<input id="${field}_ip" name="${field}_ip" type="checkbox">IP-->
-<#--</label>-->
-<#--</div>-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<input type="number" name="${field}_min" class="form-control"-->
-<#--id="${field}_min" placeholder="minLength">-->
-<#--</div>-->
-<#--<div class="col-sm-12">-->
-<#--<input type="number" name="${field}_max" class="form-control"-->
-<#--id="${field}_max" placeholder="maxLength">-->
-<#--</div>-->
-
-<#--<div class="col-sm-12">-->
-<#--<input type="text" name="${field}_regex" class="form-control"-->
-<#--id="${field}_regex" placeholder="自定义正则表达式">-->
-<#--</div>-->
-<#--</div>-->
-
-<#--</form>-->
+    function ruleCheckBoxClick(checkbox, target) {
+        if (checkbox.checked == true) {
+            $("#" + target ).show();
+        } else {
+            $("#" + target ).hide();
+        }
+    }
+</script>

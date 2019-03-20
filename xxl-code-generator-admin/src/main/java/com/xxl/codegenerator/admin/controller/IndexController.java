@@ -1,5 +1,7 @@
 package com.xxl.codegenerator.admin.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xxl.codegenerator.admin.core.CodeGeneratorTool;
 import com.xxl.codegenerator.admin.core.model.ClassInfo;
 import com.xxl.codegenerator.admin.model.ReturnT;
@@ -8,13 +10,17 @@ import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.misc.IOUtils;
+
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +31,9 @@ import java.util.Map;
 @Controller
 public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+
+    @Value(value = "classpath:verification.json")
+    private org.springframework.core.io.Resource verificationResource;
 
     @Resource
     private FreemarkerTool freemarkerTool;
@@ -37,20 +46,24 @@ public class IndexController {
 
     @RequestMapping("/getVerification")
     @ResponseBody
-    public ReturnT<Map<String, String>> getVerification(String field) {
-
+    public ReturnT<Map<String, String>> getVerification(String columnName, String fieldName, String fieldClass, String fieldComment) {
         try {
-            if (StringUtils.isBlank(field)) {
-                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "字段不能为空");
-            }
-
-
             // code genarete
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("field", field);
-            // result
-            Map<String, String> result = new HashMap<String, String>();
+            params.put("columnName", columnName);
+            params.put("fieldName", fieldName);
+            params.put("fieldClass", fieldClass);
+            params.put("fieldComment", fieldComment);
 
+            //json rule
+            String jsonString = new String(IOUtils.readFully(verificationResource.getInputStream(), -1, true));
+            Gson gson = new Gson();
+            List jsonResult = gson.fromJson(jsonString, new TypeToken<List<HashMap<String, String>>>() {
+            }.getType());
+            Map<String, String> result = new HashMap<String, String>();
+            params.put("rule", jsonResult);
+
+            // result
             result.put("verification", freemarkerTool.processString("xxl-code-generator/verification.ftl", params));
 
             return new ReturnT<Map<String, String>>(result);
