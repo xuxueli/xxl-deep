@@ -9,13 +9,13 @@
     "rule": "min",
     "name": "最小值",
     "type": "normal",
-    "errorInfo": "最小值必须小于"
+    "errorInfo": "最小值必须大于"
   },
   {
     "rule": "max",
     "name": "最大值",
     "type": "normal",
-    "errorInfo": "最大值必须大于"
+    "errorInfo": "最大值必须小于"
   },
   {
     "rule": "email",

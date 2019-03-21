@@ -173,7 +173,12 @@ CREATE TABLE `userinfo` (
 <script src="${request.contextPath}/static/js/index.js"></script>
 
 <script type="application/javascript">
+
+    var ruleMap = {};
+
     function openVerificationPage(columnName, fieldName, fieldClass, fieldComment) {
+        ruleMap.fieldName = fieldName;
+        ruleMap.check = {};
         $.ajax({
             type: 'POST',
             url: base_url + "/getVerification",
@@ -191,9 +196,7 @@ CREATE TABLE `userinfo` (
                 title += "fieldName : " + fieldName + "&nbsp;&nbsp;";
                 title += "fieldClass : " + fieldClass + "&nbsp;&nbsp;";
                 title += "fieldComment : " + fieldComment + "&nbsp;&nbsp;";
-
                 if (data.code == 200) {
-                    console.log(data);
                     layer.open({
                         id: columnName + "dialog",
                         type: 1,
@@ -202,12 +205,40 @@ CREATE TABLE `userinfo` (
                         area: '1000px',
                         btn: ["提交", '关闭'],
                         content: data.data.verification,
-                        success: function (content) {
-                            var btn = content.find('.layui-layer-btn');
-                            btn.find('.layui-layer-btn0').attr({
-                                href: 'http://www.layui.com/'
-                                , target: '_blank'
+                        yes: function (index, layero) {
+                            ruleMap.check = [];
+                            var label = "";
+                            var hasError = false;
+                            $("input:checkbox[name='" + fieldName + "_checkbox']:checked").each(function () {
+                                var checkItem = {};
+                                var rule = $(this).attr("rule");
+                                checkItem.rule = rule;
+                                if (rule == "min") {
+                                    checkItem.min = $("#" + fieldName + "_min_text_id").val();
+                                    if (checkItem.min == "undefined" || checkItem.min == "") {
+                                        layer.msg('您选择最小值验证，请填入最小值');
+                                        hasError = true;
+                                        return false;
+                                    }
+                                }
+                                if (rule == "max") {
+                                    checkItem.max = $("#" + fieldName + "_max_text_id").val();
+                                    if (checkItem.max == "undefined" || checkItem.max == "") {
+                                        layer.msg('您选择最大值验证，请填入最大值');
+                                        hasError = true;
+                                        return false;
+                                    }
+                                }
+                                checkItem.errorInfo = $("#" + fieldName + "_" + rule + "_errorInfo").val();
+                                ruleMap.check.push(checkItem);
+                                label += "<span class=\"label label-default\">" + checkItem.errorInfo + "</span>&nbsp;&nbsp;";
                             });
+                            $("#" + fieldName + "_check").html(label);
+                            if (!hasError) {
+                                layer.close(index);
+                            }
+                        },
+                        success: function (content) {
                         }
                     });
                 } else {
