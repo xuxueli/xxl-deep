@@ -27,12 +27,30 @@
 
                     <#-- left -->
                     <div class2="col-md-9" >
-
                         <#-- 表结构 -->
                         <div class="box box-default">
                             <div class="box-header with-border">
-                                <h4 class="pull-left">表结构信息</h4>
+                                <h4 class="pull-left">附加信息</h4>
                                 <button type="button" class="btn btn-default btn-xs pull-right" id="codeGenerate" >生成代码</button>
+                            </div>
+                            <div class="box-body">
+                                <ul style="list-style: none">
+                                    <li>
+                                        <label for="author">Author</label>
+                                        <input class="clearfix" type="text" id="author" placeholder="作者" value="xuxuelei" />
+                                    </li>
+                                    <li>
+                                        <label for="dao-path">mybatis dao package</label>
+                                        <input class="clearfix" type="text" size="32" id="dao-path" placeholder="dao包名" value="package.dao" />
+                                    </li>
+                                    <li>
+                                        <label for="model-path">mybatis model package</label>
+                                        <input type="text" id="model-path" size="32" placeholder="model包名" value="package.model" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box-header with-border">
+                                <h4 class="pull-left">表结构信息</h4>
                             </div>
                             <div class="box-body">
                                 <ul class="chart-legend clearfix">

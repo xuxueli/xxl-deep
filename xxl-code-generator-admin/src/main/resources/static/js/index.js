@@ -109,12 +109,18 @@ $(function () {
     $('#codeGenerate').click(function () {
 
         var tableSql = tableSqlIDE.getValue();
+        var author = $("#author").val();
+        var daoPath = $("#dao-path").val();
+        var modelPath = $("#model-path").val();
 
         $.ajax({
             type : 'POST',
             url : base_url + "/codeGenerate",
             data : {
-                "tableSql" : tableSql
+                "tableSql" : tableSql,
+                "author" : author,
+                "daoPath" : daoPath,
+                "modelPath" : modelPath
             },
             dataType : "json",
             success : function(data){
