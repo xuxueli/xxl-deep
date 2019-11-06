@@ -4,7 +4,7 @@
     <p align="center">
         Xxl Code Generator, a code generator framework for "controller/service/dao/mybatis/model" layer.
         <br>
-        <a href="http://www.xuxueli.com/xxl-code-generator/"><strong>-- Home Page --</strong></a>
+        <a href="https://www.xuxueli.com/xxl-code-generator/"><strong>-- Home Page --</strong></a>
         <br>
         <br>
         <a href="https://github.com/xuxueli/xxl-code-generator/releases">
@@ -13,7 +13,7 @@
         <a href="http://www.gnu.org/licenses/gpl-3.0.html">
             <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" >
         </a>
-        <a href="http://www.xuxueli.com/page/donate.html">
+        <a href="https://www.xuxueli.com/page/donate.html">
             <img src="https://img.shields.io/badge/%24-donate-ff69b4.svg?style=flat-square" >
         </a>
     </p>    
@@ -28,7 +28,7 @@ You only need to provide SQL to generate code automatically.
 XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
 
 ## Documentation
-- [中文文档](http://www.xuxueli.com/xxl-code-generator/)
+- [中文文档](https://www.xuxueli.com/xxl-code-generator/)
 
 
 ## Features
@@ -41,7 +41,7 @@ XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代
 
 ## Communication
 
-- [社区交流](http://www.xuxueli.com/page/community.html)
+- [社区交流](https://www.xuxueli.com/page/community.html)
 
 
 ## Contributing
@@ -63,6 +63,6 @@ This product is open source and free, and will continue to provide free communit
 
 
 ## Donate
-No matter how much the amount is enough to express your thought, thank you very much ：）     [To donate](http://www.xuxueli.com/page/donate.html )
+No matter how much the amount is enough to express your thought, thank you very much ：）     [To donate](https://www.xuxueli.com/page/donate.html )
 
-无论金额多少都足够表达您这份心意，非常感谢 ：）      [前往捐赠](http://www.xuxueli.com/page/donate.html )
+无论金额多少都足够表达您这份心意，非常感谢 ：）      [前往捐赠](https://www.xuxueli.com/page/donate.html )

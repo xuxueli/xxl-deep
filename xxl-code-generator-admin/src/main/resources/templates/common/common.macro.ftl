@@ -65,7 +65,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
-                        <a target="_blank" href="http://www.xuxueli.com/xxl-code-generator/">官方文档</a>
+                        <a target="_blank" href="https://www.xuxueli.com/xxl-code-generator/">官方文档</a>
                         <#--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="hidden-xs">表结构</span>
                         </a>
@@ -88,7 +88,7 @@
         Powered by <b>XXL Code Generator</b> v0.0.2
         <div class="pull-right hidden-xs">
             <strong>Copyright &copy; 2018-${.now?string('yyyy')} &nbsp;
-                <a href="http://www.xuxueli.com/" target="_blank" >xuxueli</a>
+                <a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
                 <a href="https://github.com/xuxueli/xxl-code-generator" target="_blank" >github</a>
             </strong><!-- All rights reserved. -->
         </div>

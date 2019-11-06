@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg)](https://github.com/xuxueli/xxl-code-generator/releases)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
-[![donate](https://img.shields.io/badge/%24-donate-ff69b4.svg?style=flat-square)](http://www.xuxueli.com/page/donate.html)
+[![donate](https://img.shields.io/badge/%24-donate-ff69b4.svg?style=flat-square)](https://www.xuxueli.com/page/donate.html)
 
 ## 一、简介
 
@@ -21,7 +21,7 @@ XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代
 
 #### 文档地址
 
-- [中文文档](http://www.xuxueli.com/xxl-code-generator/)
+- [中文文档](https://www.xuxueli.com/xxl-code-generator/)
 
 #### 源码仓库地址
 
@@ -32,7 +32,7 @@ XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代
 
 
 #### 技术交流
-- [社区交流](http://www.xuxueli.com/page/community.html)
+- [社区交流](https://www.xuxueli.com/page/community.html)
 
 ### 1.4 环境
 - JDK：1.7+
@@ -168,4 +168,4 @@ public class ReturnT<T> implements Serializable {
 
 ---
 ### 捐赠
-无论金额多少都足够表达您这份心意，非常感谢 ：）      [前往捐赠](http://www.xuxueli.com/page/donate.html )
+无论金额多少都足够表达您这份心意，非常感谢 ：）      [前往捐赠](https://www.xuxueli.com/page/donate.html )
