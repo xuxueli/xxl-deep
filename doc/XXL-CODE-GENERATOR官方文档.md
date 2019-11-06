@@ -53,24 +53,24 @@ XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代
 然后进入代码生成平台，将建表SQL脚本填写到 "表结构信息" 输入框即可。
 （默认已经提供了一个供参考Demo表SQL脚本，可操作体验下）
 
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_01.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_01.png "在这里输入图片标题")
 
 
 ### 第二步：生成代码
 点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
 
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_02.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_02.png "在这里输入图片标题")
 
 
 ### 第三步：Finish
 代码生成后，可在界面查看和使用 "controller/service/dao/mybatis/model" 多层源代码。部分截图如下：
 
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_03.png "在这里输入图片标题")
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_04.png "在这里输入图片标题")
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_05.png "在这里输入图片标题")
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_06.png "在这里输入图片标题")
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_07.png "在这里输入图片标题")
-![输入图片说明](https://raw.githubusercontent.com/xuxueli/xxl-code-generator/master/doc/images/img_08.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_03.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_04.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_05.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_06.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_07.png "在这里输入图片标题")
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-code-generator/images/img_08.png "在这里输入图片标题")
 
 
 ## 三、总体设计
