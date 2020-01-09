@@ -11,7 +11,7 @@ import java.util.Map;
 /**
 * ${classInfo.classComment}
 *
-* Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* Created by ${author} on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Controller
 public class ConfController {

@@ -36,12 +36,24 @@ public class IndexController {
 
     @RequestMapping("/codeGenerate")
     @ResponseBody
-    public ReturnT<Map<String, String>> codeGenerate(String tableSql) {
+    public ReturnT<Map<String, String>> codeGenerate(String tableSql, String author, String daoPath, String modelPath) {
 
         try {
 
             if (StringUtils.isBlank(tableSql)) {
                 return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构信息不可为空");
+            }
+
+            if (StringUtils.isBlank(author)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "作者不能为空");
+            }
+
+            if (StringUtils.isBlank(daoPath)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "dao path不能为空");
+            }
+
+            if (StringUtils.isBlank(modelPath)) {
+                return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "model path不能为空");
             }
 
             // parse table
@@ -50,6 +62,9 @@ public class IndexController {
             // code genarete
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("classInfo", classInfo);
+            params.put("author", author);
+            params.put("daoPath", daoPath);
+            params.put("modelPath", modelPath);
 
             // result
             Map<String, String> result = new HashMap<String, String>();
