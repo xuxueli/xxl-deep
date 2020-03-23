@@ -155,4 +155,17 @@ $(function () {
 
     });
 
+    // to fix code mirror not showing up until clicked
+    $('#generaterTab').click(function () {
+        setTimeout(function () {
+            controller_ide.refresh();
+            service_ide.refresh();
+            service_impl_ide.refresh();
+            dao_ide.refresh();
+            mybatis_ide.refresh();
+            model_ide.refresh();
+        }, 10);
+    });
+
+
 });

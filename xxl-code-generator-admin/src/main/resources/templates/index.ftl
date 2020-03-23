@@ -56,7 +56,7 @@ CREATE TABLE `userinfo` (
                         <#-- 生成代码 -->
                         <div class="nav-tabs-custom">
                             <!-- Tabs within a box -->
-                            <ul class="nav nav-tabs pull-right">
+                            <ul class="nav nav-tabs pull-right" id="generaterTab">
                                 <li class="pull-left header">生成代码</li>
 
                                 <li><a href="#model" data-toggle="tab">Model</a></li>
