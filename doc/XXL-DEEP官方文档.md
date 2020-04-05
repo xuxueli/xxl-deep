@@ -49,7 +49,10 @@ XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术�
 项目目录结构如下：
 ```
 - xxl-deep
-    - xxl-deep-admin   ：分布式企业开发平台XXL-DEEP
+    - xxl-deep-admin        : 基础管理平台
+    - xxl-deep-xx-service   : XX业务-服务模块
+    - xxx-deep-xx-api       : XX业务-API模块
+    - xxx-deep-xx-web       : XX业务-Web服务
 ```
 
 ### 第二步：部署运行
