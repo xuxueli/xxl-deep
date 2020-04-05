@@ -8,7 +8,7 @@
         <br>
         <br>
         <a href="https://github.com/xuxueli/xxl-deep/releases">
-            <img src="https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg" >
+            <img src="https://img.shields.io/github/release/xuxueli/xxl-deep.svg" >
         </a>
         <a href="http://www.gnu.org/licenses/gpl-3.0.html">
             <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" >
@@ -43,12 +43,12 @@ XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术�
 
 
 ## Contributing
-Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-code-generator/issues/) to discuss a new feature or change.
+Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-deep/issues/) to discuss a new feature or change.
 
-欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-code-generator/issues/) 讨论新特性或者变更。
+欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-deep/issues/) 讨论新特性或者变更。
 
 ## 接入登记
-更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-code-generator/issues/1 ) 登记，登记仅仅为了产品推广。
+更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-deep/issues/1 ) 登记，登记仅仅为了产品推广。
 
 
 ## Copyright and License
