@@ -25,22 +25,20 @@
 XXL-DEEP is a distributed enterprise development platform.
 
 XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术栈” 进行系统架构。
-提供整套开箱即用的基础模块，包括：权限管理、用户管理、代码生成、配置中心、调度中心……等，努力为中小型企业打造开箱即用的分布式企业开发解决方案。
+提供整套开箱即用的基础模块，包括：权限管理、用户管理、代码生成、服务治理、配置中心、调度中心……等，努力为中小型企业打造开箱即用的分布式企业开发解决方案。
 
 ## Documentation
 - 中文文档[](https://www.xuxueli.com/xxl-deep/)
 
-
 ## Features
-- 1、简洁：界面操作，简洁直观，可快速上手；
-- 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
-- 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
-- 4、高效：从SQL到API接口，全部代码均支持自动生成，极大提高生产力和效率； 
-- 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
+- 1、权限管理：灵活、细粒度权限管控；
+- 2、用户管理：在线、多角色用户管理；
+- 3、代码生成：轻量级、多层代码自动生成 "controller/service/dao/mybatis/model" ，参与到开发全流程；
+- 4、服务治理：分布式服务通讯与治理能力；
+- 5、配置中心：分布式配置管理能力； 
+- 6、调度中心：分布式任务调度能力；
 
-
-## Communication
-
+## Communication    
 - [社区交流](https://www.xuxueli.com/page/community.html)
 
 
