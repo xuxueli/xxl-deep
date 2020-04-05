@@ -24,7 +24,7 @@
 
 XXL-DEEP is a distributed enterprise development platform.
 
-XXL-DEEP 是一个分布式企业开发平台。基于 SpringBoot+XXL技术栈 进行系统架构。
+XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术栈” 进行系统架构。
 提供整套开箱即用的基础模块，包括：权限管理、用户管理、代码生成、配置中心、调度中心……等，努力为中小型企业打造开箱即用的分布式企业开发解决方案。
 
 ## Documentation
