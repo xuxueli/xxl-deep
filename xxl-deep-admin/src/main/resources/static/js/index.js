@@ -119,29 +119,40 @@ $(function () {
             dataType : "json",
             success : function(data){
                 if (data.code == 200) {
+
+                    // set value
+                    controller_ide.setValue(data.data.controller_code);
+                    controller_ide.setSize('auto','auto');
+
+                    service_ide.setValue(data.data.service_code);
+                    service_ide.setSize('auto','auto');
+
+                    service_impl_ide.setValue(data.data.service_impl_code);
+                    service_impl_ide.setSize('auto','auto');
+
+                    dao_ide.setValue(data.data.dao_code);
+                    dao_ide.setSize('auto','auto');
+
+                    mybatis_ide.setValue(data.data.mybatis_code);
+                    mybatis_ide.setSize('auto','auto');
+
+                    model_ide.setValue(data.data.model_code);
+                    model_ide.setSize('auto','auto');
+
+                    // refresh
+                    controller_ide.refresh();
+                    service_ide.refresh();
+                    service_impl_ide.refresh();
+                    dao_ide.refresh();
+                    mybatis_ide.refresh();
+                    model_ide.refresh();
+
+                    // msg
                     layer.open({
                         icon: '1',
                         content: "代码生成成功" ,
                         end: function(layero, index){
-
-                            controller_ide.setValue(data.data.controller_code);
-                            controller_ide.setSize('auto','auto');
-
-                            service_ide.setValue(data.data.service_code);
-                            service_ide.setSize('auto','auto');
-
-                            service_impl_ide.setValue(data.data.service_impl_code);
-                            service_impl_ide.setSize('auto','auto');
-
-                            dao_ide.setValue(data.data.dao_code);
-                            dao_ide.setSize('auto','auto');
-
-                            mybatis_ide.setValue(data.data.mybatis_code);
-                            mybatis_ide.setSize('auto','auto');
-
-                            model_ide.setValue(data.data.model_code);
-                            model_ide.setSize('auto','auto');
-
+                            //
                         }
                     });
                 } else {
