@@ -1,13 +1,13 @@
 <p align="center">
     <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.jpg" width="150">
-    <h3 align="center">XXL-CODE-GENERATOR</h3>
+    <h3 align="center">XXL-DEEP</h3>
     <p align="center">
-        Xxl Code Generator, a code generator framework for "controller/service/dao/mybatis/model" layer.
+        XXL-DEEP, a distributed enterprise development platform..
         <br>
-        <a href="https://www.xuxueli.com/xxl-code-generator/"><strong>-- Home Page --</strong></a>
+        <a href2="https://www.xuxueli.com/xxl-deep/"><strong>-- Home Page --</strong></a>
         <br>
         <br>
-        <a href="https://github.com/xuxueli/xxl-code-generator/releases">
+        <a href="https://github.com/xuxueli/xxl-deep/releases">
             <img src="https://img.shields.io/github/release/xuxueli/xxl-code-generator.svg" >
         </a>
         <a href="http://www.gnu.org/licenses/gpl-3.0.html">
@@ -22,13 +22,13 @@
 
 ## Introduction
 
-XXL-CODE-GENERATOR is a code generator framework for "controller/service/dao/mybatis/model" layer.
-You only need to provide SQL to generate code automatically.
+XXL-DEEP is a distributed enterprise development platform.
 
-XXL-CODE-GENERATOR 是一个 "controller/service/dao/mybatis/model" 多层的代码生成平台。只需要提供SQL，将会自动生成全部代码。
+XXL-DEEP 是一个分布式企业开发平台。基于 SpringBoot+XXL技术栈 进行系统架构。
+提供整套开箱即用的基础模块，包括：权限管理、用户管理、代码生成、配置中心、调度中心……等，努力为中小型企业打造开箱即用的分布式企业开发解决方案。
 
 ## Documentation
-- [中文文档](https://www.xuxueli.com/xxl-code-generator/)
+- 中文文档[](https://www.xuxueli.com/xxl-deep/)
 
 
 ## Features

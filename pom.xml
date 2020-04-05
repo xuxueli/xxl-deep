@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xuxueli</groupId>
-    <artifactId>xxl-code-generator</artifactId>
+    <artifactId>xxl-deep</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -13,7 +13,7 @@
     <url>https://www.xuxueli.com/</url>
 
     <modules>
-        <module>xxl-code-generator-admin</module>
+        <module>xxl-deep-admin</module>
     </modules>
 
     <properties>
@@ -40,9 +40,9 @@
 
     <scm>
         <tag>master</tag>
-        <url>https://github.com/xuxueli/xxl-code-generator.git</url>
-        <connection>scm:git:https://github.com/xuxueli/xxl-code-generator.git</connection>
-        <developerConnection>scm:git:git@github.com:xuxueli/xxl-code-generator.git</developerConnection>
+        <url>https://github.com/xuxueli/xxl-deep.git</url>
+        <connection>scm:git:https://github.com/xuxueli/xxl-deep.git</connection>
+        <developerConnection>scm:git:git@github.com:xuxueli/xxl-deep.git</developerConnection>
     </scm>
     <developers>
         <developer>
