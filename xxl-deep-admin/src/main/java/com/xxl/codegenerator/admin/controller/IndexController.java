@@ -2,10 +2,10 @@ package com.xxl.codegenerator.admin.controller;
 
 import com.xxl.codegenerator.admin.core.CodeGeneratorTool;
 import com.xxl.codegenerator.admin.core.model.ClassInfo;
+import com.xxl.codegenerator.admin.core.util.StringUtils;
 import com.xxl.codegenerator.admin.model.ReturnT;
 import com.xxl.codegenerator.admin.util.FreemarkerTool;
 import freemarker.template.TemplateException;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class IndexController {
 
         try {
 
-            if (StringUtils.isBlank(tableSql)) {
+            if (tableSql==null || tableSql.trim().length()==0) {
                 return new ReturnT<Map<String, String>>(ReturnT.FAIL_CODE, "表结构信息不可为空");
             }
 
