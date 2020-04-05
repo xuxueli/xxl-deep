@@ -40,7 +40,7 @@ XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术�
 - [社区交流](https://www.xuxueli.com/page/community.html)
 
 ### 1.4 环境
-- JDK：1.7+
+- JDK：1.8+
 
 
 ## 二、快速入门
