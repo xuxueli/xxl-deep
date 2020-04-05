@@ -9,11 +9,11 @@
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <description>a distributed single-sign-on framework.</description>
-    <url>https://www.xuxueli.com/</url>
+    <module>xxl-deep</module>
 
     <modules>
         <module>xxl-deep-admin</module>
+        <module>xxl-deep-permission</module>
     </modules>
 
     <properties>

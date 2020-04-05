@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- kaptcha -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg type="java.util.Properties">
+					<props>
+						<prop key="kaptcha.textproducer.char.string">8</prop>	<!-- 生成验证码内容范围 -->
+						<prop key="kaptcha.textproducer.char.length">4</prop>	<!-- 验证码个数 -->
+						<prop key="kaptcha.textproducer.char.space">10</prop>	<!-- 验证码文本字符间距 -->
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

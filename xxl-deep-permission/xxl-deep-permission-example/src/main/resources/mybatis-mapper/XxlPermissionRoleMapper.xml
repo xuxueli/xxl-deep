@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XxlPermissionRoleMapper">
+	
+	<resultMap id="XxlPermissionRole" type="com.xxl.permission.core.model.XxlPermissionRole" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="order" property="order" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		t.id,
+		t.`name`,
+		t.`order`
+	</sql>
+
+	<insert id="add" parameterType="com.xxl.permission.core.model.XxlPermissionRole" >
+		INSERT INTO xxl_permission_role(
+			`name`,
+			`order`
+		)
+		VALUES (
+			#{name, jdbcType=VARCHAR},
+			#{order, jdbcType=INTEGER}
+		)
+	</insert>
+
+	<delete id="delete" parameterType="java.util.List" >
+		DELETE FROM xxl_permission_role
+		WHERE id in
+		<foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="com.xxl.permission.core.model.XxlPermissionRole" >
+		UPDATE xxl_permission_role
+		SET
+			`name` = #{name, jdbcType=VARCHAR},
+			`order` = #{order, jdbcType=VARCHAR}
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+
+	<select id="loadRole" parameterType="java.lang.Integer" resultMap="XxlPermissionRole">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_permission_role AS t
+		WHERE t.id = #{id, jdbcType=INTEGER}
+	</select>
+
+	<select id="getAllRoles" resultMap="XxlPermissionRole">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_permission_role AS t
+		ORDER BY `order` ASC
+	</select>
+
+	<select id="findUserRoleCount" parameterType="java.util.HashMap" resultType="java.lang.Integer" >
+		SELECT count(1)
+		FROM xxl_permission_user_role
+		WHERE user_id = #{userId, jdbcType=INTEGER}
+			and role_id = #{roleId, jdbcType=INTEGER}
+	</select>
+
+	<select id="findUserCountByRole" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+		select count(1)
+		from xxl_permission_user_role
+		where role_id = #{roleId, jdbcType=INTEGER}
+	</select>
+
+	<select id="findRoleByUserId" parameterType="java.lang.Integer" resultMap="XxlPermissionRole">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_permission_role AS t
+		WHERE t.id in (
+            select role_id
+            from xxl_permission_user_role
+            where user_id = #{userId}
+		)
+		ORDER BY `order` ASC
+	</select>
+
+	<insert id="bindRoleMenu" parameterType="java.util.HashMap" >
+		INSERT INTO xxl_permission_role_menu(
+			role_id,
+			menu_id
+		)
+		VALUES
+		<foreach collection="menudIds" item="menudId" index="index" separator="," >
+		(
+			#{roleId},
+			#{menudId}
+		)
+		</foreach>
+	</insert>
+
+	<delete id="unBindRoleMenu" parameterType="java.util.HashMap">
+		delete from xxl_permission_role_menu
+		where role_id in 
+		<foreach collection="roleIds" index="index" item="roleId" open="(" separator="," close=")">
+	        #{roleId}
+	    </foreach>
+	</delete>
+
+	
+	<delete id="unBindRoleMenus" parameterType="java.util.HashMap" >
+		DELETE FROM xxl_permission_role_menu
+		WHERE role_id = #{roleId} and 
+			menu_id in
+			<foreach collection="delMenudIds" index="index" item="item" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	</delete>
+	
+</mapper>
