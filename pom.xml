@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <module>xxl-deep</module>
 
     <modules>
         <module>xxl-deep-admin</module>
