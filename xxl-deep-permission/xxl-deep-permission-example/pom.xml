@@ -118,10 +118,15 @@
 			<version>3.2.8</version>
 		</dependency>
 		<!-- mysql-connector -->
-		<dependency>
+		<!--<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
+		</dependency>-->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>8.3.0</version>
 		</dependency>
 
 		<!-- xmemcached -->
