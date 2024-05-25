@@ -175,6 +175,47 @@ public class ReturnT<T> implements Serializable {
 - 1、代码生成：
     - 多模板支持：当前模板为 "SpringMVC + Mybatis + Mysql" 技术栈；计划新增不同代码生成模板；
     - 扩展多层：目前支持生成 "controller/service/dao/mybatis/model" 层代码；计划新增前端代码，如 "jquery、vuejs、react" 等；
+- 2、其他：
+    定位：快速开发框架；多技术栈；
+    仓库格式：
+```
+/admin              ：快速版本（Bootstrap + SpringBoot）【管理系统开发框架】
+    /doc
+        /db/
+        /XX.md
+    /deep-admin（APP）
+    /deep-auth
+    /deep-codegen
+    /deep-xxljob
+    /deep-cms
+/admin_vue          ：前后端分离版本（Vue + SpringBoot）【管理系统开发框架】
+    /doc
+    /deep-admin（APP）
+    /deep-auth
+    /deep-codegen
+    /deep-ui
+/admin_cloud        ：微服务版本（Vue + SpringCloud）
+    /doc
+    /deep-gateway（GW）
+    /deep-auth（Node）
+    /deep-codegen（Node）
+    /deep-ui
+README.md
+``` 
+    功能：
+      - 多套技术栈：
+        - 前端：模板引擎[freemarker] or 前后端分离[vue]
+        - 后端：单体（admin + web） + 分布式:RPC/CONF/JOB/MQ(admin + web + service/api)
+        - 业务：开发框架（系统管理/技术能力） + 业务系统（CMS + 工作流 + …）；
+      - 系统管理：
+        - 组织管理：部门 + 岗位
+        - 人员管理：用户
+        - 资源管理：菜单 + 按钮 + 资源
+        - 权限管理：授权
+      - 技术能力：代码生成 + 工作流 + 操作日志 + 系统监控 + 通知公告 + 字典管理；
+      - 业务能力：
+        - 端：管理端 + 用户端
+        - 业务：内容发布（发布-CRUD，查询-RPC，定时发布-MQ，发布黑名单-CONF）、内容排行（排行生成-JOB、排行查询-Cache）；
 
 ## 五、其他
 
