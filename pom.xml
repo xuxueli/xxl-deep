@@ -12,7 +12,6 @@
 
     <modules>
         <module>xxl-deep-admin</module>
-        <module>xxl-deep-permission</module>
     </modules>
 
     <properties>
