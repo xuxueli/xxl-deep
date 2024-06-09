@@ -1,163 +1,147 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <title>代码生成平台</title>
-
-    <#import "common/common.macro.ftl" as netCommon>
-    <@netCommon.commonStyle />
-    <link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/addon/hint/show-hint.css">
-
+  	<#import "./common/common.macro.ftl" as netCommon>
+	<@netCommon.commonStyle />
+    <!-- daterangepicker -->
+    <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <title>${I18n.admin_name}</title>
 </head>
-<body class="hold-transition skin-blue layout-top-nav ">
+<body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
 <div class="wrapper">
+	<!-- header -->
+	<@netCommon.commonHeader />
+	<!-- left -->
+	<@netCommon.commonLeft "index" />
+	
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>${I18n.job_dashboard_name}</h1>
+			<!--
+			<h1>运行报表<small>任务调度中心</small></h1>
+			<ol class="breadcrumb">
+				<li><a><i class="fa fa-dashboard"></i>调度中心</a></li>
+				<li class="active">使用教程</li>
+			</ol>
+			-->
+		</section>
 
-<#-- header -->
-<@netCommon.commonHeader />
+		<!-- Main content -->
+		<section class="content">
 
+            <!-- 任务信息 -->
+            <div class="row">
 
-    <#-- content -->
-    <div class="content-wrapper">
-        <div class="container">
+                <#-- 任务信息 -->
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-aqua">
+                        <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
 
-            <section class="content">
+                        <div class="info-box-content">
+                            <span class="info-box-text">${I18n.job_dashboard_job_num}</span>
+                            <span class="info-box-number">${jobInfoCount}</span>
 
-                <div class="row">
-
-                    <#-- left -->
-                    <div class2="col-md-9" >
-
-                        <#-- 表结构 -->
-                        <div class="box box-default">
-                            <div class="box-header with-border">
-                                <h4 class="pull-left">表结构信息</h4>
-                                <button type="button" class="btn btn-default btn-xs pull-right" id="codeGenerate" >生成代码</button>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
                             </div>
-                            <div class="box-body">
-                                <ul class="chart-legend clearfix">
-                                    <li>
-                                        <small class="text-muted" >
-                                            <textarea id="tableSql" placeholder="请输入表结构信息..." >
-CREATE TABLE `userinfo` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `username` varchar(255) NOT NULL COMMENT '用户名',
-  `addtime` datetime NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息'
-                                            </textarea>
-                                        </small>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-                        <#-- 生成代码 -->
-                        <div class="nav-tabs-custom">
-                            <!-- Tabs within a box -->
-                            <ul class="nav nav-tabs pull-right">
-                                <li class="pull-left header">生成代码</li>
-
-                                <li><a href="#model" data-toggle="tab">Model</a></li>
-                                <li><a href="#mybatis" data-toggle="tab">Mybatis</a></li>
-                                <li><a href="#dao" data-toggle="tab">Dao</a></li>
-                                <li><a href="#service_impl" data-toggle="tab">ServiceImpl</a></li>
-                                <li><a href="#service" data-toggle="tab">Service</a></li>
-                                <li class="active" ><a href="#controller" data-toggle="tab">Controller</a></li>
-
-                            </ul>
-                            <div class="tab-content no-padding">
-                                <div class="chart tab-pane active" id="controller">
-                                    <div class="box-body">
-                                        Controller：<textarea id="controller_ide" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="chart tab-pane active" id="service">
-                                    <div class="box-body">
-                                        Service：<textarea id="service_ide" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="chart tab-pane active" id="service_impl">
-                                    <div class="box-body">
-                                        ServiceImpl：<textarea id="service_impl_ide" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="chart tab-pane active" id="dao">
-                                    <div class="box-body">
-                                        Dao：<textarea id="dao_ide" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="chart tab-pane active" id="mybatis">
-                                    <div class="box-body">
-                                        Mybatis：<textarea id="mybatis_ide" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="chart tab-pane active" id="model" >
-                                    <div class="box-body ">
-                                        Model：<textarea id="model_ide" ></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                <#--&lt;#&ndash; right &ndash;&gt;
-                <div class="col-md-3">
-
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <small class="text-muted" >表结构信息</small>
-                            <button type="button" class="btn btn-default btn-xs pull-right" >生成代码</button>
-                        </div>
-                        <!-- /.box-header &ndash;&gt;
-                        <div class="box-body">
-                            <ul class="chart-legend clearfix">
-                                <li>
-                                    <small class="text-muted" >
-                                        <textarea id="tableSql" placeholder="请输入表结构信息..." ></textarea>
-                                        &lt;#&ndash;<textarea rows="5" style="width: 100%;"></textarea>&ndash;&gt;
-                                    </small>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="box-footer no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                &lt;#&ndash;<li><a> 主题数：10 </a></li>&ndash;&gt;
-                            </ul>
+                            <span class="progress-description">${I18n.job_dashboard_job_num_tip}</span>
                         </div>
                     </div>
+                </div>
 
-                </div>-->
+                <#-- 调度信息 -->
+                <div class="col-md-4 col-sm-6 col-xs-12" >
+                    <div class="info-box bg-yellow">
+                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
+                        <div class="info-box-content">
+                            <span class="info-box-text">${I18n.job_dashboard_trigger_num}</span>
+                            <span class="info-box-number">${jobLogCount}</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%" ></div>
+                            </div>
+                            <span class="progress-description">
+                                ${I18n.job_dashboard_trigger_num_tip}
+                                <#--<#if jobLogCount gt 0>
+                                    调度成功率：${(jobLogSuccessCount*100/jobLogCount)?string("0.00")}<small>%</small>
+                                </#if>-->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <#-- 执行器 -->
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa ion-ios-settings-strong"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">${I18n.job_dashboard_jobgroup_num}</span>
+                            <span class="info-box-number">${executorCount}</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description">${I18n.job_dashboard_jobgroup_num_tip}</span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
-        </section>
+            <#-- 调度报表：时间区间筛选，左侧折线图 + 右侧饼图 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">${I18n.job_dashboard_report}</h3>
+                            <#--<input type="text" class="form-control" id="filterTime" readonly >-->
 
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" id="filterTime" >
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                                <#--<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="" style="margin-right: 5px;" data-original-title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>-->
+                            </div>
+                            <!-- /. tools -->
 
-    </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <#-- 左侧折线图 -->
+                                <div class="col-md-8">
+                                    <div id="lineChart" style="height: 350px;"></div>
+                                </div>
+                                <#-- 右侧饼图 -->
+                                <div class="col-md-4">
+                                    <div id="pieChart" style="height: 350px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	
+	<!-- footer -->
+	<@netCommon.commonFooter />
 </div>
-
-<!-- footer -->
-<@netCommon.commonFooter />
-
-</div>
-
 <@netCommon.commonScript />
-<script src="${request.contextPath}/static/plugins/codemirror/lib/codemirror.js"></script>
-<script src="${request.contextPath}/static/plugins/codemirror/addon/hint/show-hint.js"></script>
-<script src="${request.contextPath}/static/plugins/codemirror/addon/hint/anyword-hint.js"></script>
-
-<script src="${request.contextPath}/static/plugins/codemirror/addon/display/placeholder.js"></script>
-
-<script src="${request.contextPath}/static/plugins/codemirror/mode/clike/clike.js"></script>
-<script src="${request.contextPath}/static/plugins/codemirror/mode/sql/sql.js"></script>
-<script src="${request.contextPath}/static/plugins/codemirror/mode/xml/xml.js"></script>
-
+<!-- daterangepicker -->
+<script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
+<script src="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<#-- echarts -->
+<script src="${request.contextPath}/static/plugins/echarts/echarts.common.min.js"></script>
 <script src="${request.contextPath}/static/js/index.js"></script>
-
 </body>
 </html>
