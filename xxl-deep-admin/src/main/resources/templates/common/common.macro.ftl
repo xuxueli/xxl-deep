@@ -1,3 +1,4 @@
+<#-- page import (style + script) -->
 <#macro commonStyle>
 
 	<#-- i18n -->
@@ -38,6 +39,21 @@
 </#macro>
 
 <#macro commonScript>
+	<!-- base config -->
+	<script>
+		var base_url = '${request.contextPath}';
+		var I18n = ${I18nUtil.getMultString()};
+
+		/**
+		 * adminlte option
+		 */
+		var AdminLTEOptions = {
+			navbarMenuHeight: "200px",
+			animationSpeed: 'fast'
+		};
+		//$('.my-box').boxWidget(AdminLTEOptions)
+	</script>
+
 	<!-- jQuery -->
 	<script src="${request.contextPath}/static/adminlte/bower_components/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
@@ -61,28 +77,25 @@
 
 	<#-- common -->
     <script src="${request.contextPath}/static/js/common.1.js"></script>
-    <script>
-		var base_url = '${request.contextPath}';
-        var I18n = ${I18nUtil.getMultString()};
-	</script>
-
 </#macro>
 
+<#-- page module (header + footer + left) -->
 <#macro commonHeader>
 	<header class="main-header">
+		<!-- header-logo -->
 		<a href="${request.contextPath}/" class="logo">
 			<span class="logo-mini"><b>XXL</b></span>
 			<span class="logo-lg"><b>${I18n.admin_name}</b></span>
 		</a>
 		<nav class="navbar navbar-static-top" role="navigation">
-
+			<!--header left -->
 			<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-
+			<!--header right -->
           	<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<#-- login user -->
@@ -130,39 +143,86 @@
 
 </#macro>
 
+<#macro commonFooter >
+	<footer class="main-footer">
+		Powered by <b>XXL-DEEP</b> ${I18n.admin_version}
+		<div class="pull-right hidden-xs">
+			<strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
+				<a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
+				&nbsp;
+				<a href="https://github.com/xuxueli/xxl-deep" target="_blank" >github</a>
+			</strong><!-- All rights reserved. -->
+		</div>
+	</footer>
+</#macro>
+
 <#macro commonLeft pageName >
-	<!-- Left side column. contains the logo and sidebar -->
+	<!-- left -->
 	<aside class="main-sidebar">
-		<!-- sidebar: style can be found in sidebar.less -->
-		<section class="sidebar">
-			<!-- sidebar menu: : style can be found in sidebar.less -->
-			<ul class="sidebar-menu">
+		<!-- sidebar -->
+		<section class="sidebar" style="height: auto;" >
+			<!-- sidebar menu -->
+			<ul class="sidebar-menu tree" data-widget="tree" >
+
+				<#-- 历史菜单 -->
                 <li class="header">${I18n.system_nav}</li>
                 <li class="nav-click <#if pageName == "index">active</#if>" ><a href="${request.contextPath}/"><i class="fa fa-circle-o text-aqua"></i><span>${I18n.job_dashboard_name}</span></a></li>
-				<li class="nav-click <#if pageName == "jobinfo">active</#if>" ><a href="${request.contextPath}/jobinfo"><i class="fa fa-circle-o text-yellow"></i><span>${I18n.jobinfo_name}</span></a></li>
-				<li class="nav-click <#if pageName == "joblog">active</#if>" ><a href="${request.contextPath}/joblog"><i class="fa fa-circle-o text-green"></i><span>${I18n.joblog_name}</span></a></li>
 				<#if Request["XXL_JOB_LOGIN_IDENTITY"].role == 1>
-                    <li class="nav-click <#if pageName == "jobgroup">active</#if>" ><a href="${request.contextPath}/jobgroup"><i class="fa fa-circle-o text-red"></i><span>${I18n.jobgroup_name}</span></a></li>
                     <li class="nav-click <#if pageName == "user">active</#if>" ><a href="${request.contextPath}/user"><i class="fa fa-circle-o text-purple"></i><span>${I18n.user_manage}</span></a></li>
 				</#if>
-				<li class="nav-click <#if pageName == "help">active</#if>" ><a href="${request.contextPath}/help"><i class="fa fa-circle-o text-gray"></i><span>${I18n.job_help}</span></a></li>
+				<li class="nav-click <#if pageName == "help">active</#if>" ><a href="${request.contextPath}/help"><i class="fa fa-circle-o text-gray"></i><span>${I18n.admin_help}</span></a></li>
+
+				<#-- 菜单模板 -->
+				<li class="header">示例11</li>
+				<li class="treeview" style="height: auto;">
+					<a href="#">
+						<i class="fa fa-share"></i><span>父菜单1</span>
+						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+					</a>
+					<ul class="treeview-menu" >
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
+					</ul>
+				</li>
+				<li class="treeview" style="height: auto;">
+					<a href="#">
+						<i class="fa fa-share"></i><span>父菜单2</span>
+						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
+					</ul>
+				</li>
+				<li class="treeview" style="height: auto;">
+					<a href="#">
+						<i class="fa fa-share"></i><span>父菜单3</span>
+						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+					</a>
+					<ul class="treeview-menu" >
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
+						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
+					</ul>
+				</li>
+
+
 			</ul>
 		</section>
 		<!-- /.sidebar -->
 	</aside>
 </#macro>
 
-<#macro commonControl >
-	<!-- Control Sidebar -->
+<#--<#macro commonControl >
+	<!-- Control Sidebar &ndash;&gt;
 	<aside class="control-sidebar control-sidebar-dark">
-		<!-- Create the tabs -->
+		<!-- Create the tabs &ndash;&gt;
 		<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
 			<li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
 			<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
 		</ul>
-		<!-- Tab panes -->
+		<!-- Tab panes &ndash;&gt;
 		<div class="tab-content">
-			<!-- Home tab content -->
+			<!-- Home tab content &ndash;&gt;
 			<div class="tab-pane active" id="control-sidebar-home-tab">
 				<h3 class="control-sidebar-heading">近期活动</h3>
 				<ul class="control-sidebar-menu">
@@ -203,11 +263,11 @@
 						</a>
 					</li>
 				</ul>
-				<!-- /.control-sidebar-menu -->
+				<!-- /.control-sidebar-menu &ndash;&gt;
 			</div>
-			<!-- /.tab-pane -->
+			<!-- /.tab-pane &ndash;&gt;
 
-			<!-- Settings tab content -->
+			<!-- Settings tab content &ndash;&gt;
 			<div class="tab-pane" id="control-sidebar-settings-tab">
 				<form method="post">
 					<h3 class="control-sidebar-heading">个人设置</h3>
@@ -217,27 +277,14 @@
 						</label>
 						<p>左侧菜单栏样式自适应</p>
 					</div>
-					<!-- /.form-group -->
+					<!-- /.form-group &ndash;&gt;
 
 				</form>
 			</div>
-			<!-- /.tab-pane -->
+			<!-- /.tab-pane &ndash;&gt;
 		</div>
 	</aside>
-	<!-- /.control-sidebar -->
-	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	<!-- /.control-sidebar &ndash;&gt;
+	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar &ndash;&gt;
 	<div class="control-sidebar-bg"></div>
-</#macro>
-
-<#macro commonFooter >
-	<footer class="main-footer">
-        Powered by <b>XXL-JOB</b> ${I18n.admin_version}
-		<div class="pull-right hidden-xs">
-            <strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
-                <a href="https://www.xuxueli.com/" target="_blank" >xuxueli</a>
-				&nbsp;
-                <a href="https://github.com/xuxueli/xxl-job" target="_blank" >github</a>
-            </strong><!-- All rights reserved. -->
-		</div>
-	</footer>
-</#macro>
+</#macro>-->

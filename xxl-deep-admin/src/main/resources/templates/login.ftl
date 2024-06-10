@@ -3,8 +3,10 @@
 <head>
 	<#-- import macro -->
   	<#import "./common/common.macro.ftl" as netCommon>
-	<#-- import style -->
+
+	<#-- commonStyle -->
 	<@netCommon.commonStyle />
+	<!-- iCheck -->
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
 </head>
 <body class="hold-transition login-page">
@@ -41,10 +43,11 @@
 		</form>
 	</div>
 
-	<#-- import script -->
+	<#-- commonScript -->
 	<@netCommon.commonScript />
+	<!-- icheck -->
 	<script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
+	<!-- js file -->
 	<script src="${request.contextPath}/static/js/login.1.js"></script>
-
 </body>
 </html>
