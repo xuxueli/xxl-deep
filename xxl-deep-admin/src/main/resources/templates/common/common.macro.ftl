@@ -110,9 +110,14 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li id="updatePwd" ><a href="javascript:">${I18n.change_pwd}</a></li>
-                            <li id="logoutBtn" ><a href="javascript:">${I18n.logout_btn}</a></li>
+                            <li id="updatePwd" >
+								<a href="javascript:" style="height: 30px;padding: 3px 25px;" ><i class="fa fa-key"></i> ${I18n.change_pwd}</a>
+							</li>
+                            <li id="logoutBtn" >
+								<a href="javascript:" style="height: 30px;padding: 3px 25px;" ><i class="fa fa-sign-out"></i> ${I18n.logout_btn}</a>
+							</li>
                         </ul>
+
                     </li>
 				</ul>
 			</div>
@@ -189,7 +194,7 @@
 								</a>
 								<ul class="treeview-menu" >
 									<#list parent.menuList as child>
-										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}"><i class="fa ${child.icon}"></i>${child.name}</a></li>
+										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}" style="padding-top: 10px;"  ><i class="fa ${child.icon}"></i>${child.name}</a></li>
 									</#list>
 								</ul>
 							</li>
