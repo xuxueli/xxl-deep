@@ -12,7 +12,7 @@
 	<!-- header -->
 	<@netCommon.commonHeader />
 	<!-- left -->
-	<@netCommon.commonLeft "user" />
+	<@netCommon.commonLeft "/user" />
 	
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">

@@ -1,0 +1,63 @@
+package com.xxl.deep.admin.controller.interceptor;
+
+import com.xxl.deep.admin.core.model.XxlDeepMenu;
+import com.xxl.deep.admin.core.model.XxlDeepUser;
+import com.xxl.deep.admin.core.util.FtlUtil;
+import com.xxl.deep.admin.core.util.I18nUtil;
+import com.xxl.deep.admin.service.impl.LoginService;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * push cookies to model as cookieMap
+ *
+ * @author xuxueli 2015-12-12 18:09:04
+ */
+@Component
+public class CommonDataInterceptor implements AsyncHandlerInterceptor {
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+
+
+		// i18n, static method
+		if (modelAndView != null) {
+			modelAndView.addObject("I18nUtil", FtlUtil.generateStaticModel(I18nUtil.class.getName()));
+		}
+
+		// menu load
+		XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+		if (loginUser != null) {
+
+			// mock数据
+			XxlDeepMenu indexMenu = new XxlDeepMenu("首页报表", "/", 1, "text-aqua", null);
+			XxlDeepMenu authMenu = new XxlDeepMenu("用户权限", "", 2,"text-purple",
+					Arrays.asList(
+						new XxlDeepMenu("用户管理", "/user", 1, "", null),
+						new XxlDeepMenu("角色管理", "/role", 2, "", null),
+						new XxlDeepMenu("菜单管理", "/menu", 3, "", null)));
+			XxlDeepMenu helpMenu = new XxlDeepMenu("帮助中心", "/help", 3, "text-gray", null);
+
+			List<XxlDeepMenu> menuData = new ArrayList<>();
+			menuData.add(indexMenu);
+			menuData.add(authMenu);
+			menuData.add(helpMenu);
+
+			// 管理员过滤
+			if (loginUser.getRole() == 1) {
+				// 权限过滤
+			}
+
+			modelAndView.addObject("menuData", menuData);
+		}
+	}
+	
+}

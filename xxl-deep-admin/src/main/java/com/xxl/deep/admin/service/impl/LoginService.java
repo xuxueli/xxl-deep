@@ -22,7 +22,7 @@ import java.math.BigInteger;
 @Configuration
 public class LoginService {
 
-    public static final String LOGIN_IDENTITY_KEY = "XXL_JOB_LOGIN_IDENTITY";
+    public static final String LOGIN_IDENTITY_KEY = "XXL_DEEP_LOGIN_IDENTITY";
 
     @Resource
     private XxlDeepUserMapper xxlJobUserMapper;

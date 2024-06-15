@@ -69,6 +69,11 @@
 		} else {
 			$('body').removeClass('sidebar-collapse');
 		}
+		// init body fixed
+		$('body').addClass('fixed');
+		// init menu speed
+		$('.sidebar-menu').attr('data-animation-speed', 1);
+
 	</script>
 
 	<!-- AdminLTE App -->
@@ -101,7 +106,7 @@
 					<#-- login user -->
                     <li class="dropdown">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            ${I18n.system_welcome} ${Request["XXL_JOB_LOGIN_IDENTITY"].username}
+                            ${I18n.system_welcome} ${Request["XXL_DEEP_LOGIN_IDENTITY"].username}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
@@ -158,55 +163,44 @@
 </#macro>
 
 <#-- page module: Left-->
-<#macro commonLeft pageName >
+<#macro commonLeft pagePath >
 	<!-- left -->
 	<aside class="main-sidebar">
 		<!-- sidebar -->
 		<section class="sidebar" style="height: auto;" >
 			<!-- sidebar menu -->
-			<ul class="sidebar-menu tree" data-widget="tree" data-animation-speed="50" <#-- 菜单动画速度 --> >
+			<ul class="sidebar-menu tree" data-widget="tree" >
 
-				<#-- 历史菜单 -->
+				<#-- menu nav -->
                 <li class="header">${I18n.system_nav}</li>
-                <li class="nav-click <#if pageName == "index">active</#if>" ><a href="${request.contextPath}/"><i class="fa fa-circle-o text-aqua"></i><span>${I18n.job_dashboard_name}</span></a></li>
-				<#if Request["XXL_JOB_LOGIN_IDENTITY"].role == 1>
-                    <li class="nav-click <#if pageName == "user">active</#if>" ><a href="${request.contextPath}/user"><i class="fa fa-circle-o text-purple"></i><span>${I18n.user_manage}</span></a></li>
+
+				<#-- menu list -->
+				<#if menuData?exists && menuData?size gt 0>
+					<#list menuData as parent>
+						<#if parent.menuList?exists && parent.menuList?size gt 0>
+							<#-- parent + child -->
+							<#list parent.menuList as child>
+								<#if pagePath == child.path >
+									<#assign actived = "true" />
+								</#if>
+							</#list>
+							<li class="treeview <#if actived?exists >active</#if>" style="height: auto;"  >
+								<a href="#"><i class="fa fa-circle-o ${parent.icon}"></i><span>${parent.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu" >
+									<#list parent.menuList as child>
+										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}"><i class="fa fa-circle-o ${child.icon}"></i>${child.name}</a></li>
+									</#list>
+								</ul>
+							</li>
+						<#else>
+							<#-- only parent -->
+							<li class="nav-click <#if pagePath == parent.path >active</#if>" >
+								<a href="${request.contextPath}${parent.path}"><i class="fa fa-circle-o ${parent.icon}"></i><span>${parent.name}</span></a>
+							</li>
+						</#if>
+					</#list>
 				</#if>
-				<li class="nav-click <#if pageName == "help">active</#if>" ><a href="${request.contextPath}/help"><i class="fa fa-circle-o text-gray"></i><span>${I18n.admin_help}</span></a></li>
-
-				<#-- 菜单模板 -->
-				<li class="header">示例11</li>
-				<li class="treeview" style="height: auto;">
-					<a href="#">
-						<i class="fa fa-share"></i><span>父菜单1</span>
-						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-					</a>
-					<ul class="treeview-menu" >
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
-					</ul>
-				</li>
-				<li class="treeview" style="height: auto;">
-					<a href="#">
-						<i class="fa fa-share"></i><span>父菜单2</span>
-						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
-					</ul>
-				</li>
-				<li class="treeview" style="height: auto;">
-					<a href="#">
-						<i class="fa fa-share"></i><span>父菜单3</span>
-						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-					</a>
-					<ul class="treeview-menu" >
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One1</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One2</a></li>
-					</ul>
-				</li>
-
 
 			</ul>
 		</section>

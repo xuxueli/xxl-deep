@@ -3,9 +3,9 @@
 <head>
     <#-- import macro -->
   	<#import "./common/common.macro.ftl" as netCommon>
-
     <#-- commonStyle -->
 	<@netCommon.commonStyle />
+
     <!-- daterangepicker -->
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 </head>
@@ -16,7 +16,7 @@
         <@netCommon.commonHeader />
 
         <!-- left -->
-        <@netCommon.commonLeft "index" />
+        <@netCommon.commonLeft "/" />
 
         <!-- right start -->
         <div class="content-wrapper">
@@ -134,7 +134,7 @@
                 </div>
 
             </section>
-            <!-- /.content -->
+
         </div>
         <!-- right end -->
 
@@ -144,6 +144,7 @@
 
     <#-- commonScript -->
     <@netCommon.commonScript />
+
     <!-- daterangepicker -->
     <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
     <script src="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
