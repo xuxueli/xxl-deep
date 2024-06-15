@@ -39,47 +39,47 @@
 </#macro>
 
 <#macro commonScript>
-	<!-- base config -->
-	<script>
-		var base_url = '${request.contextPath}';
-		var I18n = ${I18nUtil.getMultString()};
-
-		/**
-		 * adminlte option
-		 */
-		var AdminLTEOptions = {
-			navbarMenuHeight: "200px",
-			animationSpeed: 'fast'
-		};
-		//$('.my-box').boxWidget(AdminLTEOptions)
-	</script>
-
 	<!-- jQuery -->
 	<script src="${request.contextPath}/static/adminlte/bower_components/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="${request.contextPath}/static/adminlte/bower_components/bootstrap/js/bootstrap.min.js"></script>
+	<!-- PACE -->
+	<script src="${request.contextPath}/static/adminlte/bower_components/PACE/pace.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="${request.contextPath}/static/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="${request.contextPath}/static/adminlte/bower_components/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="${request.contextPath}/static/adminlte/dist/js/adminlte.min.js"></script>
-	<!-- jquery.slimscroll -->
-	<script src="${request.contextPath}/static/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- pace -->
-    <script src="${request.contextPath}/static/adminlte/bower_components/PACE/pace.min.js"></script>
-    <#-- jquery cookie -->
+	<#-- jquery cookie -->
 	<script src="${request.contextPath}/static/plugins/jquery/jquery.cookie.js"></script>
 	<#-- jquery.validate -->
 	<script src="${request.contextPath}/static/plugins/jquery/jquery.validate.min.js"></script>
-
 	<#-- layer -->
 	<script src="${request.contextPath}/static/plugins/layer/layer.js"></script>
 
-	<#-- common -->
-    <script src="${request.contextPath}/static/js/common.1.js"></script>
+	<!-- base config -->
+	<script>
+		// init page param
+		var base_url = '${request.contextPath}';
+		var I18n = ${I18nUtil.getMultString()};
+
+		// init menu status
+		if ( 'close' == $.cookie('sidebar_status') ) {
+			$('body').addClass('sidebar-collapse');
+		} else {
+			$('body').removeClass('sidebar-collapse');
+		}
+	</script>
+
+	<!-- AdminLTE App -->
+	<script src="${request.contextPath}/static/adminlte/dist/js/adminlte.min.js"></script>
+
+	<#-- common js -->
+    <script src="${request.contextPath}/static/js/common.js"></script>
+
 </#macro>
 
-<#-- page module (header + footer + left) -->
+<#-- page module: Header-->
 <#macro commonHeader>
 	<header class="main-header">
 		<!-- header-logo -->
@@ -143,6 +143,7 @@
 
 </#macro>
 
+<#-- page module: Footer-->
 <#macro commonFooter >
 	<footer class="main-footer">
 		Powered by <b>XXL-DEEP</b> ${I18n.admin_version}
@@ -156,13 +157,14 @@
 	</footer>
 </#macro>
 
+<#-- page module: Left-->
 <#macro commonLeft pageName >
 	<!-- left -->
 	<aside class="main-sidebar">
 		<!-- sidebar -->
 		<section class="sidebar" style="height: auto;" >
 			<!-- sidebar menu -->
-			<ul class="sidebar-menu tree" data-widget="tree" >
+			<ul class="sidebar-menu tree" data-widget="tree" data-animation-speed="50" <#-- 菜单动画速度 --> >
 
 				<#-- 历史菜单 -->
                 <li class="header">${I18n.system_nav}</li>

@@ -17,12 +17,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Resource
     private PermissionInterceptor permissionInterceptor;
     @Resource
-    private CookieInterceptor cookieInterceptor;
+    private I18nInterceptor i18nInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(permissionInterceptor).addPathPatterns("/**");
-        registry.addInterceptor(cookieInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(i18nInterceptor).addPathPatterns("/**");
     }
 
 }

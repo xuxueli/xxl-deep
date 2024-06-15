@@ -9,8 +9,8 @@
     <!-- daterangepicker -->
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
-    <div class="wrapper">
+<body class="hold-transition skin-blue sidebar-mini" >
+    <div class="wrapper" >
 
         <!-- header -->
         <@netCommon.commonHeader />

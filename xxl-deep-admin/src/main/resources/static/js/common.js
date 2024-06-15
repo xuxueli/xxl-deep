@@ -139,25 +139,14 @@ $(function(){
 		}, 100);
 	});
 
-    // left menu status v: js + server + cookie
-	$('.sidebar-toggle').click(function(){
-		var xxljob_adminlte_settings = $.cookie('xxljob_adminlte_settings');	// on=open，off=close
-		if ('off' == xxljob_adminlte_settings) {
-            xxljob_adminlte_settings = 'on';
-		} else {
-            xxljob_adminlte_settings = 'off';
-		}
-		$.cookie('xxljob_adminlte_settings', xxljob_adminlte_settings, { expires: 7 });	//$.cookie('the_cookie', '', { expires: -1 });
-	});
 
-	// left menu status v1: js + cookie
-	/*
-	 var xxljob_adminlte_settings = $.cookie('xxljob_adminlte_settings');
-	 if (xxljob_adminlte_settings == 'off') {
-	 	$('body').addClass('sidebar-collapse');
-	 }
-	 */
-
-
+    // change menu status
+    $('.sidebar-toggle').click(function(){
+        if ( 'close' == $.cookie('sidebar_status') ) {
+            $.cookie('sidebar_status', 'open', { expires: 7 });
+        } else {
+            $.cookie('sidebar_status', 'close', { expires: 7 });	//$.cookie('the_cookie', '', { expires: -1 });
+        }
+    });
 	
 });
