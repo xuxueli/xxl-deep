@@ -4,7 +4,6 @@ import com.xxl.deep.admin.core.exception.XxlJobException;
 import com.xxl.tool.gson.GsonTool;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
-import com.xxl.tool.response.ResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -60,7 +59,7 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 		} else {
 
 			mv.addObject("exceptionMsg", errorResult.getMsg());
-			mv.setViewName("/common/common.exception");
+			mv.setViewName("common/common.errorpage");
 			return mv;
 		}
 	}

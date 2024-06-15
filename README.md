@@ -37,6 +37,7 @@ XXL-DEEP 是一个分布式企业开发平台。基于 “SpringBoot+XXL技术�
 - 4、服务治理：分布式服务通讯与治理能力；
 - 5、配置中心：分布式配置管理能力； 
 - 6、调度中心：分布式任务调度能力；
+- 7、异常页面：设计全局系统异常、ErrorPage异常处理机制，保障系统底限安全体验。
 
 ## Communication    
 - [社区交流](https://www.xuxueli.com/page/community.html)

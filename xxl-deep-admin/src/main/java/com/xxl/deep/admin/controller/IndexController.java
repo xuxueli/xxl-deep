@@ -120,6 +120,17 @@ public class IndexController {
 		return "help";
 	}
 
+	@RequestMapping(value = "/errorpage")
+	@PermissionLimit(limit=false)
+	public ModelAndView errorPage(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
+
+		String exceptionMsg = "HTTP Status Code: "+response.getStatus();
+
+		mv.addObject("exceptionMsg", exceptionMsg);
+		mv.setViewName("common/common.errorpage");
+		return mv;
+	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

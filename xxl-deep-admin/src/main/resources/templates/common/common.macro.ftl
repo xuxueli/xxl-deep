@@ -185,18 +185,18 @@
 								</#if>
 							</#list>
 							<li class="treeview <#if actived?exists >active</#if>" style="height: auto;"  >
-								<a href="#"><i class="fa fa-circle-o ${parent.icon}"></i><span>${parent.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								<a href="#"><i class="fa ${parent.icon}"></i><span>${parent.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 								</a>
 								<ul class="treeview-menu" >
 									<#list parent.menuList as child>
-										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}"><i class="fa fa-circle-o ${child.icon}"></i>${child.name}</a></li>
+										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}"><i class="fa ${child.icon}"></i>${child.name}</a></li>
 									</#list>
 								</ul>
 							</li>
 						<#else>
 							<#-- only parent -->
 							<li class="nav-click <#if pagePath == parent.path >active</#if>" >
-								<a href="${request.contextPath}${parent.path}"><i class="fa fa-circle-o ${parent.icon}"></i><span>${parent.name}</span></a>
+								<a href="${request.contextPath}${parent.path}"><i class="fa ${parent.icon}"></i><span>${parent.name}</span></a>
 							</li>
 						</#if>
 					</#list>
