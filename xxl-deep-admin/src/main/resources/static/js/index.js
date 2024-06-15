@@ -46,7 +46,7 @@ $(function () {
      * @param startDate
      * @param endDate
      */
-    function freshChartDate(startDate, endDate) {
+    /*function freshChartDate(startDate, endDate) {
         $.ajax({
             type : 'POST',
             url : base_url + '/chartInfo',
@@ -69,12 +69,12 @@ $(function () {
                 }
             }
         });
-    }
+    }*/
 
     /**
      * line Chart Init
      */
-    function lineChartInit(data) {
+    /*function lineChartInit(data) {
         var option = {
                title: {
                    text: I18n.job_dashboard_date_report
@@ -93,7 +93,7 @@ $(function () {
                },
                toolbox: {
                    feature: {
-                       /*saveAsImage: {}*/
+                       /!*saveAsImage: {}*!/
                    }
                },
                grid: {
@@ -148,16 +148,16 @@ $(function () {
 
         var lineChart = echarts.init(document.getElementById('lineChart'));
         lineChart.setOption(option);
-    }
+    }*/
 
     /**
      * pie Chart Init
      */
-    function pieChartInit(data) {
+    /*function pieChartInit(data) {
         var option = {
             title : {
                 text: I18n.job_dashboard_rate_report ,
-                /*subtext: 'subtext',*/
+                /!*subtext: 'subtext',*!/
                 x:'center'
             },
             tooltip : {
@@ -202,6 +202,6 @@ $(function () {
         };
         var pieChart = echarts.init(document.getElementById('pieChart'));
         pieChart.setOption(option);
-    }
+    }*/
 
 });

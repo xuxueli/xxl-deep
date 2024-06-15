@@ -56,7 +56,7 @@ public class IndexController {
 		return "index";
 	}
 
-    @RequestMapping("/chartInfo")
+    /*@RequestMapping("/chartInfo")
 	@ResponseBody
 	public Response<Map<String, Object>> chartInfo(Date startDate, Date endDate) {
 		//Response<Map<String, Object>> chartInfo = xxlJobService.chartInfo(startDate, endDate);
@@ -83,7 +83,7 @@ public class IndexController {
 
 
 		return new ResponseBuilder<Map<String, Object>>().success(result).build();
-    }
+    }*/
 	
 	@RequestMapping("/toLogin")
 	@PermissionLimit(limit=false)
