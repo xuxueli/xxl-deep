@@ -5,7 +5,7 @@
 	<#global I18n = I18nUtil.getMultString()?eval />
 
 	<#-- favicon、logo -->
-	<title>${I18n.admin_name}</title>
+	<title>${I18n.admin_name_full}</title>
 	<link rel="icon" href="${request.contextPath}/static/favicon.ico" />
 
 	<#-- meta -->

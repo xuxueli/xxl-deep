@@ -35,6 +35,11 @@ public class IndexController {
 
 
 	@RequestMapping("/")
+	public String defaultpage(Model model) {
+		return "redirect:/index";
+	}
+
+	@RequestMapping("/index")
 	public String index(Model model) {
 		//Map<String, Object> dashboardMap = xxlJobService.dashboardInfo();
 

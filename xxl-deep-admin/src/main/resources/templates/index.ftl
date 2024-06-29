@@ -16,7 +16,7 @@
         <@netCommon.commonHeader />
 
         <!-- left -->
-        <@netCommon.commonLeft "/" />
+        <@netCommon.commonLeft "/index" />
 
         <!-- right start -->
         <div class="content-wrapper">
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="pull-left info" style="padding-left: 10px;padding-top: 5px;" >
                                     <h4>早安，吴彦祖，祝你开心每一天！</h4>
-                                    <span style="color: #999;">登录时间：2024年05月01日 10:00:00</span>
+                                    <span style="color: #999;">登录时间：${.now?string('yyyy年MM月dd日 HH:mm:ss')}</span>
                                 </div>
                             </div>
                             <!-- right -->
@@ -74,27 +74,25 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <strong><i class="fa fa-book margin-r-5"></i> 用户管理</strong>
+                                <strong><i class="fa fa-users margin-r-5"></i>组织管理</strong>
                                 <p class="text-muted">
-                                    新增和管理系统用户信息；同时进行人员角色、菜单权限、人员授权等操作管理。
+                                    新增和管理组织信息、人员信息；同时进行人员角色、菜单权限、人员授权等操作管理。
                                 </p>
 
                                 <hr>
-                                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-                                <p class="text-muted">Malibu, California</p>
-
-                                <hr>
-                                <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-                                <p>
-                                    <span class="label label-danger">UI Design</span>
-                                    <span class="label label-success">Coding</span>
-                                    <span class="label label-info">Javascript</span>
-                                    <span class="label label-warning">PHP</span>
-                                    <span class="label label-primary">Node.js</span>
+                                <strong><i class="fa fa-cogs margin-r-5"></i>系统管理</strong>
+                                <p class="text-muted">
+                                    新增管理通知公告；维护管理系统字典；查看系统日志、机器监控与在线用户等信息。
                                 </p>
 
                                 <hr>
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                                <strong><i class="fa fa-wrench margin-r-5"></i>系统工具</strong>
+                                <p class="text-muted">
+                                    系统默认提供系统工具，辅助快速进行敏捷迭代开发；支持前后端代码生成；
+                                </p>
+
+                                <hr>
+                                <strong><i class="fa fa-book margin-r-5"></i> 帮助中心</strong>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
 
                             </div>
