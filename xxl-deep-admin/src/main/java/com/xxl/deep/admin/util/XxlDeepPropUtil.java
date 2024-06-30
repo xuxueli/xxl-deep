@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.core.conf;
+package com.xxl.deep.admin.util;
 
 
 import org.springframework.beans.factory.InitializingBean;
@@ -14,26 +14,21 @@ import java.util.Arrays;
  */
 
 @Component
-public class XxlJobAdminConfig implements InitializingBean {
+public class XxlDeepPropUtil implements InitializingBean {
 
-    private static XxlJobAdminConfig adminConfig = null;
-    public static XxlJobAdminConfig getAdminConfig() {
-        return adminConfig;
+    private static XxlDeepPropUtil single = null;
+    public static XxlDeepPropUtil getSingle() {
+        return single;
     }
-
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        adminConfig = this;
+        single = this;
     }
-
 
     // conf
     @Value("${xxl.job.i18n}")
     private String i18n;
-
-
-
 
     public String getI18n() {
         if (!Arrays.asList("zh_CN", "zh_TC", "en").contains(i18n)) {
@@ -41,7 +36,5 @@ public class XxlJobAdminConfig implements InitializingBean {
         }
         return i18n;
     }
-
-
 
 }

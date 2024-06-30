@@ -1,6 +1,6 @@
 package com.xxl.deep.admin.controller.resolver;
 
-import com.xxl.deep.admin.core.exception.XxlJobException;
+import com.xxl.tool.exception.BizException;
 import com.xxl.tool.gson.GsonTool;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
@@ -22,14 +22,14 @@ import java.io.IOException;
  * @author xuxueli 2016-1-6 19:22:18
  */
 @Component
-public class WebExceptionResolver implements HandlerExceptionResolver {
-	private static transient Logger logger = LoggerFactory.getLogger(WebExceptionResolver.class);
+public class WebHandlerExceptionResolver implements HandlerExceptionResolver {
+	private static transient Logger logger = LoggerFactory.getLogger(WebHandlerExceptionResolver.class);
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 
-		if (!(ex instanceof XxlJobException)) {
+		if (!(ex instanceof BizException)) {
 			logger.error("WebExceptionResolver:{}", ex);
 		}
 

@@ -1,8 +1,8 @@
 package com.xxl.deep.admin.controller;
 
 import com.xxl.deep.admin.controller.annotation.PermissionLimit;
-import com.xxl.deep.admin.core.model.XxlDeepUser;
-import com.xxl.deep.admin.core.util.I18nUtil;
+import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.dao.XxlDeepUserMapper;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.response.Response;

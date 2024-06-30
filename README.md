@@ -4,7 +4,7 @@
     <p align="center">
         XXL-DEEP, a distributed enterprise development platform..
         <br>
-        <a href2="https://www.xuxueli.com/xxl-deep/"><strong>-- Home Page --</strong></a>
+        <a href="https://www.xuxueli.com/xxl-deep/"><strong>-- Home Page --</strong></a>
         <br>
         <br>
         <a href="https://github.com/xuxueli/xxl-deep/releases">

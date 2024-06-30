@@ -1,11 +1,11 @@
 package com.xxl.deep.admin.service.impl;
 
-import com.xxl.deep.admin.core.model.XxlDeepUser;
-import com.xxl.deep.admin.core.util.CookieUtil;
-import com.xxl.deep.admin.core.util.I18nUtil;
+import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.dao.XxlDeepUserMapper;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.gson.GsonTool;
+import com.xxl.tool.net.CookieTool;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.context.annotation.Configuration;
@@ -83,7 +83,7 @@ public class LoginService {
         String loginToken = makeToken(xxlDeepUser);
 
         // do login
-        CookieUtil.set(response, LOGIN_IDENTITY_KEY, loginToken, ifRemember);
+        CookieTool.set(response, LOGIN_IDENTITY_KEY, loginToken, ifRemember);
         return new ResponseBuilder<String>().success().build();
     }
 
@@ -94,7 +94,7 @@ public class LoginService {
      * @param response
      */
     public Response<String> logout(HttpServletRequest request, HttpServletResponse response){
-        CookieUtil.remove(request, response, LOGIN_IDENTITY_KEY);
+        CookieTool.remove(request, response, LOGIN_IDENTITY_KEY);
         return new ResponseBuilder<String>().success().build();
     }
 
@@ -105,7 +105,7 @@ public class LoginService {
      * @return
      */
     public XxlDeepUser ifLogin(HttpServletRequest request, HttpServletResponse response){
-        String cookieToken = CookieUtil.getValue(request, LOGIN_IDENTITY_KEY);
+        String cookieToken = CookieTool.getValue(request, LOGIN_IDENTITY_KEY);
         if (cookieToken != null) {
             XxlDeepUser cookieUser = null;
             try {

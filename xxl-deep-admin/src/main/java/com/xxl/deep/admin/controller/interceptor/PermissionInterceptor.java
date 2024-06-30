@@ -1,8 +1,8 @@
 package com.xxl.deep.admin.controller.interceptor;
 
 import com.xxl.deep.admin.controller.annotation.PermissionLimit;
-import com.xxl.deep.admin.core.model.XxlDeepUser;
-import com.xxl.deep.admin.core.util.I18nUtil;
+import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.service.impl.LoginService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;

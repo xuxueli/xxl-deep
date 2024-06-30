@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.core.model;
+package com.xxl.deep.admin.model;
 
 /**
  * @author xuxueli 2019-05-04 16:43:12

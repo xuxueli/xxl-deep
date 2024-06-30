@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.core.model;
+package com.xxl.deep.admin.model;
 
 import java.util.List;
 
