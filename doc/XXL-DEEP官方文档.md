@@ -155,20 +155,24 @@ public class ReturnT<T> implements Serializable {
 
 
 ## 四、版本更新日志
-### 版本 v0.0.1 新特性[2018-05-03]
+### 版本 v0.1.0 Release Notes[2018-05-03]
 - 1、简洁：界面操作，简洁直观，可快速上手；
 - 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
 - 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
 - 4、高效：从SQL到API接口，全部代码均支持自动生成，极大提高生产力和效率； 
 - 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
 
-### 版本 v0.0.2[迭代中]
+### 版本 v0.2.0 Release Notes[2019-10-03]
 - 1、表字段comment不支持逗号问题修复；
 - 2、Docker基础镜像切换，精简镜像；
 - 3、修复注释为空页面渲染报错问题；
 - 4、数据库类型为char，解析成object问题修复；
 - 5、建表语句包含unique key，key里的属性，重复生成问题修复；
 - 6、项目依赖升级，并清理POM冗余依赖；
+- 
+### 版本 v1.0.0 Release Notes[迭代中]
+- 1、【整合】项目更名 XXL-DEEP，整合xxl-permission、xxl-code-generator多个历史项目；定位为企业开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
+- 2、【新增】代码生成功能集成，支持多层代码自动生成 "controller/service/dao/mybatis/model…"，助力全流程开发提效；
 
 ### TODO LIST
 - 1、代码生成：

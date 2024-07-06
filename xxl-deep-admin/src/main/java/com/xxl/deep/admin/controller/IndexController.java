@@ -1,6 +1,6 @@
 package com.xxl.deep.admin.controller;
 
-import com.xxl.deep.admin.core.annotation.PermissionLimit;
+import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.Response;
@@ -90,7 +90,7 @@ public class IndexController {
     }*/
 	
 	@RequestMapping("/toLogin")
-	@PermissionLimit(limit=false)
+	@Permission(limit=false)
 	public ModelAndView toLogin(HttpServletRequest request, HttpServletResponse response,ModelAndView modelAndView) {
 		if (loginService.ifLogin(request, response) != null) {
 			modelAndView.setView(new RedirectView("/",true,false));
@@ -101,7 +101,7 @@ public class IndexController {
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody
-	@PermissionLimit(limit=false)
+	@Permission(limit=false)
 	public Response<String> loginDo(HttpServletRequest request, HttpServletResponse response, String userName, String password, String ifRemember){
 		boolean ifRem = StringTool.isNotBlank(ifRemember) && "on".equals(ifRemember);
 		return loginService.login(response, userName, password, ifRem);
@@ -109,7 +109,7 @@ public class IndexController {
 	
 	@RequestMapping(value="logout", method=RequestMethod.POST)
 	@ResponseBody
-	@PermissionLimit(limit=false)
+	@Permission(limit=false)
 	public Response<String> logout(HttpServletRequest request, HttpServletResponse response){
 		return loginService.logout(request, response);
 	}
@@ -125,7 +125,7 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/errorpage")
-	@PermissionLimit(limit=false)
+	@Permission(limit=false)
 	public ModelAndView errorPage(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 
 		String exceptionMsg = "HTTP Status Code: "+response.getStatus();

@@ -1,16 +1,16 @@
 package com.xxl.deep.admin.controller;
 
-import com.xxl.deep.admin.core.annotation.PermissionLimit;
+import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.dao.XxlDeepUserMapper;
 import com.xxl.deep.admin.service.impl.LoginService;
+import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +32,7 @@ public class UserController {
     private XxlDeepUserMapper xxlJobUserDao;
 
     @RequestMapping
-    @PermissionLimit(adminuser = true)
+    @Permission(adminuser = true)
     public String index(Model model) {
 
         // 执行器列表
@@ -44,7 +44,7 @@ public class UserController {
 
     @RequestMapping("/pageList")
     @ResponseBody
-    @PermissionLimit(adminuser = true)
+    @Permission(adminuser = true)
     public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int start,
                                         @RequestParam(required = false, defaultValue = "10") int length,
                                         String username, int role) {
@@ -70,11 +70,11 @@ public class UserController {
 
     @RequestMapping("/add")
     @ResponseBody
-    @PermissionLimit(adminuser = true)
+    @Permission(adminuser = true)
     public Response<String> add(XxlDeepUser xxlJobUser) {
 
         // valid username
-        if (!StringUtils.hasText(xxlJobUser.getUsername())) {
+        if (StringTool.isBlank(xxlJobUser.getUsername())) {
             return new ResponseBuilder<String>().fail(I18nUtil.getString("system_please_input") + I18nUtil.getString("user_username")).build();
         }
         xxlJobUser.setUsername(xxlJobUser.getUsername().trim());
@@ -82,7 +82,7 @@ public class UserController {
             return new ResponseBuilder<String>().fail(I18nUtil.getString("system_lengh_limit")+"[4-20]").build();
         }
         // valid password
-        if (!StringUtils.hasText(xxlJobUser.getPassword())) {
+        if (StringTool.isBlank(xxlJobUser.getPassword())) {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("system_please_input")+I18nUtil.getString("user_password") ).build();
         }
         xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
@@ -105,7 +105,7 @@ public class UserController {
 
     @RequestMapping("/update")
     @ResponseBody
-    @PermissionLimit(adminuser = true)
+    @Permission(adminuser = true)
     public Response<Object> update(HttpServletRequest request, XxlDeepUser xxlJobUser) {
 
         // avoid opt login seft
@@ -115,7 +115,7 @@ public class UserController {
         }
 
         // valid password
-        if (StringUtils.hasText(xxlJobUser.getPassword())) {
+        if (StringTool.isNotBlank(xxlJobUser.getPassword())) {
             xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
             if (!(xxlJobUser.getPassword().length()>=4 && xxlJobUser.getPassword().length()<=20)) {
                 return new ResponseBuilder<Object>().fail(  I18nUtil.getString("system_lengh_limit")+"[4-20]" ).build();
@@ -133,7 +133,7 @@ public class UserController {
 
     @RequestMapping("/remove")
     @ResponseBody
-    @PermissionLimit(adminuser = true)
+    @Permission(adminuser = true)
     public Response<String> remove(HttpServletRequest request, int id) {
 
         // avoid opt login seft

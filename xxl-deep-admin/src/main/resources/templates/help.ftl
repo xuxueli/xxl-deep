@@ -25,6 +25,7 @@
 
 		<!-- content-main -->
 		<section class="content">
+			<#-- biz start  -->
 			<div class="callout callout-info">
 				<h4>${I18n.admin_name_full}</h4>
 				<br>
@@ -38,6 +39,7 @@
 				</p>
 				<p></p>
             </div>
+			<#-- biz end  -->
 		</section>
 
 	</div>

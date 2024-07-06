@@ -1,6 +1,6 @@
 package com.xxl.deep.admin.core.interceptor;
 
-import com.xxl.deep.admin.core.annotation.PermissionLimit;
+import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.service.impl.LoginService;
@@ -34,7 +34,7 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
 		boolean needLogin = true;
 		boolean needAdminuser = false;
 		HandlerMethod method = (HandlerMethod)handler;
-		PermissionLimit permission = method.getMethodAnnotation(PermissionLimit.class);
+		Permission permission = method.getMethodAnnotation(Permission.class);
 		if (permission!=null) {
 			needLogin = permission.limit();
 			needAdminuser = permission.adminuser();

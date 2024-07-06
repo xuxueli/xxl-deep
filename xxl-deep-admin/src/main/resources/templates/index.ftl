@@ -23,7 +23,7 @@
 
             <!-- content-header -->
             <section class="content-header">
-                <h1>工作台</h1>
+                <h1>${I18n.index_name}</h1>
                 <!--
                 <h1>运行报表<small>任务调度中心</small></h1>
                 <ol class="breadcrumb">
@@ -35,6 +35,7 @@
 
             <!-- content-main -->
             <section class="content">
+                <#-- biz start  -->
 
                 <!-- 顶部公告 start -->
                 <div class="box box-default">
@@ -169,7 +170,7 @@
                 </div>
                 <!-- 个人信息区域 end -->
 
-
+                <#-- biz end  -->
             </section>
 
         </div>
