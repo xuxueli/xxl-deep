@@ -7,9 +7,24 @@ package com.xxl.deep.admin.util.codegen;
  */
 public class FieldInfo {
 
+    /**
+     * column Name, "add_time"
+     */
     private String columnName;
+
+    /**
+     * field Name, "addTime"
+     */
     private String fieldName;
+
+    /**
+     * field Class, "Date"
+     */
     private String fieldClass;
+
+    /**
+     * field Comment, "add time of the recore"
+     */
     private String fieldComment;
 
     public String getColumnName() {

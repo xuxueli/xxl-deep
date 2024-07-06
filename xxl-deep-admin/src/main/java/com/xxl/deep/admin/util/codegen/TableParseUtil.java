@@ -25,7 +25,7 @@ public class TableParseUtil {
      * @return
      */
     public static ClassInfo processTableIntoClassInfo(String tableSql) throws IOException {
-        if (tableSql==null || tableSql.trim().length()==0) {
+        if (StringTool.isBlank(tableSql)) {
             throw new BizException("Table structure can not be empty.");
         }
         tableSql = tableSql.trim();
@@ -39,7 +39,6 @@ public class TableParseUtil {
         } else {
             throw new BizException("Table structure anomaly.");
         }
-
         if (tableName.contains("`")) {
             tableName = tableName.substring(tableName.indexOf("`")+1, tableName.lastIndexOf("`"));
         }
@@ -92,6 +91,7 @@ public class TableParseUtil {
             }
         }
 
+        // collect column
         String[] fieldLineList = fieldListTmp.split(",");
         if (fieldLineList.length > 0) {
             for (String columnLine :fieldLineList) {
@@ -148,10 +148,11 @@ public class TableParseUtil {
             }
         }
 
-        if (fieldList.size() < 1) {
+        if (fieldList.isEmpty()) {
             throw new BizException("Table structure anomaly.");
         }
 
+        // result
         ClassInfo codeJavaInfo = new ClassInfo();
         codeJavaInfo.setTableName(tableName);
         codeJavaInfo.setClassName(className);

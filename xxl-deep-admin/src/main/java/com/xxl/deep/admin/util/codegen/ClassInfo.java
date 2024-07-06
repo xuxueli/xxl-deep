@@ -9,8 +9,19 @@ import java.util.List;
  */
 public class ClassInfo {
 
+	/**
+	 * table name, 'user_info'
+	 */
     private String tableName;
+
+	/**
+	 * class name, 'userInfo'
+	 */
     private String className;
+
+	/**
+	 * class comment, "user info table"
+	 */
 	private String classComment;
 
 	private List<FieldInfo> fieldList;

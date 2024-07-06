@@ -40,12 +40,15 @@
 						<li>
 							<small class="text-muted" >
 									<textarea id="tableSql" placeholder="${I18n.system_please_input}${I18n.codegen_tablesql}..." >
-CREATE TABLE `userinfo` (
-`user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-`username` varchar(255) NOT NULL COMMENT '用户名',
-`addtime` datetime NOT NULL COMMENT '创建时间',
-PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息'
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL COMMENT '账号',
+  `password` varchar(50) NOT NULL COMMENT '密码',
+  `role` tinyint(4) NOT NULL COMMENT '角色：0-普通用户、1-管理员',
+  `permission` varchar(255) DEFAULT NULL COMMENT '权限：执行器ID列表，多个逗号分割',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `i_username` (`username`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 									</textarea>
 							</small>
 						</li>
