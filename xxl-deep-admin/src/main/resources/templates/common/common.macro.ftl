@@ -184,12 +184,13 @@
 					<#list menuData as parent>
 						<#if parent.menuList?exists && parent.menuList?size gt 0>
 							<#-- parent + child -->
+							<#assign actived = "false" />
 							<#list parent.menuList as child>
 								<#if pagePath == child.path >
 									<#assign actived = "true" />
 								</#if>
 							</#list>
-							<li class="treeview <#if actived?exists >active</#if>" style="height: auto;"  >
+							<li class="treeview <#if actived == "true" >active</#if>" style="height: auto;"  >
 								<a href="#"><i class="fa ${parent.icon}"></i><span>${parent.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 								</a>
 								<ul class="treeview-menu" >
