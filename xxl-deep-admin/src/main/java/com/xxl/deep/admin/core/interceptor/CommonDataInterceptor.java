@@ -48,9 +48,9 @@ public class CommonDataInterceptor implements AsyncHandlerInterceptor {
 				menuData.add(new XxlDeepMenu("组织管理", "/org", 2,"fa-users",
 						Arrays.asList(
 								new XxlDeepMenu("组织管理", "/org/org", 1, "", null),
-								new XxlDeepMenu("用户管理", "/org/user", 1, "", null),
-								new XxlDeepMenu("角色管理", "/org/role", 2, "", null),
-								new XxlDeepMenu("资源管理", "/org/resource", 3, "", null))));
+								new XxlDeepMenu("用户管理", "/org/user", 2, "", null),
+								new XxlDeepMenu("角色管理", "/org/role", 3, "", null),
+								new XxlDeepMenu("资源管理", "/org/resource", 4, "", null))));
 
 				// 系统管理
 				menuData.add(new XxlDeepMenu("系统管理", "/sys", 3,"fa-cogs",

@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.controller;
+package com.xxl.deep.admin.controller.org;
 
 import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.model.XxlDeepUser;
@@ -25,7 +25,7 @@ import java.util.Map;
  * @author xuxueli 2019-05-04 16:39:50
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/org/user")
 public class UserController {
 
     @Resource
@@ -39,7 +39,7 @@ public class UserController {
         //List<XxlJobGroup> groupList = new ArrayList<>();
         model.addAttribute("groupList", null);
 
-        return "user/user.index";
+        return "org/user";
     }
 
     @RequestMapping("/pageList")

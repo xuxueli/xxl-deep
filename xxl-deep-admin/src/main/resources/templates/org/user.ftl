@@ -12,7 +12,7 @@
 	<!-- header -->
 	<@netCommon.commonHeader />
 	<!-- left -->
-	<@netCommon.commonLeft "/user" />
+	<@netCommon.commonLeft "/org/user" />
 	
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -183,6 +183,6 @@
 <!-- DataTables -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${request.contextPath}/static/js/user.index.1.js"></script>
+<script src="${request.contextPath}/static/js/org/user.js"></script>
 </body>
 </html>

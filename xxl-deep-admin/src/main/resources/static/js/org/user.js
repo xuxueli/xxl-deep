@@ -6,7 +6,7 @@ $(function() {
 		"processing" : true, 
 	    "serverSide": true,
 		"ajax": {
-			url: base_url + "/user/pageList",
+			url: base_url + "/org/user/pageList",
 			type:"post",
 	        data : function ( d ) {
 	        	var obj = {};
@@ -120,7 +120,7 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/user/remove",
+				url : base_url + "/org/user/remove",
 				data : {
 					"id" : id
 				},
@@ -207,7 +207,7 @@ $(function() {
                 "permission": permissionArr.join(',')
 			};
 
-        	$.post(base_url + "/user/add", paramData, function(data, status) {
+        	$.post(base_url + "/org/user/add", paramData, function(data, status) {
     			if (data.code == "200") {
 					$('#addModal').modal('hide');
 
@@ -299,7 +299,7 @@ $(function() {
                 "permission": permissionArr.join(',')
             };
 
-            $.post(base_url + "/user/update", paramData, function(data, status) {
+            $.post(base_url + "/org/user/update", paramData, function(data, status) {
                 if (data.code == "200") {
                     $('#updateModal').modal('hide');
 

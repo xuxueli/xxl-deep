@@ -80,7 +80,7 @@
 	<script src="${request.contextPath}/static/adminlte/dist/js/adminlte.min.js"></script>
 
 	<#-- common js -->
-    <script src="${request.contextPath}/static/js/common.js"></script>
+    <script src="${request.contextPath}/static/js/common/common.js"></script>
 
 </#macro>
 
