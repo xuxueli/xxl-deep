@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import com.xxl.tool.response.Response;
 
 /**
 * ${classInfo.classComment}
@@ -14,7 +15,7 @@ import java.util.Map;
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Controller
-public class ConfController {
+public class ${classInfo.className}Controller {
 
     @Resource
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
@@ -24,7 +25,7 @@ public class ConfController {
     */
     @RequestMapping("/insert")
     @ResponseBody
-    public ReturnT<String> insert(${classInfo.className} ${classInfo.className?uncap_first}){
+    public Response<String> insert(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
     }
 
@@ -33,7 +34,7 @@ public class ConfController {
     */
     @RequestMapping("/delete")
     @ResponseBody
-    public ReturnT<String> delete(int id){
+    public Response<String> delete(int id){
         return ${classInfo.className?uncap_first}Service.delete(id);
     }
 
@@ -42,7 +43,7 @@ public class ConfController {
     */
     @RequestMapping("/update")
     @ResponseBody
-    public ReturnT<String> update(${classInfo.className} ${classInfo.className?uncap_first}){
+    public Response<String> update(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
     }
 
@@ -51,7 +52,7 @@ public class ConfController {
     */
     @RequestMapping("/load")
     @ResponseBody
-    public ReturnT<String> load(int id){
+    public Response<${classInfo.className}> load(int id){
         return ${classInfo.className?uncap_first}Service.load(id);
     }
 

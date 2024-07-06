@@ -120,6 +120,9 @@ $(function () {
             success : function(data){
                 if (data.code == 200) {
 
+                    // show all, for setvalue
+                    $('.chart.tab-pane').addClass('active');
+
                     // set value
                     controller_ide.setValue(data.data.controller_code);
                     controller_ide.setSize('auto','auto');
@@ -147,12 +150,18 @@ $(function () {
                     mybatis_ide.refresh();
                     model_ide.refresh();
 
+                    // hide nav + panel
+                    $('.nav-tabs > li').removeClass('active')
+                    $('.chart.tab-pane').removeClass('active');
+
                     // msg
                     layer.open({
                         icon: '1',
                         content: I18n.codegen_name+I18n.system_success ,
                         end: function(layero, index){
-                            //
+                            // hide nav + panel
+                            $('#controller_nav').addClass('active');
+                            $('#controller').addClass('active');
                         }
                     });
                 } else {

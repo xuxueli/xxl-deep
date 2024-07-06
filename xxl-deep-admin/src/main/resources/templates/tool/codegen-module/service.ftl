@@ -1,4 +1,5 @@
 import java.util.Map;
+import com.xxl.tool.response.Response;
 
 /**
 * ${classInfo.classComment}
@@ -10,22 +11,22 @@ public interface ${classInfo.className}Service {
     /**
     * 新增
     */
-    public ReturnT<String> insert(${classInfo.className} ${classInfo.className?uncap_first});
+    public Response<String> insert(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
     * 删除
     */
-    public ReturnT<String> delete(int id);
+    public Response<String> delete(int id);
 
     /**
     * 更新
     */
-    public ReturnT<String> update(${classInfo.className} ${classInfo.className?uncap_first});
+    public Response<String> update(${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
     * Load查询
     */
-    public ${classInfo.className} load(int id);
+    public Response<${classInfo.className}> load(int id);
 
     /**
     * 分页查询

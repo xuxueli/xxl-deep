@@ -9,7 +9,7 @@ import java.util.List;
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Component
-public interface ${classInfo.className}Dao {
+public interface ${classInfo.className}Mapper {
 
     /**
     * 新增
