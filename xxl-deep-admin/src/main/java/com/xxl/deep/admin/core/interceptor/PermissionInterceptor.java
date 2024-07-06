@@ -1,6 +1,6 @@
-package com.xxl.deep.admin.controller.interceptor;
+package com.xxl.deep.admin.core.interceptor;
 
-import com.xxl.deep.admin.controller.annotation.PermissionLimit;
+import com.xxl.deep.admin.core.annotation.PermissionLimit;
 import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.service.impl.LoginService;

@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.controller.annotation;
+package com.xxl.deep.admin.core.annotation;
 
 
 import java.lang.annotation.ElementType;

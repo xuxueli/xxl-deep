@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.controller.interceptor;
+package com.xxl.deep.admin.core.interceptor;
 
 import com.xxl.deep.admin.model.XxlDeepMenu;
 import com.xxl.deep.admin.model.XxlDeepUser;
