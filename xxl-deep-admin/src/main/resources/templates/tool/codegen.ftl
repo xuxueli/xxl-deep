@@ -5,8 +5,12 @@
 	<#import "../common/common.macro.ftl" as netCommon>
 	<#-- commonStyle -->
 	<@netCommon.commonStyle />
+
+	<#-- biz start（1/5 style） -->
 	<link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/lib/codemirror.css">
 	<link rel="stylesheet" href="${request.contextPath}/static/plugins/codemirror/addon/hint/show-hint.css">
+	<#-- biz end（1/5 end） -->
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini" >
 <div class="wrapper">
@@ -15,19 +19,24 @@
 	<@netCommon.commonHeader />
 
 	<!-- left -->
+	<#-- biz start（2/5 left） -->
 	<@netCommon.commonLeft "/tool/codegen" />
+	<#-- biz end（2/5 left） -->
 
 	<!-- right start -->
 	<div class="content-wrapper">
 
 		<!-- content-header -->
 		<section class="content-header">
+			<#-- biz start（3/5 name） -->
 			<h1>${I18n.codegen_name}</h1>
+			<#-- biz end（3/5 name） -->
 		</section>
 
 		<!-- content-main -->
 		<section class="content">
-			<#-- biz start  -->
+
+			<#-- biz start（4/5 content） -->
 
 			<#-- 表结构 -->
 			<div class="box box-default">
@@ -104,7 +113,8 @@ CREATE TABLE `user` (
 				</div>
 			</div>
 
-			<#-- biz end  -->
+			<#-- biz end（4/5 content） -->
+
 		</section>
 
 	</div>
@@ -114,6 +124,8 @@ CREATE TABLE `user` (
 	<@netCommon.commonFooter />
 </div>
 <@netCommon.commonScript />
+
+<#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/plugins/codemirror/lib/codemirror.js"></script>
 <script src="${request.contextPath}/static/plugins/codemirror/addon/hint/show-hint.js"></script>
 <script src="${request.contextPath}/static/plugins/codemirror/addon/hint/anyword-hint.js"></script>
@@ -122,5 +134,7 @@ CREATE TABLE `user` (
 <script src="${request.contextPath}/static/plugins/codemirror/mode/sql/sql.js"></script>
 <script src="${request.contextPath}/static/plugins/codemirror/mode/xml/xml.js"></script>
 <script src="${request.contextPath}/static/js/tool/codegen.js"></script>
+<#-- biz end（5/5 script） -->
+
 </body>
 </html>

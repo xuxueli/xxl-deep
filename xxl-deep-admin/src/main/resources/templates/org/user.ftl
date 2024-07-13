@@ -6,8 +6,9 @@
 	<#-- commonStyle -->
 	<@netCommon.commonStyle />
 
-	<!-- DataTables -->
+	<#-- biz start（1/5 style） -->
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<#-- biz end（1/5 end） -->
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini" >
@@ -17,19 +18,24 @@
 	<@netCommon.commonHeader />
 
 	<!-- left -->
+	<#-- biz start（2/5 left） -->
 	<@netCommon.commonLeft "/org/user" />
+	<#-- biz end（2/5 left） -->
 
 	<!-- right start -->
 	<div class="content-wrapper">
 
 		<!-- content-header -->
 		<section class="content-header">
-			<h1>${I18n.admin_help}</h1>
+			<#-- biz start（3/5 name） -->
+			<h1>${I18n.admin_help} TODO，用户管理 </h1>
+			<#-- biz end（3/5 name） -->
 		</section>
 
 		<!-- content-main -->
 		<section class="content">
-			<#-- biz start  -->
+
+			<#-- biz start（4/5 content） -->
 
 			<#-- filter -->
 			<div class="row">
@@ -182,7 +188,8 @@
 				</div>
 			</div>
 
-			<#-- biz end  -->
+			<#-- biz end（4/5 content） -->
+
 		</section>
 
 	</div>
@@ -193,10 +200,11 @@
 </div>
 <@netCommon.commonScript />
 
-<!-- DataTables -->
+<#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${request.contextPath}/static/js/org/user.js"></script>
+<#-- biz end（5/5 script） -->
 
 </body>
 </html>

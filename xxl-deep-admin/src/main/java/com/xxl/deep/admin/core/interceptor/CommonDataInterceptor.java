@@ -55,11 +55,11 @@ public class CommonDataInterceptor implements AsyncHandlerInterceptor {
 				// 系统管理
 				menuData.add(new XxlDeepMenu("系统管理", "/sys", 3,"fa-cogs",
 						Arrays.asList(
-								new XxlDeepMenu("通知公告", "/sys/notice", 1, "", null),
-								new XxlDeepMenu("配置中心", "/sys/data", 2, "", null),
-								new XxlDeepMenu("审计日志", "/sys/log", 3, "", null),
-								new XxlDeepMenu("在线用户", "/sys/online_user", 4, "", null),
-								new XxlDeepMenu("机器监控", "/sys/monitor", 5, "", null)
+								new XxlDeepMenu("通知公告（建设中）", "/sys/notice", 1, "", null),
+								new XxlDeepMenu("配置中心（建设中）", "/sys/data", 2, "", null),
+								new XxlDeepMenu("审计日志（建设中）", "/sys/log", 3, "", null),
+								new XxlDeepMenu("在线用户（建设中）", "/sys/online_user", 4, "", null),
+								new XxlDeepMenu("机器监控（建设中）", "/sys/monitor", 5, "", null)
 						)));
 
 				// 系统工具

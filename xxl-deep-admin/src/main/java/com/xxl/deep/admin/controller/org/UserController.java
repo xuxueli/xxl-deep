@@ -36,7 +36,6 @@ public class UserController {
     public String index(Model model) {
 
         // 执行器列表
-        //List<XxlJobGroup> groupList = new ArrayList<>();
         model.addAttribute("groupList", null);
 
         return "org/user";
