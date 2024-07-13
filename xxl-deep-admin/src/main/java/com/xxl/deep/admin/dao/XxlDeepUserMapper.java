@@ -11,6 +11,14 @@ import java.util.List;
 @Mapper
 public interface XxlDeepUserMapper {
 
+	public int insert(XxlDeepUser xxlJobUser);
+
+	public int delete(@Param("id") int id);
+
+	public int update(XxlDeepUser xxlJobUser);
+
+	public XxlDeepUser loadByUserName(@Param("username") String username);
+
 	public List<XxlDeepUser> pageList(@Param("offset") int offset,
 									  @Param("pagesize") int pagesize,
 									  @Param("username") String username,
@@ -19,13 +27,5 @@ public interface XxlDeepUserMapper {
 							 @Param("pagesize") int pagesize,
 							 @Param("username") String username,
 							 @Param("role") int role);
-
-	public XxlDeepUser loadByUserName(@Param("username") String username);
-
-	public int save(XxlDeepUser xxlJobUser);
-
-	public int update(XxlDeepUser xxlJobUser);
-	
-	public int delete(@Param("id") int id);
 
 }

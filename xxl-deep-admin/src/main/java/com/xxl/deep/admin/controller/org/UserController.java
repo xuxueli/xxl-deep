@@ -2,10 +2,12 @@ package com.xxl.deep.admin.controller.org;
 
 import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.model.XxlDeepUser;
-import com.xxl.deep.admin.util.I18nUtil;
-import com.xxl.deep.admin.dao.XxlDeepUserMapper;
+import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.impl.LoginService;
+import com.xxl.deep.admin.util.I18nUtil;
+import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
+import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,15 +30,12 @@ import java.util.Map;
 public class UserController {
 
     @Resource
-    private XxlDeepUserMapper xxlJobUserDao;
+    private UserService userService;
 
     @RequestMapping
     @Permission(adminuser = true)
     public String index(Model model) {
-
-        // 执行器列表
-        model.addAttribute("groupList", null);
-
+        //model.addAttribute("groupList", null);
         return "org/user";
     }
 
@@ -49,21 +47,21 @@ public class UserController {
                                         String username, int role) {
 
         // page list
-        List<XxlDeepUser> list = xxlJobUserDao.pageList(start, length, username, role);
-        int list_count = xxlJobUserDao.pageListCount(start, length, username, role);
+        PageModel<XxlDeepUser> pageModel = userService.pageList(start, length, username, role);
 
         // filter
-        if (list!=null && list.size()>0) {
-            for (XxlDeepUser item: list) {
+        if (CollectionTool.isNotEmpty(pageModel.getPageData())) {
+            for (XxlDeepUser item: pageModel.getPageData()) {
                 item.setPassword(null);
             }
         }
 
         // package result
         Map<String, Object> maps = new HashMap<String, Object>();
-        maps.put("recordsTotal", list_count);		// 总记录数
-        maps.put("recordsFiltered", list_count);	// 过滤后的总记录数
-        maps.put("data", list);  					// 分页列表
+        maps.put("recordsTotal", pageModel.getTotalCount());		    // 总记录数
+        maps.put("recordsFiltered", pageModel.getTotalCount());	        // 过滤后的总记录数
+        maps.put("data", pageModel.getPageData());  					// 分页列表
+
         return maps;
     }
 
@@ -92,13 +90,13 @@ public class UserController {
         xxlJobUser.setPassword(DigestUtils.md5DigestAsHex(xxlJobUser.getPassword().getBytes()));
 
         // check repeat
-        XxlDeepUser existUser = xxlJobUserDao.loadByUserName(xxlJobUser.getUsername());
-        if (existUser != null) {
+        Response<XxlDeepUser> response = userService.loadByUserName(xxlJobUser.getUsername());
+        if (response.getData() != null) {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("user_username_repeat") ).build();
         }
 
         // write
-        xxlJobUserDao.save(xxlJobUser);
+        userService.insert(xxlJobUser);
         return new ResponseBuilder<String>().success().build();
     }
 
@@ -126,7 +124,7 @@ public class UserController {
         }
 
         // write
-        xxlJobUserDao.update(xxlJobUser);
+        userService.update(xxlJobUser);
         return new ResponseBuilder<Object>().success().build();
     }
 
@@ -141,7 +139,7 @@ public class UserController {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("user_update_loginuser_limit") ).build();
         }
 
-        xxlJobUserDao.delete(id);
+        userService.delete(id);
         return new ResponseBuilder<String>().success().build();
     }
 
@@ -165,9 +163,11 @@ public class UserController {
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
 
         // do write
-        XxlDeepUser existUser = xxlJobUserDao.loadByUserName(loginUser.getUsername());
+        Response<XxlDeepUser> response = userService.loadByUserName(loginUser.getUsername());
+        XxlDeepUser existUser = response.getData();
+
         existUser.setPassword(md5Password);
-        xxlJobUserDao.update(existUser);
+        userService.update(existUser);
 
         return new ResponseBuilder<String>().success().build();
     }
