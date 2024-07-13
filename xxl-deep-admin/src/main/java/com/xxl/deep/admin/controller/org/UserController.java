@@ -5,22 +5,17 @@ import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.deep.admin.util.I18nUtil;
-import com.xxl.tool.core.CollectionTool;
-import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author xuxueli 2019-05-04 16:39:50
@@ -42,97 +37,33 @@ public class UserController {
     @RequestMapping("/pageList")
     @ResponseBody
     @Permission(adminuser = true)
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int start,
+    public Response<PageModel<XxlDeepUser>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
                                         @RequestParam(required = false, defaultValue = "10") int length,
                                         String username, int role) {
 
-        // page list
         PageModel<XxlDeepUser> pageModel = userService.pageList(start, length, username, role);
-
-        // filter
-        if (CollectionTool.isNotEmpty(pageModel.getPageData())) {
-            for (XxlDeepUser item: pageModel.getPageData()) {
-                item.setPassword(null);
-            }
-        }
-
-        // package result
-        Map<String, Object> maps = new HashMap<String, Object>();
-        maps.put("recordsTotal", pageModel.getTotalCount());		    // 总记录数
-        maps.put("recordsFiltered", pageModel.getTotalCount());	        // 过滤后的总记录数
-        maps.put("data", pageModel.getPageData());  					// 分页列表
-
-        return maps;
+        return new ResponseBuilder<PageModel<XxlDeepUser>>().success(pageModel).build();
     }
 
     @RequestMapping("/add")
     @ResponseBody
     @Permission(adminuser = true)
     public Response<String> add(XxlDeepUser xxlJobUser) {
-
-        // valid username
-        if (StringTool.isBlank(xxlJobUser.getUsername())) {
-            return new ResponseBuilder<String>().fail(I18nUtil.getString("system_please_input") + I18nUtil.getString("user_username")).build();
-        }
-        xxlJobUser.setUsername(xxlJobUser.getUsername().trim());
-        if (!(xxlJobUser.getUsername().length()>=4 && xxlJobUser.getUsername().length()<=20)) {
-            return new ResponseBuilder<String>().fail(I18nUtil.getString("system_lengh_limit")+"[4-20]").build();
-        }
-        // valid password
-        if (StringTool.isBlank(xxlJobUser.getPassword())) {
-            return new ResponseBuilder<String>().fail( I18nUtil.getString("system_please_input")+I18nUtil.getString("user_password") ).build();
-        }
-        xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
-        if (!(xxlJobUser.getPassword().length()>=4 && xxlJobUser.getPassword().length()<=20)) {
-            return new ResponseBuilder<String>().fail( I18nUtil.getString("system_lengh_limit")+"[4-20]" ).build();
-        }
-        // md5 password
-        xxlJobUser.setPassword(DigestUtils.md5DigestAsHex(xxlJobUser.getPassword().getBytes()));
-
-        // check repeat
-        Response<XxlDeepUser> response = userService.loadByUserName(xxlJobUser.getUsername());
-        if (response.getData() != null) {
-            return new ResponseBuilder<String>().fail( I18nUtil.getString("user_username_repeat") ).build();
-        }
-
-        // write
-        userService.insert(xxlJobUser);
-        return new ResponseBuilder<String>().success().build();
+        return userService.insert(xxlJobUser);
     }
 
     @RequestMapping("/update")
     @ResponseBody
     @Permission(adminuser = true)
-    public Response<Object> update(HttpServletRequest request, XxlDeepUser xxlJobUser) {
-
-        // avoid opt login seft
+    public Response<String> update(HttpServletRequest request, XxlDeepUser xxlJobUser) {
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
-        if (loginUser.getUsername().equals(xxlJobUser.getUsername())) {
-            return new ResponseBuilder<Object>().fail( I18nUtil.getString("user_update_loginuser_limit") ).build();
-        }
-
-        // valid password
-        if (StringTool.isNotBlank(xxlJobUser.getPassword())) {
-            xxlJobUser.setPassword(xxlJobUser.getPassword().trim());
-            if (!(xxlJobUser.getPassword().length()>=4 && xxlJobUser.getPassword().length()<=20)) {
-                return new ResponseBuilder<Object>().fail(  I18nUtil.getString("system_lengh_limit")+"[4-20]" ).build();
-            }
-            // md5 password
-            xxlJobUser.setPassword(DigestUtils.md5DigestAsHex(xxlJobUser.getPassword().getBytes()));
-        } else {
-            xxlJobUser.setPassword(null);
-        }
-
-        // write
-        userService.update(xxlJobUser);
-        return new ResponseBuilder<Object>().success().build();
+        return userService.update(xxlJobUser, loginUser);
     }
 
     @RequestMapping("/remove")
     @ResponseBody
     @Permission(adminuser = true)
     public Response<String> remove(HttpServletRequest request, int id) {
-
         // avoid opt login seft
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
         if (loginUser.getId() == id) {
@@ -146,30 +77,8 @@ public class UserController {
     @RequestMapping("/updatePwd")
     @ResponseBody
     public Response<String> updatePwd(HttpServletRequest request, String password){
-
-        // valid password
-        if (password==null || password.trim().length()==0){
-            new ResponseBuilder<String>().fail( "密码不可为空" ).build();
-        }
-        password = password.trim();
-        if (!(password.length()>=4 && password.length()<=20)) {
-            new ResponseBuilder<String>().fail( I18nUtil.getString("system_lengh_limit")+"[4-20]" ).build();
-        }
-
-        // md5 password
-        String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
-
-        // update pwd
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
-
-        // do write
-        Response<XxlDeepUser> response = userService.loadByUserName(loginUser.getUsername());
-        XxlDeepUser existUser = response.getData();
-
-        existUser.setPassword(md5Password);
-        userService.update(existUser);
-
-        return new ResponseBuilder<String>().success().build();
+        return userService.updatePwd(loginUser, password);
     }
 
 }

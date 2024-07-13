@@ -15,7 +15,15 @@ $(function() {
 	        	obj.start = d.start;
 	        	obj.length = d.length;
                 return obj;
-            }
+            },
+			dataFilter: function (originData) {
+				var originJson = $.parseJSON(originData);
+				return JSON.stringify({
+					recordsTotal: originJson.data.totalCount,
+					recordsFiltered: originJson.data.totalCount,
+					data: originJson.data.pageData
+				});
+			}
 	    },
 	    "searching": false,
 	    "ordering": false,

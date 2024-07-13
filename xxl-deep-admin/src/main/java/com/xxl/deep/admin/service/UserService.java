@@ -24,7 +24,12 @@ public interface UserService {
     /**
      * 更新
      */
-    public Response<String> update(XxlDeepUser user);
+    public Response<String> update(XxlDeepUser user, XxlDeepUser loginUser);
+
+    /**
+     * 修改密码
+     */
+    public Response<String> updatePwd(XxlDeepUser loginUser, String password);
 
     /**
      * Load查询
