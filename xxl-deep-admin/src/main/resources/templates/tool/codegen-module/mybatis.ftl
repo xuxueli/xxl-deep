@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Dao路径.${classInfo.className}Dao">
+<mapper namespace="Dao路径.${classInfo.className}Mapper">
 
     <resultMap id="${classInfo.className}" type="Model路径.${classInfo.className}" >
     <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
@@ -53,11 +53,11 @@
         UPDATE ${classInfo.tableName}
         SET
         <#list classInfo.fieldList as fieldItem >
-        <#if fieldItem.columnName != "Id" && fieldItem.columnName != "AddTime" && fieldItem.columnName != "UpdateTime" >
-            ${fieldItem.columnName} = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"},
+        <#if fieldItem.columnName != "id" && fieldItem.columnName != "add_time" && fieldItem.columnName != "update_time" >
+            `${fieldItem.columnName}` = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"},
         </#if>
         </#list>
-            UpdateTime = NOW()
+            update_time = NOW()
         WHERE `id` = ${r"#{"}${classInfo.className?uncap_first}.id${r"}"}
     </update>
 

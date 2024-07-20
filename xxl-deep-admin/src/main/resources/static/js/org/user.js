@@ -1,13 +1,64 @@
 $(function() {
 
+	// ---------- ---------- ---------- customer select for datatables ---------- ---------- ----------
+	// Select：All
+	$('#checkAll').on('change', function() {
+		var isChecked = $(this).prop('checked');
+		$('#data_list tbody  input.checkItem').each(function(){
+			$(this).prop('checked', isChecked);
+		});
+		selectStatusEffctOpt();
+	});
+	// Select：Item (all select will fresh '#checkAll')
+	$('#data_list tbody').on('change', 'input.checkItem', function() {
+		var newStatus = $('#data_list tbody input.checkItem').length>0
+			&& $('#data_list tbody input.checkItem').length === $('#data_list tbody input.checkItem:checked').length;
+		$('#checkAll').prop('checked', newStatus);
+		selectStatusEffctOpt();
+	});
+	// Select: status init
+	function selectStatusInit(){
+		$('#checkAll').prop('checked', false);
+		$('#data_list tbody input.checkItem').each(function(){
+			$(this).prop('checked', false);
+		});
+	}
+	// Select: find ids
+	function selectIdsFind(){
+		var checkIds = [];
+		$('#data_list tbody input.checkItem').each(function(){
+			if ($(this).prop('checked')) {
+				checkIds.push( $(this).attr('data-id') );
+			}
+		});
+		return checkIds;
+	}
+	// Select: refresh operation status
+	function selectStatusEffctOpt(){
+		var selectLen = selectIdsFind().length;
+		if (selectLen > 0) {
+			$("#data_operation .delete").removeClass('disabled');
+		} else {
+			$("#data_operation .delete").addClass('disabled');
+		}
+		if (selectLen === 1) {
+			$("#data_operation .update").removeClass('disabled');
+		} else {
+			$("#data_operation .update").addClass('disabled');
+		}
+
+	}
+
+	// ---------- ---------- ---------- main table  ---------- ---------- ----------
 	// init date tables
-	var userListTable = $("#user_list").dataTable({
+	var userListTable = $("#data_list").dataTable({
 		"deferRender": true,
 		"processing" : true, 
 	    "serverSide": true,
 		"ajax": {
 			url: base_url + "/org/user/pageList",
 			type:"post",
+			// request data
 	        data : function ( d ) {
 	        	var obj = {};
                 obj.username = $('#username').val();
@@ -16,6 +67,7 @@ $(function() {
 	        	obj.length = d.length;
                 return obj;
             },
+			// response data filter
 			dataFilter: function (originData) {
 				var originJson = $.parseJSON(originData);
 				return JSON.stringify({
@@ -27,27 +79,50 @@ $(function() {
 	    },
 	    "searching": false,
 	    "ordering": false,
-	    //"scrollX": true,	// scroll x，close self-adaption
+	    //"scrollX": true,																		// scroll x，close self-adaption
+		//"dom": '<"top" t><"bottom" <"col-sm-3" i><"col-sm-3 right" l><"col-sm-6" p> >',		// dataTable "DOM layout"：https://datatables.club/example/diy.html
+		"drawCallback": function( settings ) {
+			selectStatusInit();
+		},
 	    "columns": [
+					{
+						"title": '<input align="center" type="checkbox" id="checkAll" >',
+						"data": 'id',
+						"width":'5%',
+						"render": function ( data, type, row ) {
+							tableData['key'+row.id] = row;
+							return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
+						}
+					},
 	                {
-	                	"data": 'id',
+						"title":"User ID",
+						"data": 'id',
 						"visible" : false,
 						"width":'10%'
 					},
 	                {
+						"title": I18n.user_username,
 	                	"data": 'username',
 						"visible" : true,
 						"width":'20%'
 					},
 	                {
-	                	"data": 'password',
-						"visible" : false,
+						"title": I18n.user_username,
+						"data": 'password',
+						"visible" : true,
                         "width":'20%',
                         "render": function ( data, type, row ) {
                             return '*********';
                         }
 					},
 					{
+						"title": '真实姓名',
+						"data": 'realName',
+						"visible" : true,
+						"width":'20%'
+					},
+					{
+						"title": '有效状态',
 						"data": 'status',
 						"visible" : true,
 						"width":'10%',
@@ -58,23 +133,7 @@ $(function() {
                                 return I18n.user_role_normal
                             }
                         }
-					},
-	                {
-						"data": I18n.system_opt ,
-						"width":'15%',
-	                	"render": function ( data, type, row ) {
-	                		return function(){
-								// html
-                                tableData['key'+row.id] = row;
-								var html = '<p id="'+ row.id +'" >'+
-									'<button class="btn btn-warning btn-xs update" type="button">'+ I18n.system_opt_edit +'</button>  '+
-									'<button class="btn btn-danger btn-xs delete" type="button">'+ I18n.system_opt_del +'</button>  '+
-									'</p>';
-
-	                			return html;
-							};
-	                	}
-	                }
+					}
 	            ],
 		"language" : {
 			"sProcessing" : I18n.dataTable_sProcessing ,
@@ -109,9 +168,10 @@ $(function() {
 	$('#searchBtn').on('click', function(){
         userListTable.fnDraw();
 	});
-	
-	// job operate
-	$("#user_list").on('click', '.delete',function() {
+
+	// ---------- ---------- ---------- table operation ---------- ---------- ----------
+	// delete
+	$("#data_list").on('click', '.delete',function() {
 		var id = $(this).parent('p').attr("id");
 
 		layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
@@ -248,7 +308,7 @@ $(function() {
     });
 
 	// update
-	$("#user_list").on('click', '.update',function() {
+	$("#data_list").on('click', '.update',function() {
 
         var id = $(this).parent('p').attr("id");
         var row = tableData['key'+id];

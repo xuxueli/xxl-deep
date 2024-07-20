@@ -1,20 +1,23 @@
-import org.apache.ibatis.annotations.Param;
+package com.xxl.deep.admin.dao;
+
+import com.xxl.deep.admin.model.XxlDeepRole;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
-* ${classInfo.classComment}
+* role dao
 *
-* Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* Created by xuxueli on '2024-07-21 02:06:59'.
 */
 @Mapper
-public interface ${classInfo.className}Mapper {
+public interface XxlDeepRoleMapper {
 
     /**
     * 新增
     */
-    public int insert(${classInfo.className} ${classInfo.className?uncap_first});
+    public int insert(XxlDeepRole xxlDeepRole);
 
     /**
     * 删除
@@ -24,17 +27,17 @@ public interface ${classInfo.className}Mapper {
     /**
     * 更新
     */
-    public int update(${classInfo.className} ${classInfo.className?uncap_first});
+    public int update(XxlDeepRole xxlDeepRole);
 
     /**
     * Load查询
     */
-    public ${classInfo.className} load(@Param("id") int id);
+    public XxlDeepRole load(@Param("id") int id);
 
     /**
     * 分页查询Data
     */
-	public List<${classInfo.className}> pageList(@Param("offset") int offset,
+	public List<XxlDeepRole> pageList(@Param("offset") int offset,
                                                  @Param("pagesize") int pagesize);
 
     /**

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
+import com.xxl.tool.response.PageModel;
 
 /**
 * ${classInfo.classComment}
@@ -67,17 +68,17 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 	* 分页查询
 	*/
 	@Override
-	public Map<String,Object> pageList(int offset, int pagesize) {
+	public PageModel<${classInfo.className}> pageList(int offset, int pagesize) {
 
 		List<${classInfo.className}> pageList = ${classInfo.className?uncap_first}Mapper.pageList(offset, pagesize);
 		int totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(offset, pagesize);
 
 		// result
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("pageList", pageList);
-		result.put("totalCount", totalCount);
+		PageModel<${classInfo.className}> pageModel = new PageModel<${classInfo.className}>();
+		pageModel.setPageData(pageList);
+		pageModel.setTotalCount(totalCount);
 
-		return result;
+		return pageModel;
 	}
 
 }

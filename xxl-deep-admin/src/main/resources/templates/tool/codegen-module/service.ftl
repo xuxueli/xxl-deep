@@ -1,5 +1,6 @@
 import java.util.Map;
 import com.xxl.tool.response.Response;
+import com.xxl.tool.response.PageModel;
 
 /**
 * ${classInfo.classComment}
@@ -31,6 +32,6 @@ public interface ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    public Map<String,Object> pageList(int offset, int pagesize);
+    public PageModel<${classInfo.className}> pageList(int offset, int pagesize);
 
 }

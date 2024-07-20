@@ -181,6 +181,7 @@ public class ReturnT<T> implements Serializable {
 ### 版本 v1.0.0 Release Notes[迭代中]
 - 1、【整合】项目更名 XXL-DEEP，整合xxl-permission、xxl-code-generator多个历史项目；定位为企业开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
 - 2、【新增】代码生成功能集成，支持多层代码自动生成 "controller/service/dao/mybatis/model…"，助力全流程开发提效；
+- 3、【新增】代码生成支持 单元测试、前端代码 生成；
 
 ### TODO LIST
 - 1、代码生成：

@@ -1,0 +1,39 @@
+package com.xxl.deep.admin.service;
+
+import com.xxl.deep.admin.model.XxlDeepRole;
+import com.xxl.tool.response.PageModel;
+import com.xxl.tool.response.Response;
+
+/**
+* role service
+*
+* Created by xuxueli on '2024-07-21 02:06:59'.
+*/
+public interface RoleService {
+
+    /**
+    * 新增
+    */
+    public Response<String> insert(XxlDeepRole xxlDeepRole);
+
+    /**
+    * 删除
+    */
+    public Response<String> delete(int id);
+
+    /**
+    * 更新
+    */
+    public Response<String> update(XxlDeepRole xxlDeepRole);
+
+    /**
+    * Load查询
+    */
+    public Response<XxlDeepRole> load(int id);
+
+    /**
+    * 分页查询
+    */
+    public PageModel<XxlDeepRole> pageList(int offset, int pagesize);
+
+}

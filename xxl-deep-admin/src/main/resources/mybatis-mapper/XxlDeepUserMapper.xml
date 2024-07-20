@@ -54,12 +54,12 @@
 	<update id="update" parameterType="com.xxl.deep.admin.model.XxlDeepUser" >
 		UPDATE xxl_deep_user
 		SET
-		<if test="password != null and password != ''">
-			password = #{password},
-		</if>
-		user_token = #{userToken},
-		status = #{status},
-		real_name = #{realName}
+			<if test="password != null and password != ''">
+				password = #{password},
+			</if>
+			user_token = #{userToken},
+			status = #{status},
+			real_name = #{realName}
 		WHERE id = #{id}
 	</update>
 

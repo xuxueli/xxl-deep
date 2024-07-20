@@ -38,28 +38,29 @@
 			<#-- biz start（4/5 content） -->
 
 			<#-- filter -->
-			<div class="row">
-				<div class="col-xs-3">
-					<div class="input-group">
-						<span class="input-group-addon">${I18n.user_role}</span>
-						<select class="form-control" id="role" >
-							<option value="-1" >${I18n.system_all}</option>
-							<option value="1" >${I18n.user_role_admin}</option>
-							<option value="0" >${I18n.user_role_normal}</option>
-						</select>
+			<div class="box" style="margin-bottom:9px;">
+				<div class="box-body">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="input-group">
+								<span class="input-group-addon">${I18n.user_role}</span>
+								<select class="form-control" id="role" >
+									<option value="-1" >${I18n.system_all}</option>
+									<option value="1" >${I18n.user_role_admin}</option>
+									<option value="0" >${I18n.user_role_normal}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-3">
+							<div class="input-group">
+								<span class="input-group-addon">${I18n.user_username}</span>
+								<input type="text" class="form-control" id="username" autocomplete="on" >
+							</div>
+						</div>
+						<div class="col-xs-1">
+							<button class="btn btn-block btn-primary" id="searchBtn" >${I18n.system_search}</button>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-3">
-					<div class="input-group">
-						<span class="input-group-addon">${I18n.user_username}</span>
-						<input type="text" class="form-control" id="username" autocomplete="on" >
-					</div>
-				</div>
-				<div class="col-xs-1">
-					<button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
-				</div>
-				<div class="col-xs-2">
-					<button class="btn btn-block btn-success add" type="button">${I18n.user_add}</button>
 				</div>
 			</div>
 
@@ -67,18 +68,14 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
+						<div class="box-header" style="float: right" id="data_operation" >
+							<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
+							<button class="btn btn-sm btn-warning disabled2 update" type="button"><i class="fa fa-edit"></i>修改</button>
+							<button class="btn btn-sm btn-danger delete" type="button"><i class="fa fa-remove "></i>删除</button>
+						</div>
 						<div class="box-body" >
-							<table id="user_list" class="table table-bordered table-striped" width="100%" >
-								<thead>
-									<tr>
-										<th name="id" >ID</th>
-										<th name="username" >${I18n.user_username}</th>
-										<th name="password" >${I18n.user_password}</th>
-										<th name="role" >${I18n.user_role}</th>
-										<#--<th name="permission" >${I18n.user_permission}</th>-->
-										<th>${I18n.system_opt}</th>
-									</tr>
-								</thead>
+							<table id="data_list" class="table table-bordered table-striped" width="100%" >
+								<thead></thead>
 								<tbody></tbody>
 								<tfoot></tfoot>
 							</table>

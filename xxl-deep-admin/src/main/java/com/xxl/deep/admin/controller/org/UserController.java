@@ -1,8 +1,10 @@
 package com.xxl.deep.admin.controller.org;
 
 import com.xxl.deep.admin.core.annotation.Permission;
+import com.xxl.deep.admin.model.XxlDeepRole;
 import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.service.UserService;
+import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.tool.response.PageModel;
@@ -26,11 +28,16 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private RoleService roleService;
 
     @RequestMapping
     @Permission(adminuser = true)
     public String index(Model model) {
-        //model.addAttribute("groupList", null);
+
+        PageModel<XxlDeepRole> roleList = roleService.pageList(0, 100);
+        model.addAttribute("roleList", roleList);
+
         return "org/user";
     }
 
