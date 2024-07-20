@@ -11,7 +11,7 @@ public class XxlDeepUser {
 	private String username;		// 账号
 	private String password;		// 密码
 	private String userToken;		// 登录token
-	private int status;				// 状态：0-正常、1-禁用
+	private int status;				// 状态：0-正常、1-停用
 	private String realName;		// 真实姓名
 	private Date addTime;
 	private Date updateTime;

@@ -63,7 +63,7 @@ $(function() {
 	        data : function ( d ) {
 	        	var obj = {};
                 obj.username = $('#data_filter .username').val();
-                obj.role = $('#data_filter .role').val();
+                obj.status = $('#data_filter .status').val();
 	        	obj.start = d.start;
 	        	obj.length = d.length;
                 return obj;
@@ -89,23 +89,17 @@ $(function() {
 					{
 						"title": '<input align="center" type="checkbox" id="checkAll" >',
 						"data": 'id',
-						"width":'5%',
+						"width":'10%',
 						"render": function ( data, type, row ) {
 							tableData['key'+row.id] = row;
 							return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
 						}
 					},
 	                {
-						"title":"User ID",
-						"data": 'id',
-						"visible" : false,
-						"width":'10%'
-					},
-	                {
 						"title": I18n.user_username,
 	                	"data": 'username',
 						"visible" : true,
-						"width":'20%'
+						"width":'30%'
 					},
 	                {
 						"title": I18n.user_password,
@@ -120,19 +114,21 @@ $(function() {
 						"title": '真实姓名',
 						"data": 'realName',
 						"visible" : true,
-						"width":'20%'
+						"width":'30%'
 					},
 					{
-						"title": '有效状态',
+						"title": '启用状态',
 						"data": 'status',
 						"visible" : true,
-						"width":'10%',
+						"width":'30%',
                         "render": function ( data, type, row ) {
-                            if (data == 1) {
-                                return I18n.user_role_admin
-                            } else {
-                                return I18n.user_role_normal
-                            }
+							var result = "";
+							$('#data_filter .status option').each(function(){
+								if ( data.toString() === $(this).val() ) {
+									result = $(this).text();
+								}
+							});
+							return result;
                         }
 					}
 	            ],

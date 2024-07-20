@@ -44,10 +44,10 @@
 						<div class="col-xs-3">
 							<div class="input-group">
 								<span class="input-group-addon">${I18n.user_role}</span>
-								<select class="form-control role" >
+								<select class="form-control status" >
 									<option value="-1" >${I18n.system_all}</option>
-									<#list roleList as role>
-										<option value="${role.id}" >${role.name}</option>
+									<#list userStatuEnum as item>
+										<option value="${item.status}" >${item.desc}</option>
 									</#list>
 								</select>
 							</div>
