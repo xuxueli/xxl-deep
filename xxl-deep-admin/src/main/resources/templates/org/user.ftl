@@ -28,7 +28,7 @@
 		<!-- content-header -->
 		<section class="content-header">
 			<#-- biz start（3/5 name） -->
-			<h1>${I18n.user_manage}</h1>
+			<h1>${I18n.user_tips}${I18n.system_manage}</h1>
 			<#-- biz end（3/5 name） -->
 		</section>
 
@@ -40,25 +40,26 @@
 			<#-- filter -->
 			<div class="box" style="margin-bottom:9px;">
 				<div class="box-body">
-					<div class="row">
+					<div class="row" id="data_filter" >
 						<div class="col-xs-3">
 							<div class="input-group">
 								<span class="input-group-addon">${I18n.user_role}</span>
-								<select class="form-control" id="role" >
+								<select class="form-control role" >
 									<option value="-1" >${I18n.system_all}</option>
-									<option value="1" >${I18n.user_role_admin}</option>
-									<option value="0" >${I18n.user_role_normal}</option>
+									<#list roleList as role>
+										<option value="${role.id}" >${role.name}</option>
+									</#list>
 								</select>
 							</div>
 						</div>
 						<div class="col-xs-3">
 							<div class="input-group">
 								<span class="input-group-addon">${I18n.user_username}</span>
-								<input type="text" class="form-control" id="username" autocomplete="on" >
+								<input type="text" class="form-control username" autocomplete="on" >
 							</div>
 						</div>
 						<div class="col-xs-1">
-							<button class="btn btn-block btn-primary" id="searchBtn" >${I18n.system_search}</button>
+							<button class="btn btn-block btn-primary searchBtn" >${I18n.system_search}</button>
 						</div>
 					</div>
 				</div>
@@ -69,9 +70,9 @@
 				<div class="col-xs-12">
 					<div class="box">
 						<div class="box-header" style="float: right" id="data_operation" >
-							<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>新增</button>
-							<button class="btn btn-sm btn-warning disabled2 update" type="button"><i class="fa fa-edit"></i>修改</button>
-							<button class="btn btn-sm btn-danger delete" type="button"><i class="fa fa-remove "></i>删除</button>
+							<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
+							<button class="btn btn-sm btn-warning disabled2 update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
+							<button class="btn btn-sm btn-danger delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
 						</div>
 						<div class="box-body" >
 							<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -89,7 +90,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" >${I18n.user_add}</h4>
+							<h4 class="modal-title" >${I18n.system_opt_add}${I18n.user_tips}</h4>
 						</div>
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
@@ -139,7 +140,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" >${I18n.user_update}</h4>
+							<h4 class="modal-title" >${I18n.system_opt_edit}${I18n.user_tips}</h4>
 						</div>
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >

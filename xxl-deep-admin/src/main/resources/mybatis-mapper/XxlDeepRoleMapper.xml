@@ -54,6 +54,7 @@
     <select id="pageList" parameterType="java.util.Map" resultMap="XxlDeepRole">
         SELECT <include refid="Base_Column_List" />
         FROM xxl_deep_role
+        ORDER BY `order` ASC
         LIMIT #{offset}, #{pagesize}
     </select>
 

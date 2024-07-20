@@ -35,8 +35,8 @@ public class UserController {
     @Permission(adminuser = true)
     public String index(Model model) {
 
-        PageModel<XxlDeepRole> roleList = roleService.pageList(0, 100);
-        model.addAttribute("roleList", roleList);
+        PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 100);
+        model.addAttribute("roleList", pageModel.getPageData());
 
         return "org/user";
     }

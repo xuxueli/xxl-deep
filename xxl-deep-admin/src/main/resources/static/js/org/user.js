@@ -2,7 +2,7 @@ $(function() {
 
 	// ---------- ---------- ---------- customer select for datatables ---------- ---------- ----------
 	// Select：All
-	$('#checkAll').on('change', function() {
+	$('#data_list').on('change', 'thead #checkAll', function() {
 		var isChecked = $(this).prop('checked');
 		$('#data_list tbody  input.checkItem').each(function(){
 			$(this).prop('checked', isChecked);
@@ -10,7 +10,7 @@ $(function() {
 		selectStatusEffctOpt();
 	});
 	// Select：Item (all select will fresh '#checkAll')
-	$('#data_list tbody').on('change', 'input.checkItem', function() {
+	$('#data_list').on('change', 'tbody input.checkItem', function() {
 		var newStatus = $('#data_list tbody input.checkItem').length>0
 			&& $('#data_list tbody input.checkItem').length === $('#data_list tbody input.checkItem:checked').length;
 		$('#checkAll').prop('checked', newStatus);
@@ -22,6 +22,7 @@ $(function() {
 		$('#data_list tbody input.checkItem').each(function(){
 			$(this).prop('checked', false);
 		});
+		selectStatusEffctOpt();
 	}
 	// Select: find ids
 	function selectIdsFind(){
@@ -61,8 +62,8 @@ $(function() {
 			// request data
 	        data : function ( d ) {
 	        	var obj = {};
-                obj.username = $('#username').val();
-                obj.role = $('#role').val();
+                obj.username = $('#data_filter .username').val();
+                obj.role = $('#data_filter .role').val();
 	        	obj.start = d.start;
 	        	obj.length = d.length;
                 return obj;
@@ -107,7 +108,7 @@ $(function() {
 						"width":'20%'
 					},
 	                {
-						"title": I18n.user_username,
+						"title": I18n.user_password,
 						"data": 'password',
 						"visible" : true,
                         "width":'20%',
@@ -165,7 +166,7 @@ $(function() {
     var tableData = {};
 
 	// search btn
-	$('#searchBtn').on('click', function(){
+	$('#data_filter .searchBtn').on('click', function(){
         userListTable.fnDraw();
 	});
 
@@ -274,13 +275,13 @@ $(function() {
     			if (data.code == "200") {
 					$('#addModal').modal('hide');
 
-                    layer.msg( I18n.system_add_suc );
+                    layer.msg( I18n.system_opt_add + I18n.system_success );
                     userListTable.fnDraw();
     			} else {
 					layer.open({
 						title: I18n.system_tips ,
                         btn: [ I18n.system_ok ],
-						content: (data.msg || I18n.system_add_fail),
+						content: (data.msg || I18n.system_opt_add + I18n.system_fail ),
 						icon: '2'
 					});
     			}
@@ -366,13 +367,13 @@ $(function() {
                 if (data.code == "200") {
                     $('#updateModal').modal('hide');
 
-                    layer.msg( I18n.system_update_suc );
+                    layer.msg( I18n.system_opt_edit + I18n.system_success );
                     userListTable.fnDraw();
                 } else {
                     layer.open({
                         title: I18n.system_tips ,
                         btn: [ I18n.system_ok ],
-                        content: (data.msg || I18n.system_update_fail),
+                        content: (data.msg || I18n.system_opt_edit + I18n.system_fail ),
                         icon: '2'
                     });
                 }
