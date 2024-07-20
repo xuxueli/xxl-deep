@@ -22,10 +22,10 @@ public interface XxlDeepUserMapper {
 	public List<XxlDeepUser> pageList(@Param("offset") int offset,
 									  @Param("pagesize") int pagesize,
 									  @Param("username") String username,
-									  @Param("role") int role);
+									  @Param("status") int status);
 	public int pageListCount(@Param("offset") int offset,
 							 @Param("pagesize") int pagesize,
 							 @Param("username") String username,
-							 @Param("role") int role);
+							 @Param("status") int status);
 
 }

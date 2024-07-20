@@ -7,30 +7,42 @@
 		<result column="id" property="id" />
 		<result column="username" property="username" />
 	    <result column="password" property="password" />
-	    <result column="role" property="role" />
-	    <result column="permission" property="permission" />
+	    <result column="user_token" property="userToken" />
+	    <result column="status" property="status" />
+		<result column="real_name" property="realName" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
 		t.id,
 		t.username,
 		t.password,
-		t.role,
-		t.permission
+		t.user_token,
+		t.status,
+		t.real_name,
+		t.add_time,
+		t.update_time
 	</sql>
 
 	<insert id="insert" parameterType="com.xxl.deep.admin.model.XxlDeepUser" useGeneratedKeys="true" keyProperty="id" >
 		INSERT INTO xxl_deep_user (
 			username,
 			password,
-			role,
-			permission
+			user_token,
+			status,
+			real_name,
+			add_time,
+			update_time
 		) VALUES (
-					 #{username},
-					 #{password},
-					 #{role},
-					 #{permission}
-				 );
+			 #{username},
+			 #{password},
+			 #{userToken},
+			 #{status},
+			 #{realName},
+			 NOW(),
+			 NOW()
+		 );
 	</insert>
 
 	<delete id="delete" parameterType="java.util.HashMap">
@@ -45,8 +57,9 @@
 		<if test="password != null and password != ''">
 			password = #{password},
 		</if>
-		role = #{role},
-		permission = #{permission}
+		user_token = #{userToken},
+		status = #{status},
+		real_name = #{realName}
 		WHERE id = #{id}
 	</update>
 
@@ -63,8 +76,8 @@
 			<if test="username != null and username != ''">
 				AND t.username like CONCAT(CONCAT('%', #{username}), '%')
 			</if>
-			<if test="role gt -1">
-				AND t.role = #{role}
+			<if test="status gt -1">
+				AND t.status = #{status}
 			</if>
 		</trim>
 		ORDER BY username ASC
@@ -78,8 +91,8 @@
 			<if test="username != null and username != ''">
 				AND t.username like CONCAT(CONCAT('%', #{username}), '%')
 			</if>
-			<if test="role gt -1">
-				AND t.role = #{role}
+			<if test="status gt -1">
+				AND t.status = #{status}
 			</if>
 		</trim>
 	</select>

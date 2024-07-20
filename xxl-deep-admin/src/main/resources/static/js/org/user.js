@@ -48,7 +48,7 @@ $(function() {
                         }
 					},
 					{
-						"data": 'role',
+						"data": 'status',
 						"visible" : true,
 						"width":'10%',
                         "render": function ( data, type, row ) {
@@ -59,11 +59,6 @@ $(function() {
                             }
                         }
 					},
-	                {
-	                	"data": 'permission',
-						"width":'10%',
-	                	"visible" : false
-	                },
 	                {
 						"data": I18n.system_opt ,
 						"width":'15%',

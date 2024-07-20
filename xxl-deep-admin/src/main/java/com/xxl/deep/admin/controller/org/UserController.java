@@ -38,10 +38,11 @@ public class UserController {
     @ResponseBody
     @Permission(adminuser = true)
     public Response<PageModel<XxlDeepUser>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
-                                        @RequestParam(required = false, defaultValue = "10") int length,
-                                        String username, int role) {
+                                                     @RequestParam(required = false, defaultValue = "10") int length,
+                                                     String username,
+                                                     @RequestParam(required = false, defaultValue = "-1") int status) {
 
-        PageModel<XxlDeepUser> pageModel = userService.pageList(start, length, username, role);
+        PageModel<XxlDeepUser> pageModel = userService.pageList(start, length, username, status);
         return new ResponseBuilder<PageModel<XxlDeepUser>>().success(pageModel).build();
     }
 

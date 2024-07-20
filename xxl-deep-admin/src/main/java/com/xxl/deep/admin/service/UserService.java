@@ -39,6 +39,6 @@ public interface UserService {
     /**
      * 分页查询
      */
-    public PageModel<XxlDeepUser> pageList(int offset, int pagesize, String username, int role);
+    public PageModel<XxlDeepUser> pageList(int offset, int pagesize, String username, int status);
 
 }

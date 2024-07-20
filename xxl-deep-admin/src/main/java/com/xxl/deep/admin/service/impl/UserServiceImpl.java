@@ -140,11 +140,11 @@ public class UserServiceImpl implements UserService {
      * 分页查询
      */
     @Override
-    public PageModel<XxlDeepUser> pageList(int offset, int pagesize, String username, int role) {
+    public PageModel<XxlDeepUser> pageList(int offset, int pagesize, String username, int status) {
 
         // data
-        List<XxlDeepUser> pageList = userMapper.pageList(offset, pagesize, username, role);
-        int totalCount = userMapper.pageListCount(offset, pagesize, username, role);
+        List<XxlDeepUser> pageList = userMapper.pageList(offset, pagesize, username, status);
+        int totalCount = userMapper.pageListCount(offset, pagesize, username, status);
 
         // filter
         if (CollectionTool.isNotEmpty(pageList)) {

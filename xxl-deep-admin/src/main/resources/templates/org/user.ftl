@@ -28,7 +28,7 @@
 		<!-- content-header -->
 		<section class="content-header">
 			<#-- biz start（3/5 name） -->
-			<h1>${I18n.admin_help} TODO，用户管理 </h1>
+			<h1>${I18n.user_manage}</h1>
 			<#-- biz end（3/5 name） -->
 		</section>
 
@@ -70,14 +70,14 @@
 						<div class="box-body" >
 							<table id="user_list" class="table table-bordered table-striped" width="100%" >
 								<thead>
-								<tr>
-									<th name="id" >ID</th>
-									<th name="username" >${I18n.user_username}</th>
-									<th name="password" >${I18n.user_password}</th>
-									<th name="role" >${I18n.user_role}</th>
-									<th name="permission" >${I18n.user_permission}</th>
-									<th>${I18n.system_opt}</th>
-								</tr>
+									<tr>
+										<th name="id" >ID</th>
+										<th name="username" >${I18n.user_username}</th>
+										<th name="password" >${I18n.user_password}</th>
+										<th name="role" >${I18n.user_role}</th>
+										<#--<th name="permission" >${I18n.user_permission}</th>-->
+										<th>${I18n.system_opt}</th>
+									</tr>
 								</thead>
 								<tbody></tbody>
 								<tfoot></tfoot>
