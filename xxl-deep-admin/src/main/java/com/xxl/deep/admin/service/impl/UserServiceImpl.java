@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         // valid empty
         if (user == null) {
-            return new ResponseBuilder<String>().fail("必要参数缺失").build();
+            return new ResponseBuilder<String>().fail(I18nUtil.getString("system_param_empty")).build();
         }
         // valid username
         if (StringTool.isBlank(user.getUsername())) {

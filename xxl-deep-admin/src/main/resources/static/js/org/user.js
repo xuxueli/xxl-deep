@@ -89,7 +89,8 @@ $(function() {
 					{
 						"title": '<input align="center" type="checkbox" id="checkAll" >',
 						"data": 'id',
-						"width":'10%',
+						"visible" : true,
+						"width":'5%',
 						"render": function ( data, type, row ) {
 							tableData['key'+row.id] = row;
 							return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
@@ -98,13 +99,11 @@ $(function() {
 	                {
 						"title": I18n.user_username,
 	                	"data": 'username',
-						"visible" : true,
 						"width":'30%'
 					},
 	                {
 						"title": I18n.user_password,
 						"data": 'password',
-						"visible" : true,
                         "width":'20%',
                         "render": function ( data, type, row ) {
                             return '*********';
@@ -113,14 +112,13 @@ $(function() {
 					{
 						"title": '真实姓名',
 						"data": 'realName',
-						"visible" : true,
-						"width":'30%'
+						"width":'25%'
 					},
 					{
 						"title": '启用状态',
 						"data": 'status',
 						"visible" : true,
-						"width":'30%',
+						"width":'20%',
                         "render": function ( data, type, row ) {
 							var result = "";
 							$('#data_filter .status option').each(function(){
@@ -166,14 +164,14 @@ $(function() {
         userListTable.fnDraw();
 	});
 
-	// ---------- ---------- ---------- table operation ---------- ---------- ----------
+	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
 	// delete
 	$("#data_operation").on('click', '.delete',function() {
 
 		// find select ids
 		var selectIds = selectIdsFind();
 		if (selectIds.length <= 0) {
-			console.log('selectIds empty, pass.');
+			layer.msg(I18n.system_please_choose + I18n.system_data);
 			return;
 		}
 
@@ -212,25 +210,15 @@ $(function() {
 		});
 	});
 
-	// add role
-    $("#addModal .form input[name=role]").change(function () {
-		var role = $(this).val();
-		if (role == 1) {
-            $("#addModal .form input[name=permission]").parents('.form-group').hide();
-		} else {
-            $("#addModal .form input[name=permission]").parents('.form-group').show();
-		}
-        $("#addModal .form input[name='permission']").prop("checked",false);
-    });
-
-    jQuery.validator.addMethod("myValid01", function(value, element) {
-        var length = value.length;
-        var valid = /^[a-z][a-z0-9]*$/;
-        return this.optional(element) || valid.test(value);
-    }, I18n.user_username_valid );
-
+	// ---------- ---------- ---------- add operation ---------- ---------- ----------
+	// add validator method
+	jQuery.validator.addMethod("usernameValid", function(value, element) {
+		var length = value.length;
+		var valid = /^[a-z][a-z0-9]*$/;
+		return this.optional(element) || valid.test(value);
+	}, I18n.user_username_valid );
 	// add
-	$(".add").click(function(){
+	$("#data_operation .add").click(function(){
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var addModalValidate = $("#addModal .form").validate({
@@ -241,12 +229,16 @@ $(function() {
             username : {
 				required : true,
                 rangelength:[4, 20],
-                myValid01: true
+				usernameValid: true
 			},
             password : {
                 required : true,
                 rangelength:[4, 20]
-            }
+            },
+			realName : {
+				required : true,
+				rangelength:[4, 20]
+			}
         }, 
         messages : {
             username : {
@@ -256,7 +248,11 @@ $(function() {
             password : {
                 required : I18n.system_please_input + I18n.user_password,
                 rangelength: I18n.system_lengh_limit + "[4-20]"
-            }
+            },
+			realName : {
+				required : I18n.system_please_input + I18n.user_real_name,
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			}
         },
 		highlight : function(element) {  
             $(element).closest('.form-group').addClass('has-error');  
@@ -270,18 +266,15 @@ $(function() {
         },
         submitHandler : function(form) {
 
-            var permissionArr = [];
-            $("#addModal .form input[name=permission]:checked").each(function(){
-                permissionArr.push($(this).val());
-            });
-
+			// request
 			var paramData = {
 				"username": $("#addModal .form input[name=username]").val(),
                 "password": $("#addModal .form input[name=password]").val(),
-                "role": $("#addModal .form input[name=role]:checked").val(),
-                "permission": permissionArr.join(',')
+                "status": $("#addModal .form select[name=status]").val(),
+				"realName": $("#addModal .form input[name=realName]").val()
 			};
 
+			// post
         	$.post(base_url + "/org/user/add", paramData, function(data, status) {
     			if (data.code == "200") {
 					$('#addModal').modal('hide');
@@ -300,47 +293,29 @@ $(function() {
 		}
 	});
 	$("#addModal").on('hide.bs.modal', function () {
-		$("#addModal .form")[0].reset();
 		addModalValidate.resetForm();
-		$("#addModal .form .form-group").removeClass("has-error");
-		$(".remote_panel").show();	// remote
 
-        $("#addModal .form input[name=permission]").parents('.form-group').show();
+		$("#addModal .form")[0].reset();
+		$("#addModal .form .form-group").removeClass("has-error");
 	});
 
-    // update role
-    $("#updateModal .form input[name=role]").change(function () {
-        var role = $(this).val();
-        if (role == 1) {
-            $("#updateModal .form input[name=permission]").parents('.form-group').hide();
-        } else {
-            $("#updateModal .form input[name=permission]").parents('.form-group').show();
-        }
-        $("#updateModal .form input[name='permission']").prop("checked",false);
-    });
+	// ---------- ---------- ---------- update operation ---------- ---------- ----------
+	$("#data_operation .update").click(function(){
 
-	// update
-	$("#data_list").on('click', '.update',function() {
-
-        var id = $(this).parent('p').attr("id");
-        var row = tableData['key'+id];
+		// find select ids
+		var selectIds = selectIdsFind();
+		if (selectIds.length != 1) {
+			layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+			return;
+		}
+		var row = tableData[ 'key' + selectIds[0] ];
 
 		// base data
 		$("#updateModal .form input[name='id']").val( row.id );
 		$("#updateModal .form input[name='username']").val( row.username );
 		$("#updateModal .form input[name='password']").val( '' );
-		$("#updateModal .form input[name='role'][value='"+ row.role +"']").click();
-        var permissionArr = [];
-        if (row.permission) {
-            permissionArr = row.permission.split(",");
-		}
-        $("#updateModal .form input[name='permission']").each(function () {
-            if($.inArray($(this).val(), permissionArr) > -1) {
-                $(this).prop("checked",true);
-            } else {
-                $(this).prop("checked",false);
-            }
-        });
+		$("#updateModal .form select[name='status']").val( row.status );
+		$("#updateModal .form input[name='realName']").val( row.realName );
 
 		// show
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
@@ -359,19 +334,27 @@ $(function() {
         errorPlacement : function(error, element) {  
             element.parent('div').append(error);  
         },
+		rules : {
+			realName : {
+				required : true,
+				rangelength:[4, 20]
+			}
+		},
+		messages : {
+			realName : {
+				required : I18n.system_please_input + I18n.user_real_name,
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			}
+		},
         submitHandler : function(form) {
 
-            var permissionArr =[];
-            $("#updateModal .form input[name=permission]:checked").each(function(){
-                permissionArr.push($(this).val());
-            });
-
+			// request
             var paramData = {
                 "id": $("#updateModal .form input[name=id]").val(),
                 "username": $("#updateModal .form input[name=username]").val(),
                 "password": $("#updateModal .form input[name=password]").val(),
-                "role": $("#updateModal .form input[name=role]:checked").val(),
-                "permission": permissionArr.join(',')
+				"status": $("#updateModal .form select[name=status]").val(),
+				"realName": $("#updateModal .form input[name=realName]").val()
             };
 
             $.post(base_url + "/org/user/update", paramData, function(data, status) {
@@ -379,7 +362,7 @@ $(function() {
                     $('#updateModal').modal('hide');
 
                     layer.msg( I18n.system_opt_edit + I18n.system_success );
-                    userListTable.fnDraw();
+					userListTable.fnDraw(false);
                 } else {
                     layer.open({
                         title: I18n.system_tips ,
@@ -392,12 +375,10 @@ $(function() {
 		}
 	});
 	$("#updateModal").on('hide.bs.modal', function () {
-        $("#updateModal .form")[0].reset();
-        updateModalValidate.resetForm();
-        $("#updateModal .form .form-group").removeClass("has-error");
-        $(".remote_panel").show();	// remote
+		updateModalValidate.resetForm();
 
-        $("#updateModal .form input[name=permission]").parents('.form-group').show();
+		$("#updateModal .form")[0].reset();
+        $("#updateModal .form .form-group").removeClass("has-error");
 	});
 
 });

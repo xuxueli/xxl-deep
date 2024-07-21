@@ -37,13 +37,13 @@
 
 			<#-- biz start（4/5 content） -->
 
-			<#-- filter -->
+			<#-- 查询区域 -->
 			<div class="box" style="margin-bottom:9px;">
 				<div class="box-body">
 					<div class="row" id="data_filter" >
 						<div class="col-xs-3">
 							<div class="input-group">
-								<span class="input-group-addon">${I18n.user_role}</span>
+								<span class="input-group-addon">${I18n.user_staus}</span>
 								<select class="form-control status" >
 									<option value="-1" >${I18n.system_all}</option>
 									<#list userStatuEnum as item>
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 
-			<#-- table -->
+			<#-- 数据表格区域 -->
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
@@ -95,30 +95,26 @@
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_username}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_password}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="red">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.user_password}" maxlength="20" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_role}<font color="red">*</font></label>
-									<div class="col-sm-10">
-										<input type="radio" name="role" value="0" checked />${I18n.user_role_normal}
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="role" value="1" />${I18n.user_role_admin}
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
+									<div class="col-sm-4">
+										<select class="form-control" name="status" >
+											<#list userStatuEnum as item>
+												<option value="${item.status}" >${item.desc}</option>
+											</#list>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_permission}<font color="black">*</font></label>
-									<div class="col-sm-10">
-										<#if groupList?exists && groupList?size gt 0>
-											<#list groupList as item>
-												<input type="checkbox" name="permission" value="${item.id}" />${item.title}(${item.appname})<br>
-											</#list>
-										</#if>
-									</div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
 								<hr>
@@ -145,30 +141,26 @@
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_username}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" readonly ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_password}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="black">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.user_password_update_placeholder}" maxlength="20" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_role}<font color="red">*</font></label>
-									<div class="col-sm-10">
-										<input type="radio" name="role" value="0" />${I18n.user_role_normal}
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="role" value="1" />${I18n.user_role_admin}
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
+									<div class="col-sm-4">
+										<select class="form-control" name="status" >
+											<#list userStatuEnum as item>
+												<option value="${item.status}" >${item.desc}</option>
+											</#list>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_permission}<font color="black">*</font></label>
-									<div class="col-sm-10">
-										<#if groupList?exists && groupList?size gt 0>
-											<#list groupList as item>
-												<input type="checkbox" name="permission" value="${item.id}" />${item.title}(${item.appname})<br>
-											</#list>
-										</#if>
-									</div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
 								<hr>
