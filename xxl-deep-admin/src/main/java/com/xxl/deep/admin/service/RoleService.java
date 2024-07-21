@@ -4,6 +4,8 @@ import com.xxl.deep.admin.model.XxlDeepRole;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 
+import java.util.List;
+
 /**
 * role service
 *
@@ -19,7 +21,7 @@ public interface RoleService {
     /**
     * 删除
     */
-    public Response<String> delete(int id);
+    public Response<String> deleteByIds(List<Integer> ids);
 
     /**
     * 更新

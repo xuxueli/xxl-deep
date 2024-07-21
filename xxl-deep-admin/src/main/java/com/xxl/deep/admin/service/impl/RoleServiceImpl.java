@@ -3,6 +3,8 @@ package com.xxl.deep.admin.service.impl;
 import com.xxl.deep.admin.dao.XxlDeepRoleMapper;
 import com.xxl.deep.admin.model.XxlDeepRole;
 import com.xxl.deep.admin.service.RoleService;
+import com.xxl.deep.admin.util.I18nUtil;
+import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
@@ -43,8 +45,14 @@ public class RoleServiceImpl implements RoleService {
 	* 删除
 	*/
 	@Override
-	public Response<String> delete(int id) {
-		int ret = xxlDeepRoleMapper.delete(id);
+	public Response<String> deleteByIds(List<Integer> ids) {
+
+		// valid
+		if (CollectionTool.isEmpty(ids)) {
+			return new ResponseBuilder<String>().fail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("role_tips")).build();
+		}
+
+		int ret = xxlDeepRoleMapper.deleteByIds(ids);
 		return ret>0? new ResponseBuilder<String>().success().build()
 					: new ResponseBuilder<String>().fail().build() ;
 	}

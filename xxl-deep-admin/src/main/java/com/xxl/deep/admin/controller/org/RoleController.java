@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import com.xxl.tool.response.Response;
 
@@ -65,8 +66,8 @@ public class RoleController {
     */
     @RequestMapping("/delete")
     @ResponseBody
-    public Response<String> delete(int id){
-        return roleService.delete(id);
+    public Response<String> delete(@RequestParam("ids[]") List<Integer> ids) {
+        return roleService.deleteByIds(ids);
     }
 
     /**

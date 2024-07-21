@@ -22,7 +22,7 @@ public interface XxlDeepRoleMapper {
     /**
     * 删除
     */
-    public int delete(@Param("id") int id);
+    public int deleteByIds(@Param("ids") List<Integer> ids);
 
     /**
     * 更新

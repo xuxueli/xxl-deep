@@ -85,11 +85,11 @@
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_order}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="order" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
@@ -116,11 +116,11 @@
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_order}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="order" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">

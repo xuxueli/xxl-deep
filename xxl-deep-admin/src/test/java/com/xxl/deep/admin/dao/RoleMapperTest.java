@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RoleMapperTest {
@@ -59,7 +60,7 @@ public class RoleMapperTest {
 
     @Test
     public void deleteTest() throws Exception {
-        Response<String> result = roleService.delete(2);
+        Response<String> result = roleService.deleteByIds(Arrays.asList(2));
         Assertions.assertNotNull(result);
     }
 
