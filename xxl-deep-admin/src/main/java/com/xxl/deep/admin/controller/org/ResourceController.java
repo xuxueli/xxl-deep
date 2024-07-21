@@ -3,9 +3,9 @@ package com.xxl.deep.admin.controller.org;
 import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.enums.UserStatuEnum;
 import com.xxl.deep.admin.model.XxlDeepRole;
-import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.tool.response.PageModel;
+import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
-import com.xxl.tool.response.Response;
 
 /**
-* role
+* resource
 *
 * Created by xuxueli on '2024-07-21 13:58:17'.
 */
 @Controller
-@RequestMapping("/org/role")
-public class RoleController {
+@RequestMapping("/org/resource")
+public class ResourceController {
 
     @Resource
     private RoleService roleService;
@@ -37,7 +35,7 @@ public class RoleController {
         /*PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 100);*/
         model.addAttribute("userStatuEnum", UserStatuEnum.values());
 
-        return "org/role";
+        return "org/resource";
     }
 
     /**
