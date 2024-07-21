@@ -51,6 +51,15 @@
 		WHERE id = #{id}
 	</delete>
 
+	<delete id="deleteByIds" parameterType="java.util.HashMap">
+		DELETE
+		FROM xxl_deep_user
+		WHERE id in
+		<foreach collection="ids" item="item" open="(" close=")" separator="," >
+			#{item}
+		</foreach>
+	</delete>
+
 	<update id="update" parameterType="com.xxl.deep.admin.model.XxlDeepUser" >
 		UPDATE xxl_deep_user
 		SET

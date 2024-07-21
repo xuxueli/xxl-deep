@@ -4,6 +4,8 @@ import com.xxl.deep.admin.model.XxlDeepUser;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 
+import java.util.List;
+
 /**
  * user service
  *
@@ -20,6 +22,11 @@ public interface UserService {
      * 删除
      */
     public Response<String> delete(int id);
+
+    /**
+     * 删除
+     */
+    Response<String> deleteByIds(List<Integer> ids, XxlDeepUser loginUser);
 
     /**
      * 更新

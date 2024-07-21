@@ -3,10 +3,9 @@ package com.xxl.deep.admin.controller.org;
 import com.xxl.deep.admin.core.annotation.Permission;
 import com.xxl.deep.admin.enums.UserStatuEnum;
 import com.xxl.deep.admin.model.XxlDeepUser;
-import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.RoleService;
+import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.impl.LoginService;
-import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author xuxueli 2019-05-04 16:39:50
@@ -68,18 +68,13 @@ public class UserController {
         return userService.update(xxlJobUser, loginUser);
     }
 
-    @RequestMapping("/remove")
+    @RequestMapping("/delete")
     @ResponseBody
     @Permission(adminuser = true)
-    public Response<String> remove(HttpServletRequest request, int id) {
-        // avoid opt login seft
+    public Response<String> delete(HttpServletRequest request,
+                                   @RequestParam("ids[]") List<Integer> ids) {
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
-        if (loginUser.getId() == id) {
-            return new ResponseBuilder<String>().fail( I18nUtil.getString("user_update_loginuser_limit") ).build();
-        }
-
-        userService.delete(id);
-        return new ResponseBuilder<String>().success().build();
+        return userService.deleteByIds(ids, loginUser);
     }
 
     @RequestMapping("/updatePwd")

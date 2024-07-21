@@ -76,6 +76,27 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 删除
+     */
+    @Override
+    public Response<String> deleteByIds(List<Integer> ids, XxlDeepUser loginUser) {
+
+        // valid
+        if (CollectionTool.isEmpty(ids)) {
+            return new ResponseBuilder<String>().fail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("user_tips")).build();
+        }
+
+        // avoid opt login seft
+        if (ids.contains(loginUser.getId())) {
+            return new ResponseBuilder<String>().fail( I18nUtil.getString("user_update_loginuser_limit") ).build();
+        }
+
+        int ret = userMapper.deleteByIds(ids);
+        return ret>0? new ResponseBuilder<String>().success().build()
+                : new ResponseBuilder<String>().fail().build() ;
+    }
+
+    /**
      * 更新
      */
     @Override

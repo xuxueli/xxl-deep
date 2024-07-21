@@ -168,9 +168,16 @@ $(function() {
 
 	// ---------- ---------- ---------- table operation ---------- ---------- ----------
 	// delete
-	$("#data_list").on('click', '.delete',function() {
-		var id = $(this).parent('p').attr("id");
+	$("#data_operation").on('click', '.delete',function() {
 
+		// find select ids
+		var selectIds = selectIdsFind();
+		if (selectIds.length <= 0) {
+			console.log('selectIds empty, pass.');
+			return;
+		}
+
+		// do delete
 		layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
 			icon: 3,
 			title: I18n.system_tips ,
@@ -180,18 +187,26 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/org/user/remove",
+				url : base_url + "/org/user/delete",
 				data : {
-					"id" : id
+					"ids" : selectIds
 				},
 				dataType : "json",
 				success : function(data){
 					if (data.code == 200) {
-                        layer.msg( I18n.system_success );
-						userListTable.fnDraw(false);
+                        layer.msg( I18n.system_opt_del + I18n.system_success );
+						userListTable.fnDraw(false);	// false，refresh current page；true，all refresh
 					} else {
                         layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
 					}
+				},
+				error: function(xhr, status, error) {
+					// Handle error
+					console.log("Error: " + error);
+					layer.open({
+						icon: '2',
+						content: (I18n.system_opt_del + I18n.system_fail)
+					});
 				}
 			});
 		});

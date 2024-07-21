@@ -15,6 +15,8 @@ public interface XxlDeepUserMapper {
 
 	public int delete(@Param("id") int id);
 
+	public int deleteByIds(@Param("ids") List<Integer> ids);
+
 	public int update(XxlDeepUser xxlJobUser);
 
 	public XxlDeepUser loadByUserName(@Param("username") String username);
