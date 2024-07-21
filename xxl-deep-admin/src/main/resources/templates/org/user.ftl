@@ -117,9 +117,8 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
-								<hr>
-								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-6">
+								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+									<div style="margin-top: 10px;" >
 										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
 										<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
 									</div>
@@ -163,9 +162,8 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
-								<hr>
-								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-6">
+								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+									<div style="margin-top: 10px;" >
 										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
 										<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
 										<input type="hidden" name="id" >
