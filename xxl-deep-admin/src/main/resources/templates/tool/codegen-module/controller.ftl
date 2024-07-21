@@ -21,6 +21,35 @@ public class ${classInfo.className}Controller {
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
     /**
+    * 页面
+    */
+    @RequestMapping
+    @Permission(adminuser = true)
+    public String index(Model model) {
+        return "org/${classInfo.className?uncap_first}";
+    }
+
+    /**
+    * 分页查询
+    */
+    @RequestMapping("/pageList")
+    @ResponseBody
+    public Response<PageModel<${classInfo.className}>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+                                                    @RequestParam(required = false, defaultValue = "10") int pagesize) {
+        PageModel<${classInfo.className}> pageModel = roleService.pageList(offset, pagesize);
+        return new ResponseBuilder<PageModel<${classInfo.className}>>().success(pageModel).build();
+    }
+
+    /**
+    * Load查询
+    */
+    @RequestMapping("/load")
+    @ResponseBody
+    public Response<${classInfo.className}> load(int id){
+        return ${classInfo.className?uncap_first}Service.load(id);
+    }
+
+    /**
     * 新增
     */
     @RequestMapping("/insert")
@@ -45,25 +74,6 @@ public class ${classInfo.className}Controller {
     @ResponseBody
     public Response<String> update(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
-    }
-
-    /**
-    * Load查询
-    */
-    @RequestMapping("/load")
-    @ResponseBody
-    public Response<${classInfo.className}> load(int id){
-        return ${classInfo.className?uncap_first}Service.load(id);
-    }
-
-    /**
-    * 分页查询
-    */
-    @RequestMapping("/pageList")
-    @ResponseBody
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                        @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
     }
 
 }
