@@ -14,7 +14,7 @@
     <sql id="Base_Column_List">
     <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-        `${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
+        t.`${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
     </#list>
     </#if>
     </sql>
@@ -64,19 +64,19 @@
 
     <select id="load" parameterType="java.util.Map" resultMap="${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
-        FROM ${classInfo.tableName}
-        WHERE `id` = ${r"#{id}"}
+        FROM ${classInfo.tableName} AS t
+        WHERE t.`id` = ${r"#{id}"}
     </select>
 
     <select id="pageList" parameterType="java.util.Map" resultMap="${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
-        FROM ${classInfo.tableName}
+        FROM ${classInfo.tableName} AS t
         LIMIT ${r"#{offset}"}, ${r"#{pagesize}"}
     </select>
 
     <select id="pageListCount" parameterType="java.util.Map" resultType="int">
         SELECT count(1)
-        FROM ${classInfo.tableName}
+        FROM ${classInfo.tableName} AS t
     </select>
 
 </mapper>

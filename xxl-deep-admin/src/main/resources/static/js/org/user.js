@@ -52,7 +52,7 @@ $(function() {
 
 	// ---------- ---------- ---------- main table  ---------- ---------- ----------
 	// init date tables
-	var userListTable = $("#data_list").dataTable({
+	var mainDataTable = $("#data_list").dataTable({
 		"deferRender": true,
 		"processing" : true, 
 	    "serverSide": true,
@@ -161,7 +161,7 @@ $(function() {
 
 	// search btn
 	$('#data_filter .searchBtn').on('click', function(){
-        userListTable.fnDraw();
+        mainDataTable.fnDraw();
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
@@ -193,7 +193,7 @@ $(function() {
 				success : function(data){
 					if (data.code == 200) {
                         layer.msg( I18n.system_opt_del + I18n.system_success );
-						userListTable.fnDraw(false);	// false，refresh current page；true，all refresh
+						mainDataTable.fnDraw(false);	// false，refresh current page；true，all refresh
 					} else {
                         layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
 					}
@@ -280,7 +280,7 @@ $(function() {
 					$('#addModal').modal('hide');
 
                     layer.msg( I18n.system_opt_add + I18n.system_success );
-                    userListTable.fnDraw();
+                    mainDataTable.fnDraw();
     			} else {
 					layer.open({
 						title: I18n.system_tips ,
@@ -362,7 +362,7 @@ $(function() {
                     $('#updateModal').modal('hide');
 
                     layer.msg( I18n.system_opt_edit + I18n.system_success );
-					userListTable.fnDraw(false);
+					mainDataTable.fnDraw(false);
                 } else {
                     layer.open({
                         title: I18n.system_tips ,

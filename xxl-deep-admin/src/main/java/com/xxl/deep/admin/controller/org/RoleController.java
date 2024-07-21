@@ -45,8 +45,9 @@ public class RoleController {
     @RequestMapping("/pageList")
     @ResponseBody
     public Response<PageModel<XxlDeepRole>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                                     @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        PageModel<XxlDeepRole> pageModel = roleService.pageList(offset, pagesize);
+                                                     @RequestParam(required = false, defaultValue = "10") int pagesize,
+                                                     String name) {
+        PageModel<XxlDeepRole> pageModel = roleService.pageList(offset, pagesize, name);
         return new ResponseBuilder<PageModel<XxlDeepRole>>().success(pageModel).build();
     }
 

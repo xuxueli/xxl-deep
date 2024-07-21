@@ -12,11 +12,11 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `id`,
-        `name`,
-        `order`,
-        `add_time`,
-        `update_time`
+        t.`id`,
+        t.`name`,
+        t.`order`,
+        t.`add_time`,
+        t.`update_time`
     </sql>
 
     <insert id="insert" parameterType="com.xxl.deep.admin.model.XxlDeepRole" useGeneratedKeys="true" keyProperty="id">
@@ -47,20 +47,30 @@
 
     <select id="load" parameterType="java.util.Map" resultMap="XxlDeepRole">
         SELECT <include refid="Base_Column_List" />
-        FROM xxl_deep_role
-        WHERE `id` = #{id}
+        FROM xxl_deep_role AS t
+        WHERE t.`id` = #{id}
     </select>
 
     <select id="pageList" parameterType="java.util.Map" resultMap="XxlDeepRole">
         SELECT <include refid="Base_Column_List" />
-        FROM xxl_deep_role
+        FROM xxl_deep_role AS t
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="name != null and name != ''">
+                AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+            </if>
+        </trim>
         ORDER BY `order` ASC
         LIMIT #{offset}, #{pagesize}
     </select>
 
     <select id="pageListCount" parameterType="java.util.Map" resultType="int">
         SELECT count(1)
-        FROM xxl_deep_role
+        FROM xxl_deep_role AS t
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="name != null and name != ''">
+                AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+            </if>
+        </trim>
     </select>
 
 </mapper>

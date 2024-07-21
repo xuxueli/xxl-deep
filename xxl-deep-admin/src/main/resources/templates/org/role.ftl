@@ -43,19 +43,8 @@
 					<div class="row" id="data_filter" >
 						<div class="col-xs-3">
 							<div class="input-group">
-								<span class="input-group-addon">${I18n.user_staus}</span>
-								<select class="form-control status" >
-									<option value="-1" >${I18n.system_all}</option>
-									<#list userStatuEnum as item>
-										<option value="${item.status}" >${item.desc}</option>
-									</#list>
-								</select>
-							</div>
-						</div>
-						<div class="col-xs-3">
-							<div class="input-group">
-								<span class="input-group-addon">${I18n.user_username}</span>
-								<input type="text" class="form-control username" autocomplete="on" >
+								<span class="input-group-addon">${I18n.role_tips}${I18n.role_name}</span>
+								<input type="text" class="form-control name" autocomplete="on" >
 							</div>
 						</div>
 						<div class="col-xs-1">
@@ -95,26 +84,12 @@
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_name}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.user_password}" maxlength="20" ></div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
-									<div class="col-sm-4">
-										<select class="form-control" name="status" >
-											<#list userStatuEnum as item>
-												<option value="${item.status}" >${item.desc}</option>
-											</#list>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_order}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
@@ -140,26 +115,12 @@
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" readonly ></div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_name}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="black">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.user_password_update_placeholder}" maxlength="20" ></div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
-									<div class="col-sm-4">
-										<select class="form-control" name="status" >
-											<#list userStatuEnum as item>
-												<option value="${item.status}" >${item.desc}</option>
-											</#list>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">${I18n.role_tips}${I18n.role_order}<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.role_name}" maxlength="10" ></div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">

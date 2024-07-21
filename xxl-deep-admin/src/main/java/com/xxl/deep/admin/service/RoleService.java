@@ -34,6 +34,6 @@ public interface RoleService {
     /**
     * 分页查询
     */
-    public PageModel<XxlDeepRole> pageList(int offset, int pagesize);
+    public PageModel<XxlDeepRole> pageList(int offset, int pagesize, String name);
 
 }

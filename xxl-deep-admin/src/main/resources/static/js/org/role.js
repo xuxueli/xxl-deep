@@ -52,20 +52,19 @@ $(function() {
 
 	// ---------- ---------- ---------- main table  ---------- ---------- ----------
 	// init date tables
-	var userListTable = $("#data_list").dataTable({
+	var mainDataTable = $("#data_list").dataTable({
 		"deferRender": true,
 		"processing" : true, 
 	    "serverSide": true,
 		"ajax": {
-			url: base_url + "/org/user/pageList",
+			url: base_url + "/org/role/pageList",
 			type:"post",
 			// request data
 	        data : function ( d ) {
 	        	var obj = {};
-                obj.username = $('#data_filter .username').val();
-                obj.status = $('#data_filter .status').val();
-	        	obj.start = d.start;
-	        	obj.length = d.length;
+                obj.name = $('#data_filter .name').val();
+	        	obj.offset = d.start;
+	        	obj.pagesize = d.length;
                 return obj;
             },
 			// response data filter
@@ -97,37 +96,14 @@ $(function() {
 						}
 					},
 	                {
-						"title": I18n.user_username,
-	                	"data": 'username',
-						"width":'30%'
+						"title": I18n.role_tips + I18n.role_name,
+	                	"data": 'name',
+						"width":'40%'
 					},
 	                {
-						"title": I18n.user_password,
-						"data": 'password',
-                        "width":'20%',
-                        "render": function ( data, type, row ) {
-                            return '*********';
-                        }
-					},
-					{
-						"title": '真实姓名',
-						"data": 'realName',
-						"width":'25%'
-					},
-					{
-						"title": '启用状态',
-						"data": 'status',
-						"visible" : true,
-						"width":'20%',
-                        "render": function ( data, type, row ) {
-							var result = "";
-							$('#data_filter .status option').each(function(){
-								if ( data.toString() === $(this).val() ) {
-									result = $(this).text();
-								}
-							});
-							return result;
-                        }
+						"title": I18n.role_tips + I18n.role_order,
+						"data": 'order',
+                        "width":'30%'
 					}
 	            ],
 		"language" : {
@@ -161,7 +137,7 @@ $(function() {
 
 	// search btn
 	$('#data_filter .searchBtn').on('click', function(){
-        userListTable.fnDraw();
+        mainDataTable.fnDraw();
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
@@ -193,7 +169,7 @@ $(function() {
 				success : function(data){
 					if (data.code == 200) {
                         layer.msg( I18n.system_opt_del + I18n.system_success );
-						userListTable.fnDraw(false);	// false，refresh current page；true，all refresh
+						mainDataTable.fnDraw(false);	// false，refresh current page；true，all refresh
 					} else {
                         layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
 					}
@@ -280,7 +256,7 @@ $(function() {
 					$('#addModal').modal('hide');
 
                     layer.msg( I18n.system_opt_add + I18n.system_success );
-                    userListTable.fnDraw();
+                    mainDataTable.fnDraw();
     			} else {
 					layer.open({
 						title: I18n.system_tips ,
@@ -362,7 +338,7 @@ $(function() {
                     $('#updateModal').modal('hide');
 
                     layer.msg( I18n.system_opt_edit + I18n.system_success );
-					userListTable.fnDraw(false);
+					mainDataTable.fnDraw(false);
                 } else {
                     layer.open({
                         title: I18n.system_tips ,

@@ -72,10 +72,10 @@ public class RoleServiceImpl implements RoleService {
 	* 分页查询
 	*/
 	@Override
-	public PageModel<XxlDeepRole> pageList(int offset, int pagesize) {
+	public PageModel<XxlDeepRole> pageList(int offset, int pagesize, String name) {
 
-		List<XxlDeepRole> pageList = xxlDeepRoleMapper.pageList(offset, pagesize);
-		int totalCount = xxlDeepRoleMapper.pageListCount(offset, pagesize);
+		List<XxlDeepRole> pageList = xxlDeepRoleMapper.pageList(offset, pagesize, name);
+		int totalCount = xxlDeepRoleMapper.pageListCount(offset, pagesize, name);
 
 		// result
 		Map<String, Object> result = new HashMap<String, Object>();

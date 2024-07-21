@@ -38,12 +38,14 @@ public interface XxlDeepRoleMapper {
     * 分页查询Data
     */
 	public List<XxlDeepRole> pageList(@Param("offset") int offset,
-                                                 @Param("pagesize") int pagesize);
+                                      @Param("pagesize") int pagesize,
+                                      @Param("name") String name);
 
     /**
     * 分页查询Count
     */
     public int pageListCount(@Param("offset") int offset,
-                             @Param("pagesize") int pagesize);
+                             @Param("pagesize") int pagesize,
+                             @Param("name") String name);
 
 }

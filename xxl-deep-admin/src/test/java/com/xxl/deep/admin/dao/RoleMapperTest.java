@@ -29,7 +29,7 @@ public class RoleMapperTest {
 
     @Test
     public void pageTest() throws Exception {
-        PageModel<XxlDeepRole> result = roleService.pageList(0, 100);
+        PageModel<XxlDeepRole> result = roleService.pageList(0, 100, null);
         Assertions.assertNotNull(result);
     }
 
