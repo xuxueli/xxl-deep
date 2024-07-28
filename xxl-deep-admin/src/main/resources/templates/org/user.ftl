@@ -43,7 +43,7 @@
 					<div class="row" id="data_filter" >
 						<div class="col-xs-3">
 							<div class="input-group">
-								<span class="input-group-addon">${I18n.user_staus}</span>
+								<span class="input-group-addon">${I18n.user_tips}${I18n.user_staus}</span>
 								<select class="form-control status" >
 									<option value="-1" >${I18n.system_all}</option>
 									<#list userStatuEnum as item>

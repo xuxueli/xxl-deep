@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.deep.admin.mapper.XxlDeepResourceMapper">
+
+    <resultMap id="XxlDeepResource" type="com.xxl.deep.admin.model.entity.XxlDeepResource" >
+        <result column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="permission" property="permission" />
+        <result column="url" property="url" />
+        <result column="order" property="order" />
+        <result column="status" property="status" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        t.`id`,
+        t.`parent_id`,
+        t.`name`,
+        t.`type`,
+        t.`permission`,
+        t.`url`,
+        t.`order`,
+        t.`status`,
+        t.`add_time`,
+        t.`update_time`
+    </sql>
+
+    <insert id="insert" parameterType="java.util.Map" >
+        INSERT INTO xxl_deep_resource (
+            `parent_id`,
+            `name`,
+            `type`,
+            `permission`,
+            `url`,
+            `order`,
+            `status`,
+            `add_time`,
+            `update_time`
+        )
+        VALUES(
+                  #{xxlDeepResource.parentId} ,
+                  #{xxlDeepResource.name} ,
+                  #{xxlDeepResource.type} ,
+                  #{xxlDeepResource.permission} ,
+                  #{xxlDeepResource.url} ,
+                  #{xxlDeepResource.order} ,
+                  #{xxlDeepResource.status} ,
+                  NOW() ,
+                  NOW()
+              )
+    </insert>
+
+    <delete id="delete" parameterType="java.util.Map" >
+        DELETE FROM xxl_deep_resource
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="update" parameterType="java.util.Map" >
+        UPDATE xxl_deep_resource
+        SET
+            `parent_id` = #{xxlDeepResource.parentId},
+            `name` = #{xxlDeepResource.name},
+            `type` = #{xxlDeepResource.type},
+            `permission` = #{xxlDeepResource.permission},
+            `url` = #{xxlDeepResource.url},
+            `order` = #{xxlDeepResource.order},
+            `status` = #{xxlDeepResource.status},
+            update_time = NOW()
+        WHERE `id` = #{xxlDeepResource.id}
+    </update>
+
+
+    <select id="load" parameterType="java.util.Map" resultMap="XxlDeepResource">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_resource AS t
+        WHERE t.`id` = #{id}
+    </select>
+
+    <select id="pageList" parameterType="java.util.Map" resultMap="XxlDeepResource">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_resource AS t
+        LIMIT #{offset}, #{pagesize}
+    </select>
+
+    <select id="pageListCount" parameterType="java.util.Map" resultType="int">
+        SELECT count(1)
+        FROM xxl_deep_resource AS t
+    </select>
+
+</mapper>

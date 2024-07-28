@@ -1,11 +1,11 @@
 package com.xxl.deep.admin.controller.org;
-
 import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
+import com.xxl.deep.admin.constant.enums.ResourceTypeEnum;
 import com.xxl.deep.admin.constant.enums.UserStatuEnum;
-import com.xxl.deep.admin.model.entity.XxlDeepRole;
-import com.xxl.deep.admin.service.RoleService;
+import com.xxl.deep.admin.model.entity.XxlDeepResource;
+import com.xxl.deep.admin.service.ResourceService;
 import com.xxl.tool.response.PageModel;
-import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,26 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
+import com.xxl.tool.response.Response;
 
 /**
-* resource
-*
-* Created by xuxueli on '2024-07-21 13:58:17'.
-*/
+ * XxlDeepResource Controller
+ *
+ * Created by xuxueli on '2024-07-28 12:52:39'.
+ */
 @Controller
 @RequestMapping("/org/resource")
 public class ResourceController {
 
     @Resource
-    private RoleService roleService;
+    private ResourceService resourceService;
 
+    /**
+     * 页面
+     */
     @RequestMapping
     @Permission(adminuser = true)
     public String index(Model model) {
 
-        /*PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 100);*/
-        model.addAttribute("userStatuEnum", UserStatuEnum.values());
+        model.addAttribute("resourceStatuEnum", ResourceStatuEnum.values());
+        model.addAttribute("resourceTypeEnum", ResourceTypeEnum.values());
 
         return "org/resource";
     }
@@ -43,47 +46,46 @@ public class ResourceController {
      */
     @RequestMapping("/pageList")
     @ResponseBody
-    public Response<PageModel<XxlDeepRole>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                                     @RequestParam(required = false, defaultValue = "10") int pagesize,
-                                                     String name) {
-        PageModel<XxlDeepRole> pageModel = roleService.pageList(offset, pagesize, name);
-        return new ResponseBuilder<PageModel<XxlDeepRole>>().success(pageModel).build();
+    public Response<PageModel<XxlDeepResource>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+                                                         @RequestParam(required = false, defaultValue = "10") int pagesize) {
+        PageModel<XxlDeepResource> pageModel = resourceService.pageList(offset, pagesize);
+        return new ResponseBuilder<PageModel<XxlDeepResource>>().success(pageModel).build();
     }
 
     /**
-    * 新增
-    */
-    @RequestMapping("/insert")
-    @ResponseBody
-    public Response<String> insert(XxlDeepRole xxlDeepRole){
-        return roleService.insert(xxlDeepRole);
-    }
-
-    /**
-    * 删除
-    */
-    @RequestMapping("/delete")
-    @ResponseBody
-    public Response<String> delete(@RequestParam("ids[]") List<Integer> ids) {
-        return roleService.deleteByIds(ids);
-    }
-
-    /**
-    * 更新
-    */
-    @RequestMapping("/update")
-    @ResponseBody
-    public Response<String> update(XxlDeepRole xxlDeepRole){
-        return roleService.update(xxlDeepRole);
-    }
-
-    /**
-    * Load查询
-    */
+     * Load查询
+     */
     @RequestMapping("/load")
     @ResponseBody
-    public Response<XxlDeepRole> load(int id){
-        return roleService.load(id);
+    public Response<XxlDeepResource> load(int id){
+        return resourceService.load(id);
+    }
+
+    /**
+     * 新增
+     */
+    @RequestMapping("/insert")
+    @ResponseBody
+    public Response<String> insert(XxlDeepResource xxlDeepResource){
+        return resourceService.insert(xxlDeepResource);
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Response<String> delete(int id){
+        return resourceService.delete(id);
+    }
+
+    /**
+     * 更新
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Response<String> update(XxlDeepResource xxlDeepResource){
+        return resourceService.update(xxlDeepResource);
     }
 
 }

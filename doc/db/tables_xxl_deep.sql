@@ -24,7 +24,7 @@ CREATE TABLE `xxl_deep_user` (
 CREATE TABLE `xxl_deep_role` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
     `name` varchar(50) NOT NULL,
-    `order` int(11) NOT NULL,
+    `order` int(11) NOT NULL COMMENT '顺序',
     `add_time` datetime NOT NULL COMMENT '新增时间',
     `update_time` datetime NOT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
@@ -34,9 +34,11 @@ CREATE TABLE `xxl_deep_resource` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '资源ID',
     `parent_id` int(11) NOT NULL COMMENT '父节点ID',
     `name` varchar(50) NOT NULL COMMENT '名称',
-    `order` int(11) NOT NULL COMMENT '序号',
-    `res_type` tinyint(4) NOT NULL COMMENT '类型：0-菜单、1-操作',
-    `res_url` varchar(50) DEFAULT NULL COMMENT '授权URL，唯一标志',
+    `type` tinyint(4) NOT NULL COMMENT '类型：0-菜单、1-按钮',
+    `permission` varchar(50) DEFAULT NULL COMMENT '权限标识',
+    `url` varchar(50) DEFAULT NULL COMMENT '菜单地址',
+    `order` int(11) NOT NULL COMMENT '顺序',
+    `status` tinyint(4) NOT NULL COMMENT '状态：0-正常、1-禁用',
     `add_time` datetime NOT NULL COMMENT '新增时间',
     `update_time` datetime NOT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
@@ -63,7 +65,6 @@ CREATE TABLE `xxl_deep_role_res` (
 
 INSERT INTO `xxl_deep_user` (`id`, `username`, `password`, `user_token`, `status`, `real_name`, `add_time`, `update_time`) VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '', 0 , '吴彦祖', now(), now());
 INSERT INTO `xxl_deep_role` (`id`, `name`, `order`, `add_time`, `update_time`) VALUES (1, '管理员', 1, now(), now());
-INSERT INTO `xxl_deep_resource` (`id`, `parent_id`, `name`, `order`, `res_type`, `res_url`, `add_time`, `update_time`) VALUES (1, 0, '用户管理菜单', 1 , 0, 'menu:org/user', now(), now());
 INSERT INTO `xxl_deep_user_role` (`id`, `user_id`, `role_id`, `add_time`, `update_time`) VALUES (1, 1, 1, now(), now());
 INSERT INTO `xxl_deep_role_res` (`id`, `role_id`, `res_id`, `add_time`, `update_time`) VALUES (1, 1, 1, now(), now());
 

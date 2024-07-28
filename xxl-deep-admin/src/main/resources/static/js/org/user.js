@@ -237,7 +237,7 @@ $(function() {
             },
 			realName : {
 				required : true,
-				rangelength:[4, 20]
+				rangelength:[2, 20]
 			}
         }, 
         messages : {
@@ -251,7 +251,7 @@ $(function() {
             },
 			realName : {
 				required : I18n.system_please_input + I18n.user_real_name,
-				rangelength: I18n.system_lengh_limit + "[4-20]"
+				rangelength: I18n.system_lengh_limit + "[2-20]"
 			}
         },
 		highlight : function(element) {  
@@ -337,13 +337,13 @@ $(function() {
 		rules : {
 			realName : {
 				required : true,
-				rangelength:[4, 20]
+				rangelength:[2, 20]
 			}
 		},
 		messages : {
 			realName : {
 				required : I18n.system_please_input + I18n.user_real_name,
-				rangelength: I18n.system_lengh_limit + "[4-20]"
+				rangelength: I18n.system_lengh_limit + "[2-20]"
 			}
 		},
         submitHandler : function(form) {

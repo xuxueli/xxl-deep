@@ -54,19 +54,20 @@ $(function() {
 	// init date tables
 	var mainDataTable = $("#data_list").dataTable({
 		"deferRender": true,
-		"processing" : true, 
-	    "serverSide": true,
+		"processing" : true,
+		"serverSide": true,
 		"ajax": {
-			url: base_url + "/org/role/pageList",
+			url: base_url + "/org/user/pageList",
 			type:"post",
 			// request data
-	        data : function ( d ) {
-	        	var obj = {};
-                obj.name = $('#data_filter .name').val();
-	        	obj.offset = d.start;
-	        	obj.pagesize = d.length;
-                return obj;
-            },
+			data : function ( d ) {
+				var obj = {};
+				obj.username = $('#data_filter .username').val();
+				obj.status = $('#data_filter .status').val();
+				obj.start = d.start;
+				obj.length = d.length;
+				return obj;
+			},
 			// response data filter
 			dataFilter: function (originData) {
 				var originJson = $.parseJSON(originData);
@@ -76,36 +77,59 @@ $(function() {
 					data: originJson.data.pageData
 				});
 			}
-	    },
-	    "searching": false,
-	    "ordering": false,
-	    //"scrollX": true,																		// scroll x，close self-adaption
+		},
+		"searching": false,
+		"ordering": false,
+		//"scrollX": true,																		// scroll x，close self-adaption
 		//"dom": '<"top" t><"bottom" <"col-sm-3" i><"col-sm-3 right" l><"col-sm-6" p> >',		// dataTable "DOM layout"：https://datatables.club/example/diy.html
 		"drawCallback": function( settings ) {
 			selectStatusInit();
 		},
-	    "columns": [
-					{
-						"title": '<input align="center" type="checkbox" id="checkAll" >',
-						"data": 'id',
-						"visible" : true,
-						"width":'5%',
-						"render": function ( data, type, row ) {
-							tableData['key'+row.id] = row;
-							return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
+		"columns": [
+			{
+				"title": '<input align="center" type="checkbox" id="checkAll" >',
+				"data": 'id',
+				"visible" : true,
+				"width":'5%',
+				"render": function ( data, type, row ) {
+					tableData['key'+row.id] = row;
+					return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
+				}
+			},
+			{
+				"title": I18n.user_username,
+				"data": 'username',
+				"width":'30%'
+			},
+			{
+				"title": I18n.user_password,
+				"data": 'password',
+				"width":'20%',
+				"render": function ( data, type, row ) {
+					return '*********';
+				}
+			},
+			{
+				"title": '真实姓名',
+				"data": 'realName',
+				"width":'25%'
+			},
+			{
+				"title": '启用状态',
+				"data": 'status',
+				"visible" : true,
+				"width":'20%',
+				"render": function ( data, type, row ) {
+					var result = "";
+					$('#data_filter .status option').each(function(){
+						if ( data.toString() === $(this).val() ) {
+							result = $(this).text();
 						}
-					},
-	                {
-						"title": I18n.role_tips + I18n.role_name,
-	                	"data": 'name',
-						"width":'40%'
-					},
-	                {
-						"title": I18n.role_tips + I18n.role_order,
-						"data": 'order',
-                        "width":'30%'
-					}
-	            ],
+					});
+					return result;
+				}
+			}
+		],
 		"language" : {
 			"sProcessing" : I18n.dataTable_sProcessing ,
 			"sLengthMenu" : I18n.dataTable_sLengthMenu ,
@@ -132,12 +156,12 @@ $(function() {
 		}
 	});
 
-    // table data
-    var tableData = {};
+	// table data
+	var tableData = {};
 
 	// search btn
 	$('#data_filter .searchBtn').on('click', function(){
-        mainDataTable.fnDraw();
+		mainDataTable.fnDraw();
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
@@ -155,23 +179,23 @@ $(function() {
 		layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
 			icon: 3,
 			title: I18n.system_tips ,
-            btn: [ I18n.system_ok, I18n.system_cancel ]
+			btn: [ I18n.system_ok, I18n.system_cancel ]
 		}, function(index){
 			layer.close(index);
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/org/role/delete",
+				url : base_url + "/org/user/delete",
 				data : {
 					"ids" : selectIds
 				},
 				dataType : "json",
 				success : function(data){
 					if (data.code == 200) {
-                        layer.msg( I18n.system_opt_del + I18n.system_success );
+						layer.msg( I18n.system_opt_del + I18n.system_success );
 						mainDataTable.fnDraw(false);	// false，refresh current page；true，all refresh
 					} else {
-                        layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
+						layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
 					}
 				},
 				error: function(xhr, status, error) {
@@ -187,83 +211,85 @@ $(function() {
 	});
 
 	// ---------- ---------- ---------- add operation ---------- ---------- ----------
+	// add validator method
+	jQuery.validator.addMethod("usernameValid", function(value, element) {
+		var length = value.length;
+		var valid = /^[a-z][a-z0-9]*$/;
+		return this.optional(element) || valid.test(value);
+	}, I18n.user_username_valid );
 	// add
 	$("#data_operation .add").click(function(){
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var addModalValidate = $("#addModal .form").validate({
-		errorElement : 'span',  
-        errorClass : 'help-block',
-        focusInvalid : true,  
-        rules : {
-            name : {
+		errorElement : 'span',
+		errorClass : 'help-block',
+		focusInvalid : true,
+		rules : {
+			username : {
 				required : true,
-                rangelength:[4, 20]
+				rangelength:[4, 20],
+				usernameValid: true
 			},
-			order : {
+			password : {
 				required : true,
-				digits : true
+				rangelength:[4, 20]
+			},
+			realName : {
+				required : true,
+				rangelength:[2, 20]
 			}
-        }, 
-        messages : {
-			name : {
-            	required : I18n.system_please_input + I18n.role_name,
-                rangelength: I18n.system_lengh_limit + "[2-10]"
-            },
-			order : {
-				required : I18n.system_please_input + I18n.role_order,
-				digits: I18n.role_order_valid
+		},
+		messages : {
+			username : {
+				required : I18n.system_please_input + I18n.user_username,
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			},
+			password : {
+				required : I18n.system_please_input + I18n.user_password,
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			},
+			realName : {
+				required : I18n.system_please_input + I18n.user_real_name,
+				rangelength: I18n.system_lengh_limit + "[2-20]"
 			}
-        },
-		highlight : function(element) {  
-            $(element).closest('.form-group').addClass('has-error');  
-        },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
-        },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
-        },
-        submitHandler : function(form) {
+		},
+		highlight : function(element) {
+			$(element).closest('.form-group').addClass('has-error');
+		},
+		success : function(label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
+		},
+		errorPlacement : function(error, element) {
+			element.parent('div').append(error);
+		},
+		submitHandler : function(form) {
 
 			// request
 			var paramData = {
-				"name": $("#addModal .form input[name=name]").val(),
-				"order": $("#addModal .form input[name=order]").val()
+				"username": $("#addModal .form input[name=username]").val(),
+				"password": $("#addModal .form input[name=password]").val(),
+				"status": $("#addModal .form select[name=status]").val(),
+				"realName": $("#addModal .form input[name=realName]").val()
 			};
 
-			// invoke
-			$.ajax({
-				type : 'POST',
-				url : base_url + "/org/role/insert",
-				data : paramData,
-				dataType : "json",
-				success : function(data){
-					if (data.code == "200") {
-						$('#addModal').modal('hide');
+			// post
+			$.post(base_url + "/org/user/add", paramData, function(data, status) {
+				if (data.code == "200") {
+					$('#addModal').modal('hide');
 
-						layer.msg( I18n.system_opt_add + I18n.system_success );
-						mainDataTable.fnDraw();
-					} else {
-						layer.open({
-							title: I18n.system_tips ,
-							btn: [ I18n.system_ok ],
-							content: (data.msg || I18n.system_opt_add + I18n.system_fail ),
-							icon: '2'
-						});
-					}
-				},
-				error: function(xhr, status, error) {
-					// Handle error
-					console.log("Error: " + error);
+					layer.msg( I18n.system_opt_add + I18n.system_success );
+					mainDataTable.fnDraw();
+				} else {
 					layer.open({
-						icon: '2',
-						content: (I18n.system_opt_add + I18n.system_fail)
+						title: I18n.system_tips ,
+						btn: [ I18n.system_ok ],
+						content: (data.msg || I18n.system_opt_add + I18n.system_fail ),
+						icon: '2'
 					});
 				}
 			});
-
 		}
 	});
 	$("#addModal").on('hide.bs.modal', function () {
@@ -286,93 +312,73 @@ $(function() {
 
 		// base data
 		$("#updateModal .form input[name='id']").val( row.id );
-		$("#updateModal .form input[name='name']").val( row.name );
-		$("#updateModal .form input[name='order']").val( row.order );
+		$("#updateModal .form input[name='username']").val( row.username );
+		$("#updateModal .form input[name='password']").val( '' );
+		$("#updateModal .form select[name='status']").val( row.status );
+		$("#updateModal .form input[name='realName']").val( row.realName );
 
 		// show
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var updateModalValidate = $("#updateModal .form").validate({
-		errorElement : 'span',  
-        errorClass : 'help-block',
-        focusInvalid : true,
+		errorElement : 'span',
+		errorClass : 'help-block',
+		focusInvalid : true,
 		highlight : function(element) {
-            $(element).closest('.form-group').addClass('has-error');  
-        },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
-        },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
-        },
+			$(element).closest('.form-group').addClass('has-error');
+		},
+		success : function(label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
+		},
+		errorPlacement : function(error, element) {
+			element.parent('div').append(error);
+		},
 		rules : {
-			name : {
+			realName : {
 				required : true,
-				rangelength:[4, 20]
-			},
-			order : {
-				required : true,
-				digits : true
+				rangelength:[2, 20]
 			}
 		},
 		messages : {
-			name : {
-				required : I18n.system_please_input + I18n.role_name,
-				rangelength: I18n.system_lengh_limit + "[2-10]"
-			},
-			order : {
-				required : I18n.system_please_input + I18n.role_order,
-				digits: I18n.role_order_valid
+			realName : {
+				required : I18n.system_please_input + I18n.user_real_name,
+				rangelength: I18n.system_lengh_limit + "[2-20]"
 			}
 		},
-        submitHandler : function(form) {
+		submitHandler : function(form) {
 
 			// request
-            var paramData = {
-                "id": $("#updateModal .form input[name=id]").val(),
-                "name": $("#updateModal .form input[name=name]").val(),
-                "order": $("#updateModal .form input[name=order]").val()
-            };
+			var paramData = {
+				"id": $("#updateModal .form input[name=id]").val(),
+				"username": $("#updateModal .form input[name=username]").val(),
+				"password": $("#updateModal .form input[name=password]").val(),
+				"status": $("#updateModal .form select[name=status]").val(),
+				"realName": $("#updateModal .form input[name=realName]").val()
+			};
 
-			// invoke
-			$.ajax({
-				type : 'POST',
-				url : base_url + "/org/role/update",
-				data : paramData,
-				dataType : "json",
-				success : function(data){
-					if (data.code == "200") {
-						$('#updateModal').modal('hide');
+			$.post(base_url + "/org/user/update", paramData, function(data, status) {
+				if (data.code == "200") {
+					$('#updateModal').modal('hide');
 
-						layer.msg( I18n.system_opt_edit + I18n.system_success );
-						mainDataTable.fnDraw(false);
-					} else {
-						layer.open({
-							title: I18n.system_tips ,
-							btn: [ I18n.system_ok ],
-							content: (data.msg || I18n.system_opt_edit + I18n.system_fail ),
-							icon: '2'
-						});
-					}
-				},
-				error: function(xhr, status, error) {
-					// Handle error
-					console.log("Error: " + error);
+					layer.msg( I18n.system_opt_edit + I18n.system_success );
+					mainDataTable.fnDraw(false);
+				} else {
 					layer.open({
-						icon: '2',
-						content: (I18n.system_opt_edit + I18n.system_fail)
+						title: I18n.system_tips ,
+						btn: [ I18n.system_ok ],
+						content: (data.msg || I18n.system_opt_edit + I18n.system_fail ),
+						icon: '2'
 					});
 				}
 			});
-
 		}
 	});
 	$("#updateModal").on('hide.bs.modal', function () {
 		updateModalValidate.resetForm();
 
 		$("#updateModal .form")[0].reset();
-        $("#updateModal .form .form-group").removeClass("has-error");
+		$("#updateModal .form .form-group").removeClass("has-error");
 	});
 
 });

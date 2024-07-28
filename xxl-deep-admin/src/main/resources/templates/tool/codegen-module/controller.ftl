@@ -1,13 +1,14 @@
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 import com.xxl.tool.response.Response;
+
+import com.xxl.tool.response.PageModel;
+import com.xxl.tool.response.ResponseBuilder;
 
 /**
 * ${classInfo.className} Controller
@@ -15,6 +16,7 @@ import com.xxl.tool.response.Response;
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Controller
+@RequestMapping("${classInfo.className?uncap_first}")
 public class ${classInfo.className}Controller {
 
     @Resource
@@ -36,7 +38,7 @@ public class ${classInfo.className}Controller {
     @ResponseBody
     public Response<PageModel<${classInfo.className}>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
                     @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        PageModel<${classInfo.className}> pageModel = roleService.pageList(offset, pagesize);
+        PageModel<${classInfo.className}> pageModel = ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
         return new ResponseBuilder<PageModel<${classInfo.className}>>().success(pageModel).build();
     }
 
