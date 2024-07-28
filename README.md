@@ -22,9 +22,10 @@
 
 ## Introduction
 
-XXL-DEEP is a development platform, enterprise edition.
+XXL-DEEP is a development platform.
 
-XXL-DEEP 是企业级开发平台，整合流行前后端技术，提供丰富开箱即用的基础模块，包括组织用户、权限菜单、系统管理、系统监控、开发工具……等；致力为中小企业、个人开发者打造开箱即用的快速开发解决方案。
+XXL-DEEP 是一个快速开发平台，核心目标是开发迅速、学习简单、能力丰富、开箱即用。支持 完善的权限管控、响应式页面布局、端到端代码生成、多语言开发、丰富基础模块……等等。
+整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的快速开发解决方案。
 
 ## Documentation
 - 中文文档[](https://www.xuxueli.com/xxl-deep/)

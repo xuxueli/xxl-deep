@@ -1,4 +1,4 @@
-## 《分布式企业开发平台XXL-DEEP》
+## 《快速开发平台XXL-DEEP》
 
 [![GitHub release](https://img.shields.io/github/release/xuxueli/xxl-deep.svg)](https://github.com/xuxueli/xxl-deep/releases)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
@@ -11,7 +11,8 @@
 ## 一、简介
 
 ### 1.1 概述
-XXL-DEEP 是企业级开发平台，整合流行前后端技术，提供丰富开箱即用的基础模块，包括组织用户、权限菜单、系统管理、系统监控、开发工具……等；致力为中小企业、个人开发者打造开箱即用的快速开发解决方案。
+XXL-DEEP 是一个快速开发平台，核心目标是开发迅速、学习简单、能力丰富、开箱即用。支持 完善的权限管控、响应式页面布局、端到端代码生成、多语言开发、丰富基础模块……等等。
+整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的快速开发解决方案。
 
 ### 1.2 特性
 - 1、组织管理：针对部门组织架构进行管理，进行多层级组织架构的新增、管理、排序等操作。
@@ -179,7 +180,7 @@ public class ReturnT<T> implements Serializable {
 - 6、项目依赖升级，并清理POM冗余依赖；
 - 
 ### 版本 v1.0.0 Release Notes[迭代中]
-- 1、【整合】项目更名 XXL-DEEP，整合xxl-permission、xxl-code-generator多个历史项目；定位为企业开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
+- 1、【整合】项目更名 XXL-DEEP，整合xxl-permission、xxl-code-generator多个历史项目；定位为 快速开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
 - 2、【新增】代码生成功能集成，支持多层代码自动生成 "controller/service/dao/mybatis/model…"，助力全流程开发提效；
 - 3、【新增】代码生成支持 单元测试、前端代码 生成；
 
