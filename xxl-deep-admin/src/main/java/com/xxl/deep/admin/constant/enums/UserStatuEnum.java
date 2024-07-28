@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.enums;
+package com.xxl.deep.admin.constant.enums;
 
 /**
  * user status

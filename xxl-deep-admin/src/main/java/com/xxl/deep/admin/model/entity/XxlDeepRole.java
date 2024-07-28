@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.model;
+package com.xxl.deep.admin.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;

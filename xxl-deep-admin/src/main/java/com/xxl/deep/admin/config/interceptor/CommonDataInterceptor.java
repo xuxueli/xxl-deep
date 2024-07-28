@@ -1,7 +1,7 @@
-package com.xxl.deep.admin.core.interceptor;
+package com.xxl.deep.admin.config.interceptor;
 
-import com.xxl.deep.admin.model.XxlDeepMenu;
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.model.entity.XxlDeepMenu;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.ftl.FtlTool;

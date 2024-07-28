@@ -1,6 +1,6 @@
-package com.xxl.deep.admin.dao;
+package com.xxl.deep.admin.mapper;
 
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;

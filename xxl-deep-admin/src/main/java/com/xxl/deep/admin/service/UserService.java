@@ -1,6 +1,6 @@
 package com.xxl.deep.admin.service;
 
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 

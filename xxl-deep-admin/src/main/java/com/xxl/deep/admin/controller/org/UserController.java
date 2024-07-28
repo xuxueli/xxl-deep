@@ -1,8 +1,8 @@
 package com.xxl.deep.admin.controller.org;
 
-import com.xxl.deep.admin.core.annotation.Permission;
-import com.xxl.deep.admin.enums.UserStatuEnum;
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.UserStatuEnum;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.impl.LoginService;

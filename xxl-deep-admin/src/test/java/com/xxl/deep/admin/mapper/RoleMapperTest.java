@@ -1,8 +1,6 @@
-package com.xxl.deep.admin.dao;
+package com.xxl.deep.admin.mapper;
 
-import com.xxl.deep.admin.controller.AbstractSpringMvcTest;
-import com.xxl.deep.admin.controller.IndexControllerTest;
-import com.xxl.deep.admin.model.XxlDeepRole;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;

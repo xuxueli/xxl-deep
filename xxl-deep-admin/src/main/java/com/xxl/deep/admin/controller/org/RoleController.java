@@ -1,9 +1,8 @@
 package com.xxl.deep.admin.controller.org;
 
-import com.xxl.deep.admin.core.annotation.Permission;
-import com.xxl.deep.admin.enums.UserStatuEnum;
-import com.xxl.deep.admin.model.XxlDeepRole;
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.UserStatuEnum;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.ResponseBuilder;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
+
 import com.xxl.tool.response.Response;
 
 /**

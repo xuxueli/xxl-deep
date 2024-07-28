@@ -1,6 +1,6 @@
 package com.xxl.deep.admin.controller;
 
-import com.xxl.deep.admin.core.annotation.Permission;
+import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.Response;

@@ -38,7 +38,7 @@ $(function () {
     }, function (start, end, label) {
         freshChartDate(start, end);
     });
-    freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);
+    //freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);
 
 
 });

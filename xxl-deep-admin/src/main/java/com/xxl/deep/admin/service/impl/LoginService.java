@@ -1,8 +1,8 @@
 package com.xxl.deep.admin.service.impl;
 
-import com.xxl.deep.admin.model.XxlDeepUser;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.util.I18nUtil;
-import com.xxl.deep.admin.dao.XxlDeepUserMapper;
+import com.xxl.deep.admin.mapper.XxlDeepUserMapper;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.gson.GsonTool;
 import com.xxl.tool.net.CookieTool;

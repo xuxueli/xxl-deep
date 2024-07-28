@@ -1,8 +1,8 @@
 package com.xxl.deep.admin.controller.org;
 
-import com.xxl.deep.admin.core.annotation.Permission;
-import com.xxl.deep.admin.enums.UserStatuEnum;
-import com.xxl.deep.admin.model.XxlDeepRole;
+import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.UserStatuEnum;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;

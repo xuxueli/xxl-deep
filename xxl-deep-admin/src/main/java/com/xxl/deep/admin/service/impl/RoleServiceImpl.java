@@ -1,7 +1,7 @@
 package com.xxl.deep.admin.service.impl;
 
-import com.xxl.deep.admin.dao.XxlDeepRoleMapper;
-import com.xxl.deep.admin.model.XxlDeepRole;
+import com.xxl.deep.admin.mapper.XxlDeepRoleMapper;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.tool.core.CollectionTool;

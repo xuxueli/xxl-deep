@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.core.error;
+package com.xxl.deep.admin.config.error;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

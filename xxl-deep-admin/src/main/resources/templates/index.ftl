@@ -44,7 +44,7 @@
                         <!-- left -->
                         <div class="col-md-6">
                             <div class="pull-left image">
-                                <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.png" style="height: 80px;" >
+                                <img src="${request.contextPath}/static/favicon.ico" style="height: 80px;" >
                             </div>
                             <div class="pull-left info" style="padding-left: 10px;padding-top: 5px;" >
                                 <h4>早安，吴彦祖，祝你开心每一天！</h4>
@@ -111,7 +111,7 @@
                             <ul class="products-list product-list-in-box">
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.png" alt="Product Image">
+                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">Samsung TV
@@ -122,7 +122,7 @@
                                 <!-- /.item -->
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.png" alt="Product Image">
+                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">Bicycle
@@ -135,7 +135,7 @@
                                 <!-- /.item -->
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.png" alt="Product Image">
+                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
@@ -147,7 +147,7 @@
                                 <!-- /.item -->
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.png" alt="Product Image">
+                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">PlayStation 4

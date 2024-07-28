@@ -1,6 +1,6 @@
-package com.xxl.deep.admin.dao;
+package com.xxl.deep.admin.mapper;
 
-import com.xxl.deep.admin.model.XxlDeepRole;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
