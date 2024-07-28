@@ -54,7 +54,7 @@
 						</div>
 						<div class="col-xs-3">
 							<div class="input-group">
-								<span class="input-group-addon">${I18n.resource_tips}${I18n.user_username}</span>
+								<span class="input-group-addon">${I18n.resource_tips}${I18n.resource_name}</span>
 								<input type="text" class="form-control username" autocomplete="on" >
 							</div>
 						</div>

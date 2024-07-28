@@ -57,7 +57,7 @@ $(function() {
 		"processing" : true,
 		"serverSide": true,
 		"ajax": {
-			url: base_url + "/org/user/pageList",
+			url: base_url + "/org/resource/pageList",
 			type:"post",
 			// request data
 			data : function ( d ) {
@@ -97,28 +97,40 @@ $(function() {
 				}
 			},
 			{
-				"title": I18n.user_username,
-				"data": 'username',
-				"width":'30%'
+				"title": I18n.resource_parent,
+				"data": 'parentId',
+				"width":'15%'
 			},
 			{
-				"title": I18n.user_password,
-				"data": 'password',
-				"width":'20%',
-				"render": function ( data, type, row ) {
-					return '*********';
-				}
+				"title": I18n.resource_tips + I18n.resource_name,
+				"data": 'name',
+				"width":'15%'
 			},
 			{
-				"title": '真实姓名',
-				"data": 'realName',
-				"width":'25%'
+				"title": I18n.resource_tips + I18n.resource_type,
+				"data": 'type',
+				"width":'10%'
 			},
 			{
-				"title": '启用状态',
+				"title": I18n.resource_permission,
+				"data": 'permission',
+				"width":'15%'
+			},
+			{
+				"title": I18n.resource_tips + I18n.resource_url,
+				"data": 'url',
+				"width":'20%'
+			},
+			{
+				"title": I18n.resource_tips + I18n.resource_order,
+				"data": 'order',
+				"width":'10%'
+			},
+			{
+				"title": I18n.resource_status,
 				"data": 'status',
 				"visible" : true,
-				"width":'20%',
+				"width":'10%',
 				"render": function ( data, type, row ) {
 					var result = "";
 					$('#data_filter .status option').each(function(){
@@ -185,7 +197,7 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/org/user/delete",
+				url : base_url + "/org/resource/delete",
 				data : {
 					"ids" : selectIds
 				},
@@ -275,7 +287,7 @@ $(function() {
 			};
 
 			// post
-			$.post(base_url + "/org/user/add", paramData, function(data, status) {
+			$.post(base_url + "/org/resource/insert", paramData, function(data, status) {
 				if (data.code == "200") {
 					$('#addModal').modal('hide');
 
@@ -357,7 +369,7 @@ $(function() {
 				"realName": $("#updateModal .form input[name=realName]").val()
 			};
 
-			$.post(base_url + "/org/user/update", paramData, function(data, status) {
+			$.post(base_url + "/org/resource/update", paramData, function(data, status) {
 				if (data.code == "200") {
 					$('#updateModal').modal('hide');
 

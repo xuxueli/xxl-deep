@@ -76,6 +76,7 @@ public class ResourceController {
     @RequestMapping("/delete")
     @ResponseBody
     public Response<String> delete(int id){
+        // todo, mult delete, with codegen
         return resourceService.delete(id);
     }
 
