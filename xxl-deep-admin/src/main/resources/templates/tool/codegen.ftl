@@ -50,13 +50,16 @@
 							<small class="text-muted" >
 									<textarea id="tableSql" placeholder="${I18n.system_please_input}${I18n.codegen_tablesql}..." >
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL COMMENT '账号',
-  `password` varchar(50) NOT NULL COMMENT '密码',
-  `role` tinyint(4) NOT NULL COMMENT '角色：0-普通用户、1-管理员',
-  `permission` varchar(255) DEFAULT NULL COMMENT '权限：执行器ID列表，多个逗号分割',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `i_username` (`username`) USING BTREE
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `username` varchar(50) NOT NULL COMMENT '账号',
+    `password` varchar(50) NOT NULL COMMENT '密码',
+    `user_token` varchar(50) DEFAULT NULL COMMENT '登录token',
+    `status` tinyint(4) NOT NULL COMMENT '状态：0-正常、1-禁用',
+    `real_name` varchar(50) DEFAULT NULL COMMENT '真实姓名',
+    `add_time` datetime NOT NULL COMMENT '新增时间',
+    `update_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `i_username` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 									</textarea>
 							</small>
@@ -71,9 +74,9 @@ CREATE TABLE `user` (
 				<ul class="nav nav-tabs pull-right" >
 					<h4 class="pull-left" style="padding-left: 10px;">${I18n.codegen_result}</h4>
 
-					<li><a href="#model" data-toggle="tab">Model</a></li>
-					<li><a href="#mybatis" data-toggle="tab">Mybatis</a></li>
-					<li><a href="#dao" data-toggle="tab">Dao</a></li>
+					<li><a href="#entity" data-toggle="tab">Entity</a></li>
+					<li><a href="#mapper_xml" data-toggle="tab">Mapper(XML)</a></li>
+					<li><a href="#mapper" data-toggle="tab">Mapper</a></li>
 					<li><a href="#service_impl" data-toggle="tab">ServiceImpl</a></li>
 					<li><a href="#service" data-toggle="tab">Service</a></li>
 					<li class="active" id="controller_nav" ><a href="#controller" data-toggle="tab" >Controller</a></li>
@@ -95,19 +98,19 @@ CREATE TABLE `user` (
 							ServiceImpl：<textarea id="service_impl_ide" ></textarea>
 						</div>
 					</div>
-					<div class="chart tab-pane active" id="dao">
+					<div class="chart tab-pane active" id="mapper">
 						<div class="box-body">
-							Dao：<textarea id="dao_ide" ></textarea>
+							Mapper：<textarea id="mapper_ide" ></textarea>
 						</div>
 					</div>
-					<div class="chart tab-pane active" id="mybatis">
+					<div class="chart tab-pane active" id="mapper_xml">
 						<div class="box-body">
-							Mybatis：<textarea id="mybatis_ide" ></textarea>
+							Mapper(XML)：<textarea id="mapper_xml_ide" ></textarea>
 						</div>
 					</div>
-					<div class="chart tab-pane active" id="model" >
+					<div class="chart tab-pane active" id="entity" >
 						<div class="box-body ">
-							Model：<textarea id="model_ide" ></textarea>
+							Entity：<textarea id="entity_ide" ></textarea>
 						</div>
 					</div>
 				</div>

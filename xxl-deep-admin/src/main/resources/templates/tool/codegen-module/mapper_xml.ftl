@@ -23,7 +23,7 @@
         INSERT INTO ${classInfo.tableName} (
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
         <#list classInfo.fieldList as fieldItem >
-            <#if fieldItem.columnName != "Id" >
+            <#if fieldItem.columnName?lower_case != "id" >
             `${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
             </#if>
         </#list>
@@ -32,11 +32,11 @@
         VALUES(
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
         <#list classInfo.fieldList as fieldItem >
-        <#if fieldItem.columnName != "Id" >
-            <#if fieldItem.columnName="AddTime" || fieldItem.columnName="UpdateTime" >
-            NOW()<#if fieldItem_has_next>,</#if>
+        <#if fieldItem.columnName?lower_case != "id" >
+            <#if fieldItem.columnName?lower_case == "add_time" || fieldItem.columnName?lower_case = "update_time" >
+            NOW() <#if fieldItem_has_next>,</#if>
             <#else>
-            ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if>
+            ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"} <#if fieldItem_has_next>,</#if>
             </#if>
         </#if>
         </#list>
@@ -53,7 +53,7 @@
         UPDATE ${classInfo.tableName}
         SET
         <#list classInfo.fieldList as fieldItem >
-        <#if fieldItem.columnName != "id" && fieldItem.columnName != "add_time" && fieldItem.columnName != "update_time" >
+        <#if fieldItem.columnName?lower_case != "id" && fieldItem.columnName?lower_case != "add_time" && fieldItem.columnName?lower_case != "update_time" >
             `${fieldItem.columnName}` = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"},
         </#if>
         </#list>

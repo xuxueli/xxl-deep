@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
-* ${classInfo.classComment}
+* ${classInfo.className} Mapper
 *
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
@@ -34,13 +34,11 @@ public interface ${classInfo.className}Mapper {
     /**
     * 分页查询Data
     */
-	public List<${classInfo.className}> pageList(@Param("offset") int offset,
-                                                 @Param("pagesize") int pagesize);
+	public List<${classInfo.className}> pageList(@Param("offset") int offset, @Param("pagesize") int pagesize);
 
     /**
     * 分页查询Count
     */
-    public int pageListCount(@Param("offset") int offset,
-                             @Param("pagesize") int pagesize);
+    public int pageListCount(@Param("offset") int offset, @Param("pagesize") int pagesize);
 
 }

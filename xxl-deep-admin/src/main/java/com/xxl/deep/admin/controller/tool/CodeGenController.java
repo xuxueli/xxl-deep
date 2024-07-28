@@ -57,9 +57,9 @@ public class CodeGenController {
             result.put("controller_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/controller.ftl", params));
             result.put("service_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/service.ftl", params));
             result.put("service_impl_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/service_impl.ftl", params));
-            result.put("dao_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/dao.ftl", params));
-            result.put("mybatis_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/mybatis.ftl", params));
-            result.put("model_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/model.ftl", params));
+            result.put("mapper_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/mapper.ftl", params));
+            result.put("mapper_xml_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/mapper_xml.ftl", params));
+            result.put("entity_code", FreemarkerTool.processString(freemarkerConfig,"tool/codegen-module/entity.ftl", params));
 
             // 计算,生成代码行数
             int lineNum = 0;

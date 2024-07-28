@@ -106,7 +106,7 @@
 					<#-- login user -->
                     <li class="dropdown">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            ${I18n.system_welcome} ${Request["XXL_DEEP_LOGIN_IDENTITY"].username}
+                            ${I18n.system_welcome}：${Request["XXL_DEEP_LOGIN_IDENTITY"].username}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">

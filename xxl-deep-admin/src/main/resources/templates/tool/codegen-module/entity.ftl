@@ -11,7 +11,7 @@ import java.util.Date;
 </#if>
 
 /**
-*  ${classInfo.classComment}
+*  ${classInfo.className} Entity
 *
 *  Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */

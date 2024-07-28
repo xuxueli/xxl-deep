@@ -10,7 +10,7 @@ import com.xxl.tool.response.ResponseBuilder;
 import com.xxl.tool.response.PageModel;
 
 /**
-* ${classInfo.classComment}
+* ${classInfo.className} Service Impl
 *
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */

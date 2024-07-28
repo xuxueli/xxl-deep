@@ -25,9 +25,9 @@ $(function () {
     var controller_ide;
     var service_ide;
     var service_impl_ide;
-    var dao_ide;
-    var mybatis_ide;
-    var model_ide;
+    var mapper_ide;
+    var mapper_xml_ide;
+    var entity_ide;
     function initCodeArea(){
 
         // controller_ide
@@ -66,8 +66,8 @@ $(function () {
         });
         service_impl_ide.setSize('auto','auto');
 
-        // dao_ide
-        dao_ide = CodeMirror.fromTextArea(document.getElementById("dao_ide"), {
+        // mapper_ide
+        mapper_ide = CodeMirror.fromTextArea(document.getElementById("mapper_ide"), {
             lineNumbers: true,
             matchBrackets: true,
             mode: "text/x-java",
@@ -76,20 +76,20 @@ $(function () {
             foldGutter: true,
             gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
-        dao_ide.setSize('auto','auto');
+        mapper_ide.setSize('auto','auto');
 
-        // mybatis_ide
-        mybatis_ide = CodeMirror.fromTextArea(document.getElementById("mybatis_ide"), {
+        // mapper_xml_ide
+        mapper_xml_ide = CodeMirror.fromTextArea(document.getElementById("mapper_xml_ide"), {
             lineNumbers: true,
             matchBrackets: true,
             mode: "text/html",
             lineWrapping:true,
             readOnly:true
         });
-        mybatis_ide.setSize('auto','auto');
+        mapper_xml_ide.setSize('auto','auto');
 
-        // model_ide
-        model_ide = CodeMirror.fromTextArea(document.getElementById("model_ide"), {
+        // entity_ide
+        entity_ide = CodeMirror.fromTextArea(document.getElementById("entity_ide"), {
             lineNumbers: true,
             matchBrackets: true,
             mode: "text/x-java",
@@ -98,9 +98,8 @@ $(function () {
             foldGutter: true,
             gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
-        model_ide.setSize('auto','auto');
+        entity_ide.setSize('auto','auto');
     }
-
     initCodeArea();
 
     /**
@@ -133,22 +132,22 @@ $(function () {
                     service_impl_ide.setValue(data.data.service_impl_code);
                     service_impl_ide.setSize('auto','auto');
 
-                    dao_ide.setValue(data.data.dao_code);
-                    dao_ide.setSize('auto','auto');
+                    mapper_ide.setValue(data.data.mapper_code);
+                    mapper_ide.setSize('auto','auto');
 
-                    mybatis_ide.setValue(data.data.mybatis_code);
-                    mybatis_ide.setSize('auto','auto');
+                    mapper_xml_ide.setValue(data.data.mapper_xml_code);
+                    mapper_xml_ide.setSize('auto','auto');
 
-                    model_ide.setValue(data.data.model_code);
-                    model_ide.setSize('auto','auto');
+                    entity_ide.setValue(data.data.entity_code);
+                    entity_ide.setSize('auto','auto');
 
                     // refresh
                     controller_ide.refresh();
                     service_ide.refresh();
                     service_impl_ide.refresh();
-                    dao_ide.refresh();
-                    mybatis_ide.refresh();
-                    model_ide.refresh();
+                    mapper_ide.refresh();
+                    mapper_xml_ide.refresh();
+                    entity_ide.refresh();
 
                     // hide nav + panel
                     $('.nav-tabs > li').removeClass('active')

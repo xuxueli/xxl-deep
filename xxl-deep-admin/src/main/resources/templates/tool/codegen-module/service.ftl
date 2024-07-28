@@ -3,7 +3,7 @@ import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
 
 /**
-* ${classInfo.classComment}
+* ${classInfo.className} Service
 *
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */

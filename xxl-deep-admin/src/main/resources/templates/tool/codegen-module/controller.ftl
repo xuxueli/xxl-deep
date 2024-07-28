@@ -10,7 +10,7 @@ import java.util.Map;
 import com.xxl.tool.response.Response;
 
 /**
-* ${classInfo.classComment}
+* ${classInfo.className} Controller
 *
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
@@ -35,7 +35,7 @@ public class ${classInfo.className}Controller {
     @RequestMapping("/pageList")
     @ResponseBody
     public Response<PageModel<${classInfo.className}>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                                    @RequestParam(required = false, defaultValue = "10") int pagesize) {
+                    @RequestParam(required = false, defaultValue = "10") int pagesize) {
         PageModel<${classInfo.className}> pageModel = roleService.pageList(offset, pagesize);
         return new ResponseBuilder<PageModel<${classInfo.className}>>().success(pageModel).build();
     }
