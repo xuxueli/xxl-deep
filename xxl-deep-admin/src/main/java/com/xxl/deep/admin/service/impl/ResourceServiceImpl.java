@@ -42,20 +42,20 @@ public class ResourceServiceImpl implements ResourceService {
 	* 删除
 	*/
 	@Override
-	public Response<String> delete(int id) {
-		int ret = xxlDeepResourceMapper.delete(id);
+	public Response<String> delete(List<Integer> ids) {
+		int ret = xxlDeepResourceMapper.delete(ids);
 		return ret>0? new ResponseBuilder<String>().success().build()
 					: new ResponseBuilder<String>().fail().build() ;
 	}
 
 	/**
-	* 更新
-	*/
+	 * 更新
+	 */
 	@Override
 	public Response<String> update(XxlDeepResource xxlDeepResource) {
 		int ret = xxlDeepResourceMapper.update(xxlDeepResource);
 		return ret>0? new ResponseBuilder<String>().success().build()
-					: new ResponseBuilder<String>().fail().build() ;
+				: new ResponseBuilder<String>().fail().build() ;
 	}
 
 	/**

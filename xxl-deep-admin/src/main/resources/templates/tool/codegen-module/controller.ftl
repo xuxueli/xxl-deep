@@ -4,9 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import javax.annotation.Resource;
-import com.xxl.tool.response.Response;
 
+import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.ResponseBuilder;
 
@@ -65,8 +66,8 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/delete")
     @ResponseBody
-    public Response<String> delete(int id){
-        return ${classInfo.className?uncap_first}Service.delete(id);
+    public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
+        return ${classInfo.className?uncap_first}Service.delete(ids);
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.xxl.deep.admin.constant.enums;
 
 /**
- * user status
+ * user type
  * @author xuxueli
  */
 public enum ResourceTypeEnum {

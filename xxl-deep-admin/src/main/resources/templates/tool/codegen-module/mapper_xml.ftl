@@ -46,7 +46,10 @@
 
     <delete id="delete" parameterType="java.util.Map" >
         DELETE FROM ${classInfo.tableName}
-        WHERE `id` = ${r"#{id}"}
+        WHERE `id` in
+        <foreach collection="ids" item="item" open="(" close=")" separator="," >
+            #{item}
+        </foreach>
     </delete>
 
     <update id="update" parameterType="java.util.Map" >

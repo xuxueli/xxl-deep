@@ -56,7 +56,10 @@
 
     <delete id="delete" parameterType="java.util.Map" >
         DELETE FROM xxl_deep_resource
-        WHERE `id` = #{id}
+        WHERE `id` in
+        <foreach collection="ids" item="item" open="(" close=")" separator="," >
+            #{item}
+        </foreach>
     </delete>
 
     <update id="update" parameterType="java.util.Map" >

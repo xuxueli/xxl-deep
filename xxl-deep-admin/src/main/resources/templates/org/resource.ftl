@@ -47,7 +47,7 @@
 								<select class="form-control status" >
 									<option value="-1" >${I18n.system_all}</option>
 									<#list resourceStatuEnum as item>
-										<option value="${item.status}" >${item.desc}</option>
+										<option value="${item.value}" >${item.desc}</option>
 									</#list>
 								</select>
 							</div>
@@ -95,26 +95,40 @@
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">资源名称<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}资源名称" maxlength="20" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.system_please_input}${I18n.user_password}" maxlength="20" ></div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">资源类型<font color="red">*</font></label>
 									<div class="col-sm-4">
-										<select class="form-control" name="status" >
-											<#list resourceStatuEnum as item>
-												<option value="${item.status}" >${item.desc}</option>
+										<select class="form-control" name="type" >
+											<#list resourceTypeEnum as item>
+												<option value="${item.value}" >${item.desc}</option>
 											</#list>
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">权限标识<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="20" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="20" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">展示顺序<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="order" placeholder="${I18n.system_please_input}展示顺序" maxlength="20" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">生效状态<font color="red">*</font></label>
+									<div class="col-sm-4">
+										<select class="form-control" name="status" >
+											<#list resourceStatuEnum as item>
+												<option value="${item.value}" >${item.desc}</option>
+											</#list>
+										</select>
+									</div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
@@ -152,7 +166,7 @@
 									<div class="col-sm-4">
 										<select class="form-control" name="status" >
 											<#list resourceStatuEnum as item>
-												<option value="${item.status}" >${item.desc}</option>
+												<option value="${item.value}" >${item.desc}</option>
 											</#list>
 										</select>
 									</div>

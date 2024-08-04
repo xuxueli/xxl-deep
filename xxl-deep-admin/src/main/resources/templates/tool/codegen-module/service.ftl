@@ -1,4 +1,6 @@
 import java.util.Map;
+import java.util.List;
+
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
 
@@ -17,7 +19,7 @@ public interface ${classInfo.className}Service {
     /**
     * 删除
     */
-    public Response<String> delete(int id);
+    public Response<String> delete(List<Integer> ids);
 
     /**
     * 更新

@@ -19,7 +19,7 @@ public interface ${classInfo.className}Mapper {
     /**
     * 删除
     */
-    public int delete(@Param("id") int id);
+    public int delete(@Param("ids") List<Integer> ids);
 
     /**
     * 更新

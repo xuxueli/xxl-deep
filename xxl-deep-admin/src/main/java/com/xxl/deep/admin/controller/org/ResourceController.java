@@ -2,7 +2,6 @@ package com.xxl.deep.admin.controller.org;
 import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
 import com.xxl.deep.admin.constant.enums.ResourceTypeEnum;
-import com.xxl.deep.admin.constant.enums.UserStatuEnum;
 import com.xxl.deep.admin.model.entity.XxlDeepResource;
 import com.xxl.deep.admin.service.ResourceService;
 import com.xxl.tool.response.PageModel;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import com.xxl.tool.response.Response;
+
+import java.util.List;
 
 /**
  * XxlDeepResource Controller
@@ -75,9 +76,8 @@ public class ResourceController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Response<String> delete(int id){
-        // todo, mult delete, with codegen
-        return resourceService.delete(id);
+    public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
+        return resourceService.delete(ids);
     }
 
     /**

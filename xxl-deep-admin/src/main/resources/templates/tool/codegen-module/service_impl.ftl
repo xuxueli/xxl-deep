@@ -39,8 +39,8 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 	* 删除
 	*/
 	@Override
-	public Response<String> delete(int id) {
-		int ret = ${classInfo.className?uncap_first}Mapper.delete(id);
+	public Response<String> delete(List<Integer> ids) {
+		int ret = ${classInfo.className?uncap_first}Mapper.delete(ids);
 		return ret>0? new ResponseBuilder<String>().success().build()
 					: new ResponseBuilder<String>().fail().build() ;
 	}

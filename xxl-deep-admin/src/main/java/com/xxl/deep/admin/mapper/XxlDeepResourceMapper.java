@@ -12,7 +12,7 @@ import java.util.List;
 * Created by xuxueli on '2024-07-28 12:52:39'.
 */
 @Mapper
-public interface XxlDeepResourceMapper {
+    public interface XxlDeepResourceMapper {
 
     /**
     * 新增
@@ -22,7 +22,7 @@ public interface XxlDeepResourceMapper {
     /**
     * 删除
     */
-    public int delete(@Param("id") int id);
+    public int delete(@Param("ids") List<Integer> ids);
 
     /**
     * 更新

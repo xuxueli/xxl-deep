@@ -4,6 +4,8 @@ import com.xxl.deep.admin.model.entity.XxlDeepResource;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
 
+import java.util.List;
+
 /**
 * XxlDeepResource Service
 *
@@ -19,7 +21,7 @@ public interface ResourceService {
     /**
     * 删除
     */
-    public Response<String> delete(int id);
+    public Response<String> delete(List<Integer> ids);
 
     /**
     * 更新
