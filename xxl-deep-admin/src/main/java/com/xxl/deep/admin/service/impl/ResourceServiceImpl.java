@@ -1,12 +1,17 @@
 package com.xxl.deep.admin.service.impl;
 
 import com.xxl.deep.admin.mapper.XxlDeepResourceMapper;
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepResource;
 import com.xxl.deep.admin.service.ResourceService;
+import com.xxl.tool.core.CollectionTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
@@ -82,6 +87,45 @@ public class ResourceServiceImpl implements ResourceService {
 		pageModel.setTotalCount(totalCount);
 
 		return pageModel;
+	}
+
+	@Override
+	public List<XxlDeepResourceDTO> treeList(String name, int status) {
+		List<XxlDeepResource> resourceList = xxlDeepResourceMapper.queryResource(name, status);
+		return generateTreeList(resourceList);
+	}
+
+	private List<XxlDeepResourceDTO> generateTreeList(List<XxlDeepResource> resourceList) {
+		List<XxlDeepResourceDTO> resultList = new ArrayList<>();
+		if (CollectionTool.isEmpty(resourceList)) {
+			return resultList;
+		}
+
+		// collect children data
+		Map<Integer, List<XxlDeepResourceDTO>> parentMap = new HashMap<>();;
+		for (XxlDeepResource resource : resourceList) {
+			int pId = resource.getParentId();
+			List<XxlDeepResourceDTO> sameLevelData = parentMap.containsKey(pId)?parentMap.get(pId) :new ArrayList<>();
+
+			sameLevelData.add(new XxlDeepResourceDTO(resource, null));
+			parentMap.put(pId, sameLevelData);
+		}
+
+		// fill chindren
+		List<XxlDeepResourceDTO> toFillParent = parentMap.get(0);
+		while (CollectionTool.isNotEmpty(toFillParent)) {
+			List<XxlDeepResourceDTO> toFillParentTmp = new ArrayList<>();
+			for (XxlDeepResourceDTO resource : toFillParent) {
+				List<XxlDeepResourceDTO> children = parentMap.get(resource.getId());
+				if (CollectionTool.isNotEmpty(children)) {
+					resource.setChildren(children);
+					toFillParentTmp.addAll(children);
+				}
+			}
+			toFillParent = toFillParentTmp;
+		}
+
+		return parentMap.get(0);
 	}
 
 }

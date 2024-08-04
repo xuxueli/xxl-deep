@@ -51,18 +51,21 @@ $(function() {
 	}
 
 	// ---------- ---------- ---------- main table  ---------- ---------- ----------
+	// treeGrid：https://github.com/lhmyy521125/dataTables.treeGrid
+	// table data
+	var tableData = {};
 	// init date tables
 	var mainDataTable = $("#data_list").dataTable({
-		"deferRender": true,
+		"deferRender": false,
 		"processing" : true,
 		"serverSide": true,
 		"ajax": {
-			url: base_url + "/org/resource/pageList",
+			url: base_url + "/org/resource/treeList",
 			type:"post",
 			// request data
 			data : function ( d ) {
 				var obj = {};
-				obj.username = $('#data_filter .username').val();
+				obj.name = $('#data_filter .name').val();
 				obj.status = $('#data_filter .status').val();
 				obj.start = d.start;
 				obj.length = d.length;
@@ -72,16 +75,22 @@ $(function() {
 			dataFilter: function (originData) {
 				var originJson = $.parseJSON(originData);
 				return JSON.stringify({
-					recordsTotal: originJson.data.totalCount,
-					recordsFiltered: originJson.data.totalCount,
-					data: originJson.data.pageData
+					data: originJson.data
 				});
 			}
 		},
 		"searching": false,
 		"ordering": false,
 		//"scrollX": true,																		// scroll x，close self-adaption
-		//"dom": '<"top" t><"bottom" <"col-sm-3" i><"col-sm-3 right" l><"col-sm-6" p> >',		// dataTable "DOM layout"：https://datatables.club/example/diy.html
+		/**
+		 l - Length changing 改变每页显示多少条数据的控件
+		 f - Filtering input 即时搜索框控件
+		 t - The Table 表格本身
+		 i - Information 表格相关信息控件
+		 p - Pagination 分页控件
+		 r - pRocessing 加载等待显示信息
+		 **/
+		"dom": "tr",
 		"drawCallback": function( settings ) {
 			selectStatusInit();
 		},
@@ -97,14 +106,21 @@ $(function() {
 				}
 			},
 			{
-				"title": I18n.resource_parent,
+				"title": '层级',
+				"className": 'treegrid-control',
 				"data": 'parentId',
-				"width":'15%'
+				"width":'5%',
+				"render": function ( data, type, row ){
+					if (row.children != null && row.children.length > 0) {
+						return '<i class="fa fa-fw fa-chevron-right" ></i>';
+					}
+					return '';
+				}
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_name,
 				"data": 'name',
-				"width":'15%'
+				"width":'30%'
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_type,
@@ -142,38 +158,32 @@ $(function() {
 				}
 			}
 		],
+		"columnDefs": [
+			{
+				"defaultContent": "",
+				"targets": "_all"
+			}
+		],
 		"language" : {
 			"sProcessing" : I18n.dataTable_sProcessing ,
-			"sLengthMenu" : I18n.dataTable_sLengthMenu ,
 			"sZeroRecords" : I18n.dataTable_sZeroRecords ,
-			"sInfo" : I18n.dataTable_sInfo ,
-			"sInfoEmpty" : I18n.dataTable_sInfoEmpty ,
-			"sInfoFiltered" : I18n.dataTable_sInfoFiltered ,
-			"sInfoPostFix" : "",
-			"sSearch" : I18n.dataTable_sSearch ,
-			"sUrl" : "",
 			"sEmptyTable" : I18n.dataTable_sEmptyTable ,
 			"sLoadingRecords" : I18n.dataTable_sLoadingRecords ,
-			"sInfoThousands" : ",",
-			"oPaginate" : {
-				"sFirst" : I18n.dataTable_sFirst ,
-				"sPrevious" : I18n.dataTable_sPrevious ,
-				"sNext" : I18n.dataTable_sNext ,
-				"sLast" : I18n.dataTable_sLast
-			},
-			"oAria" : {
-				"sSortAscending" : I18n.dataTable_sSortAscending ,
-				"sSortDescending" : I18n.dataTable_sSortDescending
-			}
+			"sInfoThousands" : ","
 		}
 	});
-
-	// table data
-	var tableData = {};
+	// tree grid
+	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
+		left: 20,
+		expandAll: true,
+		expandIcon: '<i class="fa fa-fw fa-chevron-right" ></i>',
+		collapseIcon: '<i class="fa fa-fw fa-chevron-down" ></i>'
+	});
 
 	// search btn
 	$('#data_filter .searchBtn').on('click', function(){
-		mainDataTable.fnDraw();
+		mainDataTable.fnDraw(false);
+		//mainDataTable.draw(false);
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------

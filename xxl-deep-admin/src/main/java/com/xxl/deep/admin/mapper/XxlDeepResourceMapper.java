@@ -44,4 +44,9 @@ import java.util.List;
     */
     public int pageListCount(@Param("offset") int offset, @Param("pagesize") int pagesize);
 
+    /**
+     * Tree查询
+     */
+    public List<XxlDeepResource> queryResource(@Param("name") String name, @Param("status") int status);
+
 }

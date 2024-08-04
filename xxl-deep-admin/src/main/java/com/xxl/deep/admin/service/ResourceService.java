@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.service;
 
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepResource;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
@@ -37,5 +38,10 @@ public interface ResourceService {
     * 分页查询
     */
     public PageModel<XxlDeepResource> pageList(int offset, int pagesize);
+
+    /**
+     * Tree查询
+     */
+    public List<XxlDeepResourceDTO> treeList(String name, int status);
 
 }

@@ -55,7 +55,7 @@
 						<div class="col-xs-3">
 							<div class="input-group">
 								<span class="input-group-addon">${I18n.resource_tips}${I18n.resource_name}</span>
-								<input type="text" class="form-control username" autocomplete="on" >
+								<input type="text" class="form-control name" autocomplete="on" >
 							</div>
 						</div>
 						<div class="col-xs-1">
@@ -205,6 +205,7 @@
 <#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${request.contextPath}/static/plugins/treeGrid/dataTables.treeGrid.js"></script>
 <script src="${request.contextPath}/static/js/org/resource.js"></script>
 <#-- biz end（5/5 script） -->
 

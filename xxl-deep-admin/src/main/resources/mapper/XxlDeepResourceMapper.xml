@@ -76,7 +76,6 @@
         WHERE `id` = #{xxlDeepResource.id}
     </update>
 
-
     <select id="load" parameterType="java.util.Map" resultMap="XxlDeepResource">
         SELECT <include refid="Base_Column_List" />
         FROM xxl_deep_resource AS t
@@ -92,6 +91,19 @@
     <select id="pageListCount" parameterType="java.util.Map" resultType="int">
         SELECT count(1)
         FROM xxl_deep_resource AS t
+    </select>
+
+    <select id="queryResource" parameterType="java.util.Map" resultMap="XxlDeepResource">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_resource AS t
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="name != null and name != ''">
+                AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+            </if>
+            <if test="status gt -1">
+                AND t.status = #{status}
+            </if>
+        </trim>
     </select>
 
 </mapper>

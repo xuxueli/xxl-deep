@@ -2,6 +2,7 @@ package com.xxl.deep.admin.controller.org;
 import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
 import com.xxl.deep.admin.constant.enums.ResourceTypeEnum;
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepResource;
 import com.xxl.deep.admin.service.ResourceService;
 import com.xxl.tool.response.PageModel;
@@ -43,15 +44,45 @@ public class ResourceController {
     }
 
     /**
+     * 资源数据查询
+     *
+     *  <pre>
+     *  {
+     *      "data":
+     *          [
+     *              {
+     *                  "name": "lhmyy521125",
+     *                  ...
+     *                  "children": [
+     *                      {
+     *                          "name": "hello",
+     *                          ...
+     *                      }
+     *                  ]
+     *              }
+     *          ]
+     *  }
+     *  </pre>
+     */
+    @RequestMapping("/treeList")
+    @ResponseBody
+    public Response<List<XxlDeepResourceDTO>> treeList(@RequestParam(required = false) String name,
+                                                            @RequestParam(required = false, defaultValue = "-1") int status) {
+
+        List<XxlDeepResourceDTO> treeListData = resourceService.treeList(name, status);
+        return new ResponseBuilder<List<XxlDeepResourceDTO>>().success(treeListData).build();
+    }
+
+    /**
      * 分页查询
      */
-    @RequestMapping("/pageList")
+    /*@RequestMapping("/pageList")
     @ResponseBody
     public Response<PageModel<XxlDeepResource>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
                                                          @RequestParam(required = false, defaultValue = "10") int pagesize) {
         PageModel<XxlDeepResource> pageModel = resourceService.pageList(offset, pagesize);
         return new ResponseBuilder<PageModel<XxlDeepResource>>().success(pageModel).build();
-    }
+    }*/
 
     /**
      * Load查询
