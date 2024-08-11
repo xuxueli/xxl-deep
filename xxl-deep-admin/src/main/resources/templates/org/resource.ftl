@@ -8,6 +8,7 @@
 
 	<#-- biz start（1/5 style） -->
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/zTree/css/metroStyle/metroStyle.css">
 	<#-- biz end（1/5 end） -->
 
 </head>
@@ -97,7 +98,10 @@
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">父资源ID<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="parentId" placeholder="${I18n.system_please_input}资源名称" maxlength="20" ></div>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="parentId" placeholder="${I18n.system_please_input}资源名称" maxlength="20" >
+										<button class="selectParent" >选择父菜单</button>
+									</div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">资源名称<font color="red">*</font></label>
@@ -133,6 +137,36 @@
 												<option value="${item.value}" >${item.desc}</option>
 											</#list>
 										</select>
+									</div>
+								</div>
+
+								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+									<div style="margin-top: 10px;" >
+										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 谈框.菜单树选择 -->
+			<div class="modal fade" id="treeModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" >父菜单选择</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal form" role="form" >
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">父资源ID<font color="red">*</font></label>
+									<div class="col-sm-8">
+										<#-- demo tree -->
+										<ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
 									</div>
 								</div>
 
@@ -229,6 +263,7 @@
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${request.contextPath}/static/plugins/treeGrid/dataTables.treeGrid.js"></script>
+<script src="${request.contextPath}/static/plugins/zTree/js/jquery.ztree.core.js"></script>
 <script src="${request.contextPath}/static/js/org/resource.js"></script>
 <#-- biz end（5/5 script） -->
 

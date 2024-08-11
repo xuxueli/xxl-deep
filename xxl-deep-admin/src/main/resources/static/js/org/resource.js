@@ -249,7 +249,46 @@ $(function() {
 		});
 	});
 
+	// ---------- ---------- ---------- ztree ---------- ---------- ----------
+	function initTree(){
+		var setting = {
+			view: {
+				dblClickExpand: false,
+				showLine: true,
+				selectedMulti: false
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: "0"
+				}
+			}
+		};
+
+		var zNodes = [
+			{id: 1, pId: 0, name: "[core] 基本功能 演示", open: true},
+			{id: 101, pId: 1, name: "最简单的树 --  标准 JSON 数据", file: "core/standardData"},
+			{id: 102, pId: 1, name: "最简单的树 --  简单 JSON 数据", file: "core/simpleData"},
+
+			{id: 2, pId: 0, name: "[excheck] 复/单选框功能 演示", open: false},
+			{id: 201, pId: 2, name: "Checkbox 勾选操作", file: "excheck/checkbox"},
+			{id: 206, pId: 2, name: "Checkbox nocheck 演示", file: "excheck/checkbox_nocheck"},
+			{id: 207, pId: 2, name: "Checkbox chkDisabled 演示", file: "excheck/checkbox_chkDisabled"},
+		];
+
+		var zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
+		zTreeObj.expandAll(true);    //true 节点全部展开、false节点收缩
+	}
+	$("#addModal .selectParent").click(function(){
+		initTree();
+
+		$('#treeModal').modal({backdrop: false, keyboard: false}).modal('show');
+	});
+
 	// ---------- ---------- ---------- add operation ---------- ---------- ----------
+	// add modal
 	$("#data_operation .add").click(function(){
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
