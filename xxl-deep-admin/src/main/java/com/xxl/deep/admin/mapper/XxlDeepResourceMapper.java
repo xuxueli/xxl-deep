@@ -17,7 +17,7 @@ import java.util.List;
     /**
     * 新增
     */
-    public int insert(XxlDeepResource xxlDeepResource);
+    public int insert(@Param("xxlDeepResource") XxlDeepResource xxlDeepResource);
 
     /**
     * 删除
@@ -27,7 +27,7 @@ import java.util.List;
     /**
     * 更新
     */
-    public int update(XxlDeepResource xxlDeepResource);
+    public int update(@Param("xxlDeepResource") XxlDeepResource xxlDeepResource);
 
     /**
     * Load查询

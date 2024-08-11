@@ -73,6 +73,7 @@
 							<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
 							<button class="btn btn-sm btn-warning disabled2 update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
 							<button class="btn btn-sm btn-danger delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
+							<button class="btn btn-sm btn-primary expandAndCollapse" type="button"><i class="fa fa-chevron-down"></i>展开/折叠</button>
 						</div>
 						<div class="box-body" >
 							<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -90,13 +91,17 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" >${I18n.system_opt_add}${I18n.user_tips}</h4>
+							<h4 class="modal-title" >${I18n.system_opt_add}${I18n.resource_tips}</h4>
 						</div>
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">父资源ID<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="parentId" placeholder="${I18n.system_please_input}资源名称" maxlength="20" ></div>
+								</div>
+								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">资源名称<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}资源名称" maxlength="20" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}资源名称" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">资源类型<font color="red">*</font></label>
@@ -110,15 +115,15 @@
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">权限标识<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="20" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="20" ></div>
+									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">展示顺序<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="order" placeholder="${I18n.system_please_input}展示顺序" maxlength="20" ></div>
+									<div class="col-sm-8"><input type="number" class="form-control" name="order" placeholder="${I18n.system_please_input}展示顺序" ></div>
 								</div>
 								<div class="form-group">
 									<label for="lastname" class="col-sm-2 control-label">生效状态<font color="red">*</font></label>
@@ -149,20 +154,42 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" >${I18n.system_opt_edit}${I18n.user_tips}</h4>
+							<h4 class="modal-title" >${I18n.system_opt_edit}${I18n.resource_tips}</h4>
 						</div>
 						<div class="modal-body">
 							<form class="form-horizontal form" role="form" >
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" readonly ></div>
+									<label for="lastname" class="col-sm-2 control-label">父资源ID<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="parentId" placeholder="${I18n.system_please_input}资源名称" maxlength="20" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="black">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.user_password_update_placeholder}" maxlength="20" ></div>
+									<label for="lastname" class="col-sm-2 control-label">资源名称<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="name" placeholder="${I18n.system_please_input}资源名称" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">资源类型<font color="red">*</font></label>
+									<div class="col-sm-4">
+										<select class="form-control" name="type" >
+											<#list resourceTypeEnum as item>
+												<option value="${item.value}" >${item.desc}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">权限标识<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="50" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">展示顺序<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="number" class="form-control" name="order" placeholder="${I18n.system_please_input}展示顺序" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">生效状态<font color="red">*</font></label>
 									<div class="col-sm-4">
 										<select class="form-control" name="status" >
 											<#list resourceStatuEnum as item>
@@ -170,10 +197,6 @@
 											</#list>
 										</select>
 									</div>
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
-									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">

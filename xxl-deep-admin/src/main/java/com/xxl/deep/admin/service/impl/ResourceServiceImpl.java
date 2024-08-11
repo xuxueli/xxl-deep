@@ -39,6 +39,8 @@ public class ResourceServiceImpl implements ResourceService {
 			return new ResponseBuilder<String>().fail("必要参数缺失").build();
         }
 
+		// limit： 按钮只能是叶子节点 + 资源类型不能变化；
+
 		xxlDeepResourceMapper.insert(xxlDeepResource);
 		return new ResponseBuilder<String>().success().build();
 	}
@@ -105,9 +107,10 @@ public class ResourceServiceImpl implements ResourceService {
 		Map<Integer, List<XxlDeepResourceDTO>> parentMap = new HashMap<>();;
 		for (XxlDeepResource resource : resourceList) {
 			int pId = resource.getParentId();
-			List<XxlDeepResourceDTO> sameLevelData = parentMap.containsKey(pId)?parentMap.get(pId) :new ArrayList<>();
 
+			List<XxlDeepResourceDTO> sameLevelData = parentMap.containsKey(pId)?parentMap.get(pId) :new ArrayList<>();
 			sameLevelData.add(new XxlDeepResourceDTO(resource, null));
+
 			parentMap.put(pId, sameLevelData);
 		}
 

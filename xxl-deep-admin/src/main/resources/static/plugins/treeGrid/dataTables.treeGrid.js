@@ -228,7 +228,7 @@
             trs.each(function (index, tr) {
                 if(typeof($(tr).attr("parent-index"))=="undefined"){
                     var trid = $(tr).attr('id');
-                    resetTreeGridRows(trid);
+                    resetTreeGridRows(trid, dataTable);
                 }
             });
         },

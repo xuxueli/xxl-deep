@@ -75,7 +75,7 @@ $(function() {
 			dataFilter: function (originData) {
 				var originJson = $.parseJSON(originData);
 				return JSON.stringify({
-					data: originJson.data
+					data: originJson.data?originJson.data: {}
 				});
 			}
 		},
@@ -125,7 +125,16 @@ $(function() {
 			{
 				"title": I18n.resource_tips + I18n.resource_type,
 				"data": 'type',
-				"width":'10%'
+				"width":'10%',
+				"render": function ( data, type, row ) {
+					var result = "";
+					$('#addModal select[name="type"] option').each(function(){
+						if ( data.toString() === $(this).val() ) {
+							result = $(this).text();
+						}
+					});
+					return result;
+				}
 			},
 			{
 				"title": I18n.resource_permission,
@@ -149,7 +158,7 @@ $(function() {
 				"width":'10%',
 				"render": function ( data, type, row ) {
 					var result = "";
-					$('#data_filter .status option').each(function(){
+					$('#addModal select[name="status"] option').each(function(){
 						if ( data.toString() === $(this).val() ) {
 							result = $(this).text();
 						}
@@ -172,7 +181,7 @@ $(function() {
 			"sInfoThousands" : ","
 		}
 	});
-	// tree grid
+	// tree grid : expandAll / collapseAll
 	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
 		left: 20,
 		expandAll: true,
@@ -184,6 +193,16 @@ $(function() {
 	$('#data_filter .searchBtn').on('click', function(){
 		mainDataTable.fnDraw(false);
 		//mainDataTable.draw(false);
+	});
+
+	// ---------- ---------- ---------- tree operation ---------- ---------- ----------
+	var expandOrCollapse_val = 0;
+	$("#data_operation").on('click', '.expandAndCollapse',function() {
+		if ((expandOrCollapse_val++)%2 === 0) {
+			tree.collapseAll();
+		} else {
+			tree.expandAll();
+		}
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
@@ -221,8 +240,6 @@ $(function() {
 					}
 				},
 				error: function(xhr, status, error) {
-					// Handle error
-					console.log("Error: " + error);
 					layer.open({
 						icon: '2',
 						content: (I18n.system_opt_del + I18n.system_fail)
@@ -233,13 +250,6 @@ $(function() {
 	});
 
 	// ---------- ---------- ---------- add operation ---------- ---------- ----------
-	// add validator method
-	jQuery.validator.addMethod("usernameValid", function(value, element) {
-		var length = value.length;
-		var valid = /^[a-z][a-z0-9]*$/;
-		return this.optional(element) || valid.test(value);
-	}, I18n.user_username_valid );
-	// add
 	$("#data_operation .add").click(function(){
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
@@ -248,32 +258,31 @@ $(function() {
 		errorClass : 'help-block',
 		focusInvalid : true,
 		rules : {
-			username : {
+			name : {
 				required : true,
-				rangelength:[4, 20],
-				usernameValid: true
+				rangelength:[2, 50]
 			},
-			password : {
+			permission : {
 				required : true,
-				rangelength:[4, 20]
+				rangelength:[2, 50]
 			},
-			realName : {
+			order : {
 				required : true,
-				rangelength:[2, 20]
+				range:[1, 99999999]
 			}
 		},
 		messages : {
-			username : {
-				required : I18n.system_please_input + I18n.user_username,
-				rangelength: I18n.system_lengh_limit + "[4-20]"
-			},
-			password : {
+			name : {
 				required : I18n.system_please_input + I18n.user_password,
-				rangelength: I18n.system_lengh_limit + "[4-20]"
+				rangelength: I18n.system_lengh_limit + "[2-50]"
 			},
-			realName : {
+			permission : {
 				required : I18n.system_please_input + I18n.user_real_name,
 				rangelength: I18n.system_lengh_limit + "[2-20]"
+			},
+			order : {
+				required : I18n.system_please_input,
+				range: I18n.system_num_range + " 1~99999999"
 			}
 		},
 		highlight : function(element) {
@@ -290,10 +299,13 @@ $(function() {
 
 			// request
 			var paramData = {
-				"username": $("#addModal .form input[name=username]").val(),
-				"password": $("#addModal .form input[name=password]").val(),
-				"status": $("#addModal .form select[name=status]").val(),
-				"realName": $("#addModal .form input[name=realName]").val()
+				"parentId": $("#addModal .form input[name=parentId]").val(),
+				"name": $("#addModal .form input[name=name]").val(),
+				"type": $("#addModal .form select[name=type]").val(),
+				"permission": $("#addModal .form input[name=permission]").val(),
+				"url": $("#addModal .form input[name=url]").val(),
+				"order": $("#addModal .form input[name=order]").val(),
+				"status": $("#addModal .form select[name=status]").val()
 			};
 
 			// post
@@ -333,11 +345,14 @@ $(function() {
 		var row = tableData[ 'key' + selectIds[0] ];
 
 		// base data
-		$("#updateModal .form input[name='id']").val( row.id );
-		$("#updateModal .form input[name='username']").val( row.username );
-		$("#updateModal .form input[name='password']").val( '' );
-		$("#updateModal .form select[name='status']").val( row.status );
-		$("#updateModal .form input[name='realName']").val( row.realName );
+		$("#updateModal .form input[name=id]").val( row.id );
+		$("#updateModal .form input[name=parentId]").val( row.parentId );
+		$("#updateModal .form input[name=name]").val( row.name );
+		$("#updateModal .form select[name=type]").val( row.type );
+		$("#updateModal .form input[name=permission]").val( row.permission );
+		$("#updateModal .form input[name=url]").val( row.url );
+		$("#updateModal .form input[name=order]").val( row.order );
+		$("#updateModal .form select[name=status]").val( row.status );
 
 		// show
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
@@ -357,15 +372,31 @@ $(function() {
 			element.parent('div').append(error);
 		},
 		rules : {
-			realName : {
+			name : {
 				required : true,
-				rangelength:[2, 20]
+				rangelength:[2, 50]
+			},
+			permission : {
+				required : true,
+				rangelength:[2, 50]
+			},
+			order : {
+				required : true,
+				range:[1, 99999999]
 			}
 		},
 		messages : {
-			realName : {
+			name : {
+				required : I18n.system_please_input + I18n.user_password,
+				rangelength: I18n.system_lengh_limit + "[2-50]"
+			},
+			permission : {
 				required : I18n.system_please_input + I18n.user_real_name,
 				rangelength: I18n.system_lengh_limit + "[2-20]"
+			},
+			order : {
+				required : I18n.system_please_input,
+				range: I18n.system_num_range + " 1~99999999"
 			}
 		},
 		submitHandler : function(form) {
@@ -373,10 +404,13 @@ $(function() {
 			// request
 			var paramData = {
 				"id": $("#updateModal .form input[name=id]").val(),
-				"username": $("#updateModal .form input[name=username]").val(),
-				"password": $("#updateModal .form input[name=password]").val(),
-				"status": $("#updateModal .form select[name=status]").val(),
-				"realName": $("#updateModal .form input[name=realName]").val()
+				"parentId": $("#updateModal .form input[name=parentId]").val(),
+				"name": $("#updateModal .form input[name=name]").val(),
+				"type": $("#updateModal .form select[name=type]").val(),
+				"permission": $("#updateModal .form input[name=permission]").val(),
+				"url": $("#updateModal .form input[name=url]").val(),
+				"order": $("#updateModal .form input[name=order]").val(),
+				"status": $("#updateModal .form select[name=status]").val()
 			};
 
 			$.post(base_url + "/org/resource/update", paramData, function(data, status) {
