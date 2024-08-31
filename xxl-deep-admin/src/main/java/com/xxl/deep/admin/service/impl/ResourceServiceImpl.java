@@ -100,7 +100,9 @@ public class ResourceServiceImpl implements ResourceService {
 		List<XxlDeepResourceDTO> result = new ArrayList<>();
 
 		for (XxlDeepResource resource : resourceList) {
-			result.add(new XxlDeepResourceDTO(resource, null));
+			XxlDeepResourceDTO resourceDTO = new XxlDeepResourceDTO(resource, null);
+			resourceDTO.setUrl(null);
+			result.add(resourceDTO);
 		}
 		return result;
 	}

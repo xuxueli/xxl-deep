@@ -262,7 +262,7 @@ $(function() {
 				simpleData: {
 					enable: true,
 					idKey: "id",
-					pIdKey: "pId",
+					pIdKey: "parentId",
 					rootPId: "0"
 				}
 			}
@@ -277,7 +277,7 @@ $(function() {
 		// post
 		$.ajax({
 			type : 'POST',
-			url : base_url + "/org/resource/treeList",
+			url : base_url + "/org/resource/simpleTreeList",
 			dataType : "json",
 			async: false,
 			success : function(data){
