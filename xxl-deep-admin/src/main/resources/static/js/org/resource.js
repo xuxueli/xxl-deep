@@ -267,19 +267,31 @@ $(function() {
 				}
 			}
 		};
-
-		var zNodes = [
+		/*var zNodes = [
 			{id: 1, pId: 0, name: "资源A", open: true},
 			{id: 5, pId: 1, name: "资源A1"},
-			{id: 6, pId: 1, name: "资源A2"},
-
 			{id: 2, pId: 0, name: "资源B", open: false},
-			{id: 8, pId: 2, name: "资源B1"},
 			{id: 11, pId: 2, name: "资源B2"}
-		];
+		];*/
 
-		zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
-		zTreeObj.expandAll(true);    //true 节点全部展开、false节点收缩
+		// post
+		$.ajax({
+			type : 'POST',
+			url : base_url + "/org/resource/treeList",
+			dataType : "json",
+			async: false,
+			success : function(data){
+				if (data.code == "200") {
+					var zNodes = data.data;
+
+					zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
+					zTreeObj.expandAll(true);    //true 节点全部展开、false节点收缩
+
+				} else {
+					layer.msg( data.msg || '系统异常' );
+				}
+			}
+		});
 	}
 
 	// open
@@ -419,10 +431,12 @@ $(function() {
 		// 设置 tree 选中
 		initTree();
 		if (row.id > 0) {
-			var chooseNode = zTreeObj.getNodeByParam("id", row.id, null);
-			zTreeObj.selectNode(chooseNode);
+			var chooseNode = zTreeObj.getNodeByParam("id", row.parentId, null);
+			if (chooseNode) {
+				zTreeObj.selectNode(chooseNode);
+				$("#updateModal .form input[name=parentName]").val( chooseNode.name );
+			}
 
-			$("#updateModal .form input[name=parentName]").val( chooseNode.name );
 		}
 
 		// show

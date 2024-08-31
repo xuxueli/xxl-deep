@@ -8,10 +8,7 @@ import com.xxl.tool.core.CollectionTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
@@ -95,6 +92,17 @@ public class ResourceServiceImpl implements ResourceService {
 	public List<XxlDeepResourceDTO> treeList(String name, int status) {
 		List<XxlDeepResource> resourceList = xxlDeepResourceMapper.queryResource(name, status);
 		return generateTreeList(resourceList);
+	}
+
+	@Override
+	public List<XxlDeepResourceDTO> simpleTreeList(String name, int status) {
+		List<XxlDeepResource> resourceList = xxlDeepResourceMapper.queryResource(name, status);
+		List<XxlDeepResourceDTO> result = new ArrayList<>();
+
+		for (XxlDeepResource resource : resourceList) {
+			result.add(new XxlDeepResourceDTO(resource, null));
+		}
+		return result;
 	}
 
 	private List<XxlDeepResourceDTO> generateTreeList(List<XxlDeepResource> resourceList) {

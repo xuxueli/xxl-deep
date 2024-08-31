@@ -44,7 +44,7 @@ public class ResourceController {
     }
 
     /**
-     * 资源数据查询
+     * tree数据查询
      *
      *  <pre>
      *  {
@@ -67,22 +67,31 @@ public class ResourceController {
     @RequestMapping("/treeList")
     @ResponseBody
     public Response<List<XxlDeepResourceDTO>> treeList(@RequestParam(required = false) String name,
-                                                            @RequestParam(required = false, defaultValue = "-1") int status) {
+                                                       @RequestParam(required = false, defaultValue = "-1") int status) {
 
         List<XxlDeepResourceDTO> treeListData = resourceService.treeList(name, status);
         return new ResponseBuilder<List<XxlDeepResourceDTO>>().success(treeListData).build();
     }
 
     /**
-     * 分页查询
+     * 简单tree数据查询
+     *
+     * <pre>
+     *     [
+     * 			  {id: 1, pId: 0, name: "资源A", open: true},
+     *            {id: 5, pId: 1, name: "资源A1"},
+     *            {id: 2, pId: 0, name: "资源B", open: false},
+     *            {id: 11, pId: 2, name: "资源B2"}
+     * 		]
+     * </pre>
      */
-    /*@RequestMapping("/pageList")
+    @RequestMapping("/simpleTreeList")
     @ResponseBody
-    public Response<PageModel<XxlDeepResource>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                                         @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        PageModel<XxlDeepResource> pageModel = resourceService.pageList(offset, pagesize);
-        return new ResponseBuilder<PageModel<XxlDeepResource>>().success(pageModel).build();
-    }*/
+    public Response<List<XxlDeepResourceDTO>> simpleTreeList(@RequestParam(required = false) String name,
+                                                               @RequestParam(required = false, defaultValue = "-1") int status) {
+        List<XxlDeepResourceDTO> treeListData = resourceService.simpleTreeList(name, status);
+        return new ResponseBuilder<List<XxlDeepResourceDTO>>().success(treeListData).build();
+    }
 
     /**
      * Load查询
