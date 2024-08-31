@@ -48,7 +48,7 @@
         DELETE FROM ${classInfo.tableName}
         WHERE `id` in
         <foreach collection="ids" item="item" open="(" close=")" separator="," >
-            #{item}
+            ${r"#{"}item${r"}"}
         </foreach>
     </delete>
 

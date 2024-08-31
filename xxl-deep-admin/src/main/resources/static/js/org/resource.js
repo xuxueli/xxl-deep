@@ -250,6 +250,7 @@ $(function() {
 	});
 
 	// ---------- ---------- ---------- ztree ---------- ---------- ----------
+	var zTreeObj;
 	function initTree(){
 		var setting = {
 			view: {
@@ -268,28 +269,50 @@ $(function() {
 		};
 
 		var zNodes = [
-			{id: 1, pId: 0, name: "[core] 基本功能 演示", open: true},
-			{id: 101, pId: 1, name: "最简单的树 --  标准 JSON 数据", file: "core/standardData"},
-			{id: 102, pId: 1, name: "最简单的树 --  简单 JSON 数据", file: "core/simpleData"},
+			{id: 1, pId: 0, name: "资源A", open: true},
+			{id: 5, pId: 1, name: "资源A1"},
+			{id: 6, pId: 1, name: "资源A2"},
 
-			{id: 2, pId: 0, name: "[excheck] 复/单选框功能 演示", open: false},
-			{id: 201, pId: 2, name: "Checkbox 勾选操作", file: "excheck/checkbox"},
-			{id: 206, pId: 2, name: "Checkbox nocheck 演示", file: "excheck/checkbox_nocheck"},
-			{id: 207, pId: 2, name: "Checkbox chkDisabled 演示", file: "excheck/checkbox_chkDisabled"},
+			{id: 2, pId: 0, name: "资源B", open: false},
+			{id: 8, pId: 2, name: "资源B1"},
+			{id: 11, pId: 2, name: "资源B2"}
 		];
 
-		var zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
+		zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
 		zTreeObj.expandAll(true);    //true 节点全部展开、false节点收缩
 	}
-	$("#addModal .selectParent").click(function(){
-		initTree();
 
+	// open
+	$(".selectParent").click(function(){
 		$('#treeModal').modal({backdrop: false, keyboard: false}).modal('show');
+	});
+	// choose
+	$('#treeModal .choose').click(function(){
+
+		// valid choose
+		if (zTreeObj.getSelectedNodes().length < 1) {
+			layer.msg( I18n.system_please_choose + I18n.resource_parent );
+			return;
+		}
+
+		// fill choose data, todo-
+		$("#addModal .form input[name=parentId]").val( zTreeObj.getSelectedNodes()[0].id );
+		$("#addModal .form input[name=parentName]").val( zTreeObj.getSelectedNodes()[0].name );
+
+		$("#updateModal .form input[name=parentId]").val( zTreeObj.getSelectedNodes()[0].id );
+		$("#updateModal .form input[name=parentName]").val( zTreeObj.getSelectedNodes()[0].name );
+
+		$('#treeModal').modal('hide');
 	});
 
 	// ---------- ---------- ---------- add operation ---------- ---------- ----------
 	// add modal
 	$("#data_operation .add").click(function(){
+
+		// todo，reset not work
+		initTree();
+		$("#addModal .form input[name=parentId]").val( 0 );
+
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var addModalValidate = $("#addModal .form").validate({
@@ -312,11 +335,11 @@ $(function() {
 		},
 		messages : {
 			name : {
-				required : I18n.system_please_input + I18n.user_password,
+				required : I18n.system_please_input + I18n.resource_name,
 				rangelength: I18n.system_lengh_limit + "[2-50]"
 			},
 			permission : {
-				required : I18n.system_please_input + I18n.user_real_name,
+				required : I18n.system_please_input + I18n.resource_permission,
 				rangelength: I18n.system_lengh_limit + "[2-20]"
 			},
 			order : {
@@ -392,6 +415,15 @@ $(function() {
 		$("#updateModal .form input[name=url]").val( row.url );
 		$("#updateModal .form input[name=order]").val( row.order );
 		$("#updateModal .form select[name=status]").val( row.status );
+
+		// 设置 tree 选中
+		initTree();
+		if (row.id > 0) {
+			var chooseNode = zTreeObj.getNodeByParam("id", row.id, null);
+			zTreeObj.selectNode(chooseNode);
+
+			$("#updateModal .form input[name=parentName]").val( chooseNode.name );
+		}
 
 		// show
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
