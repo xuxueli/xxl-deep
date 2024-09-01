@@ -357,8 +357,7 @@
         var data = row.data();
 
         if (data.children && data.children.length) {
-            //由于数据insertAfter插入问题，这里将JSON 倒序
-            data.children.reverse();
+
             $(parentTr).attr('id', parentTrId);
             // var td = $(dataTable.cell(getParentTd(tds)).node());
             var td = $(tds);
@@ -375,7 +374,10 @@
                 insertTr = prevRow;
             }
 
-            data.children.forEach(function (item) {
+            //由于数据insertAfter插入问题，这里将JSON 倒序
+            //data.children.reverse();
+            var temp = JSON.parse(JSON.stringify(data.children));   // todo，need refactor
+            temp.reverse().forEach(function (item) {
                 var newRow = dataTable.row.add(item);
                 var node = newRow.node();
                 var treegridTd = $(node).find('.treegrid-control');
