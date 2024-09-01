@@ -129,6 +129,10 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">图标<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="icon" placeholder="${I18n.system_please_input}icon" maxlength="50" ></div>
+								</div>
+								<div class="form-group">
 									<label  class="col-sm-2 control-label">展示顺序<font color="red">*</font></label>
 									<div class="col-sm-8"><input type="number" class="form-control" name="order" placeholder="${I18n.system_please_input}展示顺序" ></div>
 								</div>
@@ -196,6 +200,10 @@
 								<div class="form-group">
 									<label  class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
+								</div>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">图标<font color="red">*</font></label>
+									<div class="col-sm-8"><input type="text" class="form-control" name="icon" placeholder="${I18n.system_please_input}icon" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
 									<label  class="col-sm-2 control-label">展示顺序<font color="red">*</font></label>

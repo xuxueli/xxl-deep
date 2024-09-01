@@ -37,7 +37,7 @@ CREATE TABLE `xxl_deep_resource` (
     `type` tinyint(4) NOT NULL COMMENT '类型：0-菜单、1-按钮',
     `permission` varchar(50) DEFAULT NULL COMMENT '权限标识',
     `url` varchar(50) DEFAULT NULL COMMENT '菜单地址',
-    `icon` varchar(20) DEFAULT NULL COMMENT '资源icon',
+    `icon` varchar(50) DEFAULT NULL COMMENT '资源icon',
     `order` int(11) NOT NULL COMMENT '顺序',
     `status` tinyint(4) NOT NULL COMMENT '状态：0-正常、1-禁用',
     `add_time` datetime NOT NULL COMMENT '新增时间',

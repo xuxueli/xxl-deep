@@ -115,19 +115,14 @@ $(function() {
 					return '';
 				},
 				"width":'5%'
-				/*"data": 'parentId',
-				"render": function ( data, type, row ){
-					if (row.children != null && row.children.length > 0) {
-						return '<i class="fa fa-fw fa-chevron-right" ></i>';
-					}
-					return '';
-				}*/
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_name,
-				/*"data": 'name',*/
-				"data": function (row) {
-					return '<i class="fa fa-users"></i>'+ row.name;
+				"render": function ( data, type, row ) {
+					var iconAndName = '<i class="fa _icon_"></i> ' + row.name;
+					var icon = row.icon?row.icon:'';		// fa-circle-o
+
+					return iconAndName.replace("_icon_", icon);
 				},
 				"width":'25%'
 			},
@@ -387,6 +382,7 @@ $(function() {
 				"type": $("#addModal .form select[name=type]").val(),
 				"permission": $("#addModal .form input[name=permission]").val(),
 				"url": $("#addModal .form input[name=url]").val(),
+				"icon": $("#addModal .form input[name=icon]").val(),
 				"order": $("#addModal .form input[name=order]").val(),
 				"status": $("#addModal .form select[name=status]").val()
 			};
@@ -434,6 +430,7 @@ $(function() {
 		$("#updateModal .form select[name=type]").val( row.type );
 		$("#updateModal .form input[name=permission]").val( row.permission );
 		$("#updateModal .form input[name=url]").val( row.url );
+		$("#updateModal .form input[name=icon]").val( row.icon );
 		$("#updateModal .form input[name=order]").val( row.order );
 		$("#updateModal .form select[name=status]").val( row.status );
 
@@ -503,6 +500,7 @@ $(function() {
 				"type": $("#updateModal .form select[name=type]").val(),
 				"permission": $("#updateModal .form input[name=permission]").val(),
 				"url": $("#updateModal .form input[name=url]").val(),
+				"icon": $("#updateModal .form input[name=icon]").val(),
 				"order": $("#updateModal .form input[name=order]").val(),
 				"status": $("#updateModal .form select[name=status]").val()
 			};
