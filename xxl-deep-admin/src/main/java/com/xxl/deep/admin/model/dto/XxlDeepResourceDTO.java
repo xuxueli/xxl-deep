@@ -45,6 +45,11 @@ public class XxlDeepResourceDTO implements Serializable {
     private String url;
 
     /**
+     * ICON
+     */
+    private String icon;
+
+    /**
      * 顺序
      */
     private int order;
@@ -78,6 +83,7 @@ public class XxlDeepResourceDTO implements Serializable {
         setType(resource.getType());
         setPermission(resource.getPermission());
         setUrl(resource.getUrl());
+        setIcon(resource.getIcon());
         setOrder(resource.getOrder());
         setStatus(resource.getStatus());
         setAddTime(resource.getAddTime());
@@ -133,6 +139,14 @@ public class XxlDeepResourceDTO implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public int getOrder() {

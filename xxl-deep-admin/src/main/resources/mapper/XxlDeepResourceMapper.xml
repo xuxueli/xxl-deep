@@ -10,6 +10,7 @@
         <result column="type" property="type" />
         <result column="permission" property="permission" />
         <result column="url" property="url" />
+        <result column="icon" property="icon" />
         <result column="order" property="order" />
         <result column="status" property="status" />
         <result column="add_time" property="addTime" />
@@ -23,6 +24,7 @@
         t.`type`,
         t.`permission`,
         t.`url`,
+        t.`icon`,
         t.`order`,
         t.`status`,
         t.`add_time`,
@@ -36,6 +38,7 @@
             `type`,
             `permission`,
             `url`,
+            `icon`,
             `order`,
             `status`,
             `add_time`,
@@ -47,6 +50,7 @@
                   #{xxlDeepResource.type} ,
                   #{xxlDeepResource.permission} ,
                   #{xxlDeepResource.url} ,
+                  #{xxlDeepResource.icon} ,
                   #{xxlDeepResource.order} ,
                   #{xxlDeepResource.status} ,
                   NOW() ,
@@ -70,6 +74,7 @@
             `type` = #{xxlDeepResource.type},
             `permission` = #{xxlDeepResource.permission},
             `url` = #{xxlDeepResource.url},
+            `icon` = #{xxlDeepResource.icon},
             `order` = #{xxlDeepResource.order},
             `status` = #{xxlDeepResource.status},
             update_time = NOW()

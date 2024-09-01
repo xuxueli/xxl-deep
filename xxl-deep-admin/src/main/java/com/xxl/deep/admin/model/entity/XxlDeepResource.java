@@ -42,6 +42,11 @@ public class XxlDeepResource implements Serializable {
     private String url;
 
     /**
+     * ICON
+     */
+    private String icon;
+
+    /**
     * 顺序
     */
     private int order;
@@ -115,6 +120,14 @@ public class XxlDeepResource implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public int getOrder() {

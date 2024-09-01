@@ -125,7 +125,10 @@ $(function() {
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_name,
-				"data": 'name',
+				/*"data": 'name',*/
+				"data": function (row) {
+					return '<i class="fa fa-users"></i>'+ row.name;
+				},
 				"width":'28%'
 			},
 			{
@@ -191,7 +194,7 @@ $(function() {
 	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
 		left: 20,
 		expandAll: true,
-		expandIcon: '<span></span><i class="fa fa-fw fa-chevron-right" ></i></span>',
+		expandIcon: '<span><i class="fa fa-fw fa-chevron-right" ></i></span>',
 		collapseIcon: '<span><i class="fa fa-fw fa-chevron-down" ></i></span>'
 	});
 
