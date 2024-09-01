@@ -108,24 +108,30 @@ $(function() {
 			{
 				"title": '层级',
 				"className": 'treegrid-control',
-				"data": 'parentId',
-				"width":'5%',
+				"data": function (row) {
+					if (row.children != null && row.children.length > 0) {
+						return '<span><i class="fa fa-fw fa-chevron-right" ></span>';
+					}
+					return '';
+				},
+				"width":'7%'
+				/*"data": 'parentId',
 				"render": function ( data, type, row ){
 					if (row.children != null && row.children.length > 0) {
 						return '<i class="fa fa-fw fa-chevron-right" ></i>';
 					}
 					return '';
-				}
+				}*/
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_name,
 				"data": 'name',
-				"width":'30%'
+				"width":'28%'
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_type,
 				"data": 'type',
-				"width":'10%',
+				"width":'7%',
 				"render": function ( data, type, row ) {
 					var result = "";
 					$('#addModal select[name="type"] option').each(function(){
@@ -139,7 +145,7 @@ $(function() {
 			{
 				"title": I18n.resource_permission,
 				"data": 'permission',
-				"width":'15%'
+				"width":'20%'
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_url,
@@ -149,13 +155,13 @@ $(function() {
 			{
 				"title": I18n.resource_tips + I18n.resource_order,
 				"data": 'order',
-				"width":'10%'
+				"width":'8%'
 			},
 			{
 				"title": I18n.resource_status,
 				"data": 'status',
 				"visible" : true,
-				"width":'10%',
+				"width":'5%',
 				"render": function ( data, type, row ) {
 					var result = "";
 					$('#addModal select[name="status"] option').each(function(){
@@ -185,8 +191,8 @@ $(function() {
 	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
 		left: 20,
 		expandAll: true,
-		expandIcon: '<i class="fa fa-fw fa-chevron-right" ></i>',
-		collapseIcon: '<i class="fa fa-fw fa-chevron-down" ></i>'
+		expandIcon: '<span></span><i class="fa fa-fw fa-chevron-right" ></i></span>',
+		collapseIcon: '<span><i class="fa fa-fw fa-chevron-down" ></i></span>'
 	});
 
 	// search btn
