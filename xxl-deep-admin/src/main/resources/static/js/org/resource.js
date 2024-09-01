@@ -110,11 +110,11 @@ $(function() {
 				"className": 'treegrid-control',
 				"data": function (row) {
 					if (row.children != null && row.children.length > 0) {
-						return '<span><i class="fa fa-fw fa-chevron-right" ></span>';
+						return '<span><i class="fa fa-fw fa-plus-square-o" ></span>';
 					}
 					return '';
 				},
-				"width":'7%'
+				"width":'5%'
 				/*"data": 'parentId',
 				"render": function ( data, type, row ){
 					if (row.children != null && row.children.length > 0) {
@@ -129,12 +129,12 @@ $(function() {
 				"data": function (row) {
 					return '<i class="fa fa-users"></i>'+ row.name;
 				},
-				"width":'28%'
+				"width":'25%'
 			},
 			{
 				"title": I18n.resource_tips + I18n.resource_type,
 				"data": 'type',
-				"width":'7%',
+				"width":'10%',
 				"render": function ( data, type, row ) {
 					var result = "";
 					$('#addModal select[name="type"] option').each(function(){
@@ -158,7 +158,7 @@ $(function() {
 			{
 				"title": I18n.resource_tips + I18n.resource_order,
 				"data": 'order',
-				"width":'8%'
+				"width":'10%'
 			},
 			{
 				"title": I18n.resource_status,
@@ -194,8 +194,8 @@ $(function() {
 	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
 		left: 20,
 		expandAll: true,
-		expandIcon: '<span><i class="fa fa-fw fa-chevron-right" ></i></span>',
-		collapseIcon: '<span><i class="fa fa-fw fa-chevron-down" ></i></span>'
+		expandIcon: '<span><i class="fa fa-fw  fa-plus-square-o" ></i></span>',
+		collapseIcon: '<span><i class="fa fa-fw  fa-minus-square-o" ></i></span>'
 	});
 
 	// search btn
