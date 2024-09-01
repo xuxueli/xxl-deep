@@ -375,4 +375,11 @@ $(function() {
         $("#updateModal .form .form-group").removeClass("has-error");
 	});
 
+	// ---------- ---------- ---------- update operation ---------- ---------- ----------
+	$("#data_operation .allocateResource").click(function(){
+
+		alert('开发中');
+	});
+
+
 });
