@@ -44,8 +44,10 @@ $(function() {
 		}
 		if (selectLen === 1) {
 			$("#data_operation .update").removeClass('disabled');
+			$("#data_operation .allocateResource").removeClass('disabled');
 		} else {
 			$("#data_operation .update").addClass('disabled');
+			$("#data_operation .allocateResource").addClass('disabled');
 		}
 
 	}
@@ -378,8 +380,79 @@ $(function() {
 	// ---------- ---------- ---------- update operation ---------- ---------- ----------
 	$("#data_operation .allocateResource").click(function(){
 
+		// find select ids
+		var selectIds = selectIdsFind();
+		if (selectIds.length != 1) {
+			layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+			return;
+		}
+		const row = tableData[ 'key' + selectIds[0] ];
+		const roleId = row.id;
+
 		alert('开发中');
+
+		// base data
+		initTree();
+
+		// 设置 tree 选中
+		/*if (row.id > 0) {
+			var chooseNode = zTreeObj.getNodeByParam("id", row.parentId, null);
+			if (chooseNode) {
+				zTreeObj.selectNode(chooseNode);
+				$("#updateModal .form input[name=parentName]").val( chooseNode.name );
+			}
+
+		}*/
+
+		// show
+		$('#roleResourceModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
+
+	// ---------- ---------- ---------- ztree ---------- ---------- ----------
+	var zTreeObj;
+	function initTree(){
+		var setting = {
+			/*view: {
+				dblClickExpand: false,
+				showLine: true,
+				selectedMulti: false
+			},*/
+			check: {
+				enable: true,
+				chkboxType : {
+					"Y" : "ps",
+					"N" : "ps"
+				}
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "parentId",
+					rootPId: "0"
+				}
+			}
+		};
+
+		// post
+		$.ajax({
+			type : 'POST',
+			url : base_url + "/org/resource/simpleTreeList",
+			dataType : "json",
+			async: false,
+			success : function(data){
+				if (data.code == "200") {
+					var zNodes = data.data;
+
+					zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes); //初始化树
+					zTreeObj.expandAll(true);    //true 节点全部展开、false节点收缩
+
+				} else {
+					layer.msg( data.msg || '系统异常' );
+				}
+			}
+		});
+	}
 
 
 });

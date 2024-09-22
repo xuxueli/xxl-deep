@@ -102,6 +102,7 @@ public class ResourceServiceImpl implements ResourceService {
 		for (XxlDeepResource resource : resourceList) {
 			XxlDeepResourceDTO resourceDTO = new XxlDeepResourceDTO(resource, null);
 			resourceDTO.setUrl(null);
+			resourceDTO.setIcon(null);
 			result.add(resourceDTO);
 		}
 		return result;

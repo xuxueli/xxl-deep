@@ -8,6 +8,7 @@
 
 	<#-- biz start（1/5 style） -->
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/plugins/zTree/css/metroStyle/metroStyle.css">
 	<#-- biz end（1/5 end） -->
 
 </head>
@@ -70,6 +71,35 @@
 								<tbody></tbody>
 								<tfoot></tfoot>
 							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 分配资源.模态框 -->
+			<div class="modal fade" id="roleResourceModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" >分配资源</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal form" role="form" >
+								<div class="form-group">
+									<div class="col-sm-12">
+										<#-- demo tree -->
+										<ul id="tree" class="ztree" style="width:260px; "></ul>
+									</div>
+								</div>
+
+								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+									<div style="margin-top: 10px;" >
+										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+									</div>
+								</div>
+
+							</form>
 						</div>
 					</div>
 				</div>
@@ -153,6 +183,8 @@
 <#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${request.contextPath}/static/plugins/zTree/js/jquery.ztree.core.js"></script>
+<script src="${request.contextPath}/static/plugins/zTree/js/jquery.ztree.excheck.js"></script>
 <script src="${request.contextPath}/static/js/org/role.js"></script>
 <#-- biz end（5/5 script） -->
 

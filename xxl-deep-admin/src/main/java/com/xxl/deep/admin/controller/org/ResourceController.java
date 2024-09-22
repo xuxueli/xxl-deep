@@ -88,7 +88,7 @@ public class ResourceController {
     @RequestMapping("/simpleTreeList")
     @ResponseBody
     public Response<List<XxlDeepResourceDTO>> simpleTreeList(@RequestParam(required = false) String name,
-                                                               @RequestParam(required = false, defaultValue = "-1") int status) {
+                                                             @RequestParam(required = false, defaultValue = "-1") int status) {
         List<XxlDeepResourceDTO> treeListData = resourceService.simpleTreeList(name, status);
         return new ResponseBuilder<List<XxlDeepResourceDTO>>().success(treeListData).build();
     }
