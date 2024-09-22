@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.config.error;
+package com.xxl.deep.admin.web.error;
 
 import com.xxl.tool.exception.BizException;
 import com.xxl.tool.gson.GsonTool;

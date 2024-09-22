@@ -1,4 +1,4 @@
-package com.xxl.deep.admin.config.interceptor;
+package com.xxl.deep.admin.web.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
