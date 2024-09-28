@@ -94,7 +94,7 @@
 
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
 									<div style="margin-top: 10px;" >
-										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
+										<button type="button" class="btn btn-primary save"  >${I18n.system_save}</button>
 										<button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
 									</div>
 								</div>

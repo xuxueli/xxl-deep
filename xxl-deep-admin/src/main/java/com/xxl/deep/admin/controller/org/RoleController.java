@@ -87,4 +87,25 @@ public class RoleController {
         return roleService.load(id);
     }
 
+    /**
+     * 角色资源查询
+     */
+    @RequestMapping("/loadRoleRes")
+    @ResponseBody
+    public Response<List<Integer>> loadRoleRes(int roleId){
+        return roleService.loadRoleRes(roleId);
+    }
+
+    /**
+     * 角色资源授权
+     */
+    @RequestMapping("/updateRoleRes")
+    @ResponseBody
+    public Response<String> updateRoleRes(@RequestParam int roleId,
+                                          @RequestParam("resourceIds[]") List<Integer> resourceIds){
+        //
+        return roleService.updateRoleRes(roleId, resourceIds);
+    }
+
+
 }

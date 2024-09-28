@@ -1,7 +1,10 @@
 package com.xxl.deep.admin.service.impl;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.xxl.deep.admin.mapper.XxlDeepRoleMapper;
+import com.xxl.deep.admin.mapper.XxlDeepRoleResMapper;
 import com.xxl.deep.admin.model.entity.XxlDeepRole;
+import com.xxl.deep.admin.model.entity.XxlDeepRoleRes;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.tool.core.CollectionTool;
@@ -11,9 +14,11 @@ import com.xxl.tool.response.ResponseBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * role service
@@ -25,6 +30,8 @@ public class RoleServiceImpl implements RoleService {
 
 	@Resource
 	private XxlDeepRoleMapper xxlDeepRoleMapper;
+	@Resource
+	private XxlDeepRoleResMapper xxlDeepRoleResMapper;
 
 	/**
     * 新增
@@ -96,6 +103,41 @@ public class RoleServiceImpl implements RoleService {
 		pageModel.setTotalCount(totalCount);
 
 		return pageModel;
+	}
+
+	@Override
+	public Response<List<Integer>> loadRoleRes(int roleId) {
+		List<XxlDeepRoleRes> roleResList = xxlDeepRoleResMapper.loadRoleRes(roleId);
+		if (CollectionTool.isEmpty(roleResList)) {
+			return new ResponseBuilder<List<Integer>>().success().build();
+		}
+
+		List<Integer> resIds = roleResList
+				.stream()
+				.map(XxlDeepRoleRes::getResId)
+				.collect(Collectors.toList());
+		return new ResponseBuilder<List<Integer>>().success(resIds).build();
+	}
+
+	@Override
+	public Response<String> updateRoleRes(int roleId, List<Integer> resourceIds) {
+		if (roleId < 1) {
+			return new ResponseBuilder<String>().fail().build();
+		}
+		// remove old
+		xxlDeepRoleResMapper.deleteByRoleId(roleId);
+
+		// init new
+		if (CollectionTool.isNotEmpty(resourceIds)) {
+			List<XxlDeepRoleRes> roleResList = resourceIds
+					.stream()
+					.map(resId -> new XxlDeepRoleRes(roleId, resId))
+					.collect(Collectors.toList());
+			int ret = xxlDeepRoleResMapper.batchInsert(roleResList);
+			System.out.println(ret);
+		}
+
+		return new ResponseBuilder<String>().success().build();
 	}
 
 }

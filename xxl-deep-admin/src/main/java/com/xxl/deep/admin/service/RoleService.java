@@ -38,4 +38,14 @@ public interface RoleService {
     */
     public PageModel<XxlDeepRole> pageList(int offset, int pagesize, String name);
 
+    /**
+     * 角色资源查询
+     */
+    Response<List<Integer>> loadRoleRes(int roleId);
+
+    /**
+     * 角色资源授权
+     */
+    Response<String> updateRoleRes(int roleId, List<Integer> resourceIds);
+
 }

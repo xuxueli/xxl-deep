@@ -200,7 +200,7 @@ $(function() {
         rules : {
             name : {
 				required : true,
-                rangelength:[4, 20]
+                rangelength:[2, 20]
 			},
 			order : {
 				required : true,
@@ -311,7 +311,7 @@ $(function() {
 		rules : {
 			name : {
 				required : true,
-				rangelength:[4, 20]
+				rangelength:[2, 20]
 			},
 			order : {
 				required : true,
@@ -377,7 +377,7 @@ $(function() {
         $("#updateModal .form .form-group").removeClass("has-error");
 	});
 
-	// ---------- ---------- ---------- update operation ---------- ---------- ----------
+	// ---------- ---------- ---------- allocate resource ---------- ---------- ----------
 	$("#data_operation .allocateResource").click(function(){
 
 		// find select ids
@@ -386,37 +386,84 @@ $(function() {
 			layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
 			return;
 		}
-		const row = tableData[ 'key' + selectIds[0] ];
-		const roleId = row.id;
-
-		alert('开发中');
+		var row = tableData[ 'key' + selectIds[0] ];
+		var roleId = row.id;
 
 		// base data
 		initTree();
 
 		// 设置 tree 选中
-		/*if (row.id > 0) {
-			var chooseNode = zTreeObj.getNodeByParam("id", row.parentId, null);
-			if (chooseNode) {
-				zTreeObj.selectNode(chooseNode);
-				$("#updateModal .form input[name=parentName]").val( chooseNode.name );
+		currentRoleId = roleId;
+		$.ajax({
+			type : 'POST',
+			url : base_url + "/org/role/loadRoleRes",
+			data: {
+				"roleId":roleId
+			},
+			dataType : "json",
+			async: false,
+			success : function(data){
+				if (data.code == "200") {
+					var checkedIds = data.data;
+					if (checkedIds && checkedIds.length >0) {
+						checkedIds.forEach(function(nodeId) {
+							var nodes = zTreeObj.getNodesByParam("id", nodeId, null);
+							if (nodes && nodes.length > 0) {
+								var node = nodes[0];
+								zTreeObj.checkNode(node, true, true);
+							}
+						});
+						//console.log("checked: "+ zTreeObj.getCheckedNodes(true).map(item => item.id));
+					}
+				} else {
+					layer.msg( data.msg || '系统异常' );
+				}
 			}
-
-		}*/
+		});
 
 		// show
 		$('#roleResourceModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 
-	// ---------- ---------- ---------- ztree ---------- ---------- ----------
+	// ———————————— save
+	$("#roleResourceModal .save").click(function(){
+		var checkedIds = zTreeObj.getCheckedNodes(true).map(item => item.id);
+
+		$.ajax({
+			type : 'POST',
+			url : base_url + "/org/role/updateRoleRes",
+			data : {
+				"roleId":currentRoleId,
+				"resourceIds":checkedIds
+			},
+			dataType : "json",
+			success : function(data){
+				if (data.code == "200") {
+					$('#updateModal').modal('hide');
+
+					layer.msg( '操作成功' );
+					mainDataTable.fnDraw(false);
+				} else {
+					layer.open({
+						title: I18n.system_tips ,
+						btn: [ I18n.system_ok ],
+						content: (data.msg || '操作失败' ),
+						icon: '2'
+					});
+				}
+
+				// hide
+				$('#roleResourceModal').modal('hide');
+			}
+		});
+
+	});
+
+	// ———————————— ztree
 	var zTreeObj;
+	var currentRoleId;
 	function initTree(){
 		var setting = {
-			/*view: {
-				dblClickExpand: false,
-				showLine: true,
-				selectedMulti: false
-			},*/
 			check: {
 				enable: true,
 				chkboxType : {
