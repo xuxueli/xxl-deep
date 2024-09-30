@@ -43,6 +43,12 @@ public class ResourceController {
         return "org/resource";
     }
 
+    @RequestMapping("/icon")
+    @Permission(adminuser = true)
+    public String icon(Model model) {
+        return "org/icon";
+    }
+
     /**
      * tree数据查询
      *
