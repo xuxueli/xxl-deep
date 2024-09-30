@@ -1,5 +1,11 @@
 $(function() {
 
+	// input iCheck
+	$('input').iCheck({
+		checkboxClass: 'icheckbox_square-blue',
+		radioClass: 'iradio_square-blue',
+	});
+
 	// ---------- ---------- ---------- main table  ---------- ---------- ----------
 	// init date tables
 	$.dataTableSelect.init();
@@ -217,12 +223,18 @@ $(function() {
         },
         submitHandler : function(form) {
 
+			// get roleids
+			var roleIds = $('#addModal .form input[name="roleId"]:checked').map(function() {
+				return this.value;
+			}).get();
+
 			// request
 			var paramData = {
 				"username": $("#addModal .form input[name=username]").val(),
                 "password": $("#addModal .form input[name=password]").val(),
                 "status": $("#addModal .form select[name=status]").val(),
-				"realName": $("#addModal .form input[name=realName]").val()
+				"realName": $("#addModal .form input[name=realName]").val(),
+				"roleIds": roleIds
 			};
 
 			// post
@@ -268,6 +280,13 @@ $(function() {
 		$("#updateModal .form select[name='status']").val( row.status );
 		$("#updateModal .form input[name='realName']").val( row.realName );
 
+		// set roleid
+		if (row.roleIds && row.roleIds.length > 0) {
+			row.roleIds.forEach(function (item){
+				$('#updateModal .form input[name="roleId"][value="'+ item +'"]').prop('checked', true).iCheck('update');
+			});
+		}
+
 		// show
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
@@ -299,13 +318,19 @@ $(function() {
 		},
         submitHandler : function(form) {
 
+			// get roleids
+			var roleIds = $('#updateModal .form input[name="roleId"]:checked').map(function() {
+				return this.value;
+			}).get();
+
 			// request
             var paramData = {
                 "id": $("#updateModal .form input[name=id]").val(),
                 "username": $("#updateModal .form input[name=username]").val(),
                 "password": $("#updateModal .form input[name=password]").val(),
 				"status": $("#updateModal .form select[name=status]").val(),
-				"realName": $("#updateModal .form input[name=realName]").val()
+				"realName": $("#updateModal .form input[name=realName]").val(),
+				"roleIds":roleIds
             };
 
             $.post(base_url + "/org/user/update", paramData, function(data, status) {
@@ -326,6 +351,10 @@ $(function() {
 		}
 	});
 	$("#updateModal").on('hide.bs.modal', function () {
+		// reset checkbox
+		$('#updateModal .form input[name="roleId"]').prop('checked', false).iCheck('update');
+
+		// reset
 		updateModalValidate.resetForm();
 
 		$("#updateModal .form")[0].reset();

@@ -8,6 +8,7 @@
 
 	<#-- biz start（1/5 style） -->
 	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
 	<#-- biz end（1/5 end） -->
 
 </head>
@@ -117,6 +118,18 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
+								<br>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">用户角色<font color="red">*</font></label>
+									<div class="col-sm-8">
+										<#if roleList?? && roleList?size gt 0>
+										<#list roleList as role>
+											<span class="col-sm-4" style="padding-left: 0px;" ><input type="checkbox"  name="roleId" value="${role.id}"> ${role.name}</span>
+										</#list>
+										</#if>
+									</div>
+								</div>
+
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
 									<div style="margin-top: 10px;" >
 										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
@@ -162,6 +175,18 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
 								</div>
 
+								<br>
+								<div class="form-group">
+									<label for="lastname" class="col-sm-2 control-label">用户角色<font color="red">*</font></label>
+									<div class="col-sm-8">
+										<#if roleList?? && roleList?size gt 0>
+											<#list roleList as role>
+												<span class="col-sm-4" style="padding-left: 0px;" ><input type="checkbox"  name="roleId" value="${role.id}"> ${role.name}</span>
+											</#list>
+										</#if>
+									</div>
+								</div>
+
 								<div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
 									<div style="margin-top: 10px;" >
 										<button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
@@ -191,6 +216,8 @@
 <#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
+
 <script src="${request.contextPath}/static/js/common/datatables.select.js"></script>
 <script src="${request.contextPath}/static/js/org/user.js"></script>
 <#-- biz end（5/5 script） -->

@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.service;
 
+import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
@@ -16,7 +17,7 @@ public interface UserService {
     /**
      * 新增
      */
-    public Response<String> insert(XxlDeepUser user);
+    public Response<String> insert(XxlDeepUserDTO xxlJobUser);
 
     /**
      * 删除
@@ -26,12 +27,12 @@ public interface UserService {
     /**
      * 删除
      */
-    Response<String> deleteByIds(List<Integer> ids, XxlDeepUser loginUser);
+    Response<String> deleteByIds(List<Integer> userIds, XxlDeepUser loginUser);
 
     /**
      * 更新
      */
-    public Response<String> update(XxlDeepUser user, XxlDeepUser loginUser);
+    public Response<String> update(XxlDeepUserDTO xxlJobUser, XxlDeepUser loginUser);
 
     /**
      * 修改密码
@@ -46,6 +47,6 @@ public interface UserService {
     /**
      * 分页查询
      */
-    public PageModel<XxlDeepUser> pageList(int offset, int pagesize, String username, int status);
+    public PageModel<XxlDeepUserDTO> pageList(int offset, int pagesize, String username, int status);
 
 }

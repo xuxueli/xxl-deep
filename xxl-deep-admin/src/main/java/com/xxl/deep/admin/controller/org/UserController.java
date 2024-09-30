@@ -2,6 +2,8 @@ package com.xxl.deep.admin.controller.org;
 
 import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.constant.enums.UserStatuEnum;
+import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
+import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.service.UserService;
@@ -35,7 +37,9 @@ public class UserController {
     @Permission(adminuser = true)
     public String index(Model model) {
 
-        /*PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 100);*/
+        PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 999, null);
+
+        model.addAttribute("roleList", pageModel.getPageData());
         model.addAttribute("userStatuEnum", UserStatuEnum.values());
 
         return "org/user";
@@ -44,26 +48,26 @@ public class UserController {
     @RequestMapping("/pageList")
     @ResponseBody
     @Permission(adminuser = true)
-    public Response<PageModel<XxlDeepUser>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
+    public Response<PageModel<XxlDeepUserDTO>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
                                                      @RequestParam(required = false, defaultValue = "10") int length,
                                                      String username,
                                                      @RequestParam(required = false, defaultValue = "-1") int status) {
 
-        PageModel<XxlDeepUser> pageModel = userService.pageList(start, length, username, status);
-        return new ResponseBuilder<PageModel<XxlDeepUser>>().success(pageModel).build();
+        PageModel<XxlDeepUserDTO> pageModel = userService.pageList(start, length, username, status);
+        return new ResponseBuilder<PageModel<XxlDeepUserDTO>>().success(pageModel).build();
     }
 
     @RequestMapping("/add")
     @ResponseBody
     @Permission(adminuser = true)
-    public Response<String> add(XxlDeepUser xxlJobUser) {
+    public Response<String> add(XxlDeepUserDTO xxlJobUser) {
         return userService.insert(xxlJobUser);
     }
 
     @RequestMapping("/update")
     @ResponseBody
     @Permission(adminuser = true)
-    public Response<String> update(HttpServletRequest request, XxlDeepUser xxlJobUser) {
+    public Response<String> update(HttpServletRequest request, XxlDeepUserDTO xxlJobUser) {
         XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
         return userService.update(xxlJobUser, loginUser);
     }

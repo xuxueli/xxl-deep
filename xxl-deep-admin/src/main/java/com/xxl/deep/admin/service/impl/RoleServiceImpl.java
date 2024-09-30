@@ -60,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
 		}
 		List<XxlDeepRoleRes> roleResList = xxlDeepRoleResMapper.queryRoleRes(ids);
 		if (CollectionTool.isNotEmpty(roleResList)) {
-			return new ResponseBuilder<String>().fail("无法删除，请先取消已分配资源").build();
+			return new ResponseBuilder<String>().fail("无法删除，请先取消关联资源").build();
 		}
 
 		int ret = xxlDeepRoleMapper.deleteByIds(ids);

@@ -48,4 +48,6 @@ public interface XxlDeepRoleMapper {
                              @Param("pagesize") int pagesize,
                              @Param("name") String name);
 
+    List<XxlDeepRole> queryByRoleIds(@Param("roleIds") List<Integer> roleIds);
+
 }
