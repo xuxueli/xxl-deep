@@ -102,8 +102,7 @@ public class RoleController {
     @RequestMapping("/updateRoleRes")
     @ResponseBody
     public Response<String> updateRoleRes(@RequestParam int roleId,
-                                          @RequestParam("resourceIds[]") List<Integer> resourceIds){
-        //
+                                          @RequestParam(value = "resourceIds[]", required = false) List<Integer> resourceIds){
         return roleService.updateRoleRes(roleId, resourceIds);
     }
 

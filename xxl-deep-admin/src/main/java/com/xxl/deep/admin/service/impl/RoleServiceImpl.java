@@ -58,6 +58,10 @@ public class RoleServiceImpl implements RoleService {
 		if (CollectionTool.isEmpty(ids)) {
 			return new ResponseBuilder<String>().fail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("role_tips")).build();
 		}
+		List<XxlDeepRoleRes> roleResList = xxlDeepRoleResMapper.queryRoleRes(ids);
+		if (CollectionTool.isNotEmpty(roleResList)) {
+			return new ResponseBuilder<String>().fail("无法删除，请先取消已分配资源").build();
+		}
 
 		int ret = xxlDeepRoleMapper.deleteByIds(ids);
 		return ret>0? new ResponseBuilder<String>().success().build()

@@ -41,4 +41,13 @@
         WHERE `role_id` = #{roleId}
     </select>
 
+    <select id="queryRoleRes" parameterType="java.util.Map" resultMap="XxlDeepRoleRes">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_role_res AS t
+        WHERE `role_id` in
+        <foreach collection="roleIds" item="roleId" index="index" separator="," open="(" close=")" >
+            #{roleId}
+        </foreach>
+    </select>
+
 </mapper>

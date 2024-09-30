@@ -61,9 +61,9 @@
 					<div class="box">
 						<div class="box-header" style="float: right" id="data_operation" >
 							<button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
-							<button class="btn btn-sm btn-warning disabled2 update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
-							<button class="btn btn-sm btn-danger delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
-							<button class="btn btn-sm btn-primary allocateResource" type="button"><i class="fa fa-chevron-down"></i>分配资源</button>
+							<button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
+							<button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
+							<button class="btn btn-sm btn-primary selectOnlyOne allocateResource" type="button"><i class="fa fa-chevron-down"></i>分配资源</button>
 						</div>
 						<div class="box-body" >
 							<table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -185,6 +185,7 @@
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${request.contextPath}/static/plugins/zTree/js/jquery.ztree.core.js"></script>
 <script src="${request.contextPath}/static/plugins/zTree/js/jquery.ztree.excheck.js"></script>
+<script src="${request.contextPath}/static/js/common/datatables.select.js"></script>
 <script src="${request.contextPath}/static/js/org/role.js"></script>
 <#-- biz end（5/5 script） -->
 

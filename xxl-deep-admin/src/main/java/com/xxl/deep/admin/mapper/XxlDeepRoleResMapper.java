@@ -29,4 +29,9 @@ public interface XxlDeepRoleResMapper {
      */
     public List<XxlDeepRoleRes> loadRoleRes(@Param("roleId") int roleId);
 
+    /**
+     * 查询
+     */
+    public List<XxlDeepRoleRes> queryRoleRes(@Param("roleIds") List<Integer> roleIds);
+
 }

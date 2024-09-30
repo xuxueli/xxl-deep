@@ -1,57 +1,9 @@
 $(function() {
 
-	// ---------- ---------- ---------- customer select for datatables ---------- ---------- ----------
-	// Select：All
-	$('#data_list').on('change', 'thead #checkAll', function() {
-		var isChecked = $(this).prop('checked');
-		$('#data_list tbody  input.checkItem').each(function(){
-			$(this).prop('checked', isChecked);
-		});
-		selectStatusEffctOpt();
-	});
-	// Select：Item (all select will fresh '#checkAll')
-	$('#data_list').on('change', 'tbody input.checkItem', function() {
-		var newStatus = $('#data_list tbody input.checkItem').length>0
-			&& $('#data_list tbody input.checkItem').length === $('#data_list tbody input.checkItem:checked').length;
-		$('#checkAll').prop('checked', newStatus);
-		selectStatusEffctOpt();
-	});
-	// Select: status init
-	function selectStatusInit(){
-		$('#checkAll').prop('checked', false);
-		$('#data_list tbody input.checkItem').each(function(){
-			$(this).prop('checked', false);
-		});
-		selectStatusEffctOpt();
-	}
-	// Select: find ids
-	function selectIdsFind(){
-		var checkIds = [];
-		$('#data_list tbody input.checkItem').each(function(){
-			if ($(this).prop('checked')) {
-				checkIds.push( $(this).attr('data-id') );
-			}
-		});
-		return checkIds;
-	}
-	// Select: refresh operation status
-	function selectStatusEffctOpt(){
-		var selectLen = selectIdsFind().length;
-		if (selectLen > 0) {
-			$("#data_operation .delete").removeClass('disabled');
-		} else {
-			$("#data_operation .delete").addClass('disabled');
-		}
-		if (selectLen === 1) {
-			$("#data_operation .update").removeClass('disabled');
-		} else {
-			$("#data_operation .update").addClass('disabled');
-		}
-
-	}
-
 	// ---------- ---------- ---------- main table  ---------- ---------- ----------
 	// treeGrid：https://github.com/lhmyy521125/dataTables.treeGrid
+	// init dataTableSelect
+	$.dataTableSelect.init();
 	// table data
 	var tableData = {};
 	// init date tables
@@ -92,7 +44,7 @@ $(function() {
 		 **/
 		"dom": "tr",
 		"drawCallback": function( settings ) {
-			selectStatusInit();
+			$.dataTableSelect.selectStatusInit();
 		},
 		"columns": [
 			{
@@ -214,7 +166,7 @@ $(function() {
 	$("#data_operation").on('click', '.delete',function() {
 
 		// find select ids
-		var selectIds = selectIdsFind();
+		var selectIds = $.dataTableSelect.selectIdsFind();
 		if (selectIds.length <= 0) {
 			layer.msg(I18n.system_please_choose + I18n.system_data);
 			return;
@@ -416,7 +368,7 @@ $(function() {
 	$("#data_operation .update").click(function(){
 
 		// find select ids
-		var selectIds = selectIdsFind();
+		var selectIds = $.dataTableSelect.selectIdsFind();
 		if (selectIds.length != 1) {
 			layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
 			return;
