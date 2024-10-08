@@ -24,7 +24,7 @@ public interface ${classInfo.className}Mapper {
     /**
     * 更新
     */
-    public int update(${classInfo.className} ${classInfo.className?uncap_first});
+    public int update(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
 
     /**
     * Load查询

@@ -7,6 +7,17 @@ use `xxl_deep`;
 
 SET NAMES utf8mb4;
 
+## —————————————————————— for org + rbac ——————————————————
+CREATE TABLE `xxl_deep_org` (
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '组织ID',
+    `parent_id` int(11) NOT NULL COMMENT '父组织ID',
+    `name` varchar(50) NOT NULL COMMENT '名称',
+    `order` int(11) NOT NULL COMMENT '顺序',
+    `status` tinyint(4) NOT NULL COMMENT '状态：0-正常、1-禁用',
+    `add_time` datetime NOT NULL COMMENT '新增时间',
+    `update_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `xxl_deep_user` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',

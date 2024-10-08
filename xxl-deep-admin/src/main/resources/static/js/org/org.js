@@ -12,7 +12,7 @@ $(function() {
 		"processing" : true,
 		"serverSide": true,
 		"ajax": {
-			url: base_url + "/org/resource/treeList",
+			url: base_url + "/org/org/treeList",
 			type:"post",
 			// request data
 			data : function ( d ) {
@@ -69,7 +69,7 @@ $(function() {
 				"width":'5%'
 			},
 			{
-				"title": I18n.resource_tips + I18n.resource_name,
+				"title": I18n.resource_name,
 				"render": function ( data, type, row ) {
 					var iconAndName = '<i class="fa _icon_"></i> ' + row.name;
 					var icon = row.icon?row.icon:'';		// fa-circle-o
@@ -79,31 +79,7 @@ $(function() {
 				"width":'25%'
 			},
 			{
-				"title": I18n.resource_tips + I18n.resource_type,
-				"data": 'type',
-				"width":'10%',
-				"render": function ( data, type, row ) {
-					var result = "";
-					$('#addModal select[name="type"] option').each(function(){
-						if ( data.toString() === $(this).val() ) {
-							result = $(this).text();
-						}
-					});
-					return result;
-				}
-			},
-			{
-				"title": I18n.resource_permission,
-				"data": 'permission',
-				"width":'20%'
-			},
-			{
-				"title": I18n.resource_tips + I18n.resource_url,
-				"data": 'url',
-				"width":'20%'
-			},
-			{
-				"title": I18n.resource_tips + I18n.resource_order,
+				"title": I18n.resource_order,
 				"data": 'order',
 				"width":'10%'
 			},
@@ -111,7 +87,7 @@ $(function() {
 				"title": I18n.resource_status,
 				"data": 'status',
 				"visible" : true,
-				"width":'5%',
+				"width":'10%',
 				"render": function ( data, type, row ) {
 					var result = "";
 					$('#addModal select[name="status"] option').each(function(){
@@ -182,7 +158,7 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/org/resource/delete",
+				url : base_url + "/org/org/delete",
 				data : {
 					"ids" : selectIds
 				},
@@ -233,7 +209,7 @@ $(function() {
 		// post
 		$.ajax({
 			type : 'POST',
-			url : base_url + "/org/resource/simpleTreeList",
+			url : base_url + "/org/org/simpleTreeList",
 			dataType : "json",
 			async: false,
 			success : function(data){
@@ -331,16 +307,12 @@ $(function() {
 			var paramData = {
 				"parentId": $("#addModal .form input[name=parentId]").val(),
 				"name": $("#addModal .form input[name=name]").val(),
-				"type": $("#addModal .form select[name=type]").val(),
-				"permission": $("#addModal .form input[name=permission]").val(),
-				"url": $("#addModal .form input[name=url]").val(),
-				"icon": $("#addModal .form input[name=icon]").val(),
 				"order": $("#addModal .form input[name=order]").val(),
 				"status": $("#addModal .form select[name=status]").val()
 			};
 
 			// post
-			$.post(base_url + "/org/resource/insert", paramData, function(data, status) {
+			$.post(base_url + "/org/org/insert", paramData, function(data, status) {
 				if (data.code == "200") {
 					$('#addModal').modal('hide');
 
@@ -379,10 +351,6 @@ $(function() {
 		$("#updateModal .form input[name=id]").val( row.id );
 		$("#updateModal .form input[name=parentId]").val( row.parentId );
 		$("#updateModal .form input[name=name]").val( row.name );
-		$("#updateModal .form select[name=type]").val( row.type );
-		$("#updateModal .form input[name=permission]").val( row.permission );
-		$("#updateModal .form input[name=url]").val( row.url );
-		$("#updateModal .form input[name=icon]").val( row.icon );
 		$("#updateModal .form input[name=order]").val( row.order );
 		$("#updateModal .form select[name=status]").val( row.status );
 
@@ -457,7 +425,7 @@ $(function() {
 				"status": $("#updateModal .form select[name=status]").val()
 			};
 
-			$.post(base_url + "/org/resource/update", paramData, function(data, status) {
+			$.post(base_url + "/org/org/update", paramData, function(data, status) {
 				if (data.code == "200") {
 					$('#updateModal').modal('hide');
 
@@ -479,12 +447,6 @@ $(function() {
 
 		$("#updateModal .form")[0].reset();
 		$("#updateModal .form .form-group").removeClass("has-error");
-	});
-
-	// ---------- ---------- ---------- iconModal ---------- ---------- ----------
-	$('.showIcon').click(function (){
-		// show
-		$('#iconModal').modal({backdrop: true, keyboard: false}).modal('show');
 	});
 
 });
