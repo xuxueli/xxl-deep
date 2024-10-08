@@ -112,4 +112,13 @@
         ORDER BY t.`order` ASC
     </select>
 
+    <select id="queryByParentIds" parameterType="java.util.Map" resultMap="XxlDeepResource">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_resource AS t
+        WHERE t.`id` in
+        <foreach collection="ids" item="parentId" index="index" separator="," open="(" close=")" >
+            #{parentId}
+        </foreach>
+    </select>
+
 </mapper>

@@ -125,11 +125,11 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">菜单URL<font color="black">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">图标<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">图标<font color="black">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="icon" placeholder="${I18n.system_please_input}icon" maxlength="50" ></div>
 									<div class="col-sm-4">
 										<a href="javascript:void(0);" class="showIcon" style="color: gray;">更多图标</a>
@@ -201,11 +201,11 @@
 									<div class="col-sm-8"><input type="text" class="form-control" name="permission" placeholder="${I18n.system_please_input}权限标识" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
-									<label  class="col-sm-2 control-label">菜单URL<font color="red">*</font></label>
+									<label  class="col-sm-2 control-label">菜单URL<font color="black">*</font></label>
 									<div class="col-sm-8"><input type="text" class="form-control" name="url" placeholder="${I18n.system_please_input}菜单URL" maxlength="50" ></div>
 								</div>
 								<div class="form-group">
-									<label for="lastname" class="col-sm-2 control-label">图标<font color="red">*</font></label>
+									<label for="lastname" class="col-sm-2 control-label">图标<font color="black">*</font></label>
 									<div class="col-sm-4"><input type="text" class="form-control" name="icon" placeholder="${I18n.system_please_input}icon" maxlength="50" ></div>
 									<div class="col-sm-4">
 										<a href="javascript:void(0);" class="showIcon" style="color: gray;">更多图标</a>

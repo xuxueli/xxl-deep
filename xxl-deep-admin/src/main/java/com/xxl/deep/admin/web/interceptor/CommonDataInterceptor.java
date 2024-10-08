@@ -1,7 +1,9 @@
 package com.xxl.deep.admin.web.interceptor;
 
-import com.xxl.deep.admin.model.entity.XxlDeepMenu;
+import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
+import com.xxl.deep.admin.service.ResourceService;
 import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.freemarker.FreemarkerTool;
@@ -9,10 +11,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ import java.util.List;
 @Component
 public class CommonDataInterceptor implements AsyncHandlerInterceptor {
 
+	@Resource
+	private ResourceService resourceService;
+
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -32,11 +36,21 @@ public class CommonDataInterceptor implements AsyncHandlerInterceptor {
 			// i18n, static method
 			modelAndView.addObject("I18nUtil", FreemarkerTool.generateStaticModel(I18nUtil.class.getName()));
 
-			// menu load
+			// resource load
 			XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
 			if (loginUser != null) {
 
-				// mock数据
+				// resourceList
+				List<XxlDeepResourceDTO> resourceList = resourceService.treeList(null, ResourceStatuEnum.NORMAL.getValue());
+				modelAndView.addObject("resourceList", resourceList);
+
+				// todo，filter permission
+				// 管理员过滤
+				if (loginUser.getRole() == 1) {
+					// 权限过滤
+				}
+
+				/*// mock数据
 				List<XxlDeepMenu> menuData = new ArrayList<>();
 				menuData.add(new XxlDeepMenu("首页", "/index", 1, "fa-home", null));						// index
 
@@ -70,12 +84,9 @@ public class CommonDataInterceptor implements AsyncHandlerInterceptor {
 				// 帮助
 				menuData.add(new XxlDeepMenu("帮助中心", "/help", 5, "fa-book", null));
 
-				// 管理员过滤
-				if (loginUser.getRole() == 1) {
-					// 权限过滤
-				}
 
-				modelAndView.addObject("menuData", menuData);
+
+				modelAndView.addObject("menuData", menuData);*/
 			}
 
 		}

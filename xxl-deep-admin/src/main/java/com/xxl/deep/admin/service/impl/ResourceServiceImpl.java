@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.service.impl;
 
+import com.xxl.deep.admin.constant.enums.ResourceTypeEnum;
 import com.xxl.deep.admin.mapper.XxlDeepResourceMapper;
 import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepResource;
@@ -37,6 +38,15 @@ public class ResourceServiceImpl implements ResourceService {
         }
 
 		// limit： 按钮只能是叶子节点 + 资源类型不能变化；
+		if (xxlDeepResource.getParentId() > 0) {
+			XxlDeepResource resource = xxlDeepResourceMapper.load(xxlDeepResource.getParentId());
+			if (resource == null) {
+				return new ResponseBuilder<String>().fail("操作失败，parentId非法").build();
+			}
+			if (ResourceTypeEnum.BUTTOM.getValue() == resource.getType()) {
+				return new ResponseBuilder<String>().fail("操作失败，按钮无法添加子资源").build();
+			}
+		}
 
 		xxlDeepResourceMapper.insert(xxlDeepResource);
 		return new ResponseBuilder<String>().success().build();
@@ -47,6 +57,12 @@ public class ResourceServiceImpl implements ResourceService {
 	*/
 	@Override
 	public Response<String> delete(List<Integer> ids) {
+
+		List<XxlDeepResource> resourceList = xxlDeepResourceMapper.queryByParentIds(ids);
+		if (CollectionTool.isNotEmpty(resourceList)) {
+			return new ResponseBuilder<String>().fail("删除失败，已关联子资源").build();
+		}
+
 		int ret = xxlDeepResourceMapper.delete(ids);
 		return ret>0? new ResponseBuilder<String>().success().build()
 					: new ResponseBuilder<String>().fail().build() ;

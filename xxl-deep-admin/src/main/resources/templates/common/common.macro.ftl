@@ -168,6 +168,39 @@
 </#macro>
 
 <#-- page module: Left-->
+<#macro renderMenu pagePath resourceList >
+	<#list resourceList as resource>
+		<#if resource.type ==0>
+			<#-- catalog -->
+			<#assign actived = "false" />
+			<#if resource.children?? && resource.children?size gt 0>
+				<#list resource.children as child>
+					<#if pagePath == child.url >
+						<#assign actived = "true" />
+					</#if>
+				</#list>
+			</#if>
+
+			<li class="treeview <#if actived == "true" >active</#if>" style="height: auto;"  >
+				<a href="javascript:void(0);"><i class="fa ${resource.icon}"></i><span>${resource.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+				<ul class="treeview-menu" >
+					<#if resource.children?? && resource.children?size gt 0>
+						<@renderMenu pagePath resource.children />
+					</#if>
+					<#--<#list resource.children as child>
+						<li class="<#if pagePath == child.url >active</#if>" ><a href="${request.contextPath}${child.url}" style="padding-top: 10px;"  ><i class="fa ${child.icon}"></i>${child.name}</a></li>
+					</#list>-->
+				</ul>
+			</li>
+		<#elseif resource.type ==1>
+			<#-- menu -->
+			<li class="nav-click <#if pagePath == resource.url >active</#if>" >
+				<a href="${request.contextPath}${resource.url}"><i class="fa ${resource.icon}"></i><span>${resource.name}</span></a>
+			</li>
+		</#if>
+	</#list>
+</#macro>
+
 <#macro commonLeft pagePath >
 	<!-- left -->
 	<aside class="main-sidebar">
@@ -180,33 +213,38 @@
                 <li class="header">${I18n.system_nav}</li>
 
 				<#-- menu list -->
-				<#if menuData?exists && menuData?size gt 0>
-					<#list menuData as parent>
-						<#if parent.menuList?exists && parent.menuList?size gt 0>
-							<#-- parent + child -->
+				<#if resourceList?? && resourceList?size gt 0>
+					<@renderMenu pagePath resourceList />
+				</#if>
+
+				<#--<#if resourceList?? && resourceList?size gt 0>
+					<#list resourceList as resource>
+						<#if resource.type ==0>
+							&lt;#&ndash; catalog &ndash;&gt;
 							<#assign actived = "false" />
-							<#list parent.menuList as child>
-								<#if pagePath == child.path >
+							<#list resource.children as child>
+								<#if pagePath == child.url >
 									<#assign actived = "true" />
 								</#if>
 							</#list>
 							<li class="treeview <#if actived == "true" >active</#if>" style="height: auto;"  >
-								<a href="#"><i class="fa ${parent.icon}"></i><span>${parent.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								<a href="javascript:void(0);"><i class="fa ${resource.icon}"></i><span>${resource.name}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 								</a>
 								<ul class="treeview-menu" >
-									<#list parent.menuList as child>
-										<li class="<#if pagePath == child.path >active</#if>" ><a href="${request.contextPath}${child.path}" style="padding-top: 10px;"  ><i class="fa ${child.icon}"></i>${child.name}</a></li>
+									<#list resource.children as child>
+										<li class="<#if pagePath == child.url >active</#if>" ><a href="${request.contextPath}${child.url}" style="padding-top: 10px;"  ><i class="fa ${child.icon}"></i>${child.name}</a></li>
 									</#list>
 								</ul>
 							</li>
-						<#else>
-							<#-- only parent -->
-							<li class="nav-click <#if pagePath == parent.path >active</#if>" >
-								<a href="${request.contextPath}${parent.path}"><i class="fa ${parent.icon}"></i><span>${parent.name}</span></a>
+
+						<#elseif resource.type ==1>
+							&lt;#&ndash; menu &ndash;&gt;
+							<li class="nav-click <#if pagePath == resource.url >active</#if>" >
+								<a href="${request.contextPath}${resource.url}"><i class="fa ${resource.icon}"></i><span>${resource.name}</span></a>
 							</li>
 						</#if>
 					</#list>
-				</#if>
+				</#if>-->
 
 			</ul>
 		</section>

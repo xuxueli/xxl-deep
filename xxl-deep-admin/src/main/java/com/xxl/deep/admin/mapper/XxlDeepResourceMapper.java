@@ -49,4 +49,9 @@ import java.util.List;
      */
     public List<XxlDeepResource> queryResource(@Param("name") String name, @Param("status") int status);
 
+    /**
+     * queryByParentIds
+     */
+    List<XxlDeepResource> queryByParentIds(@Param("ids") List<Integer> ids);
+
 }

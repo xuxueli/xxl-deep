@@ -6,8 +6,9 @@ package com.xxl.deep.admin.constant.enums;
  */
 public enum ResourceTypeEnum {
 
-    MENU(0, "菜单"),
-    BUTTOM(1, "按钮");
+    CATALOG(0, "目录"),
+    MENU(1, "菜单"),
+    BUTTOM(2, "按钮");
 
     private int value;
     private String desc;

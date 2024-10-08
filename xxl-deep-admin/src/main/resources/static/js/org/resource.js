@@ -140,7 +140,7 @@ $(function() {
 	// tree grid : expandAll / collapseAll
 	tree = new $.fn.dataTable.TreeGrid(mainDataTable,{
 		left: 20,
-		expandAll: true,
+		expandAll: false,
 		expandIcon: '<span><i class="fa fa-fw  fa-plus-square-o" ></i></span>',
 		collapseIcon: '<span><i class="fa fa-fw  fa-minus-square-o" ></i></span>'
 	});
