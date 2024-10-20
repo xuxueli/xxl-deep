@@ -14,7 +14,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Permission {
-	
+
+	/**
+	 * permission val
+	 */
+	String value() default "";
+
 	/**
 	 * 登录拦截 (默认拦截)
 	 */
@@ -22,8 +27,6 @@ public @interface Permission {
 
 	/**
 	 * 要求管理员权限（默认需要）
-	 *
-	 * @return
 	 */
 	boolean adminuser() default false;
 

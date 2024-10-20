@@ -115,10 +115,26 @@
     <select id="queryByParentIds" parameterType="java.util.Map" resultMap="XxlDeepResource">
         SELECT <include refid="Base_Column_List" />
         FROM xxl_deep_resource AS t
-        WHERE t.`id` in
+        WHERE t.`parent_id` in
         <foreach collection="ids" item="parentId" index="index" separator="," open="(" close=")" >
             #{parentId}
         </foreach>
+    </select>
+
+    <select id="queryResourceByUserId" parameterType="java.util.Map" resultMap="XxlDeepResource">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_deep_resource AS t
+        WHERE   t.`status` = #{status}
+                AND t.`id` in (
+                    SELECT res_id
+                    FROM xxl_deep_role_res
+                    WHERE role_id in (
+                        SELECT role_id
+                        FROM xxl_deep_user_role
+                        WHERE user_id = #{userId}
+                    )
+                )
+        ORDER BY t.`order` ASC
     </select>
 
 </mapper>

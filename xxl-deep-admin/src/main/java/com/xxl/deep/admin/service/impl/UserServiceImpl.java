@@ -15,7 +15,6 @@ import com.xxl.tool.core.StringTool;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private XxlDeepUserMapper userMapper;
     @Resource
     private XxlDeepRoleMapper xxlDeepRoleMapper;
-    @Autowired
+    @Resource
     private XxlDeepUserRoleMapper xxlDeepUserRoleMapper;
 
     /**
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("system_lengh_limit")+"[4-20]" ).build();
         }
         // md5 password
-        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));    // todo，move to token
 
         // valid user role
         if (CollectionTool.isNotEmpty(roleIds)) {

@@ -54,4 +54,9 @@ import java.util.List;
      */
     List<XxlDeepResource> queryByParentIds(@Param("ids") List<Integer> ids);
 
+    /**
+     * Tree查询（By User）
+     */
+    List<XxlDeepResource> queryResourceByUserId(@Param("userId") int userId, @Param("status") int status);
+
 }

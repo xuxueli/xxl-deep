@@ -1,8 +1,10 @@
 package com.xxl.deep.admin.service.impl;
 
-import com.xxl.deep.admin.model.entity.XxlDeepUser;
-import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.deep.admin.mapper.XxlDeepUserMapper;
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
+import com.xxl.deep.admin.model.entity.XxlDeepUser;
+import com.xxl.deep.admin.service.ResourceService;
+import com.xxl.deep.admin.util.I18nUtil;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.gson.GsonTool;
 import com.xxl.tool.net.CookieTool;
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author xuxueli 2019-05-04 22:13:264
@@ -26,6 +29,8 @@ public class LoginService {
 
     @Resource
     private XxlDeepUserMapper xxlJobUserMapper;
+    @Resource
+    private ResourceService resourceService;
 
     /**
      * make token from user
@@ -123,6 +128,19 @@ public class LoginService {
             }
         }
         return null;
+    }
+
+    /**
+     * query Authentication resource
+     * @param loginUser
+     * @return
+     */
+    public List<XxlDeepResourceDTO> queryAuthentication(XxlDeepUser loginUser){
+        // all resource
+        //List<XxlDeepResourceDTO> resourceList = resourceService.treeList(null, ResourceStatuEnum.NORMAL.getValue());
+        // auth resource
+        List<XxlDeepResourceDTO> resourceList = resourceService.treeListByUserId(loginUser.getId());
+        return resourceList;
     }
 
 

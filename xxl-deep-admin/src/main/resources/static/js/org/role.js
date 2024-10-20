@@ -359,7 +359,7 @@ $(function() {
 							var nodes = zTreeObj.getNodesByParam("id", nodeId, null);
 							if (nodes && nodes.length > 0) {
 								var node = nodes[0];
-								zTreeObj.checkNode(node, true, true);
+								zTreeObj.checkNode(node, true, false);	// checkTypeFlag: 是否父子节点联动
 							}
 						});
 						//console.log("checked: "+ zTreeObj.getCheckedNodes(true).map(item => item.id));
@@ -416,8 +416,8 @@ $(function() {
 			check: {
 				enable: true,
 				chkboxType : {
-					"Y" : "ps",
-					"N" : "ps"
+					"Y" : "ps",	// ps
+					"N" : "ps"	// ps
 				}
 			},
 			data: {

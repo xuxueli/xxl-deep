@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.service.impl;
 
+import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
 import com.xxl.deep.admin.constant.enums.ResourceTypeEnum;
 import com.xxl.deep.admin.mapper.XxlDeepResourceMapper;
 import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
@@ -124,6 +125,15 @@ public class ResourceServiceImpl implements ResourceService {
 		return result;
 	}
 
+	@Override
+	public List<XxlDeepResourceDTO> treeListByUserId(int userId) {
+		List<XxlDeepResource> resourceList = xxlDeepResourceMapper.queryResourceByUserId(userId, ResourceStatuEnum.NORMAL.getValue());
+		return generateTreeList(resourceList);
+	}
+
+	/**
+	 * build resource tree
+	 */
 	private List<XxlDeepResourceDTO> generateTreeList(List<XxlDeepResource> resourceList) {
 		List<XxlDeepResourceDTO> resultList = new ArrayList<>();
 		if (CollectionTool.isEmpty(resourceList)) {

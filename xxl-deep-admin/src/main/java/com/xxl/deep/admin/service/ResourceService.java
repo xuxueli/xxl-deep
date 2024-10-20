@@ -49,4 +49,9 @@ public interface ResourceService {
      */
     public List<XxlDeepResourceDTO> simpleTreeList(String name, int status);
 
+    /**
+     * Tree查询（已授权）
+     */
+    public List<XxlDeepResourceDTO> treeListByUserId(int userId);
+
 }
