@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.ResponseBuilder;
+import com.xxl.deep.admin.annotation.Permission;
 
 /**
 * ${classInfo.className} Controller
@@ -27,7 +28,7 @@ public class ${classInfo.className}Controller {
     * 页面
     */
     @RequestMapping
-    @Permission(adminuser = true)
+    @Permission
     public String index(Model model) {
         return "org/${classInfo.className?uncap_first}";
     }

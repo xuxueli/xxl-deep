@@ -16,12 +16,6 @@ public class XxlDeepUser {
 	private Date addTime;
 	private Date updateTime;
 
-	// tmp
-	private int role;				// 角色：0-普通用户、1-管理员
-	public int getRole() {
-		return 1;
-	}
-
 
 	public int getId() {
 		return id;

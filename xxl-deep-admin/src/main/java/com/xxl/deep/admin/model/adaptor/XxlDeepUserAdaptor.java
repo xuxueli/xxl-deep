@@ -1,14 +1,17 @@
 package com.xxl.deep.admin.model.adaptor;
 
+import com.xxl.deep.admin.constant.enums.ResourceStatuEnum;
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
+import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepRoleDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.MapTool;
+import com.xxl.tool.core.StringTool;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class XxlDeepUserAdaptor {
@@ -72,6 +75,48 @@ public class XxlDeepUserAdaptor {
         xxlRole.setUpdateTime(roleDTO.getUpdateTime());
 
         return xxlRole;
+    }
+
+    /**
+     * adapt to login user
+     *
+     * @param xxlDeepUser
+     * @param resourceList
+     * @return
+     */
+    public static LoginUserDTO adapt2LoginUser(XxlDeepUser xxlDeepUser, List<XxlDeepResourceDTO> resourceList) {
+        if (xxlDeepUser == null) {
+            return null;
+        }
+
+        LoginUserDTO loginUserDTO = new LoginUserDTO();
+        loginUserDTO.setId(xxlDeepUser.getId());
+        loginUserDTO.setUsername(xxlDeepUser.getUsername());
+        loginUserDTO.setPassword(xxlDeepUser.getPassword());
+        loginUserDTO.setUserToken(xxlDeepUser.getUserToken());
+        if (CollectionTool.isNotEmpty(resourceList)) {
+            /*List<String> permissionList = resourceList.stream()
+                    .filter(x -> x.getStatus()== ResourceStatuEnum.NORMAL.getValue())
+                    .map(XxlDeepResourceDTO::getPermission)
+                    .collect(Collectors.toList());*/
+            Set<String> permissionList = extractPermissions(resourceList);
+            loginUserDTO.setPermissionList(new ArrayList<>(permissionList));
+        }
+
+        return loginUserDTO;
+    }
+
+    private static Set<String> extractPermissions(List<XxlDeepResourceDTO> resources) {
+        Set<String> permissions = new HashSet<>();
+        for (XxlDeepResourceDTO resource : resources) {
+            if (StringTool.isNotBlank(resource.getPermission())) {
+                permissions.add(resource.getPermission().trim());
+            }
+            if (CollectionTool.isNotEmpty(resource.getChildren())) {
+                permissions.addAll(extractPermissions(resource.getChildren()));
+            }
+        }
+        return permissions;
     }
 
 }

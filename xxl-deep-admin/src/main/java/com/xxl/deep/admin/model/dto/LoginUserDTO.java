@@ -1,24 +1,22 @@
 package com.xxl.deep.admin.model.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author xuxueli 2019-05-04 16:43:12
  */
-public class XxlDeepUserDTO {
+public class LoginUserDTO {
 
 	private int id;
 	private String username;		// 账号
 	private String password;		// 密码
 	private String userToken;		// 登录token
-	private int status;				// 状态：0-正常、1-停用
 	private String realName;		// 真实姓名
-	private Date addTime;
-	private Date updateTime;
 
 	// other
-	private List<Integer> roleIds;
+	private List<String> permissionList;	// resource permission list
 
 
 	public int getId() {
@@ -53,14 +51,6 @@ public class XxlDeepUserDTO {
 		this.userToken = userToken;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
 	public String getRealName() {
 		return realName;
 	}
@@ -69,29 +59,12 @@ public class XxlDeepUserDTO {
 		this.realName = realName;
 	}
 
-	public Date getAddTime() {
-		return addTime;
+	public List<String> getPermissionList() {
+		return permissionList;
 	}
 
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
+	public void setPermissionList(List<String> permissionList) {
+		this.permissionList = permissionList;
 	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public List<Integer> getRoleIds() {
-		return roleIds;
-	}
-
-	public void setRoleIds(List<Integer> roleIds) {
-		this.roleIds = roleIds;
-	}
-
 
 }

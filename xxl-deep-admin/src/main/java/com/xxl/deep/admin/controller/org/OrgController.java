@@ -33,7 +33,7 @@ public class OrgController {
      * 页面
      */
     @RequestMapping
-    @Permission(adminuser = true)
+    @Permission("org:org")
     public String index(Model model) {
 
         model.addAttribute("orgStatuEnum", OrgStatuEnum.values());
@@ -63,6 +63,7 @@ public class OrgController {
      */
     @RequestMapping("/treeList")
     @ResponseBody
+    @Permission("org:org")
     public Response<List<XxlDeepOrgDTO>> treeList(@RequestParam(required = false) String name,
                                                   @RequestParam(required = false, defaultValue = "-1") int status) {
 
@@ -84,6 +85,7 @@ public class OrgController {
      */
     @RequestMapping("/simpleTreeList")
     @ResponseBody
+    @Permission("org:org")
     public Response<List<XxlDeepOrgDTO>> simpleTreeList(@RequestParam(required = false) String name,
                                                              @RequestParam(required = false, defaultValue = "-1") int status) {
         List<XxlDeepOrgDTO> treeListData = orgService.simpleTreeList(name, status);
@@ -95,6 +97,7 @@ public class OrgController {
      */
     @RequestMapping("/load")
     @ResponseBody
+    @Permission("org:org")
     public Response<XxlDeepOrg> load(int id){
         return orgService.load(id);
     }
@@ -104,6 +107,7 @@ public class OrgController {
      */
     @RequestMapping("/insert")
     @ResponseBody
+    @Permission("org:org")
     public Response<String> insert(XxlDeepOrg xxlDeepOrg){
         return orgService.insert(xxlDeepOrg);
     }
@@ -113,6 +117,7 @@ public class OrgController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @Permission("org:org")
     public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
         return orgService.delete(ids);
     }
@@ -122,6 +127,7 @@ public class OrgController {
      */
     @RequestMapping("/update")
     @ResponseBody
+    @Permission("org:org")
     public Response<String> update(XxlDeepOrg xxlDeepOrg){
         return orgService.update(xxlDeepOrg);
     }

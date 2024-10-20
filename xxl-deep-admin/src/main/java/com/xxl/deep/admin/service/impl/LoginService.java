@@ -1,6 +1,9 @@
 package com.xxl.deep.admin.service.impl;
 
+import com.xxl.deep.admin.constant.enums.UserStatuEnum;
 import com.xxl.deep.admin.mapper.XxlDeepUserMapper;
+import com.xxl.deep.admin.model.adaptor.XxlDeepUserAdaptor;
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepResourceDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.service.ResourceService;
@@ -34,28 +37,33 @@ public class LoginService {
 
     /**
      * make token from user
-     *
-     * @param xxlJobUser
-     * @return
      */
-    private String makeToken(XxlDeepUser xxlJobUser){
-        String tokenJson = GsonTool.toJson(xxlJobUser);
+    private String makeToken(LoginUserDTO loginUserDTO){
+        String tokenJson = GsonTool.toJson(loginUserDTO);
         String tokenHex = new BigInteger(tokenJson.getBytes()).toString(16);
         return tokenHex;
     }
 
     /**
      * parse token to user
-     * @param tokenHex
-     * @return
      */
-    private XxlDeepUser parseToken(String tokenHex){
-        XxlDeepUser xxlJobUser = null;
+    private LoginUserDTO parseToken(String tokenHex){
+        LoginUserDTO loginUser = null;
         if (tokenHex != null) {
             String tokenJson = new String(new BigInteger(tokenHex, 16).toByteArray());      // username_password(md5)
-            xxlJobUser = GsonTool.fromJson(tokenJson, XxlDeepUser.class);
+            loginUser = GsonTool.fromJson(tokenJson, LoginUserDTO.class);
         }
-        return xxlJobUser;
+        return loginUser;
+    }
+
+    /**
+     * get login user from request
+     * @param request
+     * @return
+     */
+    public static LoginUserDTO getLoginUser(HttpServletRequest request){
+        LoginUserDTO loginUser = (LoginUserDTO) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        return loginUser;
     }
 
     /**
@@ -74,18 +82,25 @@ public class LoginService {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("login_param_empty") ).build();
         }
 
-        // valid passowrd
+        // valid user, empty、status、passowrd
         XxlDeepUser xxlDeepUser = xxlJobUserMapper.loadByUserName(username);
         if (xxlDeepUser == null) {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("login_param_unvalid") ).build();
+        }
+        if (xxlDeepUser.getStatus() != UserStatuEnum.NORMAL.getStatus()) {
+            return new ResponseBuilder<String>().fail( I18nUtil.getString("login_status_invalid") ).build();
         }
         String passwordMd5 = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!passwordMd5.equals(xxlDeepUser.getPassword())) {
             return new ResponseBuilder<String>().fail( I18nUtil.getString("login_param_unvalid") ).build();
         }
 
+        // find resource
+        List<XxlDeepResourceDTO> resourceList = this.queryAuthentication(xxlDeepUser.getId());
+
         // make token
-        String loginToken = makeToken(xxlDeepUser);
+        LoginUserDTO loginUserDTO = XxlDeepUserAdaptor.adapt2LoginUser(xxlDeepUser, resourceList);
+        String loginToken = makeToken(loginUserDTO);
 
         // do login
         CookieTool.set(response, LOGIN_IDENTITY_KEY, loginToken, ifRemember);
@@ -109,20 +124,20 @@ public class LoginService {
      * @param request
      * @return
      */
-    public XxlDeepUser ifLogin(HttpServletRequest request, HttpServletResponse response){
+    public LoginUserDTO ifLogin(HttpServletRequest request, HttpServletResponse response){
         String cookieToken = CookieTool.getValue(request, LOGIN_IDENTITY_KEY);
         if (cookieToken != null) {
-            XxlDeepUser cookieUser = null;
+            LoginUserDTO loginUser = null;
             try {
-                cookieUser = parseToken(cookieToken);
+                loginUser = parseToken(cookieToken);
             } catch (Exception e) {
                 logout(request, response);
             }
-            if (cookieUser != null) {
-                XxlDeepUser dbUser = xxlJobUserMapper.loadByUserName(cookieUser.getUsername());
+            if (loginUser != null) {
+                XxlDeepUser dbUser = xxlJobUserMapper.loadByUserName(loginUser.getUsername());
                 if (dbUser != null) {
-                    if (cookieUser.getPassword().equals(dbUser.getPassword())) {
-                        return dbUser;
+                    if (loginUser.getPassword().equals(dbUser.getPassword())) {
+                        return loginUser;
                     }
                 }
             }
@@ -132,14 +147,14 @@ public class LoginService {
 
     /**
      * query Authentication resource
-     * @param loginUser
+     * @param userId
      * @return
      */
-    public List<XxlDeepResourceDTO> queryAuthentication(XxlDeepUser loginUser){
+    public List<XxlDeepResourceDTO> queryAuthentication(int userId){
         // all resource
         //List<XxlDeepResourceDTO> resourceList = resourceService.treeList(null, ResourceStatuEnum.NORMAL.getValue());
         // auth resource
-        List<XxlDeepResourceDTO> resourceList = resourceService.treeListByUserId(loginUser.getId());
+        List<XxlDeepResourceDTO> resourceList = resourceService.treeListByUserId(userId);
         return resourceList;
     }
 

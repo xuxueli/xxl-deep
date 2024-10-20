@@ -34,11 +34,13 @@ public class IndexController {
 
 
 	@RequestMapping("/")
+	@Permission
 	public String defaultpage(Model model) {
 		return "redirect:/index";
 	}
 
 	@RequestMapping("/index")
+	@Permission
 	public String index(Model model) {
 		//Map<String, Object> dashboardMap = xxlJobService.dashboardInfo();
 
@@ -58,6 +60,17 @@ public class IndexController {
 		model.addAllAttributes(dashboardMap);
 
 		return "index";
+	}
+
+	@RequestMapping("/help")
+	@Permission
+	public String help() {
+
+		/*if (!PermissionInterceptor.ifLogin(request)) {
+			return "redirect:/toLogin";
+		}*/
+
+		return "help";
 	}
 
     /*@RequestMapping("/chartInfo")
@@ -90,7 +103,7 @@ public class IndexController {
     }*/
 	
 	@RequestMapping("/toLogin")
-	@Permission(limit=false)
+	@Permission(login = false)
 	public ModelAndView toLogin(HttpServletRequest request, HttpServletResponse response,ModelAndView modelAndView) {
 		if (loginService.ifLogin(request, response) != null) {
 			modelAndView.setView(new RedirectView("/",true,false));
@@ -101,7 +114,7 @@ public class IndexController {
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody
-	@Permission(limit=false)
+	@Permission(login=false)
 	public Response<String> loginDo(HttpServletRequest request, HttpServletResponse response, String userName, String password, String ifRemember){
 		boolean ifRem = StringTool.isNotBlank(ifRemember) && "on".equals(ifRemember);
 		return loginService.login(response, userName, password, ifRem);
@@ -109,23 +122,13 @@ public class IndexController {
 	
 	@RequestMapping(value="logout", method=RequestMethod.POST)
 	@ResponseBody
-	@Permission(limit=false)
+	@Permission(login=false)
 	public Response<String> logout(HttpServletRequest request, HttpServletResponse response){
 		return loginService.logout(request, response);
 	}
-	
-	@RequestMapping("/help")
-	public String help() {
-
-		/*if (!PermissionInterceptor.ifLogin(request)) {
-			return "redirect:/toLogin";
-		}*/
-
-		return "help";
-	}
 
 	@RequestMapping(value = "/errorpage")
-	@Permission(limit=false)
+	@Permission(login = false)
 	public ModelAndView errorPage(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 
 		String exceptionMsg = "HTTP Status Code: "+response.getStatus();

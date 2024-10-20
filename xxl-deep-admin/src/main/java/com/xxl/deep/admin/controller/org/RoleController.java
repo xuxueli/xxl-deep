@@ -30,7 +30,7 @@ public class RoleController {
     private RoleService roleService;
 
     @RequestMapping
-    @Permission(adminuser = true)
+    @Permission("org:role")
     public String index(Model model) {
 
         /*PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 100);*/
@@ -44,6 +44,7 @@ public class RoleController {
      */
     @RequestMapping("/pageList")
     @ResponseBody
+    @Permission("org:role")
     public Response<PageModel<XxlDeepRole>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
                                                      @RequestParam(required = false, defaultValue = "10") int pagesize,
                                                      String name) {
@@ -56,6 +57,7 @@ public class RoleController {
     */
     @RequestMapping("/insert")
     @ResponseBody
+    @Permission("org:role")
     public Response<String> insert(XxlDeepRole xxlDeepRole){
         return roleService.insert(xxlDeepRole);
     }
@@ -65,6 +67,7 @@ public class RoleController {
     */
     @RequestMapping("/delete")
     @ResponseBody
+    @Permission("org:role")
     public Response<String> delete(@RequestParam("ids[]") List<Integer> ids) {
         return roleService.deleteByIds(ids);
     }
@@ -74,6 +77,7 @@ public class RoleController {
     */
     @RequestMapping("/update")
     @ResponseBody
+    @Permission("org:role")
     public Response<String> update(XxlDeepRole xxlDeepRole){
         return roleService.update(xxlDeepRole);
     }
@@ -83,6 +87,7 @@ public class RoleController {
     */
     @RequestMapping("/load")
     @ResponseBody
+    @Permission("org:role")
     public Response<XxlDeepRole> load(int id){
         return roleService.load(id);
     }
@@ -92,6 +97,7 @@ public class RoleController {
      */
     @RequestMapping("/loadRoleRes")
     @ResponseBody
+    @Permission("org:role")
     public Response<List<Integer>> loadRoleRes(int roleId){
         return roleService.loadRoleRes(roleId);
     }
@@ -101,6 +107,7 @@ public class RoleController {
      */
     @RequestMapping("/updateRoleRes")
     @ResponseBody
+    @Permission("org:role")
     public Response<String> updateRoleRes(@RequestParam int roleId,
                                           @RequestParam(value = "resourceIds[]", required = false) List<Integer> resourceIds){
         return roleService.updateRoleRes(roleId, resourceIds);

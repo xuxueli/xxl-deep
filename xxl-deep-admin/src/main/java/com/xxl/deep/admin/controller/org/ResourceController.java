@@ -34,7 +34,7 @@ public class ResourceController {
      * 页面
      */
     @RequestMapping
-    @Permission(adminuser = true)
+    @Permission("org:resource")
     public String index(Model model) {
 
         model.addAttribute("resourceStatuEnum", ResourceStatuEnum.values());
@@ -66,6 +66,7 @@ public class ResourceController {
      */
     @RequestMapping("/treeList")
     @ResponseBody
+    @Permission("org:resource")
     public Response<List<XxlDeepResourceDTO>> treeList(@RequestParam(required = false) String name,
                                                        @RequestParam(required = false, defaultValue = "-1") int status) {
 
@@ -87,6 +88,7 @@ public class ResourceController {
      */
     @RequestMapping("/simpleTreeList")
     @ResponseBody
+    @Permission("org:resource")
     public Response<List<XxlDeepResourceDTO>> simpleTreeList(@RequestParam(required = false) String name,
                                                              @RequestParam(required = false, defaultValue = "-1") int status) {
         List<XxlDeepResourceDTO> treeListData = resourceService.simpleTreeList(name, status);
@@ -98,6 +100,7 @@ public class ResourceController {
      */
     @RequestMapping("/load")
     @ResponseBody
+    @Permission("org:resource")
     public Response<XxlDeepResource> load(int id){
         return resourceService.load(id);
     }
@@ -107,6 +110,7 @@ public class ResourceController {
      */
     @RequestMapping("/insert")
     @ResponseBody
+    @Permission("org:resource")
     public Response<String> insert(XxlDeepResource xxlDeepResource){
         return resourceService.insert(xxlDeepResource);
     }
@@ -116,6 +120,7 @@ public class ResourceController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @Permission("org:resource")
     public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
         return resourceService.delete(ids);
     }
@@ -125,6 +130,7 @@ public class ResourceController {
      */
     @RequestMapping("/update")
     @ResponseBody
+    @Permission("org:resource")
     public Response<String> update(XxlDeepResource xxlDeepResource){
         return resourceService.update(xxlDeepResource);
     }

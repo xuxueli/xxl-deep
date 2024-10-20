@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.controller.tool;
 
+import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.util.codegen.ClassInfo;
 import com.xxl.deep.admin.util.codegen.TableParseUtil;
 import com.xxl.tool.core.StringTool;
@@ -16,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,13 +30,14 @@ public class CodeGenController {
     private Configuration freemarkerConfig;
 
     @RequestMapping
+    @Permission
     public String index(Model model) {
-        //model.addAttribute("groupList", null);
         return "tool/codegen";
     }
 
     @RequestMapping("/genCode")
     @ResponseBody
+    @Permission
     public Response<Map<String, String>> codeGenerate(String tableSql) {
 
         try {

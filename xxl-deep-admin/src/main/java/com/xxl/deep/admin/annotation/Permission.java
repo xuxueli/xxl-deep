@@ -9,6 +9,12 @@ import java.lang.annotation.Target;
 /**
  * permission annotation
  *
+ * <pre>
+ * 		@Permission						: need login, but not valid permission
+ * 		@Permission("xxx")				: need login, and valid permission
+ * 		@Permission(login = false)		: not need login, not valid anything
+ * </pre>
+ *
  * @author xuxueli 2015-12-12 18:29:02
  */
 @Target(ElementType.METHOD)
@@ -16,18 +22,14 @@ import java.lang.annotation.Target;
 public @interface Permission {
 
 	/**
-	 * permission val
+	 * permission value (need login)
 	 */
 	String value() default "";
 
 	/**
-	 * 登录拦截 (默认拦截)
+	 * need login
 	 */
-	boolean limit() default true;
+	boolean login() default true;
 
-	/**
-	 * 要求管理员权限（默认需要）
-	 */
-	boolean adminuser() default false;
 
 }

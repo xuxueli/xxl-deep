@@ -4,6 +4,7 @@ import com.xxl.deep.admin.mapper.XxlDeepRoleMapper;
 import com.xxl.deep.admin.mapper.XxlDeepUserMapper;
 import com.xxl.deep.admin.mapper.XxlDeepUserRoleMapper;
 import com.xxl.deep.admin.model.adaptor.XxlDeepUserAdaptor;
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepRole;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
@@ -114,7 +115,7 @@ public class UserServiceImpl implements UserService {
      * 删除
      */
     @Override
-    public Response<String> deleteByIds(List<Integer> userIds, XxlDeepUser loginUser) {
+    public Response<String> deleteByIds(List<Integer> userIds, LoginUserDTO loginUser) {
 
         // valid
         if (CollectionTool.isEmpty(userIds)) {
@@ -142,7 +143,7 @@ public class UserServiceImpl implements UserService {
      * 更新
      */
     @Override
-    public Response<String> update(XxlDeepUserDTO xxlJobUser, XxlDeepUser loginUser) {
+    public Response<String> update(XxlDeepUserDTO xxlJobUser, LoginUserDTO loginUser) {
 
         // adapt
         XxlDeepUser user = XxlDeepUserAdaptor.adapt(xxlJobUser);
@@ -193,7 +194,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改密码
      */
-    public Response<String> updatePwd(XxlDeepUser loginUser, String password){
+    public Response<String> updatePwd(LoginUserDTO loginUser, String password){
         // valid password
         if (StringTool.isBlank(password)){
             new ResponseBuilder<String>().fail( "密码不可为空" ).build();

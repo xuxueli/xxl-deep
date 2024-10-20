@@ -75,22 +75,28 @@ CREATE TABLE `xxl_deep_role_res` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `xxl_deep_user` (`id`, `username`, `password`, `user_token`, `status`, `real_name`, `add_time`, `update_time`) VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '', 0 , '吴彦祖', now(), now());
-INSERT INTO `xxl_deep_role` (`id`, `name`, `order`, `add_time`, `update_time`) VALUES (1, '管理员', 1, now(), now());
-INSERT INTO `xxl_deep_user_role` (`id`, `user_id`, `role_id`, `add_time`, `update_time`) VALUES (1, 1, 1, now(), now());
+INSERT INTO `xxl_deep_user` (`id`, `username`, `password`, `user_token`, `status`, `real_name`, `add_time`, `update_time`)
+VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '', 0 , '吴彦祖', now(), now()),
+       (2, 'user', 'e10adc3949ba59abbe56e057f20f883e', '', 0 , '张三', now(), now());
+INSERT INTO `xxl_deep_role` (`id`, `name`, `order`, `add_time`, `update_time`)
+VALUES (1, '管理员', 1, now(), now()),
+       ( 2, '普通用户', 2, now(), now());
+INSERT INTO `xxl_deep_user_role` (`id`, `user_id`, `role_id`, `add_time`, `update_time`)
+VALUES (1, 1, 1, now(), now()),
+       (2, 2, 2, now(), now());
 INSERT INTO `xxl_deep_resource` (`id`, `parent_id`, `name`, `type`, `permission`, `url`, `icon`, `order`, `status`, `add_time`, `update_time`)
 VALUES (1, 0,'首页', 1, 'index', '/index', 'fa fa-home', 200, 0, now(), now()),
-        (2, 0,'组织管理', 0, '/org', '/org', 'fa-users', 210, 0, now(), now()),
-        (3, 2,'用户管理', 1, '/org/user', '/org/user', "", 211, 0, now(), now()),
-        (4, 2,'角色管理', 1, '/org/role', '/org/role', "", 212, 0, now(), now()),
-        (5, 2, '资源管理', 1, '/org/resource', '/org/resource', "", 213, 0, now(), now()),
-        (6, 2,'组织管理', 1, '/org/org', '/org/org', "", 214, 0, now(), now()),
-        (7, 0,'系统管理', 0, '/system', '/system', 'fa-cogs', 220, 0, now(), now()),
-        (8, 7,'通知公告', 1, '/system', '/system/notify', 'fa-cogs', 221, 0, now(), now()),
-        (9, 7,'审计日志', 1, '/system', '//system/log', 'fa-cogs', 222, 0, now(), now()),
-        (10, 0,'系统工具', 0, '/tool', '/tool', 'fa-wrench', 230, 0, now(), now()),
-        (11, 10,'代码生成', 1, '/tool/codegen', '/tool/codegen', "", 231, 0, now(), now()),
-        (12, 0,'帮助中心', 1, '/help', '/help', 'fa-book', 240, 0, now(), now());
+        (2, 0,'组织管理', 0, 'org', '/org', 'fa-users', 210, 0, now(), now()),
+        (3, 2,'用户管理', 1, 'org:user', '/org/user', "", 211, 0, now(), now()),
+        (4, 2,'角色管理', 1, 'org:role', '/org/role', "", 212, 0, now(), now()),
+        (5, 2, '资源管理', 1, 'org:resource', '/org/resource', "", 213, 0, now(), now()),
+        (6, 2,'组织管理', 1, 'org:org', '/org/org', "", 214, 0, now(), now()),
+        (7, 0,'系统管理', 0, 'system', '/system', 'fa-cogs', 220, 0, now(), now()),
+        (8, 7,'通知公告', 1, 'system:notify', '/system/notify', 'fa-cogs', 221, 0, now(), now()),
+        (9, 7,'审计日志', 1, 'system:log', '//system/log', 'fa-cogs', 222, 0, now(), now()),
+        (10, 0,'系统工具', 0, 'tool', '/tool', 'fa-wrench', 230, 0, now(), now()),
+        (11, 10,'代码生成', 1, 'tool:codegen', '/tool/codegen', "", 231, 0, now(), now()),
+        (12, 0,'帮助中心', 1, 'help', '/help', 'fa-book', 240, 0, now(), now());
 INSERT INTO `xxl_deep_role_res` (`id`, `role_id`, `res_id`, `add_time`, `update_time`)
 VALUES (1, 1, 1, now(), now()),
        (2, 1, 2, now(), now()),
@@ -103,7 +109,11 @@ VALUES (1, 1, 1, now(), now()),
        (9, 1, 9, now(), now()),
        (10, 1, 10, now(), now()),
        (11, 1, 11, now(), now()),
-       (12, 1, 12, now(), now());
+       (12, 1, 12, now(), now()),
+       (13, 2, 1, now(), now()),
+       (14, 2, 10, now(), now()),
+       (15, 2, 11, now(), now()),
+       (16, 2, 12, now(), now());
 
 commit;
 

@@ -2,9 +2,9 @@ package com.xxl.deep.admin.controller.org;
 
 import com.xxl.deep.admin.annotation.Permission;
 import com.xxl.deep.admin.constant.enums.UserStatuEnum;
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepRole;
-import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.deep.admin.service.RoleService;
 import com.xxl.deep.admin.service.UserService;
 import com.xxl.deep.admin.service.impl.LoginService;
@@ -34,7 +34,7 @@ public class UserController {
     private RoleService roleService;
 
     @RequestMapping
-    @Permission(adminuser = true)
+    @Permission("org:user")
     public String index(Model model) {
 
         PageModel<XxlDeepRole> pageModel = roleService.pageList(0, 999, null);
@@ -47,7 +47,7 @@ public class UserController {
 
     @RequestMapping("/pageList")
     @ResponseBody
-    @Permission(adminuser = true)
+    @Permission("org:user")
     public Response<PageModel<XxlDeepUserDTO>> pageList(@RequestParam(required = false, defaultValue = "0") int start,
                                                      @RequestParam(required = false, defaultValue = "10") int length,
                                                      String username,
@@ -59,32 +59,33 @@ public class UserController {
 
     @RequestMapping("/add")
     @ResponseBody
-    @Permission(adminuser = true)
+    @Permission("org:user")
     public Response<String> add(XxlDeepUserDTO xxlJobUser) {
         return userService.insert(xxlJobUser);
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    @Permission(adminuser = true)
+    @Permission("org:user")
     public Response<String> update(HttpServletRequest request, XxlDeepUserDTO xxlJobUser) {
-        XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        LoginUserDTO loginUser = LoginService.getLoginUser(request);
         return userService.update(xxlJobUser, loginUser);
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    @Permission(adminuser = true)
+    @Permission("org:user")
     public Response<String> delete(HttpServletRequest request,
                                    @RequestParam("ids[]") List<Integer> ids) {
-        XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        LoginUserDTO loginUser = LoginService.getLoginUser(request);
         return userService.deleteByIds(ids, loginUser);
     }
 
     @RequestMapping("/updatePwd")
     @ResponseBody
+    @Permission
     public Response<String> updatePwd(HttpServletRequest request, String password){
-        XxlDeepUser loginUser = (XxlDeepUser) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        LoginUserDTO loginUser = LoginService.getLoginUser(request);
         return userService.updatePwd(loginUser, password);
     }
 

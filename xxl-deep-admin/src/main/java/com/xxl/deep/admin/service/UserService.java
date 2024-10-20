@@ -1,5 +1,6 @@
 package com.xxl.deep.admin.service;
 
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepUser;
 import com.xxl.tool.response.PageModel;
@@ -27,17 +28,17 @@ public interface UserService {
     /**
      * 删除
      */
-    Response<String> deleteByIds(List<Integer> userIds, XxlDeepUser loginUser);
+    Response<String> deleteByIds(List<Integer> userIds, LoginUserDTO loginUser);
 
     /**
      * 更新
      */
-    public Response<String> update(XxlDeepUserDTO xxlJobUser, XxlDeepUser loginUser);
+    public Response<String> update(XxlDeepUserDTO xxlJobUser, LoginUserDTO loginUser);
 
     /**
      * 修改密码
      */
-    public Response<String> updatePwd(XxlDeepUser loginUser, String password);
+    public Response<String> updatePwd(LoginUserDTO loginUser, String password);
 
     /**
      * Load查询
