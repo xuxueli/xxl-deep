@@ -194,99 +194,27 @@ $(function() {
 		});
 	});
 
-	// ---------- ---------- ---------- add operation ---------- ---------- ----------
-	// add validator method
-	jQuery.validator.addMethod("usernameValid", function(value, element) {
-		var length = value.length;
-		var valid = /^[a-z][a-z0-9]*$/;
-		return this.optional(element) || valid.test(value);
-	}, I18n.user_username_valid );
-	// add
-	$("#data_operation .add").click(function(){
-		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
-	});
-	var addModalValidate = $("#addModal .form").validate({
-		errorElement : 'span',  
-        errorClass : 'help-block',
-        focusInvalid : true,  
-        rules : {
-            username : {
-				required : true,
-                rangelength:[4, 20],
-				usernameValid: true
-			},
-            password : {
-                required : true,
-                rangelength:[4, 20]
-            },
-			realName : {
-				required : true,
-				rangelength:[2, 20]
-			}
-        }, 
-        messages : {
-            username : {
-            	required : I18n.system_please_input + I18n.user_username,
-                rangelength: I18n.system_lengh_limit + "[4-20]"
-            },
-            password : {
-                required : I18n.system_please_input + I18n.user_password,
-                rangelength: I18n.system_lengh_limit + "[4-20]"
-            },
-			realName : {
-				required : I18n.system_please_input + I18n.user_real_name,
-				rangelength: I18n.system_lengh_limit + "[2-20]"
-			}
-        },
-		highlight : function(element) {  
-            $(element).closest('.form-group').addClass('has-error');  
-        },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
-        },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
-        },
-        submitHandler : function(form) {
+	// ---------- ---------- ---------- showModal operation ---------- ---------- ----------
+	$("#data_operation").on('click', '.showdetail',function() {
 
-			// get roleids
-			var roleIds = $('#addModal .form input[name="roleId"]:checked').map(function() {
-				return this.value;
-			}).get();
-
-			// request
-			var paramData = {
-				"username": $("#addModal .form input[name=username]").val(),
-                "password": $("#addModal .form input[name=password]").val(),
-                "status": $("#addModal .form select[name=status]").val(),
-				"realName": $("#addModal .form input[name=realName]").val(),
-				"roleIds": roleIds
-			};
-
-			// post
-        	$.post(base_url + "/org/user/add", paramData, function(data, status) {
-    			if (data.code == "200") {
-					$('#addModal').modal('hide');
-
-                    layer.msg( I18n.system_opt_add + I18n.system_success );
-                    mainDataTable.fnDraw();
-    			} else {
-					layer.open({
-						title: I18n.system_tips ,
-                        btn: [ I18n.system_ok ],
-						content: (data.msg || I18n.system_opt_add + I18n.system_fail ),
-						icon: '2'
-					});
-    			}
-    		});
+		// find select ids
+		var selectIds = $.dataTableSelect.selectIdsFind();
+		if (selectIds.length != 1) {
+			layer.msg(I18n.system_please_choose + I18n.system_one + I18n.system_data);
+			return;
 		}
-	});
-	$("#addModal").on('hide.bs.modal', function () {
-		addModalValidate.resetForm();
+		var row = tableData[ 'key' + selectIds[0] ];
 
-		$("#addModal .form")[0].reset();
-		$("#addModal .form .form-group").removeClass("has-error");
+		// fill
+		$('#showModal .title').text(row.title);
+		$('#showModal .content2').text(row.content);
+		$('#showModal .operator').text(row.operator);
+		$('#showModal .addTime').text(row.addTime);
+		$('#showModal .ip').text(row.ip);
+		$('#showModal .ipAddress').text(row.ipAddress);
+
+		// show
+		$('#showModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 
 });

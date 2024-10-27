@@ -82,7 +82,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header" style="float: right" id="data_operation" >
-                            <button class="btn btn-sm btn-primary selectOnlyOne showdetail" type="button"><i class="fa fa-edit"></i>查看</button>
+                            <button class="btn btn-sm btn-primary selectOnlyOne showdetail" type="button"><i class="fa fa-edit"></i>查看日志详情</button>
                             <button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
 
                         </div>
@@ -98,52 +98,43 @@
             </div>
 
 
-            <!-- 更新.模态框 -->
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <!-- 展示.模态框 -->
+            <div class="modal fade" id="showModal" tabindex="-1" role="dialog"  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" >${I18n.system_opt_edit}${I18n.user_tips}</h4>
+                            <h4 class="modal-title" >日志详情</h4>
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal form" role="form" >
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_username}<font color="red">*</font></label>
-                                    <div class="col-sm-8"><input type="text" class="form-control" name="username" placeholder="${I18n.system_please_input}${I18n.user_username}" maxlength="20" readonly ></div>
+                                    <label for="lastname" class="col-sm-2 control-label2">日志标题</label>
+                                    <div class="col-sm-8 title" ></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_password}<font color="black">*</font></label>
-                                    <div class="col-sm-8"><input type="text" class="form-control" name="password" placeholder="${I18n.user_password_update_placeholder}" maxlength="20" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label2">日志正文</label>
+                                    <div class="col-sm-8 content2" ></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">${I18n.user_tips}${I18n.user_staus}<font color="red">*</font></label>
-                                    <div class="col-sm-4">
-                                        <select class="form-control" name="status" >
-                                        </select>
-                                    </div>
+                                    <label for="lastname" class="col-sm-2 control-label2">操作人</label>
+                                    <div class="col-sm-8 operator" ></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">${I18n.user_real_name}<font color="red">*</font></label>
-                                    <div class="col-sm-8"><input type="text" class="form-control" name="realName" placeholder="${I18n.system_please_input}${I18n.user_real_name}" maxlength="20" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label2">操作IP</label>
+                                    <div class="col-sm-8 ip" ></div>
                                 </div>
-
-                                <br>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">用户角色<font color="red">*</font></label>
-                                    <div class="col-sm-8">
-                                        <#if roleList?? && roleList?size gt 0>
-                                            <#list roleList as role>
-                                                <span class="col-sm-4" style="padding-left: 0px;" ><input type="checkbox"  name="roleId" value="${role.id}"> ${role.name}</span>
-                                            </#list>
-                                        </#if>
-                                    </div>
+                                    <label for="lastname" class="col-sm-2 control-label2">操作地址</label>
+                                    <div class="col-sm-8 ipAddress" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label2">操作时间</label>
+                                    <div class="col-sm-8 addTime" ></div>
                                 </div>
 
                                 <div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
                                     <div style="margin-top: 10px;" >
-                                        <button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
-                                        <input type="hidden" name="id" >
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >关闭</button>
                                     </div>
                                 </div>
 
