@@ -1,6 +1,9 @@
 package com.xxl.deep.admin.controller.tool;
 
+import com.xxl.deep.admin.annotation.Log;
 import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.LogModuleEnum;
+import com.xxl.deep.admin.constant.enums.LogTypeEnum;
 import com.xxl.deep.admin.util.codegen.ClassInfo;
 import com.xxl.deep.admin.util.codegen.TableParseUtil;
 import com.xxl.tool.core.StringTool;
@@ -38,6 +41,7 @@ public class CodeGenController {
     @RequestMapping("/genCode")
     @ResponseBody
     @Permission
+    @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.CODE_GEN, title = "生成代码")
     public Response<Map<String, String>> codeGenerate(String tableSql) {
 
         try {

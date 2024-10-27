@@ -113,7 +113,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label2">日志正文</label>
-                                    <div class="col-sm-8 content2" ></div>
+                                    <div class="col-sm-8" >
+                                        <pre class="content2" style="width: 120%;"></pre>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label2">操作人</label>

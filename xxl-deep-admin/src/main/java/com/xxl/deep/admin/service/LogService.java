@@ -1,6 +1,5 @@
 package com.xxl.deep.admin.service;
 
-import java.util.Map;
 import java.util.List;
 
 import com.xxl.deep.admin.model.dto.XxlDeepLogDTO;
@@ -13,7 +12,7 @@ import com.xxl.tool.response.PageModel;
 *
 * Created by xuxueli on '2024-10-27 12:19:06'.
 */
-public interface XxlDeepLogService {
+public interface LogService {
 
     /**
     * 新增

@@ -4,14 +4,12 @@ import com.xxl.deep.admin.mapper.XxlDeepLogMapper;
 import com.xxl.deep.admin.model.adaptor.XxlDeepLogAdaptor;
 import com.xxl.deep.admin.model.dto.XxlDeepLogDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepLog;
-import com.xxl.deep.admin.service.XxlDeepLogService;
+import com.xxl.deep.admin.service.LogService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
 import com.xxl.tool.response.PageModel;
@@ -22,7 +20,7 @@ import com.xxl.tool.response.PageModel;
 * Created by xuxueli on '2024-10-27 12:19:06'.
 */
 @Service
-public class XxlDeepLogServiceImpl implements XxlDeepLogService {
+public class LogServiceImpl implements LogService {
 
 	@Resource
 	private XxlDeepLogMapper xxlDeepLogMapper;

@@ -39,15 +39,15 @@
             `update_time`
         )
         VALUES(
-                  #{xxlDeepLog.type} ,
-                  #{xxlDeepLog.module} ,
-                  #{xxlDeepLog.title} ,
-                  #{xxlDeepLog.content} ,
-                  #{xxlDeepLog.operator} ,
-                  #{xxlDeepLog.ip} ,
-                  NOW() ,
-                  NOW()
-              )
+          #{xxlDeepLog.type} ,
+          #{xxlDeepLog.module} ,
+          #{xxlDeepLog.title} ,
+          #{xxlDeepLog.content} ,
+          #{xxlDeepLog.operator} ,
+          #{xxlDeepLog.ip} ,
+          NOW() ,
+          NOW()
+      )
     </insert>
 
     <delete id="delete" parameterType="java.util.Map" >
@@ -71,7 +71,6 @@
         WHERE `id` = #{xxlDeepLog.id}
     </update>
 
-
     <select id="load" parameterType="java.util.Map" resultMap="XxlDeepLog">
         SELECT <include refid="Base_Column_List" />
         FROM xxl_deep_log AS t
@@ -81,6 +80,7 @@
     <select id="pageList" parameterType="java.util.Map" resultMap="XxlDeepLog">
         SELECT <include refid="Base_Column_List" />
         FROM xxl_deep_log AS t
+        ORDER BY t.`id` DESC
         LIMIT #{offset}, #{pagesize}
     </select>
 

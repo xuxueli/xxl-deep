@@ -4,7 +4,7 @@ import com.xxl.deep.admin.constant.enums.LogModuleEnum;
 import com.xxl.deep.admin.constant.enums.LogTypeEnum;
 import com.xxl.deep.admin.model.dto.XxlDeepLogDTO;
 import com.xxl.deep.admin.model.entity.XxlDeepLog;
-import com.xxl.deep.admin.service.XxlDeepLogService;
+import com.xxl.deep.admin.service.LogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ import com.xxl.deep.admin.annotation.Permission;
 public class LogController {
 
     @Resource
-    private XxlDeepLogService xxlDeepLogService;
+    private LogService xxlDeepLogService;
 
     /**
      * 页面

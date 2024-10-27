@@ -1,6 +1,9 @@
 package com.xxl.deep.admin.controller.org;
 
+import com.xxl.deep.admin.annotation.Log;
 import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.LogModuleEnum;
+import com.xxl.deep.admin.constant.enums.LogTypeEnum;
 import com.xxl.deep.admin.constant.enums.UserStatuEnum;
 import com.xxl.deep.admin.model.dto.LoginUserDTO;
 import com.xxl.deep.admin.model.dto.XxlDeepUserDTO;
@@ -60,6 +63,7 @@ public class UserController {
     @RequestMapping("/add")
     @ResponseBody
     @Permission("org:user")
+    @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.USER_MANAGE, title = "新增用户")
     public Response<String> add(XxlDeepUserDTO xxlJobUser) {
         return userService.insert(xxlJobUser);
     }
@@ -67,6 +71,7 @@ public class UserController {
     @RequestMapping("/update")
     @ResponseBody
     @Permission("org:user")
+    @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.USER_MANAGE, title = "更新用户")
     public Response<String> update(HttpServletRequest request, XxlDeepUserDTO xxlJobUser) {
         LoginUserDTO loginUser = LoginService.getLoginUser(request);
         return userService.update(xxlJobUser, loginUser);
@@ -75,6 +80,7 @@ public class UserController {
     @RequestMapping("/delete")
     @ResponseBody
     @Permission("org:user")
+    @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.USER_MANAGE, title = "删除用户")
     public Response<String> delete(HttpServletRequest request,
                                    @RequestParam("ids[]") List<Integer> ids) {
         LoginUserDTO loginUser = LoginService.getLoginUser(request);
