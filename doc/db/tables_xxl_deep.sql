@@ -7,7 +7,7 @@ use `xxl_deep`;
 
 SET NAMES utf8mb4;
 
-## —————————————————————— for org + rbac ——————————————————
+## —————————————————————— for permission, user and auth ——————————————————
 CREATE TABLE `xxl_deep_org` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '组织ID',
     `parent_id` int(11) NOT NULL COMMENT '父组织ID',
@@ -79,13 +79,17 @@ CREATE TABLE `xxl_deep_role_res` (
 
 CREATE TABLE `xxl_deep_log` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志ID',
-    `type` int(11) NOT NULL COMMENT '日志类型',
+    `type` int(11) NOT NULL COMMENT '日志类型（如操作日志、登陆日志）',
+    `module` varchar(50) NOT NULL COMMENT '日志标题（如用户管理）',
     `title` varchar(50) NOT NULL COMMENT '日志标题',
     `content` text NOT NULL COMMENT '日志内容',
+    `operator` varchar(20) COMMENT '操作人',
+    `ip` varchar(50) COMMENT '操作IP',
     `add_time` datetime NOT NULL COMMENT '新增时间',
     `update_time` datetime NOT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 CREATE TABLE `xxl_deep_message` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '消息ID',

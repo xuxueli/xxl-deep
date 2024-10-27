@@ -18,7 +18,7 @@ import com.xxl.deep.admin.annotation.Permission;
 * Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Controller
-@RequestMapping("${classInfo.className?uncap_first}")
+@RequestMapping("/${classInfo.className?uncap_first}")
 public class ${classInfo.className}Controller {
 
     @Resource
@@ -38,6 +38,7 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/pageList")
     @ResponseBody
+    @Permission
     public Response<PageModel<${classInfo.className}>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
                     @RequestParam(required = false, defaultValue = "10") int pagesize) {
         PageModel<${classInfo.className}> pageModel = ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
@@ -49,6 +50,7 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/load")
     @ResponseBody
+    @Permission
     public Response<${classInfo.className}> load(int id){
         return ${classInfo.className?uncap_first}Service.load(id);
     }
@@ -58,6 +60,7 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/insert")
     @ResponseBody
+    @Permission
     public Response<String> insert(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
     }
@@ -67,6 +70,7 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/delete")
     @ResponseBody
+    @Permission
     public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
         return ${classInfo.className?uncap_first}Service.delete(ids);
     }
@@ -76,6 +80,7 @@ public class ${classInfo.className}Controller {
     */
     @RequestMapping("/update")
     @ResponseBody
+    @Permission
     public Response<String> update(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
     }
