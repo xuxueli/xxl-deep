@@ -3,8 +3,25 @@
  */
 $(function () {
 
+    $("#messageList").on('click', '.showdetail',function() {
+
+        // data
+        let title = $(this).attr('data-title');
+        let content = $(this).attr('data-content');
+        let addTime = $(this).attr('data-addTime');
+
+        // fill
+        $('#showMessageModal .title').text( title );
+        $('#showMessageModal .content').html( content );
+        $('#showMessageModal .addTime').text( addTime );
+
+        // show
+        $('#showMessageModal').modal({backdrop: false, keyboard: false}).modal('show');
+    });
+
+
     // filter Time
-    var rangesConf = {};
+    /*var rangesConf = {};
     rangesConf[I18n.daterangepicker_ranges_today] = [moment().startOf('day'), moment().endOf('day')];
     rangesConf[I18n.daterangepicker_ranges_yesterday] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
     rangesConf[I18n.daterangepicker_ranges_this_month] = [moment().startOf('month'), moment().endOf('month')];
@@ -38,7 +55,7 @@ $(function () {
     }, function (start, end, label) {
         freshChartDate(start, end);
     });
-    //freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);
+    freshChartDate(rangesConf[I18n.daterangepicker_ranges_recent_week][0], rangesConf[I18n.daterangepicker_ranges_recent_week][1]);*/
 
 
 });

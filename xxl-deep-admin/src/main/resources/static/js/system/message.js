@@ -5,115 +5,92 @@ $(function() {
 	$.dataTableSelect.init();
 	var mainDataTable = $("#data_list").dataTable({
 		"deferRender": true,
-		"processing" : true, 
-	    "serverSide": true,
+		"processing" : true,
+		"serverSide": true,
 		"ajax": {
-			url: base_url + "/system/log/pageList",
+			url: base_url + "/system/message/pageList",
 			type:"post",
 			// request data
-	        data : function ( d ) {
-	        	var obj = {};
-                obj.type = $('#data_filter .type').val();
-                obj.module = $('#data_filter .module').val();
+			data : function ( d ) {
+				var obj = {};
 				obj.title = $('#data_filter .title').val();
-	        	obj.start = d.start;
-	        	obj.length = d.length;
-                return obj;
-            },
+				obj.status = $('#data_filter .status').val();
+				obj.start = d.start;
+				obj.length = d.length;
+				return obj;
+			},
 			// response data filter
 			dataFilter: function (originData) {
 				var originJson = $.parseJSON(originData);
-				if (originJson.code != 200) {
-					layer.open({
-						icon: '2',
-						content: (originJson.msg)
-					});
-					return originData;
-				}
 				return JSON.stringify({
 					recordsTotal: originJson.data.totalCount,
 					recordsFiltered: originJson.data.totalCount,
 					data: originJson.data.pageData
 				});
 			}
-	    },
-	    "searching": false,
-	    "ordering": false,
-	    //"scrollX": true,																		// scroll x，close self-adaption
+		},
+		"searching": false,
+		"ordering": false,
+		//"scrollX": true,																		// scroll x，close self-adaption
 		//"dom": '<"top" t><"bottom" <"col-sm-3" i><"col-sm-3 right" l><"col-sm-6" p> >',		// dataTable "DOM layout"：https://datatables.club/example/diy.html
 		"drawCallback": function( settings ) {
 			$.dataTableSelect.selectStatusInit();
 		},
-	    "columns": [
-					{
-						"title": '<input align="center" type="checkbox" id="checkAll" >',
-						"data": 'id',
-						"visible" : true,
-						"width":'5%',
-						"render": function ( data, type, row ) {
-							tableData['key'+row.id] = row;
-							return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
+		"columns": [
+			{
+				"title": '<input align="center" type="checkbox" id="checkAll" >',
+				"data": 'id',
+				"visible" : true,
+				"width":'5%',
+				"render": function ( data, type, row ) {
+					tableData['key'+row.id] = row;
+					return '<input align="center" type="checkbox" class="checkItem" data-id="'+ row.id +'"  >';
+				}
+			},
+			{
+				"title": '通知分类',
+				"data": 'category',
+				"width":'10%',
+				"render": function ( data, type, row ) {
+					var result = "";
+					$('#data_filter .category option').each(function(){
+						if ( data.toString() === $(this).val() ) {
+							result = $(this).text();
 						}
-					},
-	                {
-						"title": "日志类型",
-	                	"data": 'type',
-						"width":'10%',
-						"render": function ( data, type, row ) {
-							var result = "";
-							$('#data_filter .type option').each(function(){
-								if ( data.toString() === $(this).val() ) {
-									result = $(this).text();
-								}
-							});
-							return result;
+					});
+					return result;
+				}
+			},
+			{
+				"title": '通知标题',
+				"data": 'title',
+				"width":'30%'
+			},
+			{
+				"title": '状态',
+				"data": 'status',
+				"width":'15%',
+				"render": function ( data, type, row ) {
+					var result = "";
+					$('#data_filter .status option').each(function(){
+						if ( data.toString() === $(this).val() ) {
+							result = $(this).text();
 						}
-					},
-	                {
-						"title": "系统模块",
-						"data": 'module',
-                        "width":'10%',
-						"render": function ( data, type, row ) {
-							var result = "";
-							$('#data_filter .module option').each(function(){
-								if ( data.toString() === $(this).val() ) {
-									result = $(this).text();
-								}
-							});
-							return result;
-						}
-					},
-					{
-						"title": '日志标题',
-						"data": 'title',
-						"width":'10%'
-					}/*,
-					{
-						"title": '日志正文',
-						"data": 'content',
-						"width":'20%',
-						"visible" : false,
-                        "render": function ( data, type, row ) {
-							return data;
-                        }
-					}*/,{
-						"title": '操作人',
-						"data": 'operator',
-						"width":'10%'
-					},{
-						"title": '操作IP',
-						"data": 'ip',
-						"width":'15%'
-					},{
-						"title": '操作地址',
-						"data": 'ipAddress',
-						"width":'15%'
-					},{
-						"title": '操作时间',
-						"data": 'addTime',
-						"width":'15%'
-					}
-	            ],
+					});
+					return result;
+				}
+			},
+			{
+				"title": '发送人',
+				"data": 'sender',
+				"width":'15%'
+			},
+			{
+				"title": '发送时间',
+				"data": 'addTime',
+				"width":'20%'
+			},
+		],
 		"language" : {
 			"sProcessing" : I18n.dataTable_sProcessing ,
 			"sLengthMenu" : I18n.dataTable_sLengthMenu ,
@@ -140,12 +117,12 @@ $(function() {
 		}
 	});
 
-    // table data
-    var tableData = {};
+	// table data
+	var tableData = {};
 
 	// search btn
 	$('#data_filter .searchBtn').on('click', function(){
-        mainDataTable.fnDraw();
+		mainDataTable.fnDraw();
 	});
 
 	// ---------- ---------- ---------- delete operation ---------- ---------- ----------
@@ -163,23 +140,23 @@ $(function() {
 		layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
 			icon: 3,
 			title: I18n.system_tips ,
-            btn: [ I18n.system_ok, I18n.system_cancel ]
+			btn: [ I18n.system_ok, I18n.system_cancel ]
 		}, function(index){
 			layer.close(index);
 
 			$.ajax({
 				type : 'POST',
-				url : base_url + "/system/log/delete",
+				url : base_url + "/system/message/delete",
 				data : {
 					"ids" : selectIds
 				},
 				dataType : "json",
 				success : function(data){
 					if (data.code == 200) {
-                        layer.msg( I18n.system_opt_del + I18n.system_success );
+						layer.msg( I18n.system_opt_del + I18n.system_success );
 						mainDataTable.fnDraw(false);	// false，refresh current page；true，all refresh
 					} else {
-                        layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
+						layer.msg( data.msg || I18n.system_opt_del + I18n.system_fail );
 					}
 				},
 				error: function(xhr, status, error) {
@@ -194,8 +171,98 @@ $(function() {
 		});
 	});
 
-	// ---------- ---------- ---------- showModal operation ---------- ---------- ----------
-	$("#data_operation").on('click', '.showdetail',function() {
+	// ---------- ---------- ---------- add operation ---------- ---------- ----------
+
+	// init add editor
+	CKEDITOR.replace('add_content');		// todo, 图片弹框宽高编辑与 bootstrap 冲突问题
+	/*$('#addModal').on('shown.bs.modal', function () {
+		if (!CKEDITOR.instances.add_content) {
+			CKEDITOR.replace('add_content');
+		}
+	});*/
+	// add
+	$("#data_operation .add").click(function(){
+		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
+	});
+	var addModalValidate = $("#addModal .form").validate({
+		errorElement : 'span',
+		errorClass : 'help-block',
+		focusInvalid : true,
+		rules : {
+			title : {
+				required : true,
+				rangelength:[4, 50]
+			}
+		},
+		messages : {
+			title : {
+				required : "请输入通知标题",
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			}
+		},
+		highlight : function(element) {
+			$(element).closest('.form-group').addClass('has-error');
+		},
+		success : function(label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
+		},
+		errorPlacement : function(error, element) {
+			element.parent('div').append(error);
+		},
+		submitHandler : function(form) {
+
+			// add_content
+			const addEditorInstance = CKEDITOR.instances.add_content;
+			const contentWithHTML = addEditorInstance.getData();
+			if (!contentWithHTML) {
+				layer.open({title: I18n.system_tips ,
+					btn: [ I18n.system_ok ],
+					content: "请输入通知正文",
+					icon: '2'
+				});
+				return;
+			}
+
+			// request
+			var paramData = {
+				"category": $("#addModal .form select[name=category]").val(),
+				"status": $("#addModal .form select[name=status]").val(),
+				"title": $("#addModal .form input[name=title]").val(),
+				"content": contentWithHTML
+			};
+
+			// post
+			$.post(base_url + "/system/message/insert", paramData, function(data, status) {
+				if (data.code == "200") {
+					$('#addModal').modal('hide');
+
+					layer.msg( I18n.system_opt_add + I18n.system_success );
+					mainDataTable.fnDraw();
+				} else {
+					layer.open({
+						title: I18n.system_tips ,
+						btn: [ I18n.system_ok ],
+						content: (data.msg || I18n.system_opt_add + I18n.system_fail ),
+						icon: '2'
+					});
+				}
+			});
+		}
+	});
+	$("#addModal").on('hide.bs.modal', function () {
+		addModalValidate.resetForm();
+
+		$("#addModal .form")[0].reset();
+		$("#addModal .form .form-group").removeClass("has-error");
+	});
+
+	// ---------- ---------- ---------- update operation ---------- ---------- ----------
+
+	// init update editor
+	CKEDITOR.replace('update_content');
+	// modal
+	$("#data_operation .update").click(function(){
 
 		// find select ids
 		var selectIds = $.dataTableSelect.selectIdsFind();
@@ -204,17 +271,95 @@ $(function() {
 			return;
 		}
 		var row = tableData[ 'key' + selectIds[0] ];
+		console.log(row);
 
-		// fill
-		$('#showModal .title').text(row.title);
-		$('#showModal .content2').text(row.content);
-		$('#showModal .operator').text(row.operator);
-		$('#showModal .addTime').text(row.addTime);
-		$('#showModal .ip').text(row.ip);
-		$('#showModal .ipAddress').text(row.ipAddress);
+		// base data
+		$("#updateModal .form input[name='id']").val( row.id );
+		$("#updateModal .form select[name='category']").val( row.category );
+		$("#updateModal .form select[name='status']").val( row.status );
+		$("#updateModal .form input[name='title']").val( row.title );
+		$("#updateModal .form input[name='status']").val( row.status );
+
+		// add_content
+		const updateEditorInstance = CKEDITOR.instances.update_content;
+		updateEditorInstance.setData( row.content );
 
 		// show
-		$('#showModal').modal({backdrop: false, keyboard: false}).modal('show');
+		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
+	});
+	var updateModalValidate = $("#updateModal .form").validate({
+		errorElement : 'span',
+		errorClass : 'help-block',
+		focusInvalid : true,
+		highlight : function(element) {
+			$(element).closest('.form-group').addClass('has-error');
+		},
+		success : function(label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
+		},
+		errorPlacement : function(error, element) {
+			element.parent('div').append(error);
+		},
+		rules : {
+			title : {
+				required : true,
+				rangelength:[4, 50]
+			}
+		},
+		messages : {
+			title : {
+				required : "请输入通知标题",
+				rangelength: I18n.system_lengh_limit + "[4-20]"
+			}
+		},
+		submitHandler : function(form) {
+
+			// add_content
+			const updateEditorInstance = CKEDITOR.instances.update_content;
+			const contentWithHTML = updateEditorInstance.getData();
+			if (!contentWithHTML) {
+				layer.open({title: I18n.system_tips ,
+					btn: [ I18n.system_ok ],
+					content: "请输入通知正文",
+					icon: '2'
+				});
+				return;
+			}
+
+			// request
+			var paramData = {
+				"id": $("#updateModal .form input[name=id]").val(),
+				"category": $("#updateModal .form select[name=category]").val(),
+				"status": $("#updateModal .form select[name=status]").val(),
+				"title": $("#updateModal .form input[name=title]").val(),
+				"content":contentWithHTML
+			};
+
+			$.post(base_url + "/system/message/update", paramData, function(data, status) {
+				if (data.code == "200") {
+					$('#updateModal').modal('hide');
+
+					layer.msg( I18n.system_opt_edit + I18n.system_success );
+					mainDataTable.fnDraw(false);
+				} else {
+					layer.open({
+						title: I18n.system_tips ,
+						btn: [ I18n.system_ok ],
+						content: (data.msg || I18n.system_opt_edit + I18n.system_fail ),
+						icon: '2'
+					});
+				}
+			});
+		}
+	});
+	$("#updateModal").on('hide.bs.modal', function () {
+
+		// reset
+		updateModalValidate.resetForm();
+
+		$("#updateModal .form")[0].reset();
+		$("#updateModal .form .form-group").removeClass("has-error");
 	});
 
 });

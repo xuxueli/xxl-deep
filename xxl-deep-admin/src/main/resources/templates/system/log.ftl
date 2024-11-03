@@ -100,7 +100,7 @@
 
             <!-- 展示.模态框 -->
             <div class="modal fade" id="showModal" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" >日志详情</h4>

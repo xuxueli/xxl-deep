@@ -94,6 +94,7 @@ public class XxlDeepUserAdaptor {
         loginUserDTO.setUsername(xxlDeepUser.getUsername());
         loginUserDTO.setPassword(xxlDeepUser.getPassword());
         loginUserDTO.setUserToken(xxlDeepUser.getUserToken());
+        loginUserDTO.setRealName(xxlDeepUser.getRealName());
         if (CollectionTool.isNotEmpty(resourceList)) {
             /*List<String> permissionList = resourceList.stream()
                     .filter(x -> x.getStatus()== ResourceStatuEnum.NORMAL.getValue())

@@ -47,7 +47,7 @@
                                 <img src="${request.contextPath}/static/favicon.ico" style="height: 80px;" >
                             </div>
                             <div class="pull-left info" style="padding-left: 10px;padding-top: 5px;" >
-                                <h4>早安，吴彦祖，祝你开心每一天！</h4>
+                                <h4>你好，${loginUser.realName}，祝你开心每一天！</h4>
                                 <span style="color: #999;">登录时间：${.now?string('yyyy年MM月dd日 HH:mm:ss')}</span>
                             </div>
                         </div>
@@ -77,98 +77,95 @@
                         <div class="box-body">
                             <strong><i class="fa fa-users margin-r-5"></i>组织管理</strong>
                             <p class="text-muted">
-                                新增和管理组织信息、人员信息；同时进行人员角色、菜单权限、人员授权等操作管理。
+                                针对组织、用户、角色及资源等进行管理，支持灵活的人员角色、菜单权限、人员授权等操作管理。
                             </p>
 
                             <hr>
                             <strong><i class="fa fa-cogs margin-r-5"></i>系统管理</strong>
                             <p class="text-muted">
-                                新增管理通知公告；维护管理系统字典；查看系统日志、机器监控与在线用户等信息。
+                                提供通知触达、审计日志、系统监控……等相关能力，支持高校灵活进行系统监控及管理。
                             </p>
 
                             <hr>
                             <strong><i class="fa fa-wrench margin-r-5"></i>系统工具</strong>
                             <p class="text-muted">
-                                系统默认提供系统工具，辅助快速进行敏捷迭代开发；支持前后端代码生成；
+                                提供Entity、业务代码、SQL、页面交互等……前后端一站式代码生成工具，辅助快速进行敏捷迭代开发。
                             </p>
 
                             <hr>
                             <strong><i class="fa fa-book margin-r-5"></i> 帮助中心</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                            <p>提供内容丰富、干练易懂的操作文档，辅助快速上手项目。</p>
 
                         </div>
                         <!-- /.box-body -->
                     </div>
-
                 </div>
+
+                <#-- 通知消息 -->
                 <div class="col-md-4">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">动态</h3>
+                            <h3 class="box-title">通知消息</h3>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
+                        <div class="box-body" id="messageList">
                             <ul class="products-list product-list-in-box">
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">Samsung TV
-                                            <span class="label label-warning pull-right">$1800</span></a>
-                                        <span class="product-description">Samsung 32" 1080p 60Hz LED Smart HDTV.</span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">Bicycle
-                                            <span class="label label-info pull-right">$700</span></a>
-                                        <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
-                                        <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                    <div class="product-img">
-                                        <img src="${request.contextPath}/static/favicon.ico" alt="Product Image">
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">PlayStation 4
-                                            <span class="label label-success pull-right">$399</span></a>
-                                        <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                                    </div>
-                                </li>
-                                <!-- /.item -->
+                                <#if messageList?exists && messageList?size gt 0>
+                                <#list messageList as item>
+                                    <li class="item">
+                                        <div class="product-info" style="margin-left: 10px;">
+                                                <a href="javascript:void(0)" class="product-title showdetail" data-title="${item.title}" data-content="${item.content?html}" data-addTime="${item.addTime}" >
+                                                    ${item.title}
+                                                    <span class="label label-info pull-right">${item.sender}</span></a>
+                                                </a>
+                                                <span class="product-description">${item.addTime}</span>
+                                        </div>
+                                    </li>
+                                </#list>
+                                </#if>
                             </ul>
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <a href="javascript:void(0)" class="uppercase">View All Products</a>
-                        </div>
-                        <!-- /.box-footer -->
+                        <#--<div class="box-footer text-center">
+                            <a href="javascript:void(0)" class="uppercase">查看全部消息</a>
+                        </div>-->
                     </div>
                 </div>
             </div>
             <!-- 个人信息区域 end -->
+
+            <!-- 查看通知.模态框 start -->
+            <div class="modal fade" id="showMessageModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" >查看通知</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal form" role="form" >
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label2">标题</label>
+                                    <div class="col-sm-8 title" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label2">操作时间</label>
+                                    <div class="col-sm-8 addTime" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label2">正文</label>
+                                    <div class="col-sm-8 content" style="overflow: hidden;" ></div>
+                                </div>
+
+                                <div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+                                    <div style="margin-top: 10px;" >
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >关闭</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 查看通知.模态框 end -->
 
             <#-- biz end（4/5 content） -->
 

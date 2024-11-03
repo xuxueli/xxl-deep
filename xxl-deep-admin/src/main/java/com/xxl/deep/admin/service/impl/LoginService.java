@@ -35,6 +35,8 @@ public class LoginService {
     @Resource
     private ResourceService resourceService;
 
+    // ********************** for token **********************
+
     /**
      * make token from user
      */
@@ -56,18 +58,10 @@ public class LoginService {
         return loginUser;
     }
 
-    /**
-     * get login user from request
-     * @param request
-     * @return
-     */
-    public static LoginUserDTO getLoginUser(HttpServletRequest request){
-        LoginUserDTO loginUser = (LoginUserDTO) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
-        return loginUser;
-    }
+    // ********************** for login **********************
 
     /**
-     * login
+     * login (write cookie)
      *
      * @param response
      * @param username
@@ -108,7 +102,7 @@ public class LoginService {
     }
 
     /**
-     * logout
+     * logout (remove cookie)
      *
      * @param request
      * @param response
@@ -119,12 +113,12 @@ public class LoginService {
     }
 
     /**
-     * check iflogin
+     * check iflogin (match cookie and db, del cookie if invalid)
      *
      * @param request
      * @return
      */
-    public LoginUserDTO ifLogin(HttpServletRequest request, HttpServletResponse response){
+    public LoginUserDTO checkLogin(HttpServletRequest request, HttpServletResponse response){
         String cookieToken = CookieTool.getValue(request, LOGIN_IDENTITY_KEY);
         if (cookieToken != null) {
             LoginUserDTO loginUser = null;
@@ -146,7 +140,19 @@ public class LoginService {
     }
 
     /**
+     * get login user (from request, copy from cookie)
+     *
+     * @param request
+     * @return
+     */
+    public LoginUserDTO getLoginUser(HttpServletRequest request){
+        LoginUserDTO loginUser = (LoginUserDTO) request.getAttribute(LoginService.LOGIN_IDENTITY_KEY);
+        return loginUser;
+    }
+
+    /**
      * query Authentication resource
+     *
      * @param userId
      * @return
      */

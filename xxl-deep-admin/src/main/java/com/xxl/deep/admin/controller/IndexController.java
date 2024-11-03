@@ -1,8 +1,16 @@
 package com.xxl.deep.admin.controller;
 
 import com.xxl.deep.admin.annotation.Permission;
+import com.xxl.deep.admin.constant.enums.MessageStatusEnum;
+import com.xxl.deep.admin.model.dto.LoginUserDTO;
+import com.xxl.deep.admin.model.dto.XxlDeepMessageDTO;
+import com.xxl.deep.admin.service.MessageService;
 import com.xxl.deep.admin.service.impl.LoginService;
+import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
+import com.xxl.tool.gson.GsonTool;
+import com.xxl.tool.json.writer.BasicJsonwriter;
+import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -31,6 +39,8 @@ public class IndexController {
 
 	@Resource
 	private LoginService loginService;
+	@Resource
+	private MessageService messageService;
 
 
 	@RequestMapping("/")
@@ -41,23 +51,20 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	@Permission
-	public String index(Model model) {
-		//Map<String, Object> dashboardMap = xxlJobService.dashboardInfo();
+	public String index(HttpServletRequest request, Model model) {
 
-		int jobInfoCount = 0;
-		int jobLogCount = 0;
-		int jobLogSuccessCount = 0;
-		jobLogCount = 0;
-		jobLogSuccessCount = 0;
-		int executorCount = 10;
+		// login
+		LoginUserDTO loginUser = loginService.getLoginUser(request);
+		model.addAttribute("loginUser", loginUser);
 
-		Map<String, Object> dashboardMap = new HashMap<String, Object>();
-		dashboardMap.put("jobInfoCount", jobInfoCount);
-		dashboardMap.put("jobLogCount", jobLogCount);
-		dashboardMap.put("jobLogSuccessCount", jobLogSuccessCount);
-		dashboardMap.put("executorCount", executorCount);
+		// message
+		PageModel<XxlDeepMessageDTO>  pageModel = messageService.pageList(MessageStatusEnum.NORMAL.getValue(), null, 0, 10);
+		if (pageModel!=null && CollectionTool.isNotEmpty(pageModel.getPageData())) {
+			List<XxlDeepMessageDTO> messageList = pageModel.getPageData();
+			model.addAttribute("messageList", messageList);
+		}
 
-		model.addAllAttributes(dashboardMap);
+		model.addAttribute("BasicJsonwriter", new BasicJsonwriter());
 
 		return "index";
 	}
@@ -105,7 +112,8 @@ public class IndexController {
 	@RequestMapping("/toLogin")
 	@Permission(login = false)
 	public ModelAndView toLogin(HttpServletRequest request, HttpServletResponse response,ModelAndView modelAndView) {
-		if (loginService.ifLogin(request, response) != null) {
+		LoginUserDTO loginUserDTO = loginService.getLoginUser(request);
+		if (loginUserDTO != null) {
 			modelAndView.setView(new RedirectView("/",true,false));
 			return modelAndView;
 		}

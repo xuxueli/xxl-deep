@@ -8,7 +8,6 @@
 
     <#-- biz start（1/5 style） -->
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
     <#-- biz end（1/5 end） -->
 
 </head>
@@ -29,7 +28,7 @@
         <!-- content-header -->
         <section class="content-header">
             <#-- biz start（3/5 name） -->
-            <h1>通知公告</h1>
+            <h1>通知管理</h1>
             <#-- biz end（3/5 name） -->
         </section>
 
@@ -42,31 +41,31 @@
             <div class="box" style="margin-bottom:9px;">
                 <div class="box-body">
                     <div class="row" id="data_filter" >
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 hide">
                             <div class="input-group">
-                                <span class="input-group-addon">日志类型</span>
-                                <select class="form-control type" >
+                                <span class="input-group-addon">分类</span>
+                                <select class="form-control category" >
                                     <option value="-1" >${I18n.system_all}</option>
-                                    <#list LogTypeEnum as item>
-                                        <option value="${item.code}" >${item.desc}</option>
+                                    <#list MessageCategoryEnum as item>
+                                        <option value="${item.value}" >${item.desc}</option>
                                     </#list>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <span class="input-group-addon">系统模块</span>
-                                <select class="form-control module" >
+                                <span class="input-group-addon">状态</span>
+                                <select class="form-control status" >
                                     <option value="-1" >${I18n.system_all}</option>
-                                    <#list LogModuleEnum as item>
-                                        <option value="${item}" >${item.desc}</option>
+                                    <#list MessageStatusEnum as item>
+                                        <option value="${item.value}" >${item.desc}</option>
                                     </#list>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <span class="input-group-addon">日志标题</span>
+                                <span class="input-group-addon">标题</span>
                                 <input type="text" class="form-control title" autocomplete="on" >
                             </div>
                         </div>
@@ -82,9 +81,9 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header" style="float: right" id="data_operation" >
-                            <button class="btn btn-sm btn-primary selectOnlyOne showdetail" type="button"><i class="fa fa-edit"></i>查看日志详情</button>
+                            <button class="btn btn-sm btn-info add" type="button"><i class="fa fa-plus" ></i>${I18n.system_opt_add}</button>
+                            <button class="btn btn-sm btn-warning selectOnlyOne update" type="button"><i class="fa fa-edit"></i>${I18n.system_opt_edit}</button>
                             <button class="btn btn-sm btn-danger selectAny delete" type="button"><i class="fa fa-remove "></i>${I18n.system_opt_del}</button>
-
                         </div>
                         <div class="box-body" >
                             <table id="data_list" class="table table-bordered table-striped" width="100%" >
@@ -97,46 +96,105 @@
                 </div>
             </div>
 
-
-            <!-- 展示.模态框 -->
-            <div class="modal fade" id="showModal" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog">
+            <!-- 新增.模态框 -->
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" >日志详情</h4>
+                            <h4 class="modal-title" >新增通知</h4>
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal form" role="form" >
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">日志标题</label>
-                                    <div class="col-sm-8 title" ></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">日志正文</label>
-                                    <div class="col-sm-8" >
-                                        <pre class="content2" style="width: 120%;"></pre>
+                                    <label for="lastname" class="col-sm-2 control-label">通知分类<font color="red">*</font></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="category" >
+                                            <#list MessageCategoryEnum as item>
+                                                <option value="${item.value}" >${item.desc}</option>
+                                            </#list>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">操作人</label>
-                                    <div class="col-sm-8 operator" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label">通知状态<font color="red">*</font></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="status" >
+                                            <#list MessageStatusEnum as item>
+                                                <option value="${item.value}" >${item.desc}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">操作IP</label>
-                                    <div class="col-sm-8 ip" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label">通知标题<font color="red">*</font></label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="" maxlength="50" ></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">操作地址</label>
-                                    <div class="col-sm-8 ipAddress" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label">通知正文<font color="red">*</font></label>
+                                    <div class="col-sm-10">
+                                        <textarea id="add_content" name="content" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
+                                    <div style="margin-top: 10px;" >
+                                        <button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 更新.模态框 -->
+            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" >更新通知</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal form" role="form" >
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label">通知分类<font color="red">*</font></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="category" >
+                                            <#list MessageCategoryEnum as item>
+                                                <option value="${item.value}" >${item.desc}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label2">操作时间</label>
-                                    <div class="col-sm-8 addTime" ></div>
+                                    <label for="lastname" class="col-sm-2 control-label">通知状态<font color="red">*</font></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="status" >
+                                            <#list MessageStatusEnum as item>
+                                                <option value="${item.value}" >${item.desc}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label">通知标题<font color="red">*</font></label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="title" placeholder="" maxlength="50" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label">通知正文<font color="red">*</font></label>
+                                    <div class="col-sm-10">
+                                        <textarea id="update_content" name="content" rows="10" cols="80"></textarea>
+                                    </div>
                                 </div>
 
                                 <div class="form-group" style="text-align:center;border-top: 1px solid #e4e4e4;">
                                     <div style="margin-top: 10px;" >
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >关闭</button>
+                                        <button type="submit" class="btn btn-primary"  >${I18n.system_save}</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">${I18n.system_cancel}</button>
+                                        <input type="hidden" name="id" >
                                     </div>
                                 </div>
 
@@ -161,8 +219,7 @@
 <#-- biz start（5/5 script） -->
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
-
+<script src="${request.contextPath}/static/adminlte/bower_components/ckeditor/ckeditor.js"></script>
 <script src="${request.contextPath}/static/js/common/datatables.select.js"></script>
 <script src="${request.contextPath}/static/js/system/message.js"></script>
 <#-- biz end（5/5 script） -->

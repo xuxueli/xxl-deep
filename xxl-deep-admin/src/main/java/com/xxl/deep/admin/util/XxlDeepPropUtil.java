@@ -27,7 +27,7 @@ public class XxlDeepPropUtil implements InitializingBean {
     }
 
     // conf
-    @Value("${xxl.job.i18n}")
+    @Value("${xxl.deep.i18n}")
     private String i18n;
 
     public String getI18n() {

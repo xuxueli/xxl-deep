@@ -49,7 +49,7 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
 		}
 
 		// valid login
-		LoginUserDTO loginUser = loginService.ifLogin(request, response);
+		LoginUserDTO loginUser = loginService.checkLogin(request, response);
 		if (loginUser == null) {
 			response.setStatus(302);
 			response.setHeader("location", request.getContextPath() + "/toLogin");
@@ -78,7 +78,7 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
 			modelAndView.addObject("I18nUtil", FreemarkerTool.generateStaticModel(I18nUtil.class.getName()));
 
 			// resource load
-			LoginUserDTO loginUser = LoginService.getLoginUser(request);
+			LoginUserDTO loginUser = loginService.getLoginUser(request);
 			if (loginUser != null) {
 
 				// filter Authentication （by authorization）

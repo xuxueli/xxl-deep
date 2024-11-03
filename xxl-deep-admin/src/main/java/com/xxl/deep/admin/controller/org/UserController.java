@@ -14,6 +14,7 @@ import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,8 @@ public class UserController {
     private UserService userService;
     @Resource
     private RoleService roleService;
+    @Resource
+    private LoginService loginService;
 
     @RequestMapping
     @Permission("org:user")
@@ -73,7 +76,7 @@ public class UserController {
     @Permission("org:user")
     @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.USER_MANAGE, title = "更新用户")
     public Response<String> update(HttpServletRequest request, XxlDeepUserDTO xxlJobUser) {
-        LoginUserDTO loginUser = LoginService.getLoginUser(request);
+        LoginUserDTO loginUser = loginService.getLoginUser(request);
         return userService.update(xxlJobUser, loginUser);
     }
 
@@ -83,7 +86,7 @@ public class UserController {
     @Log(type= LogTypeEnum.OPT_LOG, module = LogModuleEnum.USER_MANAGE, title = "删除用户")
     public Response<String> delete(HttpServletRequest request,
                                    @RequestParam("ids[]") List<Integer> ids) {
-        LoginUserDTO loginUser = LoginService.getLoginUser(request);
+        LoginUserDTO loginUser = loginService.getLoginUser(request);
         return userService.deleteByIds(ids, loginUser);
     }
 
@@ -91,7 +94,7 @@ public class UserController {
     @ResponseBody
     @Permission
     public Response<String> updatePwd(HttpServletRequest request, String password){
-        LoginUserDTO loginUser = LoginService.getLoginUser(request);
+        LoginUserDTO loginUser = loginService.getLoginUser(request);
         return userService.updatePwd(loginUser, password);
     }
 

@@ -7,7 +7,7 @@ use `xxl_deep`;
 
 SET NAMES utf8mb4;
 
-## —————————————————————— for permission, user and auth ——————————————————
+## —————————————————————— org：user and auth ——————————————————
 CREATE TABLE `xxl_deep_org` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '组织ID',
     `parent_id` int(11) NOT NULL COMMENT '父组织ID',
@@ -75,7 +75,7 @@ CREATE TABLE `xxl_deep_role_res` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-## —————————————————————— for system, message and log ——————————————————
+## —————————————————————— system：message and log ——————————————————
 
 CREATE TABLE `xxl_deep_log` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志ID',
@@ -90,13 +90,13 @@ CREATE TABLE `xxl_deep_log` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 CREATE TABLE `xxl_deep_message` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '消息ID',
-    `type` int(11) NOT NULL COMMENT '消息类型',
-    `title` varchar(50) NOT NULL COMMENT '日志标题',
-    `content` text NOT NULL COMMENT '日志内容',
-    `author` varchar(50) NOT NULL COMMENT '作者',
+    `category` int(11) NOT NULL COMMENT '分类（如 通知、新闻 ）',
+    `title` varchar(50) NOT NULL COMMENT '标题',
+    `content` text NOT NULL COMMENT '内容',
+    `sender` varchar(50) NOT NULL COMMENT '发送人',
+    `status` tinyint(4) NOT NULL COMMENT '状态：0-正常、1-下线',
     `add_time` datetime NOT NULL COMMENT '新增时间',
     `update_time` datetime NOT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
@@ -122,7 +122,7 @@ VALUES (1, 0,'首页', 1, 'index', '/index', 'fa fa-home', 200, 0, now(), now())
         (5, 2, '资源管理', 1, 'org:resource', '/org/resource', "", 213, 0, now(), now()),
         (6, 2,'组织管理', 1, 'org:org', '/org/org', "", 214, 0, now(), now()),
         (7, 0,'系统管理', 0, 'system', '/system', 'fa-cogs', 220, 0, now(), now()),
-        (8, 7,'通知公告', 1, 'system:message', '/system/message', 'fa-cogs', 221, 0, now(), now()),
+        (8, 7,'通知管理', 1, 'system:message', '/system/message', 'fa-cogs', 221, 0, now(), now()),
         (9, 7,'审计日志', 1, 'system:log', '/system/log', 'fa-cogs', 222, 0, now(), now()),
         (10, 0,'系统工具', 0, 'tool', '/tool', 'fa-wrench', 230, 0, now(), now()),
         (11, 10,'代码生成', 1, 'tool:codegen', '/tool/codegen', "", 231, 0, now(), now()),
@@ -144,6 +144,15 @@ VALUES (1, 1, 1, now(), now()),
        (14, 2, 10, now(), now()),
        (15, 2, 11, now(), now()),
        (16, 2, 12, now(), now());
+
+INSERT INTO `xxl_deep_message` (category, title, content, sender, status, add_time, update_time)
+VALUES (0, 'XXL-DEEP 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
+       (0, 'XXL-DEEP 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
+       (0, 'XXL-DEEP 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
+       (0, 'XXL-DEEP 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
+       (0, 'XXL-DEEP 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now());
+
+
 
 
 commit;
