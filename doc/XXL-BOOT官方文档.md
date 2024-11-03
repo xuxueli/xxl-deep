@@ -48,21 +48,61 @@ XXL-BOOT 是一个快速开发平台，核心目标是 简化开发、灵活扩�
 - [社区交流](https://www.xuxueli.com/page/community.html)
 
 ### 1.4 环境
-- JDK：1.8+
+- Maven3+
+- Jdk1.8+
+- Mysql8.0+
 
 
 ## 二、快速入门
 
-### 第一步：编译项目
-项目目录结构如下：
+### 2.1 初始化数据库
+请下载项目源码并解压，获取 "数据库初始化SQL脚本" 并执行即可。
+
+"调度数据库初始化SQL脚本" 位置为:
+
+    /xxl-boot/doc/db/tables_xxl_boot.sql
+
+项目支持集群部署，集群情况下各节点务必连接同一个mysql实例。
+
+### 2.2 编译源码
+解压源码,按照maven格式将源码导入IDE, 使用maven进行编译即可，源码结构如下：
+
 ```
 - xxl-boot
     - xxl-boot-admin        : 中后台系统模块
     - xxx-boot-web          : 前台系统服务（预留）
 ```
 
-### 第二步：部署运行
-应用 “xxl-boot-admin” 是个spring boot应用，直接启动运行即可。
+### 2.3 配置部署
+
+    项目：xxl-boot-admin
+    作用：中后台系统模块，内置“安全登录验证、RBAC权限体系、一站式代码生成、通告触达、审计日志……”等能力。
+
+#### 步骤一：配置文件设置
+配置文件地址：
+
+    /xxl-boot/xxl-boot-admin/src/main/resources/application.properties
+
+配置内容说明：
+
+    ### xxl-boot, datasource。 数据库配置，与 ”2.1 初始化数据库“ 章节初始化的数据库保持一致。
+    spring.datasource.url=jdbc:mysql://127.0.0.1:3306/xxl_boot?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    spring.datasource.username=root
+    spring.datasource.password=root_pwd
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    
+
+#### 步骤二：部署项目：
+如果已经正确进行上述配置，可将项目编译打包部署。
+
+访问地址：http://localhost:8080/xxl-boot-admin
+
+#### 步骤三：集群部署（可选）：
+项目支持集群部署，提升系统容灾和可用性。
+
+集群部署时，几点要求和建议：
+- DB配置保持一致；
+- 集群机器时钟保持一致（单机集群忽视）；
 
 
 ## 三、操作指南
@@ -181,6 +221,7 @@ public @interface Permission {
 - 5、【新增】系统管理：提供通知触达、审计日志、系统监控……等相关能力，支持高校灵活进行系统监控及管理。
 - 6、【新增】系统工具：提供Entity、业务代码、SQL、页面交互等……前后端一站式代码生成工具，辅助快速进行敏捷迭代开发。
 - 7、【扩展】分布式扩展：系统设计预留丰富扩展能力，可低成本扩展接入RPC、MQ、JOB、CONF、KV、SSO…等分布式中间件能力。
+- 8、【升级】升级依赖版本，如slf4j、poi、spring、gson、mysql…等。
 
 
 ### TODO LIST
