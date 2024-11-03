@@ -1,14 +1,14 @@
 <p align="center">
     <img src="https://www.xuxueli.com/doc/static/xxl-job/images/xxl-logo.jpg" width="150">
-    <h3 align="center">XXL-DEEP</h3>
+    <h3 align="center">XXL-BOOT</h3>
     <p align="center">
-        XXL-DEEP, a distributed enterprise development platform..
+        XXL-BOOT, a fast development platform.
         <br>
-        <a href="https://www.xuxueli.com/xxl-deep/"><strong>-- Home Page --</strong></a>
+        <a href="https://www.xuxueli.com/xxl-boot/"><strong>-- Home Page --</strong></a>
         <br>
         <br>
-        <a href="https://github.com/xuxueli/xxl-deep/releases">
-            <img src="https://img.shields.io/github/release/xuxueli/xxl-deep.svg" >
+        <a href="https://github.com/xuxueli/xxl-boot/releases">
+            <img src="https://img.shields.io/github/release/xuxueli/xxl-boot.svg" >
         </a>
         <a href="http://www.gnu.org/licenses/gpl-3.0.html">
             <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" >
@@ -22,13 +22,12 @@
 
 ## Introduction
 
-XXL-DEEP is a development platform.
+XXL-BOOT is a fast development platform.
 
-XXL-DEEP 是一个快速开发平台，核心目标是开发迅速、学习简单、能力丰富、开箱即用。支持 完善的权限管控、响应式页面布局、端到端代码生成、多语言开发、丰富基础模块……等等。
-整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的快速开发解决方案。
+XXL-BOOT 是一个快速开发平台，其核心目标是 简化开发、开箱即用、轻依赖、易扩展；内置“安全登录验证、RBAC权限体系、一站式代码生成、通告触达、审计日志……”等基础能力。现已开放源代码，开箱即用。
 
 ## Documentation
-- 中文文档[](https://www.xuxueli.com/xxl-deep/)
+- 中文文档[](https://www.xuxueli.com/xxl-boot/)
 
 ## Features
 - 1、组织管理：针对部门组织架构进行管理，进行多层级组织架构的新增、管理、排序等操作。
@@ -52,12 +51,12 @@ XXL-DEEP 是一个快速开发平台，核心目标是开发迅速、学习简�
 
 
 ## Contributing
-Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-deep/issues/) to discuss a new feature or change.
+Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-boot/issues/) to discuss a new feature or change.
 
-欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-deep/issues/) 讨论新特性或者变更。
+欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-boot/issues/) 讨论新特性或者变更。
 
 ## 接入登记
-更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-deep/issues/1 ) 登记，登记仅仅为了产品推广。
+更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-boot/issues/1 ) 登记，登记仅仅为了产品推广。
 
 
 ## Copyright and License
