@@ -96,21 +96,64 @@ XXL-BOOT 是一个快速开发平台，其核心目标是 简化开发、开箱�
 ## 四、总体设计
 
 ### 4.1、系统架构
+
 略
 
 ### 4.2、RBAC权限体系
-略
+
+项目进行安全的用户权限体系设计，基于RBAC（Role-Based Access Control，基于角色的访问控制）这种广泛采用的权限管理模型，通过将权限授予角色，然后将角色分配给用户，从而实现对系统资源的访问控制。
+RBAC 的设计目标是简化对系统资源的访问管理，提高系统的安全性和可维护性。以下是项目 RBAC 权限体系相关实体表：
+```
+xxl_boot_user           : 用户表
+xxl_boot_role           : 角色表
+xxl_boot_resource       : 资源表，菜单Page、功能Btn等。
+xxl_boot_user_role      : 用户-角色关系表
+xxl_boot_role_res       : 角色-资源关系表
+```
 
 ### 4.2、安全登录验证
-略
+
+项目进行安全的登录验证防护设计，针对需要登录验证、以及需要强权限校验的页面、操作等资源控制场景，抽象出如下权限注解：
+```
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Permission {
+
+	/**
+	 * permission value (need login)    // 权限标识，为空则不校验，非空则需要通过RBAC权限体系进行相关资源授权才可访问
+	 */
+	String value() default "";
+
+	/**
+	 * need login                       // 是否需要登录验证，默认全部需要，特殊情况可定制
+	 */
+	boolean login() default true;
+	
+}
+```
+
+示例：
+```
+// 1、需要登录态
+@Permission						: need login, but not valid permission
+
+// 2、需要登录态，同时需要进行RBAC权限授权相关资源
+@Permission("xxx")				: need login, and valid permission
+
+// 3、不需要登录态
+@Permission(login = false)		: not need login, not valid anything
+```
 
 ### 4.2、一站式代码生成
-略
+
+参考上文 “3.1、代码生成”。
 
 ### 4.2、通告触达
+
 略
 
 ### 4.2、审计日志
+
 略
 
 ## 四、版本更新日志

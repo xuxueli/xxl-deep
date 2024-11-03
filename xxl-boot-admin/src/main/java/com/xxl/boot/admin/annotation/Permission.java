@@ -31,5 +31,4 @@ public @interface Permission {
 	 */
 	boolean login() default true;
 
-
 }
