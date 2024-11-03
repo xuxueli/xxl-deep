@@ -8,8 +8,6 @@ import com.xxl.deep.admin.service.MessageService;
 import com.xxl.deep.admin.service.impl.LoginService;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
-import com.xxl.tool.gson.GsonTool;
-import com.xxl.tool.json.writer.BasicJsonwriter;
 import com.xxl.tool.response.PageModel;
 import com.xxl.tool.response.Response;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,7 +25,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * index controller
@@ -63,8 +62,7 @@ public class IndexController {
 			List<XxlDeepMessageDTO> messageList = pageModel.getPageData();
 			model.addAttribute("messageList", messageList);
 		}
-
-		model.addAttribute("BasicJsonwriter", new BasicJsonwriter());
+		/*model.addAttribute("BasicJsonwriter", new BasicJsonwriter());*/
 
 		return "index";
 	}
