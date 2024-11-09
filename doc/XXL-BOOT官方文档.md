@@ -52,6 +52,10 @@ XXL-BOOT 是一个快速开发平台，易学易用、灵活扩展、开箱即�
 - Jdk1.8+
 - Mysql8.0+
 
+### 1.5 发展历程    
+XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，以及 XXL-JOB、XXL-CONF 等系列开源软件所所沉淀中后台能力，经过整合演进最终诞生。
+- 1、xxl-code-generator：首版发布于2018年5月，一个覆盖"controller/service/dao/entity/……"的多层代码生成系统。只需要提供SQL，将会自动生成全部代码。
+- 2、xxl-permission：首版完成于2015年，一个基于RBAC实现的后台管理系统，支持动态菜单资源定义、用户角色权限管控，前后端端到端有效封装，开箱即用。
 
 ## 二、快速入门
 
