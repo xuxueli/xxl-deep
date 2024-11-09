@@ -26,8 +26,14 @@ XXL-BOOT is a fast development platform.
 
 XXL-BOOT 是一个快速开发平台，其核心目标是 简化开发、开箱即用、轻依赖、易扩展；内置“安全登录验证、RBAC权限体系、一站式代码生成、通告触达、审计日志……”等基础能力。现已开放源代码，开箱即用。
 
+
 ## Documentation
 - 中文文档[](https://www.xuxueli.com/xxl-boot/)
+
+
+## Communication
+- [社区交流](https://www.xuxueli.com/page/community.html)
+
 
 ## Features
 - 1、组织管理：针对部门组织架构进行管理，进行多层级组织架构的新增、管理、排序等操作。
@@ -46,14 +52,11 @@ XXL-BOOT 是一个快速开发平台，其核心目标是 简化开发、开箱�
 - 14、分布式扩展：系统设计预留丰富扩展能力，可低成本扩展接入RPC、MQ、JOB、CONF、KV、SSO…等分布式中间件能力。
 
 
-## Communication    
-- [社区交流](https://www.xuxueli.com/page/community.html)
-
-
 ## Contributing
 Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-boot/issues/) to discuss a new feature or change.
 
 欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-boot/issues/) 讨论新特性或者变更。
+
 
 ## 接入登记
 更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-boot/issues/1 ) 登记，登记仅仅为了产品推广。
