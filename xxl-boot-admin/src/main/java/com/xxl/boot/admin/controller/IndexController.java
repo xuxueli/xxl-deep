@@ -52,10 +52,6 @@ public class IndexController {
 	@Permission
 	public String index(HttpServletRequest request, Model model) {
 
-		// login
-		LoginUserDTO loginUser = loginService.getLoginUser(request);
-		model.addAttribute("loginUser", loginUser);
-
 		// message
 		PageModel<XxlBootMessageDTO>  pageModel = messageService.pageList(MessageStatusEnum.NORMAL.getValue(), null, 0, 10);
 		if (pageModel!=null && CollectionTool.isNotEmpty(pageModel.getPageData())) {

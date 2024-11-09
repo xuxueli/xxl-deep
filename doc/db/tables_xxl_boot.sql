@@ -146,11 +146,13 @@ VALUES (1, 1, 1, now(), now()),
        (16, 2, 12, now(), now());
 
 INSERT INTO `xxl_boot_message` (category, title, content, sender, status, add_time, update_time)
-VALUES (0, 'XXL-BOOT 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
-       (0, 'XXL-BOOT 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
-       (0, 'XXL-BOOT 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
-       (0, 'XXL-BOOT 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now()),
-       (0, 'XXL-BOOT 新版发布 | 快速开发平台', '开发迅速、学习简单、能力丰富（RBAC权限、代码生成、响应式布局…）、开箱即用', 'admin', 0, now(), now());
+VALUES (0, 'XXL-BOOT | 快速开发平台', '<p><strong>XXL-BOOT </strong>是一个快速开发平台，易学易用、灵活扩展、开箱即用。内置安全登录、权限管控、端到端代码生成、响应式布局、多语言、通告触达&hellip;&hellip;等能力。整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的中后台解决方案。</p>', 'admin', 0, now(), now()),
+       (0, 'XXL-BOOT | 快速开发平台', '<p><strong>XXL-BOOT </strong>是一个快速开发平台，易学易用、灵活扩展、开箱即用。内置安全登录、权限管控、端到端代码生成、响应式布局、多语言、通告触达&hellip;&hellip;等能力。整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的中后台解决方案。</p>', 'admin', 0, now(), now()),
+       (0, 'XXL-BOOT | 快速开发平台', '<p><strong>XXL-BOOT </strong>是一个快速开发平台，易学易用、灵活扩展、开箱即用。内置安全登录、权限管控、端到端代码生成、响应式布局、多语言、通告触达&hellip;&hellip;等能力。整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的中后台解决方案。</p>', 'admin', 0, now(), now()),
+       (0, 'XXL-BOOT | 快速开发平台', '<p><strong>XXL-BOOT </strong>是一个快速开发平台，易学易用、灵活扩展、开箱即用。内置安全登录、权限管控、端到端代码生成、响应式布局、多语言、通告触达&hellip;&hellip;等能力。整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的中后台解决方案。</p>', 'admin', 0, now(), now()),
+       (0, 'XXL-BOOT 新版发布 | 快速开发平台', '<p><strong>XXL-BOOT </strong>是一个快速开发平台，易学易用、灵活扩展、开箱即用。内置安全登录、权限管控、端到端代码生成、响应式布局、多语言、通告触达&hellip;&hellip;等能力。整合前后端流行技术，致力为 中小企业、个人开发者 打造开箱即用的中后台解决方案。</p>
+<p>&nbsp;</p> <p><u><strong>项目文档</strong></u>：<a href="https://www.xuxueli.com/xxl-boot/" target="_blank">https://www.xuxueli.com/xxl-boot/</a></p> <p><u><strong>GitHub地址</strong></u>：<a href="https://github.com/xuxueli/xxl-boot/" target="_blank">https://github.com/xuxueli/xxl-boot/</a></p>
+', 'admin', 0, now(), now());
 
 
 

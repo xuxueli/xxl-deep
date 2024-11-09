@@ -152,7 +152,7 @@ xxl_boot_user_role      : 用户-角色关系表
 xxl_boot_role_res       : 角色-资源关系表
 ```
 
-### 4.2、安全登录验证
+### 4.3、安全登录验证
 
 项目进行安全的登录验证防护设计，针对需要登录验证、以及需要强权限校验的页面、操作等资源控制场景，抽象出如下权限注解：
 ```
@@ -185,17 +185,37 @@ public @interface Permission {
 @Permission(login = false)		: not need login, not valid anything
 ```
 
-### 4.2、一站式代码生成
+### 4.4、一站式代码生成
 
 参考上文 “3.1、代码生成”。
 
-### 4.2、通告触达
+### 4.5、通告触达
 
 略
 
-### 4.2、审计日志
+### 4.6、审计日志
 
 略
+
+### 5.7 Docker镜像构建
+除通过原始方式部署外，可以通过以下命令快速构建项目，并启动运行； 
+```
+# package
+mvn clean package
+
+# build image
+docker build -t xuxueli/xxl-boot-admin ./xxl-boot-admin
+
+/**
+* 自定义 mysql 等配置，可通过 "PARAMS" 指定，参数格式 PARAMS="--key=value  --key2=value2" ；
+* 配置项参考文件：/xxl-boot/xxl-boot-admin/src/main/resources/application.properties
+*/
+docker run --name xxl-boot-admin -p 8080:8080 -v /tmp:/data/applogs -e PARAMS="--spring.datasource.url=jdbc:mysql://127.0.0.1:3306/xxl_boot?Unicode=true&characterEncoding=UTF-8" -d xuxueli/xxl-boot-admin
+
+# 其他：docker部署mysql时可能存在网络问题，可通过如下命令获取mysql可用IP
+docker inspect --format='{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+```
+
 
 ## 四、版本更新日志
 ### 版本 v0.1.0 Release Notes[2018-05-03]
@@ -213,7 +233,7 @@ public @interface Permission {
 - 5、建表语句包含unique key，key里的属性，重复生成问题修复；
 - 6、项目依赖升级，并清理POM冗余依赖；
 - 
-### 版本 v1.0.0 Release Notes[2024-11-03]
+### 版本 v1.0.0 Release Notes[2024-11-09]
 - 1、【整合】项目更名 XXL-BOOT，整合xxl-permission、xxl-code-generator多个历史项目；定位为 快速开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
 - 2、【规范】研发规范：基于标准分层架构设计，统一数据响应结构体，规范化项目目录结构。
 - 3、【规范】异常机制：严谨设计全局异常处理机制、ErrorPage异常处理机制，保障系统底限安全体验。
