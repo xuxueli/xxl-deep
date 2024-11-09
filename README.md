@@ -28,7 +28,7 @@ XXL-BOOT 是一个快速开发平台，易学易用、灵活扩展、开箱即�
 
 
 ## Documentation
-- 中文文档[](https://www.xuxueli.com/xxl-boot/)
+- [中文文档](https://www.xuxueli.com/xxl-boot/)
 
 
 ## Communication
