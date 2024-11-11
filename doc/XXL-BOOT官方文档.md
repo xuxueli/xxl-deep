@@ -105,6 +105,8 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
 
 访问地址：http://localhost:8080/xxl-boot-admin
 
+默认登录账号 "admin/123456"。
+
 #### 步骤三：集群部署（可选）：
 项目支持集群部署，提升系统容灾和可用性。
 
