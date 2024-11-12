@@ -257,7 +257,7 @@ docker inspect --format='{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAdd
 ### TODO LIST
 - 1、代码生成：支持交互层代码生成，包括ui及js；层级目录支持；
 - 2、其他：快速开发框架；多技术栈；
-
+- 3、登陆认证：切换 xxl-sso，提供登陆鉴权、以及单点登录能力。
 
 ## 五、其他
 
