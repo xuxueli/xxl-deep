@@ -64,17 +64,14 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
 ## 二、快速入门
 
 ### 2.1 初始化数据库
-请下载项目源码并解压，获取 "数据库初始化SQL脚本" 并执行即可。
-
-"调度数据库初始化SQL脚本" 位置为:
-
-    /xxl-boot/doc/db/tables_xxl_boot.sql
-
+请下载项目源码并解压，获取 "数据库初始化SQL脚本" 并执行即可。"调度数据库初始化SQL脚本" 位置为:
+```
+/xxl-boot/doc/db/tables_xxl_boot.sql
+```
 项目支持集群部署，集群情况下各节点务必连接同一个mysql实例。
 
 ### 2.2 编译源码
 解压源码,按照maven格式将源码导入IDE, 使用maven进行编译即可，源码结构如下：
-
 ```
 - xxl-boot
     - xxl-boot-admin        : 中后台系统模块
@@ -82,77 +79,93 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
 ```
 
 ### 2.3 配置部署
-
-    项目：xxl-boot-admin
-    作用：中后台系统模块，内置“安全登录验证、RBAC权限体系、一站式代码生成、通告触达、审计日志……”等能力。
+- 部署项目：xxl-boot-admin
+- 项目说明：中后台系统模块，内置“安全登录验证、RBAC权限体系、一站式代码生成、通告触达、审计日志……”等能力。
 
 #### 步骤一：配置文件设置
 配置文件地址：
-
-    /xxl-boot/xxl-boot-admin/src/main/resources/application.properties
+```
+/xxl-boot/xxl-boot-admin/src/main/resources/application.properties
+```
 
 配置内容说明：
-
-    ### xxl-boot, datasource。 数据库配置，与 ”2.1 初始化数据库“ 章节初始化的数据库保持一致。
-    spring.datasource.url=jdbc:mysql://127.0.0.1:3306/xxl_boot?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    spring.datasource.username=root
-    spring.datasource.password=root_pwd
-    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
+### xxl-boot, datasource。 数据库配置，与 ”2.1 初始化数据库“ 章节初始化的数据库保持一致。
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/xxl_boot?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+spring.datasource.username=root
+spring.datasource.password=root_pwd
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
 
 
 #### 步骤二：部署项目：
-如果已经正确进行上述配置，可将项目编译打包部署。
+项目打包部署后，可通过如下地址及账号进行登录。
+- 访问地址：http://localhost:8080/xxl-boot-admin   
+- 默认登录账号："admin/123456"
 
-访问地址：http://localhost:8080/xxl-boot-admin   
-默认登录账号 "admin/123456"
-
+登录页截图示例：
 ![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_001.png "在这里输入图片标题")
 
-#### 步骤三：集群部署（可选）：
-项目支持集群部署，提升系统容灾和可用性。
+系统首页截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_002.png "在这里输入图片标题")
 
-集群部署时，几点要求和建议：
+#### 步骤三：集群部署（可选）：
+项目支持集群部署，提升系统容灾和可用性。 集群部署时，几点要求和建议：
 - DB配置保持一致；
 - 集群机器时钟保持一致（单机集群忽视）；
-
 
 ## 三、操作指南
 
 ### 3.1、权限管控
 
+进入“用户管理”菜单，支持针对系统用户进行管理，进行用户新增、管理、角色授权等操作。
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_003.png "在这里输入图片标题")
 
+进入“角色管理”菜单，支持针对系统权限角色进行动态管理，进行角色新增、管理、菜单分配等操作。
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_004.png "在这里输入图片标题")
+
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_005.png "在这里输入图片标题")
+
+进入“资源管理”菜单，支持针对系统资源进行细粒度管理，支持页面、按钮等多类型资源管理，进行新增、管理等操作。
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_006.png "在这里输入图片标题")
 
 ### 3.2、代码生成
 
-#### 第一步：准备SQL
-代码生成，是以数据库表为维度进行生成。所以，需要准备好待生成代码的表SQL脚本。
-然后进入代码生成平台，将建表SQL脚本填写到 "表结构信息" 输入框即可。
-（默认已经提供了一个供参考Demo表SQL脚本，可操作体验下）
+#### 第一步：准备SQL 
 
-![输入图片说明](./xxl-boot/images/img_01.png "在这里输入图片标题")
+内置代码生成器，只需提供SQL将会自动生成全部代码，覆盖“controller/servie/dao/entity…”等多层，加速研发效率。
 
+默认提供Demo表SQL语句，可操作体验，参考下图。
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_007.png "在这里输入图片标题")
 
 #### 第二步：生成代码
 点击右上角 "生成代码按钮"，即可完整多层代码的生成，非常方便；
 
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_02.png "在这里输入图片标题")
-
-
 #### 第三步：Finish
 代码生成后，可在界面查看和使用 "controller/service/dao/mybatis/model" 多层源代码。部分截图如下：
 
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_03.png "在这里输入图片标题")
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_04.png "在这里输入图片标题")
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_05.png "在这里输入图片标题")
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_06.png "在这里输入图片标题")
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_07.png "在这里输入图片标题")
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_08.png "在这里输入图片标题")
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_008.png "在这里输入图片标题")
+
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_009.png "在这里输入图片标题")
+
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_010.png "在这里输入图片标题")
+
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_011.png "在这里输入图片标题")
+
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_012.png "在这里输入图片标题")
+
+代码生成截图示例：
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_013.png "在这里输入图片标题")
 
 
 ## 四、总体设计
 
 ### 4.1、系统架构
-
 略
 
 ### 4.2、RBAC权限体系
@@ -201,18 +214,15 @@ public @interface Permission {
 ```
 
 ### 4.4、一站式代码生成
-
 参考上文 “3.1、代码生成”。
 
 ### 4.5、通告触达
-
 略
 
 ### 4.6、审计日志
-
 略
 
-### 5.7 Docker镜像构建
+### 4.7 Docker镜像构建
 除通过原始方式部署外，可以通过以下命令快速构建项目，并启动运行；
 ```
 # package
