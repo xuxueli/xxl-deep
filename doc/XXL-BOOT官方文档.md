@@ -56,7 +56,7 @@ XXL-BOOT 是一个快速开发平台，易学易用、简化开发、丰富扩�
 - Jdk1.8+
 - Mysql8.0+
 
-### 1.5 发展历程    
+### 1.5 发展历程
 XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，以及 XXL-JOB、XXL-CONF 等系列开源软件所所沉淀中后台能力，经过整合演进最终诞生。
 - 1、xxl-code-generator：首版发布于2018年5月，一个覆盖"controller/service/dao/entity/……"的多层代码生成系统。只需要提供SQL，将会自动生成全部代码。(已废弃，整合至XXL-BOOT)
 - 2、xxl-permission：首版完成于2015年，一个基于RBAC实现的后台管理系统，支持动态菜单资源定义、用户角色权限管控，前后端端到端有效封装，开箱即用。(已废弃，整合至XXL-BOOT)
@@ -98,12 +98,14 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
     spring.datasource.username=root
     spring.datasource.password=root_pwd
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-    
+
 
 #### 步骤二：部署项目：
 如果已经正确进行上述配置，可将项目编译打包部署。
 
 访问地址：http://localhost:8080/xxl-boot-admin
+
+默认登录账号 "admin/123456"。
 
 #### 步骤三：集群部署（可选）：
 项目支持集群部署，提升系统容灾和可用性。
@@ -206,7 +208,7 @@ public @interface Permission {
 略
 
 ### 5.7 Docker镜像构建
-除通过原始方式部署外，可以通过以下命令快速构建项目，并启动运行； 
+除通过原始方式部署外，可以通过以下命令快速构建项目，并启动运行；
 ```
 # package
 mvn clean package
@@ -230,7 +232,7 @@ docker inspect --format='{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAdd
 - 1、简洁：界面操作，简洁直观，可快速上手；
 - 2、轻量级：仅需提供建表SQL，即可自动完成代码生成，简洁高效；
 - 3、多层代码生成：自动生成  "controller/service/dao/mybatis/model" 多层代码，参与到开发全流程；
-- 4、高效：从SQL到API接口，全部代码均支持自动生成，极大提高生产力和效率； 
+- 4、高效：从SQL到API接口，全部代码均支持自动生成，极大提高生产力和效率；
 - 5、在线预览：代码生成后，支持实时在线预览，直接复制使用；
 
 ### 版本 v0.2.0 Release Notes[2019-10-03]
@@ -240,7 +242,7 @@ docker inspect --format='{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAdd
 - 4、数据库类型为char，解析成object问题修复；
 - 5、建表语句包含unique key，key里的属性，重复生成问题修复；
 - 6、项目依赖升级，并清理POM冗余依赖；
-- 
+-
 ### 版本 v1.0.0 Release Notes[2024-11-09]
 - 1、【整合】项目更名 XXL-BOOT，整合xxl-permission、xxl-code-generator多个历史项目；定位为 快速开发平台，整合流行前后端技术能力，致力为中小企业与个人开发者打造开箱即用的快速开发解决方案。
 - 2、【规范】研发规范：基于标准分层架构设计，统一数据响应结构体，规范化项目目录结构。
