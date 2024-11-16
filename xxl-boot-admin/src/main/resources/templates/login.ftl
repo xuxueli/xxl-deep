@@ -14,7 +14,7 @@
 	<#-- login div -->
 	<div class="login-box">
 		<div class="login-logo">
-			<a>XXL<b>BOOT</b></a>
+			<a><b>XXL</b>BOOT</a>
 		</div>
 		<form id="loginForm" method="post" >
 			<div class="login-box-body">

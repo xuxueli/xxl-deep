@@ -103,9 +103,10 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
 #### 步骤二：部署项目：
 如果已经正确进行上述配置，可将项目编译打包部署。
 
-访问地址：http://localhost:8080/xxl-boot-admin
+访问地址：http://localhost:8080/xxl-boot-admin   
+默认登录账号 "admin/123456"
 
-默认登录账号 "admin/123456"。
+![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_001.png "在这里输入图片标题")
 
 #### 步骤三：集群部署（可选）：
 项目支持集群部署，提升系统容灾和可用性。
@@ -117,14 +118,18 @@ XXL-BOOT 前身为 xxl-permission、xxl-code-generator 等多个历史项目，�
 
 ## 三、操作指南
 
-### 3.1、代码生成
+### 3.1、权限管控
+
+
+
+### 3.2、代码生成
 
 #### 第一步：准备SQL
 代码生成，是以数据库表为维度进行生成。所以，需要准备好待生成代码的表SQL脚本。
 然后进入代码生成平台，将建表SQL脚本填写到 "表结构信息" 输入框即可。
 （默认已经提供了一个供参考Demo表SQL脚本，可操作体验下）
 
-![输入图片说明](https://www.xuxueli.com/doc/static/xxl-boot/images/img_01.png "在这里输入图片标题")
+![输入图片说明](./xxl-boot/images/img_01.png "在这里输入图片标题")
 
 
 #### 第二步：生成代码
