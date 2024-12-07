@@ -30,7 +30,7 @@ public class XxlBootResourceDTO implements Serializable {
     private String name;
 
     /**
-     * 类型：0-菜单、1-按钮
+     * 类型
      */
     private int type;
 
