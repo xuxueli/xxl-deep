@@ -30,7 +30,7 @@ public class ${classInfo.className}Controller {
     @RequestMapping
     @Permission
     public String index(Model model) {
-        return "org/${classInfo.className?uncap_first}";
+        return "${classInfo.className?uncap_first}";
     }
 
     /**
