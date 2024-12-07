@@ -60,7 +60,7 @@
             `${fieldItem.columnName}` = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"},
         </#if>
         </#list>
-            update_time = NOW()
+            `update_time` = NOW()
         WHERE `id` = ${r"#{"}${classInfo.className?uncap_first}.id${r"}"}
     </update>
 
