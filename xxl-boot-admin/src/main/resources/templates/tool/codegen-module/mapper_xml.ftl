@@ -64,7 +64,6 @@
         WHERE `id` = ${r"#{"}${classInfo.className?uncap_first}.id${r"}"}
     </update>
 
-
     <select id="load" parameterType="java.util.Map" resultMap="${classInfo.className}">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.tableName} AS t
